@@ -1,29 +1,51 @@
-<p align="center">
-  <a href="https://babeljs.io/">
-    <img alt="babel" src="https://raw.githubusercontent.com/babel/logo/master/babel.png" width="546">
-  </a>
-</p>
+# Babel Plugin for Importing Ember Addons into the global namespace.
 
-<p align="center">
-  The compiler for writing next generation JavaScript.
-</p>
+Hooray, you're trying to import an Ember Addon into a Node project!
 
-<p align="center">
-  <a href="https://travis-ci.org/babel/babel"><img alt="Travis Status" src="https://img.shields.io/travis/babel/babel/master.svg?style=flat&label=travis"></a>
-  <a href="https://circleci.com/gh/babel/babel"><img alt="CircleCI Status" src="https://img.shields.io/circleci/project/babel/babel/master.svg?style=flat&label=circle"></a>
-  <a href="https://codecov.io/github/babel/babel"><img alt="Coverage Status" src="https://img.shields.io/codecov/c/github/babel/babel/master.svg?style=flat"></a>
-</p>
+You've probably noticed that Ember doesn't use an absolute namespace for
+a project, but assumes that /addon or /app are the base.  This plugin
+allows you to rewrite imports from specific modules to include the addon
+or app path.
 
-## Looking for support?
+## Usage
 
-<p align="center">For questions and support please visit the <a href="https://discuss.babeljs.io/">discussion forum</a>, <a href="https://slack.babeljs.io/">Slack community</a>, or <a href="http://stackoverflow.com/questions/tagged/babeljs">StackOverflow</a>.</p>
+You'll want to start off with all of the es2015 plugins, but replacing
+the modules-commonjs plugin with this one. Then define your module
+replacements, which have a simple in/out, as shown below
 
-## Want to report a bug or request a feature?
+    {
+      "plugins": [
+        "babel-plugin-transform-es2015-template-literals",
+        "babel-plugin-transform-es2015-literals",
+        "babel-plugin-transform-es2015-function-name",
+        "babel-plugin-transform-es2015-arrow-functions",
+        "babel-plugin-transform-es2015-block-scoped-functions",
+        "babel-plugin-transform-es2015-classes",
+        "babel-plugin-transform-es2015-object-super",
+        "babel-plugin-transform-es2015-shorthand-properties",
+        "babel-plugin-transform-es2015-duplicate-keys",
+        "babel-plugin-transform-es2015-computed-properties",
+        "babel-plugin-transform-es2015-for-of",
+        "babel-plugin-transform-es2015-sticky-regex",
+        "babel-plugin-transform-es2015-unicode-regex",
+        "babel-plugin-check-es2015-constants",
+        "babel-plugin-transform-es2015-spread",
+        "babel-plugin-transform-es2015-parameters",
+        "babel-plugin-transform-es2015-destructuring",
+        "babel-plugin-transform-es2015-block-scoping",
+        "babel-plugin-transform-es2015-typeof-symbol",
+        ["transform-es2015-modules-commonjs-ember", {
+          moduleReplacements: [
+            {in:'my-ember-addon', out:'my-ember-addon/addon'},
+            {in:'my-ember-app', out:'my-ember-app/app'}
+          ]
+        }],
+        ["babel-plugin-transform-regenerator", { async: false, asyncGenerators: false }]
+      ]
+    }
 
-<p align="center">Bugs and feature requests should be posted at <a href="https://phabricator.babeljs.io/">phabricator.babeljs.io</a>.</p>
-
-## Want to report an issue with [babeljs.io](https://babeljs.io)?
-
-<p align="center">
-  For documentation and website issues please visit the <a href="https://github.com/babel/babel.github.io">babel.github.io</a> repo.
-</p>
+The main caveat here is that we are not actually combining or changing
+the actual namespaces, simply the way that the namespace is re-written
+from import -> require. This means that you can only import from app or
+addon... it is NOT exactly the same as ember's more complicated namespacing...
+only a rough approximation.
