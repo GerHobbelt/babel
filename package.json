@@ -1,6 +1,19 @@
 {
-  "private": true,
+  "name": "babel-plugin-transform-es2015-modules-commonjs-ember",
+  "version": "6.7.4",
+  "description": "",
+  "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-es2015-modules-commonjs",
   "license": "MIT",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src --out-dir lib --copy-files",
+    "test:unit": "node test/unit",
+    "test:integration": "npm run build && karma start --single-run",
+    "test": "npm run test:unit && npm run test:integration",
+    "clean": "rm -rf lib",
+    "lint": "eslint .",
+    "prepublish": "npm run clean && npm run build"
+  },
   "devDependencies": {
     "async": "^1.5.0",
     "babel": "5.8.21",
@@ -36,27 +49,13 @@
     "through2": "^2.0.0",
     "uglify-js": "^2.4.16"
   },
-  "babel": {
-    "ignore": [
-      "packages/babel-cli/src/babel-plugin/templates"
-    ],
-    "stage": 0,
-    "loose": [
-      "all"
-    ],
-    "blacklist": [
-      "es6.tailCall"
-    ],
-    "optional": [
-      "flow",
-      "optimisation.flow.forOf",
-      "runtime"
-    ],
-    "env": {
-      "test": {
-        "auxiliaryCommentBefore": "istanbul ignore next"
-      }
-    },
-    "breakConfig": true
-  }
+  "dependencies": {
+    "babel-plugin-transform-strict-mode": "^6.6.5",
+    "babel-runtime": "^5.0.0",
+    "babel-template": "^6.7.0",
+    "babel-types": "^6.7.0"
+  },
+  "keywords": [
+    "babel-plugin"
+  ]
 }

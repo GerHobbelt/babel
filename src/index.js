@@ -144,7 +144,7 @@ export default function () {
       },
 
       Program: {
-        exit(path) {
+        exit(path, state) {
           this.ranCommonJS = true;
 
           let strict = !!this.opts.strict;
@@ -170,15 +170,32 @@ export default function () {
 
           let requires = Object.create(null);
 
+          function replaceModules(source, replacements) {
+            if (!replacements || replacements.length === 0) {
+              return source;
+            }
+            for(var i = 0; i < replacements.length; i++) {
+              let replacement = replacements[i];
+              if(source.indexOf(replacement.in) !== -1) {
+                //console.log("Replaced ", replacement.in, " with ", replacement.out, " in ", source);
+                //console.log("         ", source.replace(replacement.in, replacement.out));
+                return source.replace(replacement.in, replacement.out);
+              }
+            };
+            return source;
+          }
+
           function addRequire(source, blockHoist) {
             let cached = requires[source];
             if (cached) return cached;
 
             let ref = path.scope.generateUidIdentifier(basename(source, extname(source)));
 
+            let sourceActual = replaceModules(source, state.opts.moduleReplacements);
+
             let varDecl = t.variableDeclaration("var", [
               t.variableDeclarator(ref, buildRequire(
-                t.stringLiteral(source)
+                t.stringLiteral(sourceActual)
               ).expression)
             ]);
 
