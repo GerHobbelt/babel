@@ -1,61 +1,26 @@
 {
   "name": "babel-plugin-transform-es2015-modules-commonjs-ember",
-  "version": "6.7.4",
+  "version": "0.1.0",
   "description": "",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-es2015-modules-commonjs",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src --out-dir lib --copy-files",
-    "test:unit": "node test/unit",
-    "test:integration": "npm run build && karma start --single-run",
-    "test": "npm run test:unit && npm run test:integration",
     "clean": "rm -rf lib",
-    "lint": "eslint .",
     "prepublish": "npm run clean && npm run build"
   },
-  "devDependencies": {
-    "async": "^1.5.0",
-    "babel": "5.8.21",
-    "browserify": "^11.2.0",
-    "bundle-collapser": "^1.2.1",
-    "chai": "^2.2.0",
-    "chalk": "1.1.1",
-    "codecov.io": "^0.1.6",
-    "derequire": "^2.0.2",
-    "es5-shim": "^4.1.7",
-    "kcheck": "^2.0.0",
-    "fs-readdir-recursive": "^0.1.2",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^5.3.0",
-    "gulp-newer": "^1.0.0",
-    "gulp-plumber": "^1.0.1",
-    "gulp-util": "^3.0.7",
-    "gulp-watch": "^4.3.5",
-    "istanbul": "^0.3.5",
-    "lerna": "^1.0.0",
-    "lodash": "^3.10.0",
-    "matcha": "^0.6.0",
-    "mkdirp": "^0.5.1",
-    "mocha": "2.2.0",
-    "output-file-sync": "^1.1.1",
-    "pad": "^1.0.0",
-    "path-exists": "^1.0.0",
-    "progress": "^1.1.8",
-    "readline-sync": "^1.2.19",
-    "rimraf": "^2.4.3",
-    "semver": "^5.0.0",
-    "shelljs": "^0.5.1",
-    "through2": "^2.0.0",
-    "uglify-js": "^2.4.16"
-  },
   "dependencies": {
+    "babel": "5.8.21",
     "babel-plugin-transform-strict-mode": "^6.6.5",
     "babel-runtime": "^5.0.0",
     "babel-template": "^6.7.0",
-    "babel-types": "^6.7.0"
+    "babel-types": "^6.7.2"
   },
   "keywords": [
     "babel-plugin"
-  ]
+  ],
+  "devDependencies": {
+    "git-release": "^0.6.0"
+  }
 }
