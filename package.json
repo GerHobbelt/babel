@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-es2015-modules-commonjs-ember",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "repository": "https://github.com/dustyjewett/babel-plugin-transform-es2015-modules-commonjs-ember",
   "license": "MIT",
