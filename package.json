@@ -8,7 +8,8 @@
   "scripts": {
     "build": "babel src --out-dir lib --copy-files",
     "clean": "rm -rf lib",
-    "prepublish": "npm run clean && npm run build"
+    "prepublish": "npm run clean && npm run build",
+    "release": "release"
   },
   "dependencies": {
     "babel": "5.8.21",
