@@ -6,7 +6,7 @@
     "build": "make build",
     "fix": "make fix",
     "lint": "make lint",
-    "precommit": "lint-staged",
+    "precommit-orig": "lint-staged",
     "test": "make test"
   },
   "devDependencies": {
