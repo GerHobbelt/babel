@@ -119,8 +119,8 @@ publish:
 	make clean
 
 bootstrap: #clean-all
-	#./node_modules/.bin/yarn --ignore-engines
-	npm i
+	##./node_modules/.bin/yarn --ignore-engines
+	#npm i
 	./node_modules/.bin/lerna bootstrap -- --ignore-engines
 	make build
 	cd packages/babel-runtime; \
