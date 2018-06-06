@@ -118,8 +118,8 @@ publish:
 	./node_modules/.bin/lerna publish --force-publish=* --exact --skip-temp-tag
 	make clean
 
-bootstrap: clean-all
-	#yarn --ignore-engines
+bootstrap: #clean-all
+	#./node_modules/.bin/yarn --ignore-engines
 	npm i
 	./node_modules/.bin/lerna bootstrap -- --ignore-engines
 	make build
