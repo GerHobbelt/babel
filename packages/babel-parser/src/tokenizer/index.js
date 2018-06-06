@@ -235,6 +235,53 @@ export default class Tokenizer extends LocationParser {
     // identifiers, so '\' also dispatches to that.
     if (isIdentifierStart(code) || code === charCodes.backslash) {
       this.readWord();
+    } else if (this.options.jisonVariables && 
+        !this.state.isIterator && 
+        !this.state.inType &&
+        (code === charCodes.hash || code === charCodes.atSign || code === charCodes.dollar)
+    ) {
+      // JISON variables have a lead (and possibly a tail as well) consisting of any of these: # @ $
+      // while the variable MAY be a *negative* index, e.g. `$-1`, hence we tolerate a single `-`
+      // minus character following the lead characters of the JISON variable:
+      let type = tt.name;
+
+      // consume head/lead of jison variable: readWord1()...
+      let chunkStart = this.state.pos;
+      while (this.state.pos < this.input.length) {
+        const ch = this.fullCharCodeAtPos();
+        if (ch === charCodes.hash || ch === charCodes.atSign || ch === charCodes.dollar) {
+          this.state.pos++;
+        } else {
+          break;
+        }
+      }
+
+      // accept a `-` minus sign when it follows this lead immediately and
+      // is followed immediately by a number, e.g. `$-1`
+      const code1 = this.input.charCodeAt(this.state.pos);
+      if (code1 === charCodes.minus) {
+        const code2 = this.input.charCodeAt(this.state.pos + 1);
+        if (code2 >= 0x30 && code2 <= 0x39) {
+          this.state.pos++;
+        }
+      }
+
+      let word = this.input.slice(chunkStart, this.state.pos);
+      word += this.readWord1();
+
+      // consume tail of jison identifier: readWord1()...
+      chunkStart = this.state.pos;
+      while (this.state.pos < this.input.length) {
+        const ch = this.fullCharCodeAtPos();
+        if (ch === charCodes.hash || ch === charCodes.atSign || ch === charCodes.dollar) {
+          this.state.pos++;
+        } else {
+          break;
+        }
+      }
+      word += this.input.slice(chunkStart, this.state.pos);
+
+      this.finishToken(type, word);
     } else {
       this.getTokenFromCode(code);
     }
