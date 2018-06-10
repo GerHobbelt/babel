@@ -1,3 +1,6 @@
 {
-  "throws": "Invalid JISON identifier # (2:5)"
+  "throws": "Invalid JISON identifier # (2:5)",
+  "options": {
+  	"jisonVariables": true
+  }
 }

@@ -1,3 +1,6 @@
 {
-  "throws": "Unexpected token, expected \";\" (2:8)"
+  "throws": "Unexpected token, expected \";\" (2:8)",
+  "options": {
+  	"jisonVariables": true
+  }
 }
