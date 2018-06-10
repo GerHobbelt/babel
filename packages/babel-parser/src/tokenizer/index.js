@@ -307,7 +307,8 @@ export default class Tokenizer extends LocationParser {
 
       this.finishToken(type, word);
     } else if (
-      isIdentifierStart(code) || code === charCodes.backslash
+      isIdentifierStart(code) ||
+      code === charCodes.backslash
       // Identifier or keyword. '\uXXXX' sequences are allowed in
       // identifiers, so '\' also dispatches to that.
     ) {
