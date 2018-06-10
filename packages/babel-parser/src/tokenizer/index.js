@@ -235,21 +235,28 @@ export default class Tokenizer extends LocationParser {
     // identifiers, so '\' also dispatches to that.
     if (isIdentifierStart(code) || code === charCodes.backslash) {
       this.readWord();
-    } else if (this.options.jisonVariables && 
-        !this.state.isIterator && 
-        !this.state.inType &&
-        (code === charCodes.numberSign || code === charCodes.atSign || code === charCodes.dollarSign)
+    } else if (
+      this.options.jisonVariables &&
+      !this.state.isIterator &&
+      !this.state.inType &&
+      (code === charCodes.numberSign ||
+        code === charCodes.atSign ||
+        code === charCodes.dollarSign)
     ) {
       // JISON variables have a lead (and possibly a tail as well) consisting of any of these: # @ $
       // while the variable MAY be a *negative* index, e.g. `$-1`, hence we tolerate a single `-`
       // minus character following the lead characters of the JISON variable:
-      let type = tt.name;
+      const type = tt.name;
 
       // consume head/lead of jison variable: readWord1()...
       let chunkStart = this.state.pos;
       while (this.state.pos < this.input.length) {
         const ch = this.fullCharCodeAtPos();
-        if (ch === charCodes.numberSign || ch === charCodes.atSign || ch === charCodes.dollarSign) {
+        if (
+          ch === charCodes.numberSign ||
+          ch === charCodes.atSign ||
+          ch === charCodes.dollarSign
+        ) {
           this.state.pos++;
         } else {
           break;
@@ -273,7 +280,11 @@ export default class Tokenizer extends LocationParser {
       chunkStart = this.state.pos;
       while (this.state.pos < this.input.length) {
         const ch = this.fullCharCodeAtPos();
-        if (ch === charCodes.numberSign || ch === charCodes.atSign || ch === charCodes.dollarSign) {
+        if (
+          ch === charCodes.numberSign ||
+          ch === charCodes.atSign ||
+          ch === charCodes.dollarSign
+        ) {
           this.state.pos++;
         } else {
           break;
