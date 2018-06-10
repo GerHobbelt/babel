@@ -1,0 +1,238 @@
+{
+  "type": "File",
+  "start": 0,
+  "end": 49,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 2,
+      "column": 26
+    }
+  },
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 49,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 26
+      }
+    },
+    "sourceType": "script",
+    "interpreter": null,
+    "body": [
+      {
+        "type": "IfStatement",
+        "start": 0,
+        "end": 22,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 22
+          }
+        },
+        "test": {
+          "type": "BinaryExpression",
+          "start": 4,
+          "end": 10,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 4
+            },
+            "end": {
+              "line": 1,
+              "column": 10
+            }
+          },
+          "left": {
+            "type": "Identifier",
+            "start": 4,
+            "end": 6,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 4
+              },
+              "end": {
+                "line": 1,
+                "column": 6
+              },
+              "identifierName": "$1"
+            },
+            "name": "$1"
+          },
+          "operator": ">",
+          "right": {
+            "type": "NumericLiteral",
+            "start": 9,
+            "end": 10,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 9
+              },
+              "end": {
+                "line": 1,
+                "column": 10
+              }
+            },
+            "extra": {
+              "rawValue": 0,
+              "raw": "0"
+            },
+            "value": 0
+          }
+        },
+        "consequent": {
+          "type": "ExpressionStatement",
+          "start": 12,
+          "end": 22,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 12
+            },
+            "end": {
+              "line": 1,
+              "column": 22
+            }
+          },
+          "expression": {
+            "type": "Identifier",
+            "start": 12,
+            "end": 22,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 12
+              },
+              "end": {
+                "line": 1,
+                "column": 22
+              },
+              "identifierName": "YYCONTINUE"
+            },
+            "name": "YYCONTINUE"
+          }
+        },
+        "alternate": null
+      },
+      {
+        "type": "ExpressionStatement",
+        "start": 23,
+        "end": 49,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 26
+          }
+        },
+        "expression": {
+          "type": "CallExpression",
+          "start": 23,
+          "end": 49,
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 0
+            },
+            "end": {
+              "line": 2,
+              "column": 26
+            }
+          },
+          "callee": {
+            "type": "Identifier",
+            "start": 23,
+            "end": 30,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 0
+              },
+              "end": {
+                "line": 2,
+                "column": 7
+              },
+              "identifierName": "yyerror"
+            },
+            "name": "yyerror"
+          },
+          "arguments": [
+            {
+              "type": "BinaryExpression",
+              "start": 31,
+              "end": 48,
+              "loc": {
+                "start": {
+                  "line": 2,
+                  "column": 8
+                },
+                "end": {
+                  "line": 2,
+                  "column": 25
+                }
+              },
+              "left": {
+                "type": "StringLiteral",
+                "start": 31,
+                "end": 40,
+                "loc": {
+                  "start": {
+                    "line": 2,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 2,
+                    "column": 17
+                  }
+                },
+                "extra": {
+                  "rawValue": "B0rk @ ",
+                  "raw": "\"B0rk @ \""
+                },
+                "value": "B0rk @ "
+              },
+              "operator": "+",
+              "right": {
+                "type": "Identifier",
+                "start": 43,
+                "end": 48,
+                "loc": {
+                  "start": {
+                    "line": 2,
+                    "column": 20
+                  },
+                  "end": {
+                    "line": 2,
+                    "column": 25
+                  },
+                  "identifierName": "#STMT"
+                },
+                "name": "#STMT"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "directives": []
+  }
+}
