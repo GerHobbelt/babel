@@ -17,6 +17,7 @@ export type Options = {
   strictMode: ?boolean,
   ranges: boolean,
   tokens: boolean,
+  jisonVariables: boolean,
 };
 
 export const defaultOptions: Options = {
@@ -53,6 +54,8 @@ export const defaultOptions: Options = {
   ranges: false,
   // Adds all parsed tokens to a `tokens` property on the `File` node
   tokens: false,
+  // Recognize JISON action block variables, e.g. `#1` or `@id`
+  jisonVariables: false,
 };
 
 // Interpret and default an options object
