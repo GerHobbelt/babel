@@ -231,11 +231,10 @@ export default class Tokenizer extends LocationParser {
   }
 
   readToken(code: number): void {
-    // Identifier or keyword. '\uXXXX' sequences are allowed in
-    // identifiers, so '\' also dispatches to that.
-    if (isIdentifierStart(code) || code === charCodes.backslash) {
-      this.readWord();
-    } else if (
+    // JISON variables can also start with '$' which itself is a legal
+    // IndentifierStartChracter for JS, hence we should *first* check
+    // if we have a JISON variable right here:
+    if (
       this.options.jisonVariables &&
       !this.state.isIterator &&
       !this.state.inType &&
@@ -249,14 +248,13 @@ export default class Tokenizer extends LocationParser {
       const type = tt.name;
 
       // consume head/lead of jison variable: readWord1()...
-      let chunkStart = this.state.pos;
-      while (this.state.pos < this.input.length) {
+      // ...accept only series of @@..., ##... and $$..., but no mixes
+      // such as #@ or #$ -- note the latter should be decoded as head '#' +
+      // identifier core '$' instead.
+      const chunkStart = this.state.pos;
+      for (;;) {
         const ch = this.fullCharCodeAtPos();
-        if (
-          ch === charCodes.numberSign ||
-          ch === charCodes.atSign ||
-          ch === charCodes.dollarSign
-        ) {
+        if (ch === code) {
           this.state.pos++;
         } else {
           break;
@@ -269,30 +267,51 @@ export default class Tokenizer extends LocationParser {
       if (code1 === charCodes.dash) {
         const code2 = this.input.charCodeAt(this.state.pos + 1);
         if (code2 >= 0x30 && code2 <= 0x39) {
-          this.state.pos++;
+          this.state.pos++; // consume the '-' dash
         }
       }
 
-      let word = this.input.slice(chunkStart, this.state.pos);
-      word += this.readWord1();
+      const identifierStart = this.state.pos;
+
+      this.readWord1(); // side-effect: moves `this.state.pos` past the identifier
+
+      // Jison variables must have a non-empty identifier part, either numeric or alphanumeric,
+      // UNLESS the head ends with a '$' dollar:
+      if (
+        this.state.pos === identifierStart &&
+        code /* optimization -- this.input.charCodeAt(this.state.pos - 1) */ !==
+          charCodes.dollarSign
+      ) {
+        this.raise(
+          chunkStart,
+          `Invalid JISON identifier ${this.input.slice(
+            chunkStart,
+            this.state.pos,
+          )}`,
+        );
+      }
 
       // consume tail of jison identifier: readWord1()...
-      chunkStart = this.state.pos;
-      while (this.state.pos < this.input.length) {
+      // ...again we only accept more of the same, i.e. #id#,
+      // @id@, $id$, but not mixes such as @id#:
+      for (;;) {
         const ch = this.fullCharCodeAtPos();
-        if (
-          ch === charCodes.numberSign ||
-          ch === charCodes.atSign ||
-          ch === charCodes.dollarSign
-        ) {
+        if (ch === code) {
           this.state.pos++;
         } else {
           break;
         }
       }
-      word += this.input.slice(chunkStart, this.state.pos);
+
+      const word = this.input.slice(chunkStart, this.state.pos);
 
       this.finishToken(type, word);
+    } else if (
+      isIdentifierStart(code) || code === charCodes.backslash
+      // Identifier or keyword. '\uXXXX' sequences are allowed in
+      // identifiers, so '\' also dispatches to that.
+    ) {
+      this.readWord();
     } else {
       this.getTokenFromCode(code);
     }
