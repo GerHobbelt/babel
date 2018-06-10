@@ -107,7 +107,7 @@ test-test262-update-whitelist:
 	node scripts/tests/test262/run_babel_parser_test262.js --update-whitelist
 
 publish:
-	git pull --rebase
+	#git pull --rebase
 	make clean-lib
 	rm -rf packages/babel-runtime/helpers
 	rm -rf packages/babel-runtime/core-js
@@ -115,8 +115,9 @@ publish:
 	make test
 	# not using lerna independent mode atm, so only update packages that have changed since we use ^
 	# --only-explicit-updates
-	./node_modules/.bin/lerna publish --force-publish=* --exact --skip-temp-tag
-	make clean
+	
+	#./node_modules/.bin/lerna publish --force-publish=* --exact --skip-temp-tag
+	#make clean
 
 bootstrap: #clean-all
 	##./node_modules/.bin/yarn --ignore-engines
