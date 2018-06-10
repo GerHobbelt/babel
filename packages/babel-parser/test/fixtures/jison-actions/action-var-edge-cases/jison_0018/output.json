@@ -1,0 +1,476 @@
+{
+  "type": "File",
+  "start": 0,
+  "end": 205,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 7,
+      "column": 6
+    }
+  },
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 205,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 7,
+        "column": 6
+      }
+    },
+    "sourceType": "script",
+    "interpreter": null,
+    "body": [
+      {
+        "type": "ExpressionStatement",
+        "start": 73,
+        "end": 80,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 7
+          }
+        },
+        "expression": {
+          "type": "AssignmentExpression",
+          "start": 73,
+          "end": 79,
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 0
+            },
+            "end": {
+              "line": 2,
+              "column": 6
+            }
+          },
+          "operator": "=",
+          "left": {
+            "type": "Identifier",
+            "start": 73,
+            "end": 75,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 0
+              },
+              "end": {
+                "line": 2,
+                "column": 2
+              },
+              "identifierName": "$$"
+            },
+            "name": "$$"
+          },
+          "right": {
+            "type": "NumericLiteral",
+            "start": 78,
+            "end": 79,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 5
+              },
+              "end": {
+                "line": 2,
+                "column": 6
+              }
+            },
+            "extra": {
+              "rawValue": 0,
+              "raw": "0"
+            },
+            "value": 0
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "CommentLine",
+            "value": " any jison var referencing current value is okay: $$, @$, #$, ##$, #$#",
+            "start": 0,
+            "end": 72,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 72
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ExpressionStatement",
+        "start": 81,
+        "end": 99,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 18
+          }
+        },
+        "expression": {
+          "type": "AssignmentExpression",
+          "start": 81,
+          "end": 98,
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 17
+            }
+          },
+          "operator": "=",
+          "left": {
+            "type": "MemberExpression",
+            "start": 81,
+            "end": 89,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 0
+              },
+              "end": {
+                "line": 3,
+                "column": 8
+              }
+            },
+            "object": {
+              "type": "Identifier",
+              "start": 81,
+              "end": 83,
+              "loc": {
+                "start": {
+                  "line": 3,
+                  "column": 0
+                },
+                "end": {
+                  "line": 3,
+                  "column": 2
+                },
+                "identifierName": "@$"
+              },
+              "name": "@$"
+            },
+            "property": {
+              "type": "Identifier",
+              "start": 84,
+              "end": 89,
+              "loc": {
+                "start": {
+                  "line": 3,
+                  "column": 3
+                },
+                "end": {
+                  "line": 3,
+                  "column": 8
+                },
+                "identifierName": "range"
+              },
+              "name": "range"
+            },
+            "computed": false
+          },
+          "right": {
+            "type": "ArrayExpression",
+            "start": 92,
+            "end": 98,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 11
+              },
+              "end": {
+                "line": 3,
+                "column": 17
+              }
+            },
+            "elements": [
+              {
+                "type": "NumericLiteral",
+                "start": 93,
+                "end": 94,
+                "loc": {
+                  "start": {
+                    "line": 3,
+                    "column": 12
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 13
+                  }
+                },
+                "extra": {
+                  "rawValue": 1,
+                  "raw": "1"
+                },
+                "value": 1
+              },
+              {
+                "type": "NumericLiteral",
+                "start": 96,
+                "end": 97,
+                "loc": {
+                  "start": {
+                    "line": 3,
+                    "column": 15
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 16
+                  }
+                },
+                "extra": {
+                  "rawValue": 2,
+                  "raw": "2"
+                },
+                "value": 2
+              }
+            ]
+          }
+        },
+        "trailingComments": [
+          {
+            "type": "CommentLine",
+            "value": " highly suspect as the next few are considered strictly CONSTANTS/RVALUES in JISON:",
+            "start": 100,
+            "end": 185,
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 0
+              },
+              "end": {
+                "line": 4,
+                "column": 85
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ExpressionStatement",
+        "start": 186,
+        "end": 191,
+        "loc": {
+          "start": {
+            "line": 5,
+            "column": 0
+          },
+          "end": {
+            "line": 5,
+            "column": 5
+          }
+        },
+        "expression": {
+          "type": "UpdateExpression",
+          "start": 186,
+          "end": 190,
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 0
+            },
+            "end": {
+              "line": 5,
+              "column": 4
+            }
+          },
+          "operator": "--",
+          "prefix": false,
+          "argument": {
+            "type": "Identifier",
+            "start": 186,
+            "end": 188,
+            "loc": {
+              "start": {
+                "line": 5,
+                "column": 0
+              },
+              "end": {
+                "line": 5,
+                "column": 2
+              },
+              "identifierName": "#$"
+            },
+            "name": "#$"
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "CommentLine",
+            "value": " highly suspect as the next few are considered strictly CONSTANTS/RVALUES in JISON:",
+            "start": 100,
+            "end": 185,
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 0
+              },
+              "end": {
+                "line": 4,
+                "column": 85
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ExpressionStatement",
+        "start": 192,
+        "end": 198,
+        "loc": {
+          "start": {
+            "line": 6,
+            "column": 0
+          },
+          "end": {
+            "line": 6,
+            "column": 6
+          }
+        },
+        "expression": {
+          "type": "UpdateExpression",
+          "start": 192,
+          "end": 197,
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 0
+            },
+            "end": {
+              "line": 6,
+              "column": 5
+            }
+          },
+          "operator": "--",
+          "prefix": false,
+          "argument": {
+            "type": "Identifier",
+            "start": 192,
+            "end": 195,
+            "loc": {
+              "start": {
+                "line": 6,
+                "column": 0
+              },
+              "end": {
+                "line": 6,
+                "column": 3
+              },
+              "identifierName": "##$"
+            },
+            "name": "##$"
+          }
+        }
+      },
+      {
+        "type": "ExpressionStatement",
+        "start": 199,
+        "end": 205,
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 0
+          },
+          "end": {
+            "line": 7,
+            "column": 6
+          }
+        },
+        "expression": {
+          "type": "UpdateExpression",
+          "start": 199,
+          "end": 204,
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 5
+            }
+          },
+          "operator": "--",
+          "prefix": false,
+          "argument": {
+            "type": "Identifier",
+            "start": 199,
+            "end": 202,
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 0
+              },
+              "end": {
+                "line": 7,
+                "column": 3
+              },
+              "identifierName": "#$#"
+            },
+            "name": "#$#"
+          }
+        }
+      }
+    ],
+    "directives": []
+  },
+  "comments": [
+    {
+      "type": "CommentLine",
+      "value": " any jison var referencing current value is okay: $$, @$, #$, ##$, #$#",
+      "start": 0,
+      "end": 72,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 72
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " highly suspect as the next few are considered strictly CONSTANTS/RVALUES in JISON:",
+      "start": 100,
+      "end": 185,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 85
+        }
+      }
+    }
+  ]
+}

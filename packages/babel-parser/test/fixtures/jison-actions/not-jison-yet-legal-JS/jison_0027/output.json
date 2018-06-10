@@ -1,0 +1,172 @@
+{
+  "type": "File",
+  "start": 0,
+  "end": 47,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 2,
+      "column": 10
+    }
+  },
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 47,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 10
+      }
+    },
+    "sourceType": "script",
+    "interpreter": null,
+    "body": [
+      {
+        "type": "ExpressionStatement",
+        "start": 37,
+        "end": 47,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 10
+          }
+        },
+        "expression": {
+          "type": "AssignmentExpression",
+          "start": 37,
+          "end": 46,
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 0
+            },
+            "end": {
+              "line": 2,
+              "column": 9
+            }
+          },
+          "operator": "=",
+          "left": {
+            "type": "Identifier",
+            "start": 37,
+            "end": 39,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 0
+              },
+              "end": {
+                "line": 2,
+                "column": 2
+              },
+              "identifierName": "rv"
+            },
+            "name": "rv"
+          },
+          "right": {
+            "type": "BinaryExpression",
+            "start": 42,
+            "end": 46,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 5
+              },
+              "end": {
+                "line": 2,
+                "column": 9
+              }
+            },
+            "left": {
+              "type": "Identifier",
+              "start": 42,
+              "end": 43,
+              "loc": {
+                "start": {
+                  "line": 2,
+                  "column": 5
+                },
+                "end": {
+                  "line": 2,
+                  "column": 6
+                },
+                "identifierName": "$"
+              },
+              "name": "$"
+            },
+            "operator": "-",
+            "right": {
+              "type": "NumericLiteral",
+              "start": 45,
+              "end": 46,
+              "loc": {
+                "start": {
+                  "line": 2,
+                  "column": 8
+                },
+                "end": {
+                  "line": 2,
+                  "column": 9
+                }
+              },
+              "extra": {
+                "rawValue": 5,
+                "raw": "5"
+              },
+              "value": 5
+            }
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "CommentLine",
+            "value": " this decodes as legal JS: `$ - 5`",
+            "start": 0,
+            "end": 36,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 36
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "directives": []
+  },
+  "comments": [
+    {
+      "type": "CommentLine",
+      "value": " this decodes as legal JS: `$ - 5`",
+      "start": 0,
+      "end": 36,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 36
+        }
+      }
+    }
+  ]
+}
