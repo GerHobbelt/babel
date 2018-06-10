@@ -17,8 +17,12 @@ export function runFixtureTests(fixturesPath, parseFunction) {
             if (!task.expect.code && !process.env.CI) {
               const fn = path.dirname(task.expect.loc) + "/options.json";
               if (!fs.existsSync(fn)) {
-                const data = { throws: err.message };
-                fs.writeFileSync(fn, JSON.stringify(data, null, "  "));
+                task.options = task.options || {};
+                task.options.throws = err.message.replace(
+                  /^.*Got error message: /,
+                  "",
+                );
+                fs.writeFileSync(fn, JSON.stringify(task.options, null, "  "));
               }
             }
 
