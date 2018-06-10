@@ -947,7 +947,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
     }
 
     // This is similar to checkGetterSetterParams, but as
-    // @babel/parser uses non estree properties we cannot reuse it here
+    // @gerhobbelt/babel-parser uses non estree properties we cannot reuse it here
     flowCheckGetterSetterParams(
       property: N.FlowObjectTypeProperty | N.FlowObjectTypeSpreadProperty,
     ): void {

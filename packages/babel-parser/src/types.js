@@ -981,7 +981,7 @@ export type EstreeMethodDefinition = NodeBase & {
 //   and only allow modifiers that are not considered errors.
 // * A property named `type` must be renamed to `typeAnnotation` to avoid conflict with the node's type.
 // * Sometimes TypeScript allows to parse something which will be a grammar error later;
-//   in @babel/parser these cause exceptions, so the AST format is stricter.
+//   in @gerhobbelt/babel-parser these cause exceptions, so the AST format is stricter.
 
 // ================
 // Misc
@@ -1312,7 +1312,7 @@ export type TsExternalModuleReference = NodeBase & {
 };
 
 // TypeScript's own parser uses ExportAssignment for both `export default` and `export =`.
-// But for @babel/parser, `export default` is an ExportDefaultDeclaration,
+// But for @gerhobbelt/babel-parser, `export default` is an ExportDefaultDeclaration,
 // so a TsExportAssignment is always `export =`.
 export type TsExportAssignment = NodeBase & {
   type: "TSExportAssignment",
