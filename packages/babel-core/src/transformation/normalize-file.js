@@ -4,7 +4,7 @@ import buildDebug from "debug";
 import * as t from "@babel/types";
 import type { PluginPasses } from "../config";
 import convertSourceMap, { typeof Converter } from "convert-source-map";
-import { parse } from "@babel/parser";
+import { parse } from "@gerhobbelt/babel-parser";
 import { codeFrameColumns } from "@babel/code-frame";
 import File from "./file/file";
 import generateMissingPluginMessage from "./util/missing-plugin-helper";

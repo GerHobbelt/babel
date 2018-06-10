@@ -1,5 +1,5 @@
 import { NodePath } from "../lib";
-import { parse } from "@babel/parser";
+import { parse } from "@gerhobbelt/babel-parser";
 import generate from "@babel/generator";
 import * as t from "@babel/types";
 

@@ -1,5 +1,5 @@
 import * as t from "../lib";
-import { parse } from "@babel/parser";
+import { parse } from "@gerhobbelt/babel-parser";
 import generate from "@babel/generator";
 
 function parseCode(string) {
