@@ -73,7 +73,8 @@ export default (superClass: Class<Parser>): Class<Parser> =>
     tsNextTokenCanFollowModifier() {
       // Note: TypeScript's implementation is much more complicated because
       // more things are considered modifiers there.
-      // This implementation only handles modifiers not handled by @gerhobbelt/babel-parser itself. And "static".
+      // This implementation only handles modifiers not handled by
+      // @gerhobbelt/babel-parser itself. And "static".
       // TODO: Would be nice to avoid lookahead. Want a hasLineBreakUpNext() method...
       this.next();
       return (

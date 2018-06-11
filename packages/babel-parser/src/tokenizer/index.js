@@ -814,6 +814,7 @@ export default class Tokenizer extends LocationParser {
       case charCodes.questionMark:
         this.readToken_question();
         return;
+
       case charCodes.atSign:
         ++this.state.pos;
         this.finishToken(tt.at);
