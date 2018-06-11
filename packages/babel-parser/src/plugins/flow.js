@@ -1816,7 +1816,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
         (code === charCodes.greaterThan || code === charCodes.lessThan)
       ) {
         return this.finishOp(tt.relational, 1);
-      } else if (isIteratorStart(code, next)) {
+      } else if (!this.options.jisonVariables && isIteratorStart(code, next)) {
         this.state.isIterator = true;
         return super.readWord();
       } else {
