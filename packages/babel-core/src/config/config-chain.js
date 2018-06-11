@@ -681,7 +681,7 @@ function matchesPatterns(
       }
       if (negate) pattern = pattern.slice(1);
 
-      return (negate ? "!" : "") + path.resolve(dirname, pattern);
+      return (negate ? "!" : "") + path.resolve(dirname, pattern).replace(/\\/g, '/');
     });
 
     if (
@@ -710,5 +710,5 @@ const getPossibleDirs = makeWeakCache((context: ConfigContextNamed) => {
     possibleDirs.push(current);
   }
 
-  return possibleDirs;
+  return possibleDirs.map((path) => path.replace(/\\/g, '/'));
 });
