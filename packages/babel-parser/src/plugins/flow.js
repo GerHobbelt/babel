@@ -1813,7 +1813,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       const next = this.input.charCodeAt(this.state.pos + 1);
       if (this.state.inType && (code === 62 || code === 60)) {
         return this.finishOp(tt.relational, 1);
-      } else if (isIteratorStart(code, next)) {
+      } else if (!this.options.jisonVariables && isIteratorStart(code, next)) {
         this.state.isIterator = true;
         return super.readWord();
       } else {
