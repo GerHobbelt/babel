@@ -117,6 +117,8 @@ publish:
 	# --only-explicit-updates
 	
 	#./node_modules/.bin/lerna publish --force-publish=* --exact --skip-temp-tag
+	#
+	#./node_modules/.bin/lerna publish --exact --skip-temp-tag --skip-npm --skip-git --repo-version 7.0.0-49.7
 	#make clean
 
 bootstrap: #clean-all
