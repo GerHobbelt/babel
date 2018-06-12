@@ -7,7 +7,9 @@ function fixture(...args) {
 }
 
 function fixture4re(...args) {
-  return path.join("fixtures", "config", ...args).replace(/[\\/]/g, '[\\\\\\/]');
+  return path
+    .join("fixtures", "config", ...args)
+    .replace(/[\\/]/g, "[\\\\\\/]");
 }
 
 function loadOptions(opts) {

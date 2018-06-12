@@ -54,8 +54,8 @@ const replacePaths = function(str, cwd) {
   } while (str !== prev);
 
   // Unify Windows and UNIX paths: make Windows paths look like UNIX ones:
-  str = str.replace(/[A-Z]:[\\\/]/g, '/').replace(/\\/g, '/');
-  
+  str = str.replace(/[A-Z]:[\\/]/g, "/").replace(/\\/g, "/");
+
   return str;
 };
 
