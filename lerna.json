@@ -1,6 +1,6 @@
 {
   "lerna": "2.11.0",
-  "version": "7.0.0-beta.51",
+  "version": "7.0.0-beta.510001",
   "changelog": {
     "repo": "babel/babel",
     "cacheDir": ".changelog",
@@ -27,8 +27,7 @@
     "packages/*",
     "codemods/*"
   ],
-  "npmClient": "yarn",
+  "npmClient": "npm",
   "npmClientArgs": [
-    "--no-lockfile"
   ]
 }
