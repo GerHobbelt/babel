@@ -80,6 +80,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       return (
         !this.hasPrecedingLineBreak() &&
         !this.match(tt.parenL) &&
+        !this.match(tt.parenR) &&
         !this.match(tt.colon) &&
         !this.match(tt.eq) &&
         !this.match(tt.question)
