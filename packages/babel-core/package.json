@@ -1,5 +1,5 @@
 {
-  "name": "@babel/core",
+  "name": "@gerhobbelt/babel-core",
   "version": "7.0.0-beta.510001",
   "description": "Babel compiler core.",
   "main": "lib/index.js",
@@ -30,13 +30,13 @@
     "./lib/transform-file.js": "./lib/transform-file-browser.js"
   },
   "dependencies": {
-    "@babel/code-frame": "7.0.0-beta.510001",
-    "@babel/generator": "7.0.0-beta.510001",
-    "@babel/helpers": "7.0.0-beta.510001",
-    "@babel/parser": "7.0.0-beta.510001",
-    "@babel/template": "7.0.0-beta.510001",
-    "@babel/traverse": "7.0.0-beta.510001",
-    "@babel/types": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-code-frame": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-generator": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-helpers": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-parser": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-template": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-traverse": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-types": "7.0.0-beta.510001",
     "convert-source-map": "^1.5.1",
     "debug": "^3.1.0",
     "json5": "^1.0.1",
@@ -47,7 +47,7 @@
     "source-map": "^0.5.0"
   },
   "devDependencies": {
-    "@babel/helper-transform-fixture-test-runner": "7.0.0-beta.510001",
-    "@babel/register": "7.0.0-beta.510001"
+    "@gerhobbelt/babel-helper-transform-fixture-test-runner": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-register": "7.0.0-beta.510001"
   }
 }

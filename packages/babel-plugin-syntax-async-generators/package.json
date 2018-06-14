@@ -1,5 +1,5 @@
 {
-  "name": "@babel/plugin-syntax-async-generators",
+  "name": "@gerhobbelt/babel-plugin-syntax-async-generators",
   "version": "7.0.0-beta.510001",
   "description": "Allow parsing of async generator functions",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-async-generators",
@@ -9,12 +9,12 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@babel/helper-plugin-utils": "7.0.0-beta.510001"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-beta.510001"
   },
   "peerDependencies": {
-    "@babel/core": ">=7.0.0-beta.50 <7.0.0-rc.0"
+    "@gerhobbelt/babel-core": ">=7.0.0-beta.50 <7.0.0-rc.0"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.510001"
+    "@gerhobbelt/babel-core": "7.0.0-beta.510001"
   }
 }

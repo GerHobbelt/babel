@@ -1,5 +1,5 @@
 {
-  "name": "@babel/preset-flow",
+  "name": "@gerhobbelt/babel-preset-flow",
   "version": "7.0.0-beta.510001",
   "description": "Babel preset for all Flow plugins.",
   "author": "James Kyle <me@thejameskyle.com>",
@@ -13,14 +13,14 @@
     "types"
   ],
   "dependencies": {
-    "@babel/helper-plugin-utils": "7.0.0-beta.510001",
-    "@babel/plugin-transform-flow-strip-types": "7.0.0-beta.510001"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-plugin-transform-flow-strip-types": "7.0.0-beta.510001"
   },
   "peerDependencies": {
-    "@babel/core": ">=7.0.0-beta.50 <7.0.0-rc.0"
+    "@gerhobbelt/babel-core": ">=7.0.0-beta.50 <7.0.0-rc.0"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.510001",
-    "@babel/helper-plugin-test-runner": "7.0.0-beta.510001"
+    "@gerhobbelt/babel-core": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.0.0-beta.510001"
   }
 }

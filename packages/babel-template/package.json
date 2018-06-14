@@ -1,5 +1,5 @@
 {
-  "name": "@babel/template",
+  "name": "@gerhobbelt/babel-template",
   "version": "7.0.0-beta.510001",
   "description": "Generate an AST from a string template.",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
@@ -8,9 +8,9 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-template",
   "main": "lib/index.js",
   "dependencies": {
-    "@babel/code-frame": "7.0.0-beta.510001",
-    "@babel/parser": "7.0.0-beta.510001",
-    "@babel/types": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-code-frame": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-parser": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-types": "7.0.0-beta.510001",
     "lodash": "^4.17.5"
   }
 }
