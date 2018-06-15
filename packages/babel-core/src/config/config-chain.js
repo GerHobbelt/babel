@@ -3,6 +3,7 @@
 import path from "path";
 import micromatch from "micromatch";
 import buildDebug from "debug";
+import slash from "slash";
 import {
   validate,
   type ValidatedOptions,
@@ -681,9 +682,7 @@ function matchesPatterns(
       }
       if (negate) pattern = pattern.slice(1);
 
-      return (
-        (negate ? "!" : "") + path.resolve(dirname, pattern).replace(/\\/g, "/")
-      );
+      return (negate ? "!" : "") + slash(path.resolve(dirname, pattern));
     });
 
     if (
@@ -712,5 +711,5 @@ const getPossibleDirs = makeWeakCache((context: ConfigContextNamed) => {
     possibleDirs.push(current);
   }
 
-  return possibleDirs.map(path => path.replace(/\\/g, "/"));
+  return possibleDirs.map(path => slash(path));
 });

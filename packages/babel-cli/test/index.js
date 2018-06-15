@@ -4,6 +4,7 @@ const rimraf = require("rimraf");
 const outputFileSync = require("output-file-sync");
 const child = require("child_process");
 const merge = require("lodash/merge");
+const slash = require("slash");
 const path = require("path");
 const fs = require("fs");
 
@@ -54,7 +55,7 @@ const replacePaths = function(str, cwd) {
   } while (str !== prev);
 
   // Unify Windows and UNIX paths: make Windows paths look like UNIX ones:
-  str = str.replace(/[A-Z]:[\\/]/g, "/").replace(/\\/g, "/");
+  str = slash(str.replace(/[A-Z]:[\\/]/g, "/"));
 
   return str;
 };

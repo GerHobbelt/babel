@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@gerhobbelt/babel-helper-transform-fixture-test-runner": "7.0.0-beta.510001",
-    "@gerhobbelt/babel-register": "7.0.0-beta.510001"
+    "@gerhobbelt/babel-register": "7.0.0-beta.510001",
+    "slash": "^2.0.0"
   }
 }
