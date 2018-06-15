@@ -1,7 +1,7 @@
-import * as helpers from "@babel/helpers";
-import generator from "@babel/generator";
-import template from "@babel/template";
-import * as t from "@babel/types";
+import * as helpers from "@gerhobbelt/babel-helpers";
+import generator from "@gerhobbelt/babel-generator";
+import template from "@gerhobbelt/babel-template";
+import * as t from "@gerhobbelt/babel-types";
 
 // Wrapped to avoid wasting time parsing this when almost no-one uses
 // build-external-helpers.

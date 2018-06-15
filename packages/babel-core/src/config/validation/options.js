@@ -189,7 +189,7 @@ export type ValidatedOptions = {
   plugins?: PluginList,
   passPerPreset?: boolean,
 
-  // Options for @babel/generator
+  // Options for @gerhobbelt/babel-generator
   retainLines?: boolean,
   comments?: boolean,
   shouldPrintComment?: Function,

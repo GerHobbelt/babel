@@ -1,19 +1,19 @@
-# @babel/helper-call-delegate
+# @gerhobbelt/babel-helper-call-delegate
 
 > Helper function to call delegate
 
-See our website [@babel/helper-call-delegate](https://new.babeljs.io/docs/en/next/babel-helper-call-delegate.html) for more information.
+See our website [@gerhobbelt/babel-helper-call-delegate](https://new.babeljs.io/docs/en/next/babel-helper-call-delegate.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/helper-call-delegate
+npm install --save @gerhobbelt/babel-helper-call-delegate
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/helper-call-delegate
+yarn add --save @gerhobbelt/babel-helper-call-delegate
 ```

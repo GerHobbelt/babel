@@ -89,7 +89,7 @@ class ConfigItem {
    * Data about the file that the item was loaded from, if Babel knows it.
    */
   file: {
-    // The requested path, e.g. "@babel/env".
+    // The requested path, e.g. "@gerhobbelt/babel-env".
     request: string,
 
     // The resolved absolute path of the file.

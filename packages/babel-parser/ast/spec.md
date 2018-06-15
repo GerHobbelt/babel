@@ -1,4 +1,4 @@
-These are the core @babel/parser (babylon) AST node types.
+These are the core @gerhobbelt/babel-parser (babylon) AST node types.
 
 - [Node objects](#node-objects)
 - [Changes](#changes)
@@ -145,7 +145,7 @@ interface Position {
 
 # Changes
 
-### @babel/parser (Babylon) v7
+### @gerhobbelt/babel-parser (Babylon) v7
 
 Flow: Node renamed from `ExistentialTypeParam` to `ExistsTypeAnnotation` [#322](https://github.com/babel/babylon/pull/322)
 

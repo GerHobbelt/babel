@@ -12,8 +12,8 @@
  * var __jsxFileName = 'this/file.js';
  * <sometag __source={{fileName: __jsxFileName, lineNumber: 10}}/>
  */
-import { declare } from "@babel/helper-plugin-utils";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import { types as t } from "@gerhobbelt/babel-core";
 
 const TRACE_ID = "__source";
 const FILE_NAME_VAR = "_jsxFileName";

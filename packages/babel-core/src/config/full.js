@@ -11,7 +11,7 @@ import {
   type PresetInstance,
 } from "./config-chain";
 import type { UnloadedDescriptor } from "./config-descriptors";
-import traverse from "@babel/traverse";
+import traverse from "@gerhobbelt/babel-traverse";
 import { makeWeakCache, type CacheConfigurator } from "./caching";
 import { validate } from "./validation/options";
 import { validatePluginObject } from "./validation/plugins";
@@ -197,7 +197,7 @@ const loadDescriptor = makeWeakCache(
         `You appear to be using an async plugin, ` +
           `which your current version of Babel does not support.` +
           `If you're using a published plugin, ` +
-          `you may need to upgrade your @babel/core version.`,
+          `you may need to upgrade your @gerhobbelt/babel-core version.`,
       );
     }
 

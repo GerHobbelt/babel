@@ -36,7 +36,7 @@ const defaultOptions = {
   ignoreNodeModules: false,
 };
 
-describe("@babel/register", function() {
+describe("@gerhobbelt/babel-register", function() {
   let babelRegister;
 
   function setupRegister(config = { babelrc: false }) {
@@ -113,7 +113,7 @@ describe("@babel/register", function() {
     setupRegister({
       babelrc: false,
       sourceMaps: false,
-      plugins: ["@babel/transform-modules-commonjs"],
+      plugins: ["@gerhobbelt/babel-transform-modules-commonjs"],
     });
 
     const result = currentHook(testFileContent, testFile);

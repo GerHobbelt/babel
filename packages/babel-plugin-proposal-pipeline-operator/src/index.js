@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxPipelineOperator from "@babel/plugin-syntax-pipeline-operator";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxPipelineOperator from "@gerhobbelt/babel-plugin-syntax-pipeline-operator";
+import { types as t } from "@gerhobbelt/babel-core";
 
 export default declare(api => {
   api.assertVersion(7);

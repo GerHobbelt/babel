@@ -1,4 +1,4 @@
-import { template, types as t } from "@babel/core";
+import { template, types as t } from "@gerhobbelt/babel-core";
 
 const buildRest = template(`
   for (var LEN = ARGUMENTS.length,

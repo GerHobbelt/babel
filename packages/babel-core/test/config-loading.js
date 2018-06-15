@@ -1,7 +1,7 @@
 import loadConfig from "../lib/config";
 import path from "path";
 
-describe("@babel/core config loading", () => {
+describe("@gerhobbelt/babel-core config loading", () => {
   const FILEPATH = path.join(
     __dirname,
     "fixtures",

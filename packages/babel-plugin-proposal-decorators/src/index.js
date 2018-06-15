@@ -1,5 +1,5 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxDecorators from "@babel/plugin-syntax-decorators";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxDecorators from "@gerhobbelt/babel-plugin-syntax-decorators";
 import visitor from "./transformer";
 import legacyVisitor from "./transformer-legacy";
 
@@ -15,7 +15,7 @@ export default declare((api, options) => {
     throw new Error(
       "The new decorators proposal is not supported yet." +
         ' You must pass the `"legacy": true` option to' +
-        " @babel/plugin-proposal-decorators",
+        " @gerhobbelt/babel-plugin-proposal-decorators",
     );
   }
 

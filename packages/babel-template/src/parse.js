@@ -1,8 +1,8 @@
 // @flow
-import * as t from "@babel/types";
-import type { TraversalAncestors, TraversalHandler } from "@babel/types";
+import * as t from "@gerhobbelt/babel-types";
+import type { TraversalAncestors, TraversalHandler } from "@gerhobbelt/babel-types";
 import { parse } from "@gerhobbelt/babel-parser";
-import { codeFrameColumns } from "@babel/code-frame";
+import { codeFrameColumns } from "@gerhobbelt/babel-code-frame";
 import type { TemplateOpts } from "./options";
 import type { Formatter } from "./formatters";
 

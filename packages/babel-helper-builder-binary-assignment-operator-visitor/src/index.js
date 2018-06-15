@@ -1,5 +1,5 @@
-import explode from "@babel/helper-explode-assignable-expression";
-import * as t from "@babel/types";
+import explode from "@gerhobbelt/babel-helper-explode-assignable-expression";
+import * as t from "@gerhobbelt/babel-types";
 
 export default function(opts: { build: Function, operator: string }): Object {
   const { build, operator } = opts;

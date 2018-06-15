@@ -1,4 +1,4 @@
-import highlight, { shouldHighlight, getChalk } from "@babel/highlight";
+import highlight, { shouldHighlight, getChalk } from "@gerhobbelt/babel-highlight";
 
 let deprecationWarningShown = false;
 
@@ -184,7 +184,7 @@ export default function(
     deprecationWarningShown = true;
 
     const message =
-      "Passing lineNumber and colNumber is deprecated to @babel/code-frame. Please use `codeFrameColumns`.";
+      "Passing lineNumber and colNumber is deprecated to @gerhobbelt/babel-code-frame. Please use `codeFrameColumns`.";
 
     if (process.emitWarning) {
       // A string is directly supplied to emitWarning, because when supplying an

@@ -1,3 +1,3 @@
-require("@babel/register").default({
+require("@gerhobbelt/babel-register").default({
   ignore: false
 });

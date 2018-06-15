@@ -194,9 +194,9 @@ module.exports = {
         if (
           origin.kind === "import" &&
           (origin.name === "clone" || origin.name === "cloneDeep") &&
-          origin.source === "@babel/types"
+          origin.source === "@gerhobbelt/babel-types"
         ) {
-          // imported from @babel/types
+          // imported from @gerhobbelt/babel-types
           return reportError(context, node.callee);
         }
 
@@ -205,9 +205,9 @@ module.exports = {
           (origin.path === "clone" || origin.path === "cloneDeep") &&
           origin.base.kind === "import" &&
           origin.base.name === "types" &&
-          origin.base.source === "@babel/core"
+          origin.base.source === "@gerhobbelt/babel-core"
         ) {
-          // imported from @babel/core
+          // imported from @gerhobbelt/babel-core
           return reportError(context, node.callee);
         }
 

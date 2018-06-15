@@ -3,7 +3,7 @@ import path from "path";
 import vm from "vm";
 
 describe("browserify", function() {
-  it("@babel/register may be used without breaking browserify", function(done) {
+  it("@gerhobbelt/babel-register may be used without breaking browserify", function(done) {
     const bundler = browserify(
       path.join(__dirname, "fixtures/browserify/register.js"),
     );

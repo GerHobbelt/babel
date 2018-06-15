@@ -1,3 +1,3 @@
-import "@babel/polyfill";
+import "@gerhobbelt/babel-polyfill";
 
 a ** b;

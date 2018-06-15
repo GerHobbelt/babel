@@ -15,7 +15,7 @@ function makeStatementFormatter<T>(
     // Alongside that, we also prepend a comment so that when a syntax error
     // is encountered, the user will be less likely to get confused about
     // where the random semicolon came from.
-    code: str => `/* @babel/template */;\n${str}`,
+    code: str => `/* @gerhobbelt/babel-template */;\n${str}`,
     validate: () => {},
     unwrap: (ast: BabelNodeFile): T => {
       return fn(ast.program.body.slice(1));

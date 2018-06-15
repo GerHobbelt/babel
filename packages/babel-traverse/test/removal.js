@@ -1,6 +1,6 @@
 import traverse from "../lib";
 import { parse } from "@gerhobbelt/babel-parser";
-import generate from "@babel/generator";
+import generate from "@gerhobbelt/babel-generator";
 
 function getPath(code) {
   const ast = parse(code);

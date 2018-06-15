@@ -1,19 +1,19 @@
-# @babel/helper-explode-assignable-expression
+# @gerhobbelt/babel-helper-explode-assignable-expression
 
 > Helper function to explode an assignable expression
 
-See our website [@babel/helper-explode-assignable-expression](https://new.babeljs.io/docs/en/next/babel-helper-explode-assignable-expression.html) for more information.
+See our website [@gerhobbelt/babel-helper-explode-assignable-expression](https://new.babeljs.io/docs/en/next/babel-helper-explode-assignable-expression.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/helper-explode-assignable-expression
+npm install --save @gerhobbelt/babel-helper-explode-assignable-expression
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/helper-explode-assignable-expression
+yarn add --save @gerhobbelt/babel-helper-explode-assignable-expression
 ```

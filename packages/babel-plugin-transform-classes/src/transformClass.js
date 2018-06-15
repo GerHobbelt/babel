@@ -1,11 +1,11 @@
-import type { NodePath } from "@babel/traverse";
-import nameFunction from "@babel/helper-function-name";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
+import nameFunction from "@gerhobbelt/babel-helper-function-name";
 import ReplaceSupers, {
   environmentVisitor,
-} from "@babel/helper-replace-supers";
-import optimiseCall from "@babel/helper-optimise-call-expression";
-import * as defineMap from "@babel/helper-define-map";
-import { traverse, template, types as t } from "@babel/core";
+} from "@gerhobbelt/babel-helper-replace-supers";
+import optimiseCall from "@gerhobbelt/babel-helper-optimise-call-expression";
+import * as defineMap from "@gerhobbelt/babel-helper-define-map";
+import { traverse, template, types as t } from "@gerhobbelt/babel-core";
 
 type ReadonlySet<T> = Set<T> | { has(val: T): boolean };
 

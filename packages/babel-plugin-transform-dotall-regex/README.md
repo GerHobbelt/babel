@@ -1,19 +1,19 @@
-# @babel/plugin-transform-dotall-regex
+# @gerhobbelt/babel-plugin-transform-dotall-regex
 
 > Compile regular expressions using the `s` (`dotAll`) flag to ES5.
 
-See our website [@babel/plugin-transform-dotall-regex](https://new.babeljs.io/docs/en/next/babel-plugin-transform-dotall-regex.html) for more information.
+See our website [@gerhobbelt/babel-plugin-transform-dotall-regex](https://new.babeljs.io/docs/en/next/babel-plugin-transform-dotall-regex.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/plugin-transform-dotall-regex
+npm install --save @gerhobbelt/babel-plugin-transform-dotall-regex
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/plugin-transform-dotall-regex
+yarn add --save @gerhobbelt/babel-plugin-transform-dotall-regex
 ```

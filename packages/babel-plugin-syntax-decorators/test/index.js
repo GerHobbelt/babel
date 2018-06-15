@@ -1,4 +1,4 @@
-import { parse } from "@babel/core";
+import { parse } from "@gerhobbelt/babel-core";
 import syntaxDecorators from "../lib";
 
 function makeParser(code, options) {

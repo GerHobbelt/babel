@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
-import hoistVariables from "@babel/helper-hoist-variables";
-import { template, types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import hoistVariables from "@gerhobbelt/babel-helper-hoist-variables";
+import { template, types as t } from "@gerhobbelt/babel-core";
 
 const buildTemplate = template(`
   SYSTEM_REGISTER(MODULE_NAME, SOURCES, function (EXPORT_IDENTIFIER, CONTEXT_IDENTIFIER) {

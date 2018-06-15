@@ -3,7 +3,7 @@
 import invariant from "invariant";
 import semver from "semver";
 import levenshtein from "js-levenshtein";
-import { addSideEffect } from "@babel/helper-module-imports";
+import { addSideEffect } from "@gerhobbelt/babel-helper-module-imports";
 import unreleasedLabels from "../data/unreleased-labels";
 import { semverMin } from "./targets-parser";
 import type { Targets } from "./types";
@@ -111,7 +111,7 @@ export const filterStageFromList = (list: any, stageList: any) => {
 };
 
 export const isPolyfillSource = (source: string): boolean =>
-  source === "@babel/polyfill" || source === "core-js";
+  source === "@gerhobbelt/babel-polyfill" || source === "core-js";
 
 const modulePathMap = {
   "regenerator-runtime": "regenerator-runtime/runtime",

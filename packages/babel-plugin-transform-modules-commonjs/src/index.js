@@ -1,4 +1,4 @@
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 import {
   isModule,
   rewriteModuleStatementsAndPrepareHeader,
@@ -6,9 +6,9 @@ import {
   buildNamespaceInitStatements,
   ensureStatementsHoisted,
   wrapInterop,
-} from "@babel/helper-module-transforms";
-import simplifyAccess from "@babel/helper-simple-access";
-import { template, types as t } from "@babel/core";
+} from "@gerhobbelt/babel-helper-module-transforms";
+import simplifyAccess from "@gerhobbelt/babel-helper-simple-access";
+import { template, types as t } from "@gerhobbelt/babel-core";
 
 export default declare((api, options) => {
   api.assertVersion(7);

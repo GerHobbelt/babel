@@ -1,10 +1,10 @@
 "use strict";
 
 const outputFile = require("output-file-sync");
-const coreDefinitions = require("@babel/plugin-transform-runtime").definitions;
-const helpers = require("@babel/helpers");
-const babel = require("@babel/core");
-const t = require("@babel/types");
+const coreDefinitions = require("@gerhobbelt/babel-plugin-transform-runtime").definitions;
+const helpers = require("@gerhobbelt/babel-helpers");
+const babel = require("@gerhobbelt/babel-core");
+const t = require("@gerhobbelt/babel-types");
 
 const paths = ["is-iterable", "get-iterator"];
 
@@ -47,11 +47,11 @@ function writeFile(filename, content) {
 
 function makeTransformOpts(modules, useBuiltIns) {
   const opts = {
-    presets: [[require("@babel/preset-env"), { modules: false }]],
+    presets: [[require("@gerhobbelt/babel-preset-env"), { modules: false }]],
 
     plugins: [
       [
-        require("@babel/plugin-transform-runtime"),
+        require("@gerhobbelt/babel-plugin-transform-runtime"),
         { useBuiltIns, useESModules: modules === false },
       ],
     ],
@@ -63,7 +63,7 @@ function adjustImportPath(node, relativePath) {
   if (helpers.list.indexOf(node.value) >= 0) {
     node.value = `./${node.value}`;
   } else {
-    node.value = node.value.replace(/^@babel\/runtime/, relativePath);
+    node.value = node.value.replace(/^@gerhobbelt/babel-/runtime/, relativePath);
   }
 }
 
@@ -91,7 +91,7 @@ function buildRuntimeRewritePlugin(relativePath, helperName, dependencies) {
           return;
         }
 
-        // replace any reference to @babel/runtime and other helpers
+        // replace any reference to @gerhobbelt/babel-runtime and other helpers
         // with a relative path
         adjustImportPath(path.get("arguments")[0].node, relativePath);
       },

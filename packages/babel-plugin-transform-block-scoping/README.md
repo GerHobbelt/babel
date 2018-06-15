@@ -1,19 +1,19 @@
-# @babel/plugin-transform-block-scoping
+# @gerhobbelt/babel-plugin-transform-block-scoping
 
 > Compile ES2015 block scoping (const and let) to ES5
 
-See our website [@babel/plugin-transform-block-scoping](https://new.babeljs.io/docs/en/next/babel-plugin-transform-block-scoping.html) for more information.
+See our website [@gerhobbelt/babel-plugin-transform-block-scoping](https://new.babeljs.io/docs/en/next/babel-plugin-transform-block-scoping.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/plugin-transform-block-scoping
+npm install --save @gerhobbelt/babel-plugin-transform-block-scoping
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/plugin-transform-block-scoping
+yarn add --save @gerhobbelt/babel-plugin-transform-block-scoping
 ```

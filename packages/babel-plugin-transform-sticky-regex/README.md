@@ -1,19 +1,19 @@
-# @babel/plugin-transform-sticky-regex
+# @gerhobbelt/babel-plugin-transform-sticky-regex
 
 > Compile ES2015 sticky regex to an ES5 RegExp constructor
 
-See our website [@babel/plugin-transform-sticky-regex](https://new.babeljs.io/docs/en/next/babel-plugin-transform-sticky-regex.html) for more information.
+See our website [@gerhobbelt/babel-plugin-transform-sticky-regex](https://new.babeljs.io/docs/en/next/babel-plugin-transform-sticky-regex.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/plugin-transform-sticky-regex
+npm install --save @gerhobbelt/babel-plugin-transform-sticky-regex
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/plugin-transform-sticky-regex
+yarn add --save @gerhobbelt/babel-plugin-transform-sticky-regex
 ```

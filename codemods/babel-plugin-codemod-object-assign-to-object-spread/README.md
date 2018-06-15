@@ -1,4 +1,4 @@
-# @babel/plugin-codemod-object-assign-to-object-spread
+# @gerhobbelt/babel-plugin-codemod-object-assign-to-object-spread
 
 Transforms old code that uses `Object.assign` with an Object Literal as
 the first param to use Object Spread syntax.
@@ -27,7 +27,7 @@ const obj = {
 ## Installation
 
 ```sh
-npm install --save-dev @babel/plugin-codemod-object-assign-to-object-spread
+npm install --save-dev @gerhobbelt/babel-plugin-codemod-object-assign-to-object-spread
 ```
 
 ## Usage
@@ -38,20 +38,20 @@ npm install --save-dev @babel/plugin-codemod-object-assign-to-object-spread
 
 ```json
 {
-  "plugins": ["@babel/plugin-codemod-object-assign-to-object-spread"]
+  "plugins": ["@gerhobbelt/babel-plugin-codemod-object-assign-to-object-spread"]
 }
 ```
 
 ### Via CLI
 
 ```sh
-babel --plugins @babel/plugin-codemod-object-assign-to-object-spread script.js
+babel --plugins @gerhobbelt/babel-plugin-codemod-object-assign-to-object-spread script.js
 ```
 
 ### Via Node API
 
 ```javascript
-require("@babel/core").transform("code", {
-  plugins: ["@babel/plugin-codemod-object-assign-to-object-spread"]
+require("@gerhobbelt/babel-core").transform("code", {
+  plugins: ["@gerhobbelt/babel-plugin-codemod-object-assign-to-object-spread"]
 });
 ```

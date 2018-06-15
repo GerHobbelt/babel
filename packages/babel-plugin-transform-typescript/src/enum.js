@@ -1,5 +1,5 @@
 import assert from "assert";
-import { template } from "@babel/core";
+import { template } from "@gerhobbelt/babel-core";
 
 export default function transpileEnum(path, t) {
   const { node } = path;

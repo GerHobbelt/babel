@@ -82,7 +82,7 @@ function webpackBuild(opts) {
 
   if (opts.library !== "Babel") {
     config.externals = {
-      "@babel/standalone": "Babel",
+      "@gerhobbelt/babel-standalone": "Babel",
     };
   }
 

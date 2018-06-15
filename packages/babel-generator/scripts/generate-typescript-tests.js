@@ -1,5 +1,5 @@
 /*
-Copies tests from the @gerhobbelt/babel-parser's TypeScript test suite to @babel/generator.
+Copies tests from the @gerhobbelt/babel-parser's TypeScript test suite to @gerhobbelt/babel-generator.
 */
 const {
   copySync,

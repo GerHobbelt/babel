@@ -1,19 +1,19 @@
-# @babel/helper-module-transforms
+# @gerhobbelt/babel-helper-module-transforms
 
 > Babel helper functions for implementing ES6 module transformations
 
-See our website [@babel/helper-module-transforms](https://new.babeljs.io/docs/en/next/babel-helper-module-transforms.html) for more information.
+See our website [@gerhobbelt/babel-helper-module-transforms](https://new.babeljs.io/docs/en/next/babel-helper-module-transforms.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/helper-module-transforms
+npm install --save @gerhobbelt/babel-helper-module-transforms
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/helper-module-transforms
+yarn add --save @gerhobbelt/babel-helper-module-transforms
 ```

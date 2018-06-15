@@ -1,19 +1,19 @@
-# @babel/helper-transform-fixture-test-runner
+# @gerhobbelt/babel-helper-transform-fixture-test-runner
 
-> Transform test runner for @babel/helper-fixtures module
+> Transform test runner for @gerhobbelt/babel-helper-fixtures module
 
-See our website [@babel/helper-transform-fixture-test-runner](https://new.babeljs.io/docs/en/next/babel-helper-transform-fixture-test-runner.html) for more information.
+See our website [@gerhobbelt/babel-helper-transform-fixture-test-runner](https://new.babeljs.io/docs/en/next/babel-helper-transform-fixture-test-runner.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/helper-transform-fixture-test-runner
+npm install --save @gerhobbelt/babel-helper-transform-fixture-test-runner
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/helper-transform-fixture-test-runner
+yarn add --save @gerhobbelt/babel-helper-transform-fixture-test-runner
 ```

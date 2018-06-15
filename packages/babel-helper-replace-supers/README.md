@@ -1,19 +1,19 @@
-# @babel/helper-replace-supers
+# @gerhobbelt/babel-helper-replace-supers
 
 > Helper function to replace supers
 
-See our website [@babel/helper-replace-supers](https://new.babeljs.io/docs/en/next/babel-helper-replace-supers.html) for more information.
+See our website [@gerhobbelt/babel-helper-replace-supers](https://new.babeljs.io/docs/en/next/babel-helper-replace-supers.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/helper-replace-supers
+npm install --save @gerhobbelt/babel-helper-replace-supers
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/helper-replace-supers
+yarn add --save @gerhobbelt/babel-helper-replace-supers
 ```

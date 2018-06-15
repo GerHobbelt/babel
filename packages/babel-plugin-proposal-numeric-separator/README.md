@@ -1,19 +1,19 @@
-# @babel/plugin-proposal-numeric-separator
+# @gerhobbelt/babel-plugin-proposal-numeric-separator
 
 > Remove numeric separators from Decimal, Binary, Hex and Octal literals
 
-See our website [@babel/plugin-proposal-numeric-separator](https://new.babeljs.io/docs/en/next/babel-plugin-proposal-numeric-separator.html) for more information.
+See our website [@gerhobbelt/babel-plugin-proposal-numeric-separator](https://new.babeljs.io/docs/en/next/babel-plugin-proposal-numeric-separator.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/plugin-proposal-numeric-separator
+npm install --save @gerhobbelt/babel-plugin-proposal-numeric-separator
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/plugin-proposal-numeric-separator
+yarn add --save @gerhobbelt/babel-plugin-proposal-numeric-separator
 ```

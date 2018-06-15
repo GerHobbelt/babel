@@ -1,19 +1,19 @@
-# @babel/plugin-transform-react-jsx-self
+# @gerhobbelt/babel-plugin-transform-react-jsx-self
 
 > Add a __self prop to all JSX Elements
 
-See our website [@babel/plugin-transform-react-jsx-self](https://new.babeljs.io/docs/en/next/babel-plugin-transform-react-jsx-self.html) for more information.
+See our website [@gerhobbelt/babel-plugin-transform-react-jsx-self](https://new.babeljs.io/docs/en/next/babel-plugin-transform-react-jsx-self.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/plugin-transform-react-jsx-self
+npm install --save @gerhobbelt/babel-plugin-transform-react-jsx-self
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/plugin-transform-react-jsx-self
+yarn add --save @gerhobbelt/babel-plugin-transform-react-jsx-self
 ```

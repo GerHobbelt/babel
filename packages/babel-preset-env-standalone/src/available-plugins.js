@@ -1,7 +1,7 @@
-import { availablePlugins, registerPlugin } from "@babel/standalone";
+import { availablePlugins, registerPlugin } from "@gerhobbelt/babel-standalone";
 
 const notIncludedPlugins = {
-  "transform-new-target": require("@babel/plugin-transform-new-target"),
+  "transform-new-target": require("@gerhobbelt/babel-plugin-transform-new-target"),
 };
 
 Object.keys(notIncludedPlugins).forEach(pluginName => {

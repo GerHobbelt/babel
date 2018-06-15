@@ -1,12 +1,12 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxDynamicImport from "@babel/plugin-syntax-dynamic-import";
-import syntaxImportMeta from "@babel/plugin-syntax-import-meta";
-import transformAsyncGeneratorFunctions from "@babel/plugin-proposal-async-generator-functions";
-import transformClassProperties from "@babel/plugin-proposal-class-properties";
-import transformJsonStrings from "@babel/plugin-proposal-json-strings";
-import transformObjectRestSpread from "@babel/plugin-proposal-object-rest-spread";
-import transformOptionalCatchBinding from "@babel/plugin-proposal-optional-catch-binding";
-import transformUnicodePropertyRegex from "@babel/plugin-proposal-unicode-property-regex";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxDynamicImport from "@gerhobbelt/babel-plugin-syntax-dynamic-import";
+import syntaxImportMeta from "@gerhobbelt/babel-plugin-syntax-import-meta";
+import transformAsyncGeneratorFunctions from "@gerhobbelt/babel-plugin-proposal-async-generator-functions";
+import transformClassProperties from "@gerhobbelt/babel-plugin-proposal-class-properties";
+import transformJsonStrings from "@gerhobbelt/babel-plugin-proposal-json-strings";
+import transformObjectRestSpread from "@gerhobbelt/babel-plugin-proposal-object-rest-spread";
+import transformOptionalCatchBinding from "@gerhobbelt/babel-plugin-proposal-optional-catch-binding";
+import transformUnicodePropertyRegex from "@gerhobbelt/babel-plugin-proposal-unicode-property-regex";
 
 export default declare((api, opts) => {
   api.assertVersion(7);
@@ -20,11 +20,11 @@ export default declare((api, opts) => {
   }
 
   if (typeof loose !== "boolean") {
-    throw new Error("@babel/preset-stage-3 'loose' option must be a boolean.");
+    throw new Error("@gerhobbelt/babel-preset-stage-3 'loose' option must be a boolean.");
   }
   if (typeof useBuiltIns !== "boolean") {
     throw new Error(
-      "@babel/preset-stage-3 'useBuiltIns' option must be a boolean.",
+      "@gerhobbelt/babel-preset-stage-3 'useBuiltIns' option must be a boolean.",
     );
   }
 

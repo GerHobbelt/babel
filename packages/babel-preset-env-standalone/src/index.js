@@ -1,7 +1,7 @@
 /* global VERSION */
 
-import { registerPreset } from "@babel/standalone";
-import babelPresetEnv from "@babel/preset-env";
+import { registerPreset } from "@gerhobbelt/babel-standalone";
+import babelPresetEnv from "@gerhobbelt/babel-preset-env";
 
 registerPreset("env", babelPresetEnv);
 

@@ -1,4 +1,4 @@
-import * as t from "@babel/types";
+import * as t from "@gerhobbelt/babel-types";
 
 export default function splitExportDeclaration(exportDeclaration) {
   if (!exportDeclaration.isExportDeclaration()) {

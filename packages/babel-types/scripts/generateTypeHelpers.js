@@ -23,7 +23,7 @@ function writeFile(content, location) {
   fs.writeFileSync(file, format(content, file));
 }
 
-console.log("Generating @babel/types dynamic functions");
+console.log("Generating @gerhobbelt/babel-types dynamic functions");
 
 writeFile(generateBuilders(), "builders/generated/index.js");
 writeFile(generateValidators(), "validators/generated/index.js");

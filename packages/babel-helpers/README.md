@@ -1,19 +1,19 @@
-# @babel/helpers
+# @gerhobbelt/babel-helpers
 
 > Collection of helper functions used by Babel transforms.
 
-See our website [@babel/helpers](https://new.babeljs.io/docs/en/next/babel-helpers.html) for more information.
+See our website [@gerhobbelt/babel-helpers](https://new.babeljs.io/docs/en/next/babel-helpers.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/helpers
+npm install --save @gerhobbelt/babel-helpers
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/helpers
+yarn add --save @gerhobbelt/babel-helpers
 ```

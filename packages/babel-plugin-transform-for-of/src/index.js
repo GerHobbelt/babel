@@ -1,5 +1,5 @@
-import { declare } from "@babel/helper-plugin-utils";
-import { template, types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import { template, types as t } from "@gerhobbelt/babel-core";
 
 export default declare((api, options) => {
   api.assertVersion(7);
@@ -8,7 +8,7 @@ export default declare((api, options) => {
 
   if (loose === true && assumeArray === true) {
     throw new Error(
-      `The loose and assumeArray options cannot be used together in @babel/plugin-transform-for-of`,
+      `The loose and assumeArray options cannot be used together in @gerhobbelt/babel-plugin-transform-for-of`,
     );
   }
 

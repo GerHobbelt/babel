@@ -1,4 +1,4 @@
-import template from "@babel/template";
+import template from "@gerhobbelt/babel-template";
 
 const helpers = {};
 export default helpers;

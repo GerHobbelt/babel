@@ -69,10 +69,10 @@ function assertVersion(range: string | number): void {
 
   const err = new Error(
     `Requires Babel "${range}", but was loaded with "${coreVersion}". ` +
-      `If you are sure you have a compatible version of @babel/core, ` +
+      `If you are sure you have a compatible version of @gerhobbelt/babel-core, ` +
       `it is likely that something in your build process is loading the ` +
       `wrong version. Inspect the stack trace of this error to look for ` +
-      `the first entry that doesn't mention "@babel/core" or "babel-core" ` +
+      `the first entry that doesn't mention "@gerhobbelt/babel-core" or "babel-core" ` +
       `to see what is calling Babel.`,
   );
 

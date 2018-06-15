@@ -1,4 +1,4 @@
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 import {
   isModule,
   rewriteModuleStatementsAndPrepareHeader,
@@ -7,8 +7,8 @@ import {
   buildNamespaceInitStatements,
   ensureStatementsHoisted,
   wrapInterop,
-} from "@babel/helper-module-transforms";
-import { template, types as t } from "@babel/core";
+} from "@gerhobbelt/babel-helper-module-transforms";
+import { template, types as t } from "@gerhobbelt/babel-core";
 
 const buildWrapper = template(`
   define(MODULE_NAME, AMD_ARGUMENTS, function(IMPORT_NAMES) {

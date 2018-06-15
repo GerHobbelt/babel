@@ -1,10 +1,10 @@
-var _classCallCheck = require("@babel/runtime/helpers/builtin/classCallCheck");
+var _classCallCheck = require("@gerhobbelt/babel-runtime/helpers/builtin/classCallCheck");
 
-var _possibleConstructorReturn = require("@babel/runtime/helpers/builtin/possibleConstructorReturn");
+var _possibleConstructorReturn = require("@gerhobbelt/babel-runtime/helpers/builtin/possibleConstructorReturn");
 
-var _getPrototypeOf = require("@babel/runtime/helpers/builtin/getPrototypeOf");
+var _getPrototypeOf = require("@gerhobbelt/babel-runtime/helpers/builtin/getPrototypeOf");
 
-var _inherits = require("@babel/runtime/helpers/builtin/inherits");
+var _inherits = require("@gerhobbelt/babel-runtime/helpers/builtin/inherits");
 
 let Foo =
 /*#__PURE__*/

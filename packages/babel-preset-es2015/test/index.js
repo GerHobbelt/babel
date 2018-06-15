@@ -1,4 +1,4 @@
-import * as babel from "@babel/core";
+import * as babel from "@gerhobbelt/babel-core";
 import es2015 from "../lib";
 
 function transform(code, opts) {

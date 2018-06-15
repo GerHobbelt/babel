@@ -1,5 +1,5 @@
 // @flow
-import type { Scope } from "@babel/traverse";
+import type { Scope } from "@gerhobbelt/babel-traverse";
 import getBindingIdentifiers from "../retrievers/getBindingIdentifiers";
 import {
   isExpression,

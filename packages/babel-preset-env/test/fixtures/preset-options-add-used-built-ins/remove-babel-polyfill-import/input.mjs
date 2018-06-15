@@ -1,4 +1,4 @@
-import "@babel/polyfill";
-import "@babel/polyfill";
-require("@babel/polyfill");
-require("@babel/polyfill");
+import "@gerhobbelt/babel-polyfill";
+import "@gerhobbelt/babel-polyfill";
+require("@gerhobbelt/babel-polyfill");
+require("@gerhobbelt/babel-polyfill");

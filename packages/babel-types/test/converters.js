@@ -1,6 +1,6 @@
 import * as t from "../lib";
 import { parse } from "@gerhobbelt/babel-parser";
-import generate from "@babel/generator";
+import generate from "@gerhobbelt/babel-generator";
 
 function parseCode(string) {
   return parse(string, {

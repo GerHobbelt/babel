@@ -2,7 +2,7 @@
 
 import type { PluginPasses } from "../../config";
 import convertSourceMap, { type SourceMap } from "convert-source-map";
-import generate from "@babel/generator";
+import generate from "@gerhobbelt/babel-generator";
 
 import type File from "./file";
 import mergeSourceMap from "./merge-map";
@@ -44,7 +44,7 @@ export default function generateCode(
         `You appear to be using an async parser plugin, ` +
           `which your current version of Babel does not support. ` +
           `If you're using a published plugin, ` +
-          `you may need to upgrade your @babel/core version.`,
+          `you may need to upgrade your @gerhobbelt/babel-core version.`,
       );
     }
   } else {

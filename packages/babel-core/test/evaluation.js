@@ -1,4 +1,4 @@
-import traverse from "@babel/traverse";
+import traverse from "@gerhobbelt/babel-traverse";
 import { parse } from "@gerhobbelt/babel-parser";
 
 describe("evaluation", function() {

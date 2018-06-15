@@ -1,4 +1,4 @@
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 import convertFunctionParams from "./params";
 import convertFunctionRest from "./rest";
 

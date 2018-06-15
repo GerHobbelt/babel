@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 import rewritePattern from "regexpu-core";
-import * as regex from "@babel/helper-regex";
+import * as regex from "@gerhobbelt/babel-helper-regex";
 
 export default declare((api, options) => {
   api.assertVersion(7);

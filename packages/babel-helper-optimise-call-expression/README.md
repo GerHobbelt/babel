@@ -1,19 +1,19 @@
-# @babel/helper-optimise-call-expression
+# @gerhobbelt/babel-helper-optimise-call-expression
 
 > Helper function to optimise call expression
 
-See our website [@babel/helper-optimise-call-expression](https://new.babeljs.io/docs/en/next/babel-helper-optimise-call-expression.html) for more information.
+See our website [@gerhobbelt/babel-helper-optimise-call-expression](https://new.babeljs.io/docs/en/next/babel-helper-optimise-call-expression.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/helper-optimise-call-expression
+npm install --save @gerhobbelt/babel-helper-optimise-call-expression
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/helper-optimise-call-expression
+yarn add --save @gerhobbelt/babel-helper-optimise-call-expression
 ```

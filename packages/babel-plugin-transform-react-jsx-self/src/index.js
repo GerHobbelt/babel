@@ -11,8 +11,8 @@
  *
  * <sometag __self={this} />
  */
-import { declare } from "@babel/helper-plugin-utils";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import { types as t } from "@gerhobbelt/babel-core";
 
 const TRACE_ID = "__self";
 

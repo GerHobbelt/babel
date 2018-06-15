@@ -1,4 +1,4 @@
-import { multiple as getFixtures } from "@babel/helper-fixtures";
+import { multiple as getFixtures } from "@gerhobbelt/babel-helper-fixtures";
 
 export function runFixtureTests(fixturesPath, parseFunction) {
   const fixtures = getFixtures(fixturesPath);

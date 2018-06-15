@@ -1,6 +1,6 @@
 import traverse from "../lib";
 import { parse } from "@gerhobbelt/babel-parser";
-import * as t from "@babel/types";
+import * as t from "@gerhobbelt/babel-types";
 
 function getPath(code) {
   const ast = parse(code, { plugins: ["flow", "asyncGenerators"] });

@@ -1,7 +1,7 @@
 import traverse from "../lib";
 import { parse } from "@gerhobbelt/babel-parser";
-import generate from "@babel/generator";
-import * as t from "@babel/types";
+import generate from "@gerhobbelt/babel-generator";
+import * as t from "@gerhobbelt/babel-types";
 
 function getPath(code, parserOpts) {
   const ast = parse(code, parserOpts);

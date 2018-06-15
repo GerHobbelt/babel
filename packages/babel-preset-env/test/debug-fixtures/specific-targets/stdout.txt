@@ -1,4 +1,4 @@
-@babel/preset-env: `DEBUG` option
+@gerhobbelt/babel-preset-env: `DEBUG` option
 
 Using targets:
 {
@@ -42,7 +42,7 @@ Using plugins:
 
 Using polyfills with `entry` option:
 
-[<CWD>/src/in.js] Replaced `@babel/polyfill` with the following polyfills:
+[<CWD>/src/in.js] Replaced `@gerhobbelt/babel-polyfill` with the following polyfills:
   es6.array.copy-within { "ie":"10", "safari":"7" }
   es6.array.fill { "ie":"10", "safari":"7" }
   es6.array.find { "ie":"10", "safari":"7" }

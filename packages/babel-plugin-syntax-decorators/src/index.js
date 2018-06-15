@@ -1,4 +1,4 @@
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 
 export default declare((api, options) => {
   api.assertVersion(7);
@@ -12,7 +12,7 @@ export default declare((api, options) => {
     throw new Error(
       "The new decorators proposal is not supported yet." +
         ' You must pass the `"legacy": true` option to' +
-        " @babel/plugin-syntax-decorators",
+        " @gerhobbelt/babel-plugin-syntax-decorators",
     );
   }
 

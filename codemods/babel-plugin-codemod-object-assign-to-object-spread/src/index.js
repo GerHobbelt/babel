@@ -1,4 +1,4 @@
-import syntaxObjectRestSpread from "@babel/plugin-syntax-object-rest-spread";
+import syntaxObjectRestSpread from "@gerhobbelt/babel-plugin-syntax-object-rest-spread";
 
 export default function({ types: t }) {
   return {

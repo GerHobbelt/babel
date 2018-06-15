@@ -1,7 +1,7 @@
-import { declare } from "@babel/helper-plugin-utils";
-import remapAsyncToGenerator from "@babel/helper-remap-async-to-generator";
-import syntaxAsyncGenerators from "@babel/plugin-syntax-async-generators";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import remapAsyncToGenerator from "@gerhobbelt/babel-helper-remap-async-to-generator";
+import syntaxAsyncGenerators from "@gerhobbelt/babel-plugin-syntax-async-generators";
+import { types as t } from "@gerhobbelt/babel-core";
 import rewriteForAwait from "./for-await";
 
 export default declare(api => {

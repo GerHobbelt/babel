@@ -1,4 +1,4 @@
-import syntaxOptionalCatchBinding from "@babel/plugin-syntax-optional-catch-binding";
+import syntaxOptionalCatchBinding from "@gerhobbelt/babel-plugin-syntax-optional-catch-binding";
 
 export default function({ types: t }) {
   return {

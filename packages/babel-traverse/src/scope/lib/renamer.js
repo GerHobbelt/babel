@@ -1,6 +1,6 @@
 import Binding from "../binding";
-import splitExportDeclaration from "@babel/helper-split-export-declaration";
-import * as t from "@babel/types";
+import splitExportDeclaration from "@gerhobbelt/babel-helper-split-export-declaration";
+import * as t from "@gerhobbelt/babel-types";
 
 const renameVisitor = {
   ReferencedIdentifier({ node }, state) {

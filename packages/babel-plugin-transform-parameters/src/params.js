@@ -1,5 +1,5 @@
-import callDelegate from "@babel/helper-call-delegate";
-import { template, types as t } from "@babel/core";
+import callDelegate from "@gerhobbelt/babel-helper-call-delegate";
+import { template, types as t } from "@gerhobbelt/babel-core";
 
 const buildDefaultParam = template(`
   let VARIABLE_NAME =

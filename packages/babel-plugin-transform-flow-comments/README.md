@@ -1,19 +1,19 @@
-# @babel/plugin-transform-flow-comments
+# @gerhobbelt/babel-plugin-transform-flow-comments
 
 > Turn flow type annotations into comments
 
-See our website [@babel/plugin-transform-flow-comments](https://new.babeljs.io/docs/en/next/babel-plugin-transform-flow-comments.html) for more information.
+See our website [@gerhobbelt/babel-plugin-transform-flow-comments](https://new.babeljs.io/docs/en/next/babel-plugin-transform-flow-comments.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/plugin-transform-flow-comments
+npm install --save @gerhobbelt/babel-plugin-transform-flow-comments
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/plugin-transform-flow-comments
+yarn add --save @gerhobbelt/babel-plugin-transform-flow-comments
 ```

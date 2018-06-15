@@ -1,19 +1,19 @@
-# @babel/preset-react
+# @gerhobbelt/babel-preset-react
 
 > Babel preset for all React plugins.
 
-See our website [@babel/preset-react](https://new.babeljs.io/docs/en/next/babel-preset-react.html) for more information or the [issues](https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22area%3A%20react%22+is%3Aopen) associated with this package.
+See our website [@gerhobbelt/babel-preset-react](https://new.babeljs.io/docs/en/next/babel-preset-react.html) for more information or the [issues](https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22area%3A%20react%22+is%3Aopen) associated with this package.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/preset-react
+npm install --save @gerhobbelt/babel-preset-react
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/preset-react
+yarn add --save @gerhobbelt/babel-preset-react
 ```

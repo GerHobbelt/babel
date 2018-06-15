@@ -55,7 +55,7 @@ export const logEntryPolyfills = (
   if (!importPolyfillIncluded) {
     console.log(
       `
-[${filename}] \`import '@babel/polyfill'\` was not found.`,
+[${filename}] \`import '@gerhobbelt/babel-polyfill'\` was not found.`,
     );
     return;
   }
@@ -69,7 +69,7 @@ export const logEntryPolyfills = (
 
   console.log(
     `
-[${filename}] Replaced \`@babel/polyfill\` with the following polyfill${wordEnds(
+[${filename}] Replaced \`@gerhobbelt/babel-polyfill\` with the following polyfill${wordEnds(
       polyfills.size,
     )}:`,
   );

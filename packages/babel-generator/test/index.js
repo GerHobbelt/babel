@@ -1,10 +1,10 @@
 import Printer from "../lib/printer";
 import generate, { CodeGenerator } from "../lib";
 import { parse } from "@gerhobbelt/babel-parser";
-import * as t from "@babel/types";
+import * as t from "@gerhobbelt/babel-types";
 import fs from "fs";
 import path from "path";
-import fixtures from "@babel/helper-fixtures";
+import fixtures from "@gerhobbelt/babel-helper-fixtures";
 
 describe("generation", function() {
   it("completeness", function() {

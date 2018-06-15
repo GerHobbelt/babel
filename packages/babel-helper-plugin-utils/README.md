@@ -1,19 +1,19 @@
-# @babel/helper-plugin-utils
+# @gerhobbelt/babel-helper-plugin-utils
 
 > General utilities for plugins to use
 
-See our website [@babel/helper-plugin-utils](https://new.babeljs.io/docs/en/next/babel-helper-plugin-utils.html) for more information.
+See our website [@gerhobbelt/babel-helper-plugin-utils](https://new.babeljs.io/docs/en/next/babel-helper-plugin-utils.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/helper-plugin-utils
+npm install --save @gerhobbelt/babel-helper-plugin-utils
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/helper-plugin-utils
+yarn add --save @gerhobbelt/babel-helper-plugin-utils
 ```

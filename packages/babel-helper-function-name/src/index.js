@@ -1,6 +1,6 @@
-import getFunctionArity from "@babel/helper-get-function-arity";
-import template from "@babel/template";
-import * as t from "@babel/types";
+import getFunctionArity from "@gerhobbelt/babel-helper-get-function-arity";
+import template from "@gerhobbelt/babel-template";
+import * as t from "@gerhobbelt/babel-types";
 
 const buildPropertyMethodAssignmentWrapper = template(`
   (function (FUNCTION_KEY) {

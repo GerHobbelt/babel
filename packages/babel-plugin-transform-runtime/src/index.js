@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
-import { addDefault, isModule } from "@babel/helper-module-imports";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import { addDefault, isModule } from "@gerhobbelt/babel-helper-module-imports";
+import { types as t } from "@gerhobbelt/babel-core";
 
 import definitions from "./definitions";
 
@@ -9,7 +9,7 @@ export default declare((api, options) => {
 
   const {
     helpers,
-    moduleName = "@babel/runtime",
+    moduleName = "@gerhobbelt/babel-runtime",
     polyfill,
     regenerator,
     useBuiltIns,

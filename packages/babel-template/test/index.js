@@ -1,10 +1,10 @@
 import generator from "../../babel-generator";
 import template from "../lib";
-import * as t from "@babel/types";
+import * as t from "@gerhobbelt/babel-types";
 
 const comments = "// Sum two numbers\nconst add = (a, b) => a + b;";
 
-describe("@babel/template", function() {
+describe("@gerhobbelt/babel-template", function() {
   it("import statements are allowed by default", function() {
     expect(function() {
       template("import foo from 'foo'")({});
@@ -134,7 +134,7 @@ describe("@babel/template", function() {
         `)({ ID: t.identifier("someIdent") });
       }).toThrow(
         `Error: No substitution given for "ANOTHER_ID". If this is not meant to be a
-            placeholder you may want to consider passing one of the following options to @babel/template:
+            placeholder you may want to consider passing one of the following options to @gerhobbelt/babel-template:
             - { placeholderPattern: false, placeholderWhitelist: new Set(['ANOTHER_ID'])}
             - { placeholderPattern: /^ANOTHER_ID$/ }`,
       );

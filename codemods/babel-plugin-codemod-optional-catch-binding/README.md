@@ -1,4 +1,4 @@
-# @babel/plugin-codemod-optional-catch-binding
+# @gerhobbelt/babel-plugin-codemod-optional-catch-binding
 
 > If the argument bound to the catch block is not referenced in the catch block, that argument and the catch binding is removed.
 
@@ -25,7 +25,7 @@ try {
 ## Installation
 
 ```sh
-npm install --save-dev @babel/plugin-codemod-optional-catch-binding
+npm install --save-dev @gerhobbelt/babel-plugin-codemod-optional-catch-binding
 ```
 
 ## Usage
@@ -36,21 +36,21 @@ npm install --save-dev @babel/plugin-codemod-optional-catch-binding
 
 ```json
 {
-  "plugins": ["@babel/plugin-codemod-optional-catch-binding"]
+  "plugins": ["@gerhobbelt/babel-plugin-codemod-optional-catch-binding"]
 }
 ```
 
 ### Via CLI
 
 ```sh
-babel --plugins @babel/plugin-codemod-optional-catch-binding script.js
+babel --plugins @gerhobbelt/babel-plugin-codemod-optional-catch-binding script.js
 ```
 
 ### Via Node API
 
 ```javascript
-require("@babel/core").transform("code", {
-  plugins: ["@babel/plugin-codemod-optional-catch-binding"]
+require("@gerhobbelt/babel-core").transform("code", {
+  plugins: ["@gerhobbelt/babel-plugin-codemod-optional-catch-binding"]
 });
 ```
 

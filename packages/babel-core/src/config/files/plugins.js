@@ -13,8 +13,8 @@ const debug = buildDebug("babel:config:loading:files:plugins");
 const EXACT_RE = /^module:/;
 const BABEL_PLUGIN_PREFIX_RE = /^(?!@|module:|[^/]+\/|babel-plugin-)/;
 const BABEL_PRESET_PREFIX_RE = /^(?!@|module:|[^/]+\/|babel-preset-)/;
-const BABEL_PLUGIN_ORG_RE = /^(@babel\/)(?!plugin-|[^/]+\/)/;
-const BABEL_PRESET_ORG_RE = /^(@babel\/)(?!preset-|[^/]+\/)/;
+const BABEL_PLUGIN_ORG_RE = /^(@gerhobbelt/babel-/)(?!plugin-|[^/]+\/)/;
+const BABEL_PRESET_ORG_RE = /^(@gerhobbelt/babel-/)(?!preset-|[^/]+\/)/;
 const OTHER_PLUGIN_ORG_RE = /^(@(?!babel\/)[^/]+\/)(?!babel-plugin-|[^/]+\/)/;
 const OTHER_PRESET_ORG_RE = /^(@(?!babel\/)[^/]+\/)(?!babel-preset-|[^/]+\/)/;
 
@@ -70,7 +70,7 @@ function standardizeName(type: "plugin" | "preset", name: string) {
         isPreset ? BABEL_PRESET_PREFIX_RE : BABEL_PLUGIN_PREFIX_RE,
         `babel-${type}-`,
       )
-      // @babel/es2015 -> @babel/preset-es2015
+      // @gerhobbelt/babel-es2015 -> @babel/preset-es2015
       .replace(
         isPreset ? BABEL_PRESET_ORG_RE : BABEL_PLUGIN_ORG_RE,
         `$1${type}-`,
@@ -111,14 +111,14 @@ function resolveStandardizedName(
 
     let resolvedBabel = false;
     try {
-      resolve.sync(standardizeName(type, "@babel/" + name), {
+      resolve.sync(standardizeName(type, "@gerhobbelt/babel-" + name), {
         basedir: dirname,
       });
       resolvedBabel = true;
     } catch (e2) {}
 
     if (resolvedBabel) {
-      e.message += `\n- Did you mean "@babel/${name}"?`;
+      e.message += `\n- Did you mean "@gerhobbelt/babel-${name}"?`;
     }
 
     let resolvedOppositeType = false;

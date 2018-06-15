@@ -14,13 +14,13 @@ Find the relevant entries on [compat-table](https://kangax.github.io/compat-tabl
 
 Find the corresponding babel plugin:
 
-`@babel/plugin-transform-exponentiation-operator`
+`@gerhobbelt/babel-plugin-transform-exponentiation-operator`
 
 And add them in this structure:
 
 ```js
 // es2016
-"@babel/plugin-transform-exponentiation-operator": {
+"@gerhobbelt/babel-plugin-transform-exponentiation-operator": {
   features: [
     "exponentiation (**) operator",
   ],
@@ -77,7 +77,7 @@ npm run coverage
 
 #### General
 
-All the tests for `@babel/preset-env` exist in the `test/fixtures` folder. The
+All the tests for `@gerhobbelt/babel-preset-env` exist in the `test/fixtures` folder. The
 test setup and conventions are exactly the same as testing a Babel plugin, so
 please read our [documentation on writing tests](https://github.com/babel/babel/blob/master/CONTRIBUTING.md#babel-plugin-x).
 

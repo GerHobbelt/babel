@@ -1,19 +1,19 @@
-# @babel/plugin-syntax-nullish-coalescing-operator
+# @gerhobbelt/babel-plugin-syntax-nullish-coalescing-operator
 
 > Allow parsing of the nullish-coalescing operator
 
-See our website [@babel/plugin-syntax-nullish-coalescing-operator](https://new.babeljs.io/docs/en/next/babel-plugin-syntax-nullish-coalescing-operator.html) for more information.
+See our website [@gerhobbelt/babel-plugin-syntax-nullish-coalescing-operator](https://new.babeljs.io/docs/en/next/babel-plugin-syntax-nullish-coalescing-operator.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/plugin-syntax-nullish-coalescing-operator
+npm install --save @gerhobbelt/babel-plugin-syntax-nullish-coalescing-operator
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/plugin-syntax-nullish-coalescing-operator
+yarn add --save @gerhobbelt/babel-plugin-syntax-nullish-coalescing-operator
 ```

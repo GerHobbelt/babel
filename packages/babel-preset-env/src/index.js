@@ -26,7 +26,7 @@ import {
   isUnreleasedVersion,
 } from "./utils";
 import type { Targets } from "./types";
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 
 const getPlugin = (pluginName: string) => {
   const plugin = availablePlugins[pluginName];
@@ -188,7 +188,7 @@ export default declare((api, opts) => {
   if (optionsTargets && optionsTargets.esmodules && optionsTargets.browsers) {
     console.log("");
     console.log(
-      "@babel/preset-env: esmodules and browsers targets have been specified together.",
+      "@gerhobbelt/babel-preset-env: esmodules and browsers targets have been specified together.",
     );
     console.log(
       `\`browsers\` target, \`${optionsTargets.browsers}\` will be ignored.`,
@@ -248,7 +248,7 @@ export default declare((api, opts) => {
   const regenerator = transformations.has("transform-regenerator");
 
   if (debug) {
-    console.log("@babel/preset-env: `DEBUG` option");
+    console.log("@gerhobbelt/babel-preset-env: `DEBUG` option");
     console.log("\nUsing targets:");
     console.log(JSON.stringify(prettifyTargets(targets), null, 2));
     console.log(`\nUsing modules transform: ${modules.toString()}`);

@@ -1,3 +1,3 @@
-var _isIterable = require("@babel/runtime/core-js/is-iterable");
+var _isIterable = require("@gerhobbelt/babel-runtime/core-js/is-iterable");
 
 _isIterable(Object(arr));

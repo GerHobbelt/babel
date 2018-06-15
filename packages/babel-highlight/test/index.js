@@ -2,7 +2,7 @@ import chalk from "chalk";
 import stripAnsi from "strip-ansi";
 import highlight, { shouldHighlight, getChalk } from "..";
 
-describe("@babel/highlight", function() {
+describe("@gerhobbelt/babel-highlight", function() {
   function stubColorSupport(supported) {
     let originalSupportsColor;
     beforeEach(function() {

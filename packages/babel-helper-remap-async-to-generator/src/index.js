@@ -1,9 +1,9 @@
 /* @noflow */
 
-import type { NodePath } from "@babel/traverse";
-import wrapFunction from "@babel/helper-wrap-function";
-import annotateAsPure from "@babel/helper-annotate-as-pure";
-import * as t from "@babel/types";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
+import wrapFunction from "@gerhobbelt/babel-helper-wrap-function";
+import annotateAsPure from "@gerhobbelt/babel-helper-annotate-as-pure";
+import * as t from "@gerhobbelt/babel-types";
 
 const awaitVisitor = {
   Function(path) {

@@ -1,4 +1,4 @@
-import { types as t } from "@babel/core";
+import { types as t } from "@gerhobbelt/babel-core";
 
 function getTDZStatus(refPath, bindingPath) {
   const executionStatus = bindingPath._guessExecutionStatusRelativeTo(refPath);

@@ -135,7 +135,7 @@ const readConfigJS = makeStrongCache(
       return null;
     }
 
-    // The `require()` call below can make this code reentrant if a require hook like @babel/register has been
+    // The `require()` call below can make this code reentrant if a require hook like @gerhobbelt/babel-register has been
     // loaded into the system. That would cause Babel to attempt to compile the `.babelrc.js` file as it loads
     // below. To cover this case, we auto-ignore re-entrant config processing.
     if (LOADING_CONFIGS.has(filepath)) {
@@ -183,7 +183,7 @@ const readConfigJS = makeStrongCache(
         `You appear to be using an async configuration, ` +
           `which your current version of Babel does not support. ` +
           `We may add support for this in the future, ` +
-          `but if you're on the most recent version of @babel/core and still ` +
+          `but if you're on the most recent version of @gerhobbelt/babel-core and still ` +
           `seeing this error, then you'll need to synchronously return your config.`,
       );
     }

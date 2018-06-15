@@ -2,7 +2,7 @@ import chalk from "chalk";
 import stripAnsi from "strip-ansi";
 import codeFrame, { codeFrameColumns } from "..";
 
-describe("@babel/code-frame", function() {
+describe("@gerhobbelt/babel-code-frame", function() {
   test("basic usage", function() {
     const rawLines = ["class Foo {", "  constructor()", "};"].join("\n");
     expect(codeFrame(rawLines, 2, 16)).toEqual(

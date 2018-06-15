@@ -1,4 +1,4 @@
-import "@babel/polyfill";
+import "@gerhobbelt/babel-polyfill";
 
 const foo = {
   a: true,

@@ -1,10 +1,10 @@
-import { declare } from "@babel/helper-plugin-utils";
-import nameFunction from "@babel/helper-function-name";
-import syntaxClassProperties from "@babel/plugin-syntax-class-properties";
-import { template, traverse, types as t } from "@babel/core";
-import { environmentVisitor } from "@babel/helper-replace-supers";
-import memberExpressionToFunctions from "@babel/helper-member-expression-to-functions";
-import optimiseCall from "@babel/helper-optimise-call-expression";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import nameFunction from "@gerhobbelt/babel-helper-function-name";
+import syntaxClassProperties from "@gerhobbelt/babel-plugin-syntax-class-properties";
+import { template, traverse, types as t } from "@gerhobbelt/babel-core";
+import { environmentVisitor } from "@gerhobbelt/babel-helper-replace-supers";
+import memberExpressionToFunctions from "@gerhobbelt/babel-helper-member-expression-to-functions";
+import optimiseCall from "@gerhobbelt/babel-helper-optimise-call-expression";
 
 export default declare((api, options) => {
   api.assertVersion(7);

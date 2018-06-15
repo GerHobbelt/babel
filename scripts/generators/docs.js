@@ -6,14 +6,14 @@ const utils = require("./utils");
 const types = require("../../packages/babel-types");
 
 const readme = [
-  `# @babel/types
+  `# @gerhobbelt/babel-types
 
 > This module contains methods for building ASTs manually and for checking the types of AST nodes.
 
 ## Install
 
 \`\`\`sh
-npm install --save-dev @babel/types
+npm install --save-dev @gerhobbelt/babel-types
 \`\`\`
 
 ## API`,

@@ -1,6 +1,6 @@
-var _regeneratorRuntime = require("@babel/runtime/regenerator");
+var _regeneratorRuntime = require("@gerhobbelt/babel-runtime/regenerator");
 
-var _Object$keys = require("@babel/runtime/core-js/object/keys");
+var _Object$keys = require("@gerhobbelt/babel-runtime/core-js/object/keys");
 
 var _marked =
 /*#__PURE__*/

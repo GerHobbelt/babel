@@ -1,19 +1,19 @@
-# @babel/helper-member-expression-to-functions
+# @gerhobbelt/babel-helper-member-expression-to-functions
 
 > Helper function to replace certain member expressions with function calls
 
-See our website [@babel/helper-member-expression-to-functions](https://new.babeljs.io/docs/en/next/babel-helper-member-expression-to-functions.html) for more information.
+See our website [@gerhobbelt/babel-helper-member-expression-to-functions](https://new.babeljs.io/docs/en/next/babel-helper-member-expression-to-functions.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/helper-member-expression-to-functions
+npm install --save @gerhobbelt/babel-helper-member-expression-to-functions
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/helper-member-expression-to-functions
+yarn add --save @gerhobbelt/babel-helper-member-expression-to-functions
 ```

@@ -1,19 +1,19 @@
-# @babel/plugin-transform-property-literals
+# @gerhobbelt/babel-plugin-transform-property-literals
 
 > Ensure that reserved words are quoted in object property keys
 
-See our website [@babel/plugin-transform-property-literals](https://new.babeljs.io/docs/en/next/babel-plugin-transform-property-literals.html) for more information.
+See our website [@gerhobbelt/babel-plugin-transform-property-literals](https://new.babeljs.io/docs/en/next/babel-plugin-transform-property-literals.html) for more information.
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save @babel/plugin-transform-property-literals
+npm install --save @gerhobbelt/babel-plugin-transform-property-literals
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @babel/plugin-transform-property-literals
+yarn add --save @gerhobbelt/babel-plugin-transform-property-literals
 ```
