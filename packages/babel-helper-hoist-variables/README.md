@@ -2,7 +2,7 @@
 
 > Helper function to hoist variables
 
-See our website [@gerhobbelt/babel-helper-hoist-variables](https://new.babeljs.io/docs/en/next/babel-helper-hoist-variables.html) for more information.
+See our website [@gerhobbelt/babel-helper-hoist-variables](https://babeljs.io/docs/en/next/babel-helper-hoist-variables.html) for more information.
 
 ## Install
 

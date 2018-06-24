@@ -2,7 +2,7 @@
 
 > Add a __self prop to all JSX Elements
 
-See our website [@gerhobbelt/babel-plugin-transform-react-jsx-self](https://new.babeljs.io/docs/en/next/babel-plugin-transform-react-jsx-self.html) for more information.
+See our website [@gerhobbelt/babel-plugin-transform-react-jsx-self](https://babeljs.io/docs/en/next/babel-plugin-transform-react-jsx-self.html) for more information.
 
 ## Install
 

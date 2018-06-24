@@ -2,7 +2,7 @@
 
 > Allow parsing of TypeScript syntax
 
-See our website [@gerhobbelt/babel-plugin-syntax-typescript](https://new.babeljs.io/docs/en/next/babel-plugin-syntax-typescript.html) for more information.
+See our website [@gerhobbelt/babel-plugin-syntax-typescript](https://babeljs.io/docs/en/next/babel-plugin-syntax-typescript.html) for more information.
 
 ## Install
 

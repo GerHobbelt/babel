@@ -2,7 +2,7 @@
 
 > Wraps Throw Expressions in an IIFE
 
-See our website [@gerhobbelt/babel-plugin-proposal-throw-expressions](https://new.babeljs.io/docs/en/next/babel-plugin-proposal-throw-expressions.html) for more information.
+See our website [@gerhobbelt/babel-plugin-proposal-throw-expressions](https://babeljs.io/docs/en/next/babel-plugin-proposal-throw-expressions.html) for more information.
 
 ## Install
 

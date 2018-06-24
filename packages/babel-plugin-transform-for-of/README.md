@@ -2,7 +2,7 @@
 
 > Compile ES2015 for...of to ES5
 
-See our website [@gerhobbelt/babel-plugin-transform-for-of](https://new.babeljs.io/docs/en/next/babel-plugin-transform-for-of.html) for more information.
+See our website [@gerhobbelt/babel-plugin-transform-for-of](https://babeljs.io/docs/en/next/babel-plugin-transform-for-of.html) for more information.
 
 ## Install
 

@@ -2,7 +2,7 @@
 
 > Allow parsing of the flow syntax
 
-See our website [@gerhobbelt/babel-plugin-syntax-flow](https://new.babeljs.io/docs/en/next/babel-plugin-syntax-flow.html) for more information.
+See our website [@gerhobbelt/babel-plugin-syntax-flow](https://babeljs.io/docs/en/next/babel-plugin-syntax-flow.html) for more information.
 
 ## Install
 

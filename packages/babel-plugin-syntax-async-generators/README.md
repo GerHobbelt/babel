@@ -2,7 +2,7 @@
 
 > Allow parsing of async generator functions
 
-See our website [@gerhobbelt/babel-plugin-syntax-async-generators](https://new.babeljs.io/docs/en/next/babel-plugin-syntax-async-generators.html) for more information.
+See our website [@gerhobbelt/babel-plugin-syntax-async-generators](https://babeljs.io/docs/en/next/babel-plugin-syntax-async-generators.html) for more information.
 
 ## Install
 

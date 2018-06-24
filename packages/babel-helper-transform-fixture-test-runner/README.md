@@ -2,7 +2,7 @@
 
 > Transform test runner for @gerhobbelt/babel-helper-fixtures module
 
-See our website [@gerhobbelt/babel-helper-transform-fixture-test-runner](https://new.babeljs.io/docs/en/next/babel-helper-transform-fixture-test-runner.html) for more information.
+See our website [@gerhobbelt/babel-helper-transform-fixture-test-runner](https://babeljs.io/docs/en/next/babel-helper-transform-fixture-test-runner.html) for more information.
 
 ## Install
 

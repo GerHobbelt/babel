@@ -2,7 +2,7 @@
 
 > Compile optional catch bindings
 
-See our website [@gerhobbelt/babel-plugin-proposal-optional-catch-binding](https://new.babeljs.io/docs/en/next/babel-plugin-proposal-optional-catch-binding.html) for more information.
+See our website [@gerhobbelt/babel-plugin-proposal-optional-catch-binding](https://babeljs.io/docs/en/next/babel-plugin-proposal-optional-catch-binding.html) for more information.
 
 ## Install
 
