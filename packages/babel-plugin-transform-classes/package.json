@@ -13,7 +13,7 @@
     "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-beta.510001",
     "@gerhobbelt/babel-helper-replace-supers": "7.0.0-beta.510001",
     "@gerhobbelt/babel-helper-split-export-declaration": "7.0.0-beta.510001",
-    "globals": "^11.1.0"
+    "globals": "^11.7.0"
   },
   "keywords": [
     "babel-plugin"
