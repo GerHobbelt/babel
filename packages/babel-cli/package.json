@@ -24,10 +24,10 @@
     "mkdirp": "^0.5.1",
     "output-file-sync": "^2.0.1",
     "slash": "^2.0.0",
-    "source-map": "^0.5.0"
+    "source-map": "^0.7.3"
   },
   "optionalDependencies": {
-    "chokidar": "^2.0.3"
+    "chokidar": "^2.0.4"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": ">=7.0.0-beta.50 <7.0.0-rc.0"
