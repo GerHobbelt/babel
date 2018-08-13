@@ -13,13 +13,18 @@ module.exports = function(api) {
 
   let convertESM = true;
   let ignoreLib = true;
+  let includeRuntime = false;
 
   switch (env) {
     // Configs used during bundling builds.
     case "babel-parser":
+      convertESM = false;
+      ignoreLib = false;
+      break;
     case "standalone":
       convertESM = false;
       ignoreLib = false;
+      includeRuntime = true;
       break;
     case "production":
       // Config during builds before publish.
@@ -41,6 +46,10 @@ module.exports = function(api) {
   }
 
   const config = {
+    // Our dependencies are all standard CommonJS, along with all sorts of
+    // other random files in Babel's codebase, so we use script as the default,
+    // and then mark actual modules as modules farther down.
+    //sourceType: "script",
     comments: false,
     ignore: [
       // These may not be strictly necessary with the newly-limited scope of
@@ -51,28 +60,28 @@ module.exports = function(api) {
       "packages/babel-standalone/babel.js",
       "packages/babel-preset-env-standalone/babel-preset-env.js",
     ].filter(Boolean),
-    presets: [["@gerhobbelt/babel-env", envOpts]],
+    presets: [["@babel/env", envOpts]],
     plugins: [
-      // TODO: Use @gerhobbelt/babel-preset-flow when
+      // TODO: Use @babel/preset-flow when
       // https://github.com/babel/babel/issues/7233 is fixed
-      "@gerhobbelt/babel-plugin-transform-flow-strip-types",
-      ["@gerhobbelt/babel-proposal-class-properties", { loose: true }],
-      "@gerhobbelt/babel-proposal-export-namespace-from",
-      "@gerhobbelt/babel-proposal-numeric-separator",
+      "@babel/plugin-transform-flow-strip-types",
+      ["@babel/proposal-class-properties", { loose: true }],
+      "@babel/proposal-export-namespace-from",
+      "@babel/proposal-numeric-separator",
       [
-        "@gerhobbelt/babel-proposal-object-rest-spread",
+        "@babel/proposal-object-rest-spread",
         { useBuiltIns: true, loose: true },
       ],
 
       // Explicitly use the lazy version of CommonJS modules.
-      convertESM ? ["@gerhobbelt/babel-transform-modules-commonjs", { lazy: true }] : null,
+      convertESM ? ["@babel/transform-modules-commonjs", { lazy: true }] : null,
     ].filter(Boolean),
     overrides: [
       {
         test: "packages/babel-parser",
         plugins: [
           "babel-plugin-transform-charcodes",
-          ["@gerhobbelt/babel-transform-for-of", { assumeArray: true }],
+          ["@babel/transform-for-of", { assumeArray: true }],
         ],
       },
       {
@@ -81,10 +90,32 @@ module.exports = function(api) {
           // Override the root options to disable lazy imports for babel-register
           // because otherwise the require hook will try to lazy-import things
           // leading to dependency cycles.
-          convertESM ? "@gerhobbelt/babel-transform-modules-commonjs" : null,
+          convertESM ? "@babel/transform-modules-commonjs" : null,
         ].filter(Boolean),
       },
-    ],
+      {
+        // The vast majority of our src files are modules, but we use
+        // unambiguous to keep things simple until we get around to renaming
+        // the modules to be more easily distinguished from CommonJS
+        test: [
+          "packages/*/src",
+          "packages/*/test",
+          "codemods/*/src",
+          "codemods/*/test",
+        ],
+        sourceType: "unambiguous",
+      },
+      {
+        // The runtime transform shouldn't process its own runtime or core-js.
+        exclude: [
+          "packages/babel-runtime",
+          /[\\/]node_modules[\\/](?:@babel\/runtime|babel-runtime|core-js)[\\/]/,
+        ],
+        plugins: [includeRuntime ? "@babel/transform-runtime" : null].filter(
+          Boolean
+        ),
+      },
+    ].filter(Boolean),
   };
 
   // we need to do this as long as we do not test everything from source
