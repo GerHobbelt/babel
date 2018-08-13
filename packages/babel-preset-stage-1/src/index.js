@@ -4,7 +4,9 @@ import presetStage2 from "@gerhobbelt/babel-preset-stage-2";
 import transformExportDefaultFrom from "@gerhobbelt/babel-plugin-proposal-export-default-from";
 import transformLogicalAssignmentOperators from "@gerhobbelt/babel-plugin-proposal-logical-assignment-operators";
 import transformOptionalChaining from "@gerhobbelt/babel-plugin-proposal-optional-chaining";
-import transformPipelineOperator from "@gerhobbelt/babel-plugin-proposal-pipeline-operator";
+import transformPipelineOperator, {
+  proposals,
+} from "@gerhobbelt/babel-plugin-proposal-pipeline-operator";
 import transformNullishCoalescingOperator from "@gerhobbelt/babel-plugin-proposal-nullish-coalescing-operator";
 import transformDoExpressions from "@gerhobbelt/babel-plugin-proposal-do-expressions";
 
@@ -44,7 +46,8 @@ export default declare((api, opts = {}) => {
     throw new Error(
       "The pipeline operator requires a proposal set." +
         " You must pass 'pipelineProposal' option to" +
-        " @babel/preset-stage-1",
+        " @gerhobbelt/babel-preset-stage-1 whose value must be one of: " +
+        proposals.join(", "),
     );
   }
 
