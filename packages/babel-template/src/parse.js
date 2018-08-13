@@ -1,6 +1,9 @@
 // @flow
 import * as t from "@gerhobbelt/babel-types";
-import type { TraversalAncestors, TraversalHandler } from "@gerhobbelt/babel-types";
+import type {
+  TraversalAncestors,
+  TraversalHandler,
+} from "@gerhobbelt/babel-types";
 import { parse } from "@gerhobbelt/babel-parser";
 import { codeFrameColumns } from "@gerhobbelt/babel-code-frame";
 import type { TemplateOpts } from "./options";

@@ -30,16 +30,22 @@ function patchPackageJson(filePath) {
 
   // apply patches:
   const updatedPackageJson = packageJson
-  .replace(/@babel\//g, "@gerhobbelt/babel-")
-  .replace(/"(@gerhobbelt\/babel-.*?)": "([0-9.a-z-]+)"/g, (m, m1, m2) => {
-    return `"${m1}": "${babelVersion}"`;
-  })
-  .replace(/"(@gerhobbelt\/babel-.*?)": ">([=0-9.a-z-]+) <([=0-9.a-z-]+)"/g, (m, m1, m2, m3) => {
-    return `"${m1}": "${babelPeerDependencyClause}"`;
-  })
-  .replace(/"version": "([^"]+)"/g, (m, m1) => {
-    return `"version": "${babelVersion}"`;
-  });
+    .replace(/@babel\//g, "@gerhobbelt/babel-")
+    .replace(/"(@gerhobbelt\/babel-.*?)": "([0-9.a-z-]+)"/g, (
+      m,
+      m1 /*, m2 */
+    ) => {
+      return `"${m1}": "${babelVersion}"`;
+    })
+    .replace(/"(@gerhobbelt\/babel-.*?)": ">([=0-9.a-z-]+) <([=0-9.a-z-]+)"/g, (
+      m,
+      m1 /*, m2, m3 */
+    ) => {
+      return `"${m1}": "${babelPeerDependencyClause}"`;
+    })
+    .replace(/"version": "([^"]+)"/g, (/* m, m1 */) => {
+      return `"version": "${babelVersion}"`;
+    });
 
   // write
   writeFileSync(filePath, updatedPackageJson);
@@ -63,9 +69,8 @@ codemods
     patchPackageJson(packageJsonPath);
   });
 
-["./"]
-  .forEach(id => {
-    const packageJsonPath = join(id, "package.json");
+["./"].forEach(id => {
+  const packageJsonPath = join(id, "package.json");
 
-    patchPackageJson(packageJsonPath);
-  });
+  patchPackageJson(packageJsonPath);
+});

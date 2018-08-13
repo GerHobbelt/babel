@@ -1,4 +1,7 @@
-import highlight, { shouldHighlight, getChalk } from "@gerhobbelt/babel-highlight";
+import highlight, {
+  shouldHighlight,
+  getChalk,
+} from "@gerhobbelt/babel-highlight";
 
 let deprecationWarningShown = false;
 

@@ -5,7 +5,8 @@
   "rules": {
     "curly": ["error", "multi-line"],
     "prettier/prettier": "error",
-    "no-case-declarations": "error"
+    "no-case-declarations": "error",
+    "max-len": ["error", { "code": 130, "ignoreTemplateLiterals": true, "ignoreUrls": true, "ignoreStrings": true, "ignoreComments": true }]
   },
   "env": {
     "node": true

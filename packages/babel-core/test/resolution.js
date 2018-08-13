@@ -332,7 +332,7 @@ describe("addon resolution", function() {
         presets: ["foo"],
       });
     }).toThrow(
-      /Cannot find module 'babel-preset-foo'.*\n- Did you mean "@gerhobbelt/babel-/foo"\?/,
+      /Cannot find module 'babel-preset-foo'.*\n- Did you mean "@gerhobbelt\/babel-preset-foo"\?/,
     );
   });
 
@@ -346,7 +346,7 @@ describe("addon resolution", function() {
         plugins: ["foo"],
       });
     }).toThrow(
-      /Cannot find module 'babel-plugin-foo'.*\n- Did you mean "@gerhobbelt/babel-/foo"\?/,
+      /Cannot find module 'babel-plugin-foo'.*\n- Did you mean "@gerhobbelt\/babel-plugin-foo"\?/,
     );
   });
 

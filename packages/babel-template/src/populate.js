@@ -45,9 +45,9 @@ export default function populatePlaceholders(
           (replacements && replacements[placeholder.name]) || null,
         );
       } catch (e) {
-        e.message = `@gerhobbelt/babel-template placeholder "${placeholder.name}": ${
-          e.message
-        }`;
+        e.message = `@gerhobbelt/babel-template placeholder "${
+          placeholder.name
+        }": ${e.message}`;
         throw e;
       }
     });

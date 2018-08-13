@@ -15,7 +15,9 @@ export default declare((api, opts = {}) => {
   } = opts;
 
   if (typeof loose !== "boolean") {
-    throw new Error("@gerhobbelt/babel-preset-stage-0 'loose' option must be a boolean.");
+    throw new Error(
+      "@gerhobbelt/babel-preset-stage-0 'loose' option must be a boolean.",
+    );
   }
   if (typeof useBuiltIns !== "boolean") {
     throw new Error(
