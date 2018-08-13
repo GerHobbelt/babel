@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-react-jsx-self](https://babe
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-react-jsx-self
+npm install --save-dev @gerhobbelt/babel-plugin-transform-react-jsx-self
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-react-jsx-self
+yarn add @gerhobbelt/babel-plugin-transform-react-jsx-self --dev
 ```

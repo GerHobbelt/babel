@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-remap-async-to-generator](https://babe
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-remap-async-to-generator
+npm install --save-dev @gerhobbelt/babel-helper-remap-async-to-generator
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-remap-async-to-generator
+yarn add @gerhobbelt/babel-helper-remap-async-to-generator --dev
 ```

@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-export-namespace-from](https:
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-export-namespace-from
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-export-namespace-from
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-export-namespace-from
+yarn add @gerhobbelt/babel-plugin-proposal-export-namespace-from --dev
 ```

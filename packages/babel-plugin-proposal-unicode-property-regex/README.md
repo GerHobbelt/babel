@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-unicode-property-regex](https
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-unicode-property-regex
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-unicode-property-regex
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-unicode-property-regex
+yarn add @gerhobbelt/babel-plugin-proposal-unicode-property-regex --dev
 ```

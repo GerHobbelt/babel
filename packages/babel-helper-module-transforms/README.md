@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-module-transforms](https://babeljs.io/
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-module-transforms
+npm install --save-dev @gerhobbelt/babel-helper-module-transforms
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-module-transforms
+yarn add @gerhobbelt/babel-helper-module-transforms --dev
 ```

@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-template](https://babeljs.io/docs/en/next/bab
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-template
+npm install --save-dev @gerhobbelt/babel-template
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-template
+yarn add @gerhobbelt/babel-template --dev
 ```

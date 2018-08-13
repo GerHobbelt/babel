@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-flow-strip-types](https://ba
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-flow-strip-types
+npm install --save-dev @gerhobbelt/babel-plugin-transform-flow-strip-types
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-flow-strip-types
+yarn add @gerhobbelt/babel-plugin-transform-flow-strip-types --dev
 ```

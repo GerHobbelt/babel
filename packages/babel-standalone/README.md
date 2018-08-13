@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-standalone](https://babeljs.io/docs/en/next/b
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-standalone
+npm install --save-dev @gerhobbelt/babel-standalone
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-standalone
+yarn add @gerhobbelt/babel-standalone --dev
 ```

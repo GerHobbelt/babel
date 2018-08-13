@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-member-expression-to-functions](https:
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-member-expression-to-functions
+npm install --save-dev @gerhobbelt/babel-helper-member-expression-to-functions
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-member-expression-to-functions
+yarn add @gerhobbelt/babel-helper-member-expression-to-functions --dev
 ```

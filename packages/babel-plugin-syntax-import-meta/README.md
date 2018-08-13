@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-import-meta](https://babeljs.io
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-import-meta
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-import-meta
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-import-meta
+yarn add @gerhobbelt/babel-plugin-syntax-import-meta --dev
 ```

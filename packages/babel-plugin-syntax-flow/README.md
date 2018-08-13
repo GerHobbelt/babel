@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-flow](https://babeljs.io/docs/e
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-flow
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-flow
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-flow
+yarn add @gerhobbelt/babel-plugin-syntax-flow --dev
 ```

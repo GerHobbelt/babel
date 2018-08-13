@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-optional-chaining](https://ba
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-optional-chaining
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-optional-chaining
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-optional-chaining
+yarn add @gerhobbelt/babel-plugin-proposal-optional-chaining --dev
 ```

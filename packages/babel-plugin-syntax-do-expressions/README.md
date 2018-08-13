@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-do-expressions](https://babeljs
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-do-expressions
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-do-expressions
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-do-expressions
+yarn add @gerhobbelt/babel-plugin-syntax-do-expressions --dev
 ```

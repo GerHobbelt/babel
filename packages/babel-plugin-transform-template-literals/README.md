@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-template-literals](https://b
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-template-literals
+npm install --save-dev @gerhobbelt/babel-plugin-transform-template-literals
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-template-literals
+yarn add @gerhobbelt/babel-plugin-transform-template-literals --dev
 ```

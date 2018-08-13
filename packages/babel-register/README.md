@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-register](https://babeljs.io/docs/en/next/bab
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-register
+npm install --save-dev @gerhobbelt/babel-register
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-register
+yarn add @gerhobbelt/babel-register --dev
 ```

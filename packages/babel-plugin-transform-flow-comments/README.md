@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-flow-comments](https://babel
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-flow-comments
+npm install --save-dev @gerhobbelt/babel-plugin-transform-flow-comments
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-flow-comments
+yarn add @gerhobbelt/babel-plugin-transform-flow-comments --dev
 ```

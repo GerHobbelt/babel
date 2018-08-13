@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-class-properties](https://bab
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-class-properties
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-class-properties
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-class-properties
+yarn add @gerhobbelt/babel-plugin-proposal-class-properties --dev
 ```

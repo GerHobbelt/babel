@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-parameters](https://babeljs.
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-parameters
+npm install --save-dev @gerhobbelt/babel-plugin-transform-parameters
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-parameters
+yarn add @gerhobbelt/babel-plugin-transform-parameters --dev
 ```

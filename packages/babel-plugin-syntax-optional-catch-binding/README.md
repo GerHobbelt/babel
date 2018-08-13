@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-optional-catch-binding](https:/
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-optional-catch-binding
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-optional-catch-binding
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-optional-catch-binding
+yarn add @gerhobbelt/babel-plugin-syntax-optional-catch-binding --dev
 ```

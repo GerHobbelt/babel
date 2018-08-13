@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-typescript](https://babeljs.io/
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-typescript
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-typescript
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-typescript
+yarn add @gerhobbelt/babel-plugin-syntax-typescript --dev
 ```

@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-code-frame](https://babeljs.io/docs/en/next/b
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-code-frame
+npm install --save-dev @gerhobbelt/babel-code-frame
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-code-frame
+yarn add @gerhobbelt/babel-code-frame --dev
 ```

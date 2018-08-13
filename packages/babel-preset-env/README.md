@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-preset-env](https://babeljs.io/docs/en/next/b
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-preset-env
+npm install --save-dev @gerhobbelt/babel-preset-env
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-preset-env
+yarn add @gerhobbelt/babel-preset-env --dev
 ```

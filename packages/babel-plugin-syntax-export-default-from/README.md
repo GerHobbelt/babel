@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-export-default-from](https://ba
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-export-default-from
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-export-default-from
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-export-default-from
+yarn add @gerhobbelt/babel-plugin-syntax-export-default-from --dev
 ```

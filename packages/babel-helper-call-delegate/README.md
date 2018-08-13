@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-call-delegate](https://babeljs.io/docs
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-call-delegate
+npm install --save-dev @gerhobbelt/babel-helper-call-delegate
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-call-delegate
+yarn add @gerhobbelt/babel-helper-call-delegate --dev
 ```

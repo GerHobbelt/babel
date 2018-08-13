@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-explode-assignable-expression](https:/
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-explode-assignable-expression
+npm install --save-dev @gerhobbelt/babel-helper-explode-assignable-expression
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-explode-assignable-expression
+yarn add @gerhobbelt/babel-helper-explode-assignable-expression --dev
 ```

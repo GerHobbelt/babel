@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-spread](https://babeljs.io/d
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-spread
+npm install --save-dev @gerhobbelt/babel-plugin-transform-spread
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-spread
+yarn add @gerhobbelt/babel-plugin-transform-spread --dev
 ```

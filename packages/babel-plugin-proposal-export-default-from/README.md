@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-export-default-from](https://
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-export-default-from
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-export-default-from
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-export-default-from
+yarn add @gerhobbelt/babel-plugin-proposal-export-default-from --dev
 ```

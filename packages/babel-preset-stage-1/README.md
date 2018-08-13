@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-preset-stage-1](https://babeljs.io/docs/en/ne
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-preset-stage-1
+npm install --save-dev @gerhobbelt/babel-preset-stage-1
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-preset-stage-1
+yarn add @gerhobbelt/babel-preset-stage-1 --dev
 ```

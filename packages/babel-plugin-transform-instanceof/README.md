@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-instanceof](https://babeljs.
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-instanceof
+npm install --save-dev @gerhobbelt/babel-plugin-transform-instanceof
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-instanceof
+yarn add @gerhobbelt/babel-plugin-transform-instanceof --dev
 ```

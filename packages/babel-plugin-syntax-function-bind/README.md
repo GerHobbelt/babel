@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-function-bind](https://babeljs.
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-function-bind
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-function-bind
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-function-bind
+yarn add @gerhobbelt/babel-plugin-syntax-function-bind --dev
 ```

@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-decorators](https://babeljs.io/
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-decorators
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-decorators
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-decorators
+yarn add @gerhobbelt/babel-plugin-syntax-decorators --dev
 ```

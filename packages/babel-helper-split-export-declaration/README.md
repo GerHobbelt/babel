@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-split-export-declaration](https://babe
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-split-export-declaration
+npm install --save-dev @gerhobbelt/babel-helper-split-export-declaration
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-split-export-declaration
+yarn add @gerhobbelt/babel-helper-split-export-declaration --dev
 ```

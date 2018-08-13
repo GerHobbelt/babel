@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-jscript](https://babeljs.io/
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-jscript
+npm install --save-dev @gerhobbelt/babel-plugin-transform-jscript
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-jscript
+yarn add @gerhobbelt/babel-plugin-transform-jscript --dev
 ```

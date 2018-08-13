@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-object-super](https://babelj
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-object-super
+npm install --save-dev @gerhobbelt/babel-plugin-transform-object-super
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-object-super
+yarn add @gerhobbelt/babel-plugin-transform-object-super --dev
 ```

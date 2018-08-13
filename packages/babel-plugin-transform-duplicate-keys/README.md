@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-duplicate-keys](https://babe
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-duplicate-keys
+npm install --save-dev @gerhobbelt/babel-plugin-transform-duplicate-keys
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-duplicate-keys
+yarn add @gerhobbelt/babel-plugin-transform-duplicate-keys --dev
 ```

@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-replace-supers](https://babeljs.io/doc
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-replace-supers
+npm install --save-dev @gerhobbelt/babel-helper-replace-supers
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-replace-supers
+yarn add @gerhobbelt/babel-helper-replace-supers --dev
 ```

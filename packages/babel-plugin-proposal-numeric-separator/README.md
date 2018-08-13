@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-numeric-separator](https://ba
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-numeric-separator
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-numeric-separator
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-numeric-separator
+yarn add @gerhobbelt/babel-plugin-proposal-numeric-separator --dev
 ```

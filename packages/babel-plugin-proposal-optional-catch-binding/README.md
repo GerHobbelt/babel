@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-optional-catch-binding](https
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-optional-catch-binding
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-optional-catch-binding
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-optional-catch-binding
+yarn add @gerhobbelt/babel-plugin-proposal-optional-catch-binding --dev
 ```

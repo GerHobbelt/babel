@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-for-of](https://babeljs.io/d
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-for-of
+npm install --save-dev @gerhobbelt/babel-plugin-transform-for-of
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-for-of
+yarn add @gerhobbelt/babel-plugin-transform-for-of --dev
 ```

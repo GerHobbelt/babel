@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-typeof-symbol](https://babel
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-typeof-symbol
+npm install --save-dev @gerhobbelt/babel-plugin-transform-typeof-symbol
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-typeof-symbol
+yarn add @gerhobbelt/babel-plugin-transform-typeof-symbol --dev
 ```

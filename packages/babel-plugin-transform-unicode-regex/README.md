@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-unicode-regex](https://babel
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-unicode-regex
+npm install --save-dev @gerhobbelt/babel-plugin-transform-unicode-regex
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-unicode-regex
+yarn add @gerhobbelt/babel-plugin-transform-unicode-regex --dev
 ```

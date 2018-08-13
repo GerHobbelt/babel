@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-preset-es2015](https://babeljs.io/docs/en/nex
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-preset-es2015
+npm install --save-dev @gerhobbelt/babel-preset-es2015
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-preset-es2015
+yarn add @gerhobbelt/babel-preset-es2015 --dev
 ```

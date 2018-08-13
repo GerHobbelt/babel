@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-async-generators](https://babel
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-async-generators
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-async-generators
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-async-generators
+yarn add @gerhobbelt/babel-plugin-syntax-async-generators --dev
 ```

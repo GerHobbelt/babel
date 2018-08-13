@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-classes](https://babeljs.io/
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-classes
+npm install --save-dev @gerhobbelt/babel-plugin-transform-classes
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-classes
+yarn add @gerhobbelt/babel-plugin-transform-classes --dev
 ```

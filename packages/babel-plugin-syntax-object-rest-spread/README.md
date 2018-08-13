@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-object-rest-spread](https://bab
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-object-rest-spread
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-object-rest-spread
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-object-rest-spread
+yarn add @gerhobbelt/babel-plugin-syntax-object-rest-spread --dev
 ```

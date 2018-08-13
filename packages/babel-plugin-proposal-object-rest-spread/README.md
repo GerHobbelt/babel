@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-object-rest-spread](https://b
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-object-rest-spread
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-object-rest-spread
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-object-rest-spread
+yarn add @gerhobbelt/babel-plugin-proposal-object-rest-spread --dev
 ```

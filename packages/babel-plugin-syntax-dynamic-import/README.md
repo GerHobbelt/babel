@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-dynamic-import](https://babeljs
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-dynamic-import
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-dynamic-import
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-dynamic-import
+yarn add @gerhobbelt/babel-plugin-syntax-dynamic-import --dev
 ```

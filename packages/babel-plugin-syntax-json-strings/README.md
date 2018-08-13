@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-json-strings](https://babeljs.i
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-json-strings
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-json-strings
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-json-strings
+yarn add @gerhobbelt/babel-plugin-syntax-json-strings --dev
 ```

@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-highlight](https://babeljs.io/docs/en/next/ba
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-highlight
+npm install --save-dev @gerhobbelt/babel-highlight
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-highlight
+yarn add @gerhobbelt/babel-highlight --dev
 ```

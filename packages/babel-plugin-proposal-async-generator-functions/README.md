@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-async-generator-functions](ht
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-async-generator-functions
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-async-generator-functions
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-async-generator-functions
+yarn add @gerhobbelt/babel-plugin-proposal-async-generator-functions --dev
 ```

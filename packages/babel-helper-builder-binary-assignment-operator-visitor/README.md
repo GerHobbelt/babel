@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-builder-binary-assignment-operator-vis
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-builder-binary-assignment-operator-visitor
+npm install --save-dev @gerhobbelt/babel-helper-builder-binary-assignment-operator-visitor
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-builder-binary-assignment-operator-visitor
+yarn add @gerhobbelt/babel-helper-builder-binary-assignment-operator-visitor --dev
 ```

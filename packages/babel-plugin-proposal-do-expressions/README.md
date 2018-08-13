@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-do-expressions](https://babel
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-do-expressions
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-do-expressions
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-do-expressions
+yarn add @gerhobbelt/babel-plugin-proposal-do-expressions --dev
 ```

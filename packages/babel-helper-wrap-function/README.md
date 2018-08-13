@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-wrap-function](https://babeljs.io/docs
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-wrap-function
+npm install --save-dev @gerhobbelt/babel-helper-wrap-function
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-wrap-function
+yarn add @gerhobbelt/babel-helper-wrap-function --dev
 ```

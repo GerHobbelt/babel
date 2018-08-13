@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-parser](https://babeljs.io/docs/en/next/babel
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-parser
+npm install --save-dev @gerhobbelt/babel-parser
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-parser
+yarn add @gerhobbelt/babel-parser --dev
 ```

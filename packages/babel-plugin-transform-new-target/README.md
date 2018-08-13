@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-new-target](https://babeljs.
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-new-target
+npm install --save-dev @gerhobbelt/babel-plugin-transform-new-target
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-new-target
+yarn add @gerhobbelt/babel-plugin-transform-new-target --dev
 ```

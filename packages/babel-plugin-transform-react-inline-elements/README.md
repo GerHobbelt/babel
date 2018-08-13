@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-react-inline-elements](https
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-react-inline-elements
+npm install --save-dev @gerhobbelt/babel-plugin-transform-react-inline-elements
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-react-inline-elements
+yarn add @gerhobbelt/babel-plugin-transform-react-inline-elements --dev
 ```

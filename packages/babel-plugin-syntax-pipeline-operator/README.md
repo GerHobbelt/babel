@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-pipeline-operator](https://babe
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-pipeline-operator
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-pipeline-operator
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-pipeline-operator
+yarn add @gerhobbelt/babel-plugin-syntax-pipeline-operator --dev
 ```

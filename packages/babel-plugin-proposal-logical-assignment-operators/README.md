@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-proposal-logical-assignment-operators]
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-proposal-logical-assignment-operators
+npm install --save-dev @gerhobbelt/babel-plugin-proposal-logical-assignment-operators
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-proposal-logical-assignment-operators
+yarn add @gerhobbelt/babel-plugin-proposal-logical-assignment-operators --dev
 ```

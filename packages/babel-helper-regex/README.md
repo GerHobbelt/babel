@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-regex](https://babeljs.io/docs/en/next
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-regex
+npm install --save-dev @gerhobbelt/babel-helper-regex
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-regex
+yarn add @gerhobbelt/babel-helper-regex --dev
 ```

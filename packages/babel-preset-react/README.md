@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-preset-react](https://babeljs.io/docs/en/next
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-preset-react
+npm install --save-dev @gerhobbelt/babel-preset-react
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-preset-react
+yarn add @gerhobbelt/babel-preset-react --dev
 ```

@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-fixtures](https://babeljs.io/docs/en/n
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-fixtures
+npm install --save-dev @gerhobbelt/babel-helper-fixtures
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-fixtures
+yarn add @gerhobbelt/babel-helper-fixtures --dev
 ```

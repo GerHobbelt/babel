@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-object-set-prototype-of-to-a
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-object-set-prototype-of-to-assign
+npm install --save-dev @gerhobbelt/babel-plugin-transform-object-set-prototype-of-to-assign
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-object-set-prototype-of-to-assign
+yarn add @gerhobbelt/babel-plugin-transform-object-set-prototype-of-to-assign --dev
 ```

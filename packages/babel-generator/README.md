@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-generator](https://babeljs.io/docs/en/next/ba
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-generator
+npm install --save-dev @gerhobbelt/babel-generator
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-generator
+yarn add @gerhobbelt/babel-generator --dev
 ```

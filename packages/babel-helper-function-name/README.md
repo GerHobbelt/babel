@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-function-name](https://babeljs.io/docs
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-function-name
+npm install --save-dev @gerhobbelt/babel-helper-function-name
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-function-name
+yarn add @gerhobbelt/babel-helper-function-name --dev
 ```

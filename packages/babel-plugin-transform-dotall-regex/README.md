@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-dotall-regex](https://babelj
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-dotall-regex
+npm install --save-dev @gerhobbelt/babel-plugin-transform-dotall-regex
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-dotall-regex
+yarn add @gerhobbelt/babel-plugin-transform-dotall-regex --dev
 ```

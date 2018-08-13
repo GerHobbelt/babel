@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-object-assign](https://babel
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-object-assign
+npm install --save-dev @gerhobbelt/babel-plugin-transform-object-assign
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-object-assign
+yarn add @gerhobbelt/babel-plugin-transform-object-assign --dev
 ```

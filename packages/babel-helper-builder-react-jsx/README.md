@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-builder-react-jsx](https://babeljs.io/
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-builder-react-jsx
+npm install --save-dev @gerhobbelt/babel-helper-builder-react-jsx
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-builder-react-jsx
+yarn add @gerhobbelt/babel-helper-builder-react-jsx --dev
 ```

@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-helper-define-map](https://babeljs.io/docs/en
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-helper-define-map
+npm install --save-dev @gerhobbelt/babel-helper-define-map
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-helper-define-map
+yarn add @gerhobbelt/babel-helper-define-map --dev
 ```

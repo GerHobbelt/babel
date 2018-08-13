@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-regenerator](https://babeljs
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-regenerator
+npm install --save-dev @gerhobbelt/babel-plugin-transform-regenerator
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-regenerator
+yarn add @gerhobbelt/babel-plugin-transform-regenerator --dev
 ```

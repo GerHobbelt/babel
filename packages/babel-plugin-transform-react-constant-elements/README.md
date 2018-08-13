@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-transform-react-constant-elements](htt
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-transform-react-constant-elements
+npm install --save-dev @gerhobbelt/babel-plugin-transform-react-constant-elements
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-transform-react-constant-elements
+yarn add @gerhobbelt/babel-plugin-transform-react-constant-elements --dev
 ```

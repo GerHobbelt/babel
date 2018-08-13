@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-plugin-syntax-jsx](https://babeljs.io/docs/en
 Using npm:
 
 ```sh
-npm install --save @gerhobbelt/babel-plugin-syntax-jsx
+npm install --save-dev @gerhobbelt/babel-plugin-syntax-jsx
 ```
 
 or using yarn:
 
 ```sh
-yarn add --save @gerhobbelt/babel-plugin-syntax-jsx
+yarn add @gerhobbelt/babel-plugin-syntax-jsx --dev
 ```
