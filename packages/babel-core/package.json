@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-core",
-  "version": "7.0.0-beta.530001",
+  "version": "7.0.0-beta.530004",
   "description": "Babel compiler core.",
   "main": "lib/index.js",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
@@ -30,13 +30,13 @@
     "./lib/transform-file.js": "./lib/transform-file-browser.js"
   },
   "dependencies": {
-    "@gerhobbelt/babel-code-frame": "7.0.0-beta.510001",
-    "@gerhobbelt/babel-generator": "7.0.0-beta.510001",
-    "@gerhobbelt/babel-helpers": "7.0.0-beta.510001",
-    "@gerhobbelt/babel-parser": "7.0.0-beta.510001",
-    "@gerhobbelt/babel-template": "7.0.0-beta.510001",
-    "@gerhobbelt/babel-traverse": "7.0.0-beta.510001",
-    "@gerhobbelt/babel-types": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-code-frame": "7.0.0-beta.530004",
+    "@gerhobbelt/babel-generator": "7.0.0-beta.530004",
+    "@gerhobbelt/babel-helpers": "7.0.0-beta.530004",
+    "@gerhobbelt/babel-parser": "7.0.0-beta.530004",
+    "@gerhobbelt/babel-template": "7.0.0-beta.530004",
+    "@gerhobbelt/babel-traverse": "7.0.0-beta.530004",
+    "@gerhobbelt/babel-types": "7.0.0-beta.530004",
     "convert-source-map": "^1.5.1",
     "debug": "^3.1.0",
     "json5": "^1.0.1",
@@ -47,8 +47,8 @@
     "source-map": "^0.7.3"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-helper-transform-fixture-test-runner": "7.0.0-beta.510001",
-    "@gerhobbelt/babel-register": "7.0.0-beta.510001",
+    "@gerhobbelt/babel-helper-transform-fixture-test-runner": "7.0.0-beta.530004",
+    "@gerhobbelt/babel-register": "7.0.0-beta.530004",
     "slash": "^2.0.0"
   }
 }

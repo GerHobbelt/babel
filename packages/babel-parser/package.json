@@ -1,6 +1,6 @@
 {
-  "name": "@babel/parser",
-  "version": "7.0.0-beta.53",
+  "name": "@gerhobbelt/babel-parser",
+  "version": "7.0.0-beta.530004",
   "description": "A JavaScript parser",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
   "homepage": "https://babeljs.io/",
@@ -11,7 +11,7 @@
     "parser",
     "tc39",
     "ecmascript",
-    "@babel/parser"
+    "@gerhobbelt/babel-parser"
   ],
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-parser",
   "main": "lib/index.js",
@@ -23,7 +23,7 @@
     "node": ">=6.0.0"
   },
   "devDependencies": {
-    "@babel/helper-fixtures": "7.0.0-beta.53",
+    "@gerhobbelt/babel-helper-fixtures": "7.0.0-beta.530004",
     "charcodes": "0.1.0",
     "unicode-11.0.0": "^0.7.7"
   },
