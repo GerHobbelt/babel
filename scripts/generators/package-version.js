@@ -19,6 +19,12 @@ const codemods = readdirSync(codemodDir);
 const babelVersion = require(join(cwd, "packages/babel-core/package.json")).version;
 console.log("Updating version of all babel packages to", babelVersion);
 
+// pick up the peerDependencies clause from packages/babel-cli:
+const babelPeerDependencyClause = (() => {
+  const packageJson = require(join(cwd, "packages/babel-cli/package.json"));
+  return packageJson.peerDependencies["@gerhobbelt/babel-core"];
+})();
+
 function patchPackageJson(filePath) {
   const packageJson = readFileSync(filePath, "utf8");
 
@@ -29,7 +35,7 @@ function patchPackageJson(filePath) {
     return `"${m1}": "${babelVersion}"`;
   })
   .replace(/"(@gerhobbelt\/babel-.*?)": ">([=0-9.a-z-]+) <([=0-9.a-z-]+)"/g, (m, m1, m2, m3) => {
-    return `"${m1}": ">${m2} <${m3}"`;
+    return `"${m1}": "${babelPeerDependencyClause}"`;
   })
   .replace(/"version": "([^"]+)"/g, (m, m1) => {
     return `"version": "${babelVersion}"`;
