@@ -28,7 +28,7 @@
     "charcodes": "^0.1.0",
     "derequire": "^2.0.6",
     "enhanced-resolve": "^4.0.0",
-    "eslint": "^5.0.0",
+    "eslint": "^5.0.1",
     "eslint-config-babel": "^7.0.2",
     "eslint-plugin-flowtype": "^2.49.3",
     "eslint-plugin-prettier": "^2.6.1",
