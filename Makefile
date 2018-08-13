@@ -35,7 +35,6 @@ build-dist: build
 	node scripts/build-dist.js
 
 watch: clean clean-lib
-
 	# Ensure that build artifacts for types are created during local
 	# development too.
 	BABEL_ENV=development ./node_modules/.bin/gulp build-no-bundle

@@ -14,7 +14,7 @@
       "PR: Internal :house:": ":house: Internal"
     }
   },
-  "commands": {
+  "command": {
     "publish": {
       "ignore": [
         "*.md",
