@@ -2,7 +2,7 @@
  * Since we moved our documentation to our website repo, we want to point to the
  * website from the docs in this repo
  *
- * This script write the link to the website in every READMEs.
+ * This script writes the link to the website in every READMEs.
  */
 
 const { join } = require("path");
