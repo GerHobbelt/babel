@@ -7,7 +7,7 @@ export FORCE_COLOR = true
 
 SOURCES = packages codemods
 
-.PHONY: build build-dist watch lint fix clean test-clean test-only test test-ci publish bootstrap
+.PHONY: build build-dist watch lint fix clean test-clean test-only test test-ci publish bootstrap update-npm-packages update-version
 
 build: clean clean-lib
 	./node_modules/.bin/gulp build
@@ -126,6 +126,12 @@ bootstrap: #clean-all
 	make build
 	cd packages/babel-runtime; \
 	node scripts/build-dist.js
+
+update-npm-packages:
+	bash scripts/update-all-npm-package-dependencies.sh
+
+update-version:
+	node scripts/generators/package-version.js
 
 clean-lib:
 	$(foreach source, $(SOURCES), \
