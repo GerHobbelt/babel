@@ -1,12 +1,10 @@
 var _regeneratorRuntime = require("@gerhobbelt/babel-runtime/regenerator");
 
-var _Object$keys = require("@gerhobbelt/babel-runtime/core-js/object/keys");
-
 var _marked =
 /*#__PURE__*/
 _regeneratorRuntime.mark(fn);
 
-_Object$keys({});
+Object.keys({});
 
 function fn() {
   return _regeneratorRuntime.wrap(function fn$(_context) {

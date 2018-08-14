@@ -1,6 +1,6 @@
 # @gerhobbelt/babel-runtime
 
-> babel selfContained runtime
+> babel's modular runtime helpers
 
 See our website [@gerhobbelt/babel-runtime](https://babeljs.io/docs/en/next/babel-runtime.html) for more information.
 
