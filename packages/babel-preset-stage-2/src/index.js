@@ -1,41 +1,49 @@
-import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
-import presetStage3 from "@gerhobbelt/babel-preset-stage-3";
+export default function() {
+  throw new Error(`
+As of v7.0.0-beta.55, we've removed Babel's Stage presets.
+Please consider reading our blog post on this decision at
+https://babeljs.io/blog/2018/07/27/removing-babels-stage-presets
+for more details. TL;DR is that it's more beneficial in the
+  long run to explicitly add which proposals to use.
 
-import transformDecorators from "@gerhobbelt/babel-plugin-proposal-decorators";
-import transformFunctionSent from "@gerhobbelt/babel-plugin-proposal-function-sent";
-import transformExportNamespaceFrom from "@gerhobbelt/babel-plugin-proposal-export-namespace-from";
-import transformNumericSeparator from "@gerhobbelt/babel-plugin-proposal-numeric-separator";
-import transformThrowExpressions from "@gerhobbelt/babel-plugin-proposal-throw-expressions";
+For a more automatic migration, we have updated babel-upgrade,
+https://github.com/babel/babel-upgrade to do this for you with
+"npx babel-upgrade".
 
-export default declare((api, opts = {}) => {
-  api.assertVersion(7);
+If you want the same configuration as before:
 
-  const { loose = false, useBuiltIns = false, decoratorsLegacy = true } = opts;
+{
+  "plugins": [
+    // Stage 2
+    ["@gerhobbelt/babel-plugin-proposal-decorators", { "legacy": true }],
+    "@gerhobbelt/babel-plugin-proposal-function-sent",
+    "@gerhobbelt/babel-plugin-proposal-export-namespace-from",
+    "@gerhobbelt/babel-plugin-proposal-numeric-separator",
+    "@gerhobbelt/babel-plugin-proposal-throw-expressions",
 
-  if (typeof loose !== "boolean") {
-    throw new Error(
-      "@gerhobbelt/babel-preset-stage-2 'loose' option must be a boolean.",
-    );
-  }
-  if (typeof useBuiltIns !== "boolean") {
-    throw new Error(
-      "@gerhobbelt/babel-preset-stage-2 'useBuiltIns' option must be a boolean.",
-    );
-  }
-  if (typeof decoratorsLegacy !== "boolean") {
-    throw new Error(
-      "@gerhobbelt/babel-preset-stage-2 'decoratorsLegacy' option must be a boolean.",
-    );
-  }
+    // Stage 3
+    "@gerhobbelt/babel-plugin-syntax-dynamic-import",
+    "@gerhobbelt/babel-plugin-syntax-import-meta",
+    ["@gerhobbelt/babel-plugin-proposal-class-properties", { "loose": false }],
+    "@gerhobbelt/babel-plugin-proposal-json-strings"
+  ]
+}
 
+If you're using the same configuration across many separate projects,
+keep in mind that you can also create your own custom presets with
+whichever plugins and presets you're looking to use.
+
+module.exports = function() {
   return {
-    presets: [[presetStage3, { loose, useBuiltIns }]],
     plugins: [
-      [transformDecorators, { legacy: decoratorsLegacy }],
-      transformFunctionSent,
-      transformExportNamespaceFrom,
-      transformNumericSeparator,
-      transformThrowExpressions,
+      require("@gerhobbelt/babel-plugin-syntax-dynamic-import"),
+      [require("@gerhobbelt/babel-plugin-proposal-decorators"), { "legacy": true }],
+      [require("@gerhobbelt/babel-plugin-proposal-class-properties"), { "loose": false }],
+    ],
+    presets: [
+      // ...
     ],
   };
-});
+};
+`);
+}
