@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-runtime",
-  "version": "7.0.0-beta.530005",
+  "version": "7.0.0-beta.530006",
   "description": "babel selfContained runtime",
   "license": "MIT",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-runtime",
@@ -10,10 +10,10 @@
     "regenerator-runtime": "^0.12.1"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-beta.530005",
-    "@gerhobbelt/babel-helpers": "7.0.0-beta.530005",
-    "@gerhobbelt/babel-plugin-transform-runtime": "7.0.0-beta.530005",
-    "@gerhobbelt/babel-preset-env": "7.0.0-beta.530005",
-    "@gerhobbelt/babel-types": "7.0.0-beta.530005"
+    "@gerhobbelt/babel-core": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-helpers": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-plugin-transform-runtime": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-preset-env": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-types": "7.0.0-beta.530006"
   }
 }
