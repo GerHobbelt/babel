@@ -9,7 +9,6 @@
   "main": "lib/index.js",
   "dependencies": {
     "@gerhobbelt/babel-template": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-types": "7.0.0-beta.530006",
-    "lodash": "^4.17.10"
+    "@gerhobbelt/babel-types": "7.0.0-beta.530006"
   }
 }
