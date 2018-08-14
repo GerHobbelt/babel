@@ -4,9 +4,7 @@ import presetStage2 from "@gerhobbelt/babel-preset-stage-2";
 import transformExportDefaultFrom from "@gerhobbelt/babel-plugin-proposal-export-default-from";
 import transformLogicalAssignmentOperators from "@gerhobbelt/babel-plugin-proposal-logical-assignment-operators";
 import transformOptionalChaining from "@gerhobbelt/babel-plugin-proposal-optional-chaining";
-import transformPipelineOperator, {
-  proposals,
-} from "@gerhobbelt/babel-plugin-proposal-pipeline-operator";
+import transformPipelineOperator from "@gerhobbelt/babel-plugin-proposal-pipeline-operator";
 import transformNullishCoalescingOperator from "@gerhobbelt/babel-plugin-proposal-nullish-coalescing-operator";
 import transformDoExpressions from "@gerhobbelt/babel-plugin-proposal-do-expressions";
 
@@ -16,8 +14,8 @@ export default declare((api, opts = {}) => {
   const {
     loose = false,
     useBuiltIns = false,
-    decoratorsLegacy = false,
-    pipelineProposal,
+    decoratorsLegacy = true,
+    pipelineProposal = "minimal",
   } = opts;
 
   if (typeof loose !== "boolean") {
@@ -33,23 +31,6 @@ export default declare((api, opts = {}) => {
   if (typeof decoratorsLegacy !== "boolean") {
     throw new Error(
       "@gerhobbelt/babel-preset-stage-1 'decoratorsLegacy' option must be a boolean.",
-    );
-  }
-
-  if (decoratorsLegacy !== true) {
-    throw new Error(
-      "The new decorators proposal is not supported yet." +
-        ' You must pass the `"decoratorsLegacy": true` option to' +
-        " @gerhobbelt/babel-preset-stage-1",
-    );
-  }
-
-  if (typeof pipelineProposal !== "string") {
-    throw new Error(
-      "The pipeline operator requires a proposal set." +
-        " You must pass 'pipelineProposal' option to" +
-        " @gerhobbelt/babel-preset-stage-1 whose value must be one of: " +
-        proposals.join(", "),
     );
   }
 
