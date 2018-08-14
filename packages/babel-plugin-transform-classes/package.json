@@ -1,18 +1,18 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-classes",
-  "version": "7.0.0-beta.530004",
+  "version": "7.0.0-beta.530005",
   "description": "Compile ES2015 classes to ES5",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-classes",
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-helper-annotate-as-pure": "7.0.0-beta.530004",
-    "@gerhobbelt/babel-helper-define-map": "7.0.0-beta.530004",
-    "@gerhobbelt/babel-helper-function-name": "7.0.0-beta.530004",
-    "@gerhobbelt/babel-helper-optimise-call-expression": "7.0.0-beta.530004",
-    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-beta.530004",
-    "@gerhobbelt/babel-helper-replace-supers": "7.0.0-beta.530004",
-    "@gerhobbelt/babel-helper-split-export-declaration": "7.0.0-beta.530004",
+    "@gerhobbelt/babel-helper-annotate-as-pure": "7.0.0-beta.530005",
+    "@gerhobbelt/babel-helper-define-map": "7.0.0-beta.530005",
+    "@gerhobbelt/babel-helper-function-name": "7.0.0-beta.530005",
+    "@gerhobbelt/babel-helper-optimise-call-expression": "7.0.0-beta.530005",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-beta.530005",
+    "@gerhobbelt/babel-helper-replace-supers": "7.0.0-beta.530005",
+    "@gerhobbelt/babel-helper-split-export-declaration": "7.0.0-beta.530005",
     "globals": "^11.7.0"
   },
   "keywords": [
@@ -22,7 +22,7 @@
     "@gerhobbelt/babel-core": ">=7.0.0-beta.50 <7.0.0-rc.0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-beta.530004",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.0.0-beta.530004"
+    "@gerhobbelt/babel-core": "7.0.0-beta.530005",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.0.0-beta.530005"
   }
 }

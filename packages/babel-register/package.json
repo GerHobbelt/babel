@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-register",
-  "version": "7.0.0-beta.530004",
+  "version": "7.0.0-beta.530005",
   "description": "babel require hook",
   "license": "MIT",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-register",
@@ -22,7 +22,7 @@
     "@gerhobbelt/babel-core": ">=7.0.0-beta.50 <7.0.0-rc.0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-beta.530004",
+    "@gerhobbelt/babel-core": "7.0.0-beta.530005",
     "default-require-extensions": "^2.0.0"
   }
 }
