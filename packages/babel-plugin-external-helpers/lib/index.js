@@ -25,11 +25,20 @@ function _babelCore() {
   return data;
 }
 
-var _default = (0, _babelHelperPluginUtils().declare)(api => {
+var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
   api.assertVersion(7);
+  const {
+    helperVersion = "7.0.0-beta.0"
+  } = options;
   return {
     pre(file) {
-      file.set("helpersNamespace", _babelCore().types.identifier("babelHelpers"));
+      file.set("helperGenerator", name => {
+        if (file.availableHelper && !file.availableHelper(name, helperVersion)) {
+          return;
+        }
+
+        return _babelCore().types.memberExpression(_babelCore().types.identifier("babelHelpers"), _babelCore().types.identifier(name));
+      });
     }
 
   };

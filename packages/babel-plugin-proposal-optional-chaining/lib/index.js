@@ -112,6 +112,10 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
         }
       }
 
+      if (replacementPath.isOptionalCallExpression()) {
+        replacementPath.node.type = "CallExpression";
+      }
+
       replacementPath.replaceWith(_babelCore().types.conditionalExpression(loose ? _babelCore().types.binaryExpression("==", _babelCore().types.cloneNode(check), _babelCore().types.nullLiteral()) : _babelCore().types.logicalExpression("||", _babelCore().types.binaryExpression("===", _babelCore().types.cloneNode(check), _babelCore().types.nullLiteral()), _babelCore().types.binaryExpression("===", _babelCore().types.cloneNode(ref), scope.buildUndefinedNode())), scope.buildUndefinedNode(), replacementPath.node));
       replacementPath = replacementPath.get("alternate");
     }

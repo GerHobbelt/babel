@@ -2,7 +2,6 @@
 
 import path from "path";
 import buildDebug from "debug";
-import slash from "slash";
 import {
   validate,
   type ValidatedOptions,

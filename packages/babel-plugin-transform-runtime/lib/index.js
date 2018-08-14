@@ -3,12 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "definitions", {
-  enumerable: true,
-  get: function () {
-    return _definitions.default;
-  }
-});
 exports.default = void 0;
 
 function _babelHelperPluginUtils() {
@@ -48,39 +42,71 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
   api.assertVersion(7);
   const {
-    helpers,
-    moduleName = "@gerhobbelt/babel-runtime",
-    polyfill,
-    regenerator,
-    useBuiltIns,
-    useESModules
+    corejs: corejsVersion = false,
+    helpers: useRuntimeHelpers = true,
+    regenerator: useRuntimeRegenerator = true,
+    useESModules = false,
+    version: runtimeVersion = "7.0.0-beta.0"
   } = options;
-  const regeneratorEnabled = regenerator !== false;
-  const notPolyfillOrDoesUseBuiltIns = polyfill === false || useBuiltIns;
-  const isPolyfillAndUseBuiltIns = polyfill && useBuiltIns;
-  const baseHelpersDir = useBuiltIns ? "helpers/builtin" : "helpers";
-  const helpersDir = useESModules ? `${baseHelpersDir}/es6` : baseHelpersDir;
+
+  if (typeof useRuntimeRegenerator !== "boolean") {
+    throw new Error("The 'regenerator' option must be undefined, or a boolean.");
+  }
+
+  if (typeof useRuntimeHelpers !== "boolean") {
+    throw new Error("The 'helpers' option must be undefined, or a boolean.");
+  }
+
+  if (typeof useESModules !== "boolean") {
+    throw new Error("The 'useESModules' option must be undefined, or a boolean.");
+  }
+
+  if (corejsVersion !== false && (typeof corejsVersion !== "number" || corejsVersion !== 2) && (typeof corejsVersion !== "string" || corejsVersion !== "2")) {
+    throw new Error(`The 'corejs' option must be undefined, false, or 2, or '2', ` + `but got ${JSON.stringify(corejsVersion)}.`);
+  }
 
   function has(obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
   }
 
+  if (has(options, "useBuiltIns")) {
+    if (options.useBuiltIns) {
+      throw new Error("The 'useBuiltIns' option has been removed. The @gerhobbelt/babel-runtime " + "module now uses builtins by default.");
+    } else {
+      throw new Error("The 'useBuiltIns' option has been removed. Use the 'corejs'" + "option with value '2' to polyfill with CoreJS 2.x via @gerhobbelt/babel-runtime.");
+    }
+  }
+
+  if (has(options, "polyfill")) {
+    if (options.polyfill === false) {
+      throw new Error("The 'polyfill' option has been removed. The @gerhobbelt/babel-runtime " + "module now skips polyfilling by default.");
+    } else {
+      throw new Error("The 'polyfill' option has been removed. Use the 'corejs'" + "option with value '2' to polyfill with CoreJS 2.x via @gerhobbelt/babel-runtime.");
+    }
+  }
+
+  if (has(options, "moduleName")) {
+    throw new Error("The 'moduleName' option has been removed. @gerhobbelt/babel-transform-runtime " + "no longer supports arbitrary runtimes.");
+  }
+
+  const helpersDir = useESModules ? "helpers/esm" : "helpers";
+  const injectCoreJS2 = `${corejsVersion}` === "2";
+  const moduleName = injectCoreJS2 ? "@gerhobbelt/babel-runtime-corejs2" : "@gerhobbelt/babel-runtime";
   const HEADER_HELPERS = ["interopRequireWildcard", "interopRequireDefault"];
   return {
     pre(file) {
-      if (helpers !== false) {
+      if (useRuntimeHelpers) {
         file.set("helperGenerator", name => {
+          if (file.availableHelper && !file.availableHelper(name, runtimeVersion)) {
+            return;
+          }
+
           const isInteropHelper = HEADER_HELPERS.indexOf(name) !== -1;
           const blockHoist = isInteropHelper && !(0, _babelHelperModuleImports().isModule)(file.path) ? 4 : undefined;
           return this.addDefaultImport(`${moduleName}/${helpersDir}/${name}`, name, blockHoist);
         });
       }
 
-      if (isPolyfillAndUseBuiltIns) {
-        throw new Error("The polyfill option conflicts with useBuiltIns; use one or the other");
-      }
-
-      this.moduleName = moduleName;
       const cache = new Map();
 
       this.addDefaultImport = (source, nameHint, blockHoist) => {
@@ -111,12 +137,12 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
           scope
         } = path;
 
-        if (node.name === "regeneratorRuntime" && regeneratorEnabled) {
-          path.replaceWith(this.addDefaultImport(`${this.moduleName}/regenerator`, "regeneratorRuntime"));
+        if (node.name === "regeneratorRuntime" && useRuntimeRegenerator) {
+          path.replaceWith(this.addDefaultImport(`${moduleName}/regenerator`, "regeneratorRuntime"));
           return;
         }
 
-        if (notPolyfillOrDoesUseBuiltIns) return;
+        if (!injectCoreJS2) return;
         if (_babelCore().types.isMemberExpression(parent)) return;
         if (!has(_definitions.default.builtins, node.name)) return;
         if (scope.getBindingIdentifier(node.name)) return;
@@ -124,7 +150,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
       },
 
       CallExpression(path) {
-        if (notPolyfillOrDoesUseBuiltIns) return;
+        if (!injectCoreJS2) return;
         if (path.node.arguments.length) return;
         const callee = path.node.callee;
         if (!_babelCore().types.isMemberExpression(callee)) return;
@@ -138,7 +164,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
       },
 
       BinaryExpression(path) {
-        if (notPolyfillOrDoesUseBuiltIns) return;
+        if (!injectCoreJS2) return;
         if (path.node.operator !== "in") return;
         if (!path.get("left").matchesPattern("Symbol.iterator")) return;
         path.replaceWith(_babelCore().types.callExpression(this.addDefaultImport(`${moduleName}/core-js/is-iterable`, "isIterable"), [path.node.right]));
@@ -146,7 +172,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
 
       MemberExpression: {
         enter(path) {
-          if (notPolyfillOrDoesUseBuiltIns) return;
+          if (!injectCoreJS2) return;
           if (!path.isReferenced()) return;
           const {
             node
@@ -172,7 +198,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
         },
 
         exit(path) {
-          if (notPolyfillOrDoesUseBuiltIns) return;
+          if (!injectCoreJS2) return;
           if (!path.isReferenced()) return;
           const {
             node

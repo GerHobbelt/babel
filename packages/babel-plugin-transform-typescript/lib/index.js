@@ -274,6 +274,10 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, {
 
       JSXOpeningElement(path) {
         path.node.typeParameters = null;
+      },
+
+      TaggedTemplateExpression(path) {
+        path.node.typeParameters = null;
       }
 
     }

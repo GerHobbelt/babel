@@ -206,9 +206,18 @@ function convertFunctionRest(path) {
     scope
   } = path;
   if (!hasRest(node)) return false;
-  const rest = node.params.pop().argument;
+  let rest = node.params.pop().argument;
 
   const argsId = _babelCore().types.identifier("arguments");
+
+  if (_babelCore().types.isPattern(rest)) {
+    const pattern = rest;
+    rest = scope.generateUidIdentifier("ref");
+
+    const declar = _babelCore().types.variableDeclaration("let", [_babelCore().types.variableDeclarator(pattern, rest)]);
+
+    node.body.body.unshift(declar);
+  }
 
   const state = {
     references: [],

@@ -424,7 +424,8 @@ function _default(fixturesLoc, name, suiteOpts = {}, taskOpts = {}, dynamicOpts)
           continue;
         }
 
-        it(task.title, !task.disabled && function () {
+        const testFn = task.disabled ? it.skip : it;
+        testFn(task.title, function () {
           function runTask() {
             run(task);
           }

@@ -17,11 +17,16 @@ function _babelTemplate() {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const helpers = {};
+const helpers = Object.create(null);
 var _default = helpers;
 exports.default = _default;
 
-helpers.typeof = () => _babelTemplate().default.program.ast`
+const helper = minVersion => tpl => ({
+  minVersion,
+  ast: () => _babelTemplate().default.program.ast(tpl)
+});
+
+helpers.typeof = helper("7.0.0-beta.0")`
   export default function _typeof(obj) {
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
       _typeof = function (obj) { return typeof obj; };
@@ -36,8 +41,7 @@ helpers.typeof = () => _babelTemplate().default.program.ast`
     return _typeof(obj);
   }
 `;
-
-helpers.jsx = () => _babelTemplate().default.program.ast`
+helpers.jsx = helper("7.0.0-beta.0")`
   var REACT_ELEMENT_TYPE;
 
   export default function _createRawReactElement(type, props, key, children) {
@@ -87,8 +91,7 @@ helpers.jsx = () => _babelTemplate().default.program.ast`
     };
   }
 `;
-
-helpers.asyncIterator = () => _babelTemplate().default.program.ast`
+helpers.asyncIterator = helper("7.0.0-beta.0")`
   export default function _asyncIterator(iterable) {
     var method
     if (typeof Symbol === "function") {
@@ -104,14 +107,12 @@ helpers.asyncIterator = () => _babelTemplate().default.program.ast`
     throw new TypeError("Object is not async iterable");
   }
 `;
-
-helpers.AwaitValue = () => _babelTemplate().default.program.ast`
+helpers.AwaitValue = helper("7.0.0-beta.0")`
   export default function _AwaitValue(value) {
     this.wrapped = value;
   }
 `;
-
-helpers.AsyncGenerator = () => _babelTemplate().default.program.ast`
+helpers.AsyncGenerator = helper("7.0.0-beta.0")`
   import AwaitValue from "AwaitValue";
 
   export default function AsyncGenerator(gen) {
@@ -194,8 +195,7 @@ helpers.AsyncGenerator = () => _babelTemplate().default.program.ast`
   AsyncGenerator.prototype.throw = function (arg) { return this._invoke("throw", arg); };
   AsyncGenerator.prototype.return = function (arg) { return this._invoke("return", arg); };
 `;
-
-helpers.wrapAsyncGenerator = () => _babelTemplate().default.program.ast`
+helpers.wrapAsyncGenerator = helper("7.0.0-beta.0")`
   import AsyncGenerator from "AsyncGenerator";
 
   export default function _wrapAsyncGenerator(fn) {
@@ -204,16 +204,14 @@ helpers.wrapAsyncGenerator = () => _babelTemplate().default.program.ast`
     };
   }
 `;
-
-helpers.awaitAsyncGenerator = () => _babelTemplate().default.program.ast`
+helpers.awaitAsyncGenerator = helper("7.0.0-beta.0")`
   import AwaitValue from "AwaitValue";
 
   export default function _awaitAsyncGenerator(value) {
     return new AwaitValue(value);
   }
 `;
-
-helpers.asyncGeneratorDelegate = () => _babelTemplate().default.program.ast`
+helpers.asyncGeneratorDelegate = helper("7.0.0-beta.0")`
   export default function _asyncGeneratorDelegate(inner, awaitWrap) {
     var iter = {}, waiting = false;
 
@@ -254,8 +252,7 @@ helpers.asyncGeneratorDelegate = () => _babelTemplate().default.program.ast`
     return iter;
   }
 `;
-
-helpers.asyncToGenerator = () => _babelTemplate().default.program.ast`
+helpers.asyncToGenerator = helper("7.0.0-beta.0")`
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
     try {
       var info = gen[key](arg);
@@ -289,16 +286,14 @@ helpers.asyncToGenerator = () => _babelTemplate().default.program.ast`
     };
   }
 `;
-
-helpers.classCallCheck = () => _babelTemplate().default.program.ast`
+helpers.classCallCheck = helper("7.0.0-beta.0")`
   export default function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
 `;
-
-helpers.createClass = () => _babelTemplate().default.program.ast`
+helpers.createClass = helper("7.0.0-beta.0")`
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i ++) {
       var descriptor = props[i];
@@ -315,8 +310,7 @@ helpers.createClass = () => _babelTemplate().default.program.ast`
     return Constructor;
   }
 `;
-
-helpers.defineEnumerableProperties = () => _babelTemplate().default.program.ast`
+helpers.defineEnumerableProperties = helper("7.0.0-beta.0")`
   export default function _defineEnumerableProperties(obj, descs) {
     for (var key in descs) {
       var desc = descs[key];
@@ -341,8 +335,7 @@ helpers.defineEnumerableProperties = () => _babelTemplate().default.program.ast`
     return obj;
   }
 `;
-
-helpers.defaults = () => _babelTemplate().default.program.ast`
+helpers.defaults = helper("7.0.0-beta.0")`
   export default function _defaults(obj, defaults) {
     var keys = Object.getOwnPropertyNames(defaults);
     for (var i = 0; i < keys.length; i++) {
@@ -355,8 +348,7 @@ helpers.defaults = () => _babelTemplate().default.program.ast`
     return obj;
   }
 `;
-
-helpers.defineProperty = () => _babelTemplate().default.program.ast`
+helpers.defineProperty = helper("7.0.0-beta.0")`
   export default function _defineProperty(obj, key, value) {
     // Shortcircuit the slow defineProperty path when possible.
     // We are trying to avoid issues where setters defined on the
@@ -376,8 +368,7 @@ helpers.defineProperty = () => _babelTemplate().default.program.ast`
     return obj;
   }
 `;
-
-helpers.extends = () => _babelTemplate().default.program.ast`
+helpers.extends = helper("7.0.0-beta.0")`
   export default function _extends() {
     _extends = Object.assign || function (target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -394,8 +385,7 @@ helpers.extends = () => _babelTemplate().default.program.ast`
     return _extends.apply(this, arguments);
   }
 `;
-
-helpers.objectSpread = () => _babelTemplate().default.program.ast`
+helpers.objectSpread = helper("7.0.0-beta.0")`
   import defineProperty from "defineProperty";
 
   export default function _objectSpread(target) {
@@ -414,8 +404,7 @@ helpers.objectSpread = () => _babelTemplate().default.program.ast`
     return target;
   }
 `;
-
-helpers.inherits = () => _babelTemplate().default.program.ast`
+helpers.inherits = helper("7.0.0-beta.0")`
   import setPrototypeOf from "setPrototypeOf";
 
   export default function _inherits(subClass, superClass) {
@@ -432,16 +421,14 @@ helpers.inherits = () => _babelTemplate().default.program.ast`
     if (superClass) setPrototypeOf(subClass, superClass);
   }
 `;
-
-helpers.inheritsLoose = () => _babelTemplate().default.program.ast`
+helpers.inheritsLoose = helper("7.0.0-beta.0")`
   export default function _inheritsLoose(subClass, superClass) {
     subClass.prototype = Object.create(superClass.prototype);
     subClass.prototype.constructor = subClass;
     subClass.__proto__ = superClass;
   }
 `;
-
-helpers.getPrototypeOf = () => _babelTemplate().default.program.ast`
+helpers.getPrototypeOf = helper("7.0.0-beta.0")`
   export default function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf
       ? Object.getPrototypeOf
@@ -451,8 +438,7 @@ helpers.getPrototypeOf = () => _babelTemplate().default.program.ast`
     return _getPrototypeOf(o);
   }
 `;
-
-helpers.setPrototypeOf = () => _babelTemplate().default.program.ast`
+helpers.setPrototypeOf = helper("7.0.0-beta.0")`
   export default function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -461,8 +447,7 @@ helpers.setPrototypeOf = () => _babelTemplate().default.program.ast`
     return _setPrototypeOf(o, p);
   }
 `;
-
-helpers.construct = () => _babelTemplate().default.program.ast`
+helpers.construct = helper("7.0.0-beta.0")`
   import setPrototypeOf from "setPrototypeOf";
 
   function isNativeReflectConstruct() {
@@ -483,7 +468,15 @@ helpers.construct = () => _babelTemplate().default.program.ast`
     try {
       // If the internal slots aren't set, this throws an error similar to
       //   TypeError: this is not a Date object.
+      // Date#toString is generic in ES2015 [1] and it doesn't throw, so we also
+      // check Map#get (which on the other hand doesn't exist in ES5 browsers).
+      //
+      // [1]: https://github.com/tc39/ecma262/issues/1268#issuecomment-410104832
+
       Date.prototype.toString.call(Reflect.construct(Date, [], function() {}));
+      if (typeof Map === "function") {
+        Map.prototype.get.call(Reflect.construct(Map, [], function() {}));
+      }
       return true;
     } catch (e) {
       return false;
@@ -508,8 +501,7 @@ helpers.construct = () => _babelTemplate().default.program.ast`
     return _construct.apply(null, arguments);
   }
 `;
-
-helpers.wrapNativeSuper = () => _babelTemplate().default.program.ast`
+helpers.wrapNativeSuper = helper("7.0.0-beta.0")`
   import getPrototypeOf from "getPrototypeOf";
   import setPrototypeOf from "setPrototypeOf";
   import construct from "construct";
@@ -544,8 +536,7 @@ helpers.wrapNativeSuper = () => _babelTemplate().default.program.ast`
     return _wrapNativeSuper(Class)
   }
 `;
-
-helpers.instanceof = () => _babelTemplate().default.program.ast`
+helpers.instanceof = helper("7.0.0-beta.0")`
   export default function _instanceof(left, right) {
     if (right != null && typeof Symbol !== "undefined" && right[Symbol.hasInstance]) {
       return right[Symbol.hasInstance](left);
@@ -554,14 +545,12 @@ helpers.instanceof = () => _babelTemplate().default.program.ast`
     }
   }
 `;
-
-helpers.interopRequireDefault = () => _babelTemplate().default.program.ast`
+helpers.interopRequireDefault = helper("7.0.0-beta.0")`
   export default function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
   }
 `;
-
-helpers.interopRequireWildcard = () => _babelTemplate().default.program.ast`
+helpers.interopRequireWildcard = helper("7.0.0-beta.0")`
   export default function _interopRequireWildcard(obj) {
     if (obj && obj.__esModule) {
       return obj;
@@ -586,22 +575,19 @@ helpers.interopRequireWildcard = () => _babelTemplate().default.program.ast`
     }
   }
 `;
-
-helpers.newArrowCheck = () => _babelTemplate().default.program.ast`
+helpers.newArrowCheck = helper("7.0.0-beta.0")`
   export default function _newArrowCheck(innerThis, boundThis) {
     if (innerThis !== boundThis) {
       throw new TypeError("Cannot instantiate an arrow function");
     }
   }
 `;
-
-helpers.objectDestructuringEmpty = () => _babelTemplate().default.program.ast`
+helpers.objectDestructuringEmpty = helper("7.0.0-beta.0")`
   export default function _objectDestructuringEmpty(obj) {
     if (obj == null) throw new TypeError("Cannot destructure undefined");
   }
 `;
-
-helpers.objectWithoutPropertiesLoose = () => _babelTemplate().default.program.ast`
+helpers.objectWithoutPropertiesLoose = helper("7.0.0-beta.0")`
   export default function _objectWithoutPropertiesLoose(source, excluded) {
     if (source == null) return {};
 
@@ -618,8 +604,7 @@ helpers.objectWithoutPropertiesLoose = () => _babelTemplate().default.program.as
     return target;
   }
 `;
-
-helpers.objectWithoutProperties = () => _babelTemplate().default.program.ast`
+helpers.objectWithoutProperties = helper("7.0.0-beta.0")`
   import objectWithoutPropertiesLoose from "objectWithoutPropertiesLoose";
 
   export default function _objectWithoutProperties(source, excluded) {
@@ -641,8 +626,7 @@ helpers.objectWithoutProperties = () => _babelTemplate().default.program.ast`
     return target;
   }
 `;
-
-helpers.assertThisInitialized = () => _babelTemplate().default.program.ast`
+helpers.assertThisInitialized = helper("7.0.0-beta.0")`
   export default function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -650,8 +634,7 @@ helpers.assertThisInitialized = () => _babelTemplate().default.program.ast`
     return self;
   }
 `;
-
-helpers.possibleConstructorReturn = () => _babelTemplate().default.program.ast`
+helpers.possibleConstructorReturn = helper("7.0.0-beta.0")`
   import assertThisInitialized from "assertThisInitialized";
 
   export default function _possibleConstructorReturn(self, call) {
@@ -661,8 +644,7 @@ helpers.possibleConstructorReturn = () => _babelTemplate().default.program.ast`
     return assertThisInitialized(self);
   }
 `;
-
-helpers.superPropBase = () => _babelTemplate().default.program.ast`
+helpers.superPropBase = helper("7.0.0-beta.0")`
   import getPrototypeOf from "getPrototypeOf";
 
   export default function _superPropBase(object, property) {
@@ -674,8 +656,7 @@ helpers.superPropBase = () => _babelTemplate().default.program.ast`
     return object;
   }
 `;
-
-helpers.get = () => _babelTemplate().default.program.ast`
+helpers.get = helper("7.0.0-beta.0")`
   import getPrototypeOf from "getPrototypeOf";
   import superPropBase from "superPropBase";
 
@@ -699,8 +680,7 @@ helpers.get = () => _babelTemplate().default.program.ast`
     return _get(target, property, receiver || target);
   }
 `;
-
-helpers.set = () => _babelTemplate().default.program.ast`
+helpers.set = helper("7.0.0-beta.0")`
   import getPrototypeOf from "getPrototypeOf";
   import superPropBase from "superPropBase";
   import defineProperty from "defineProperty";
@@ -757,8 +737,7 @@ helpers.set = () => _babelTemplate().default.program.ast`
     return value;
   }
 `;
-
-helpers.taggedTemplateLiteral = () => _babelTemplate().default.program.ast`
+helpers.taggedTemplateLiteral = helper("7.0.0-beta.0")`
   export default function _taggedTemplateLiteral(strings, raw) {
     if (!raw) { raw = strings.slice(0); }
     return Object.freeze(Object.defineProperties(strings, {
@@ -766,16 +745,14 @@ helpers.taggedTemplateLiteral = () => _babelTemplate().default.program.ast`
     }));
   }
 `;
-
-helpers.taggedTemplateLiteralLoose = () => _babelTemplate().default.program.ast`
+helpers.taggedTemplateLiteralLoose = helper("7.0.0-beta.0")`
   export default function _taggedTemplateLiteralLoose(strings, raw) {
     if (!raw) { raw = strings.slice(0); }
     strings.raw = raw;
     return strings;
   }
 `;
-
-helpers.temporalRef = () => _babelTemplate().default.program.ast`
+helpers.temporalRef = helper("7.0.0-beta.0")`
   import undef from "temporalUndefined";
 
   export default function _temporalRef(val, name) {
@@ -786,24 +763,20 @@ helpers.temporalRef = () => _babelTemplate().default.program.ast`
     }
   }
 `;
-
-helpers.readOnlyError = () => _babelTemplate().default.program.ast`
+helpers.readOnlyError = helper("7.0.0-beta.0")`
   export default function _readOnlyError(name) {
     throw new Error("\\"" + name + "\\" is read-only");
   }
 `;
-
-helpers.classNameTDZError = () => _babelTemplate().default.program.ast`
+helpers.classNameTDZError = helper("7.0.0-beta.0")`
   export default function _classNameTDZError(name) {
     throw new Error("Class \\"" + name + "\\" cannot be referenced in computed property keys.");
   }
 `;
-
-helpers.temporalUndefined = () => _babelTemplate().default.program.ast`
+helpers.temporalUndefined = helper("7.0.0-beta.0")`
   export default {};
 `;
-
-helpers.slicedToArray = () => _babelTemplate().default.program.ast`
+helpers.slicedToArray = helper("7.0.0-beta.0")`
   import arrayWithHoles from "arrayWithHoles";
   import iterableToArrayLimit from "iterableToArrayLimit";
   import nonIterableRest from "nonIterableRest";
@@ -812,8 +785,7 @@ helpers.slicedToArray = () => _babelTemplate().default.program.ast`
     return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
   }
 `;
-
-helpers.slicedToArrayLoose = () => _babelTemplate().default.program.ast`
+helpers.slicedToArrayLoose = helper("7.0.0-beta.0")`
   import arrayWithHoles from "arrayWithHoles";
   import iterableToArrayLimitLoose from "iterableToArrayLimitLoose";
   import nonIterableRest from "nonIterableRest";
@@ -822,8 +794,7 @@ helpers.slicedToArrayLoose = () => _babelTemplate().default.program.ast`
     return arrayWithHoles(arr) || iterableToArrayLimitLoose(arr, i) || nonIterableRest();
   }
 `;
-
-helpers.toArray = () => _babelTemplate().default.program.ast`
+helpers.toArray = helper("7.0.0-beta.0")`
   import arrayWithHoles from "arrayWithHoles";
   import iterableToArray from "iterableToArray";
   import nonIterableRest from "nonIterableRest";
@@ -832,8 +803,7 @@ helpers.toArray = () => _babelTemplate().default.program.ast`
     return arrayWithHoles(arr) || iterableToArray(arr) || nonIterableRest();
   }
 `;
-
-helpers.toConsumableArray = () => _babelTemplate().default.program.ast`
+helpers.toConsumableArray = helper("7.0.0-beta.0")`
   import arrayWithoutHoles from "arrayWithoutHoles";
   import iterableToArray from "iterableToArray";
   import nonIterableSpread from "nonIterableSpread";
@@ -842,8 +812,7 @@ helpers.toConsumableArray = () => _babelTemplate().default.program.ast`
     return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
   }
 `;
-
-helpers.arrayWithoutHoles = () => _babelTemplate().default.program.ast`
+helpers.arrayWithoutHoles = helper("7.0.0-beta.0")`
   export default function _arrayWithoutHoles(arr) {
     if (Array.isArray(arr)) {
       for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
@@ -851,14 +820,12 @@ helpers.arrayWithoutHoles = () => _babelTemplate().default.program.ast`
     }
   }
 `;
-
-helpers.arrayWithHoles = () => _babelTemplate().default.program.ast`
+helpers.arrayWithHoles = helper("7.0.0-beta.0")`
   export default function _arrayWithHoles(arr) {
     if (Array.isArray(arr)) return arr;
   }
 `;
-
-helpers.iterableToArray = () => _babelTemplate().default.program.ast`
+helpers.iterableToArray = helper("7.0.0-beta.0")`
   export default function _iterableToArray(iter) {
     if (
       Symbol.iterator in Object(iter) ||
@@ -866,8 +833,7 @@ helpers.iterableToArray = () => _babelTemplate().default.program.ast`
     ) return Array.from(iter);
   }
 `;
-
-helpers.iterableToArrayLimit = () => _babelTemplate().default.program.ast`
+helpers.iterableToArrayLimit = helper("7.0.0-beta.0")`
   export default function _iterableToArrayLimit(arr, i) {
     // this is an expanded form of \`for...of\` that properly supports abrupt completions of
     // iterators etc. variable names have been minimised to reduce the size of this massive
@@ -901,8 +867,7 @@ helpers.iterableToArrayLimit = () => _babelTemplate().default.program.ast`
     return _arr;
   }
 `;
-
-helpers.iterableToArrayLimitLoose = () => _babelTemplate().default.program.ast`
+helpers.iterableToArrayLimitLoose = helper("7.0.0-beta.0")`
   export default function _iterableToArrayLimitLoose(arr, i) {
     var _arr = [];
     for (var _iterator = arr[Symbol.iterator](), _step; !(_step = _iterator.next()).done;) {
@@ -912,20 +877,17 @@ helpers.iterableToArrayLimitLoose = () => _babelTemplate().default.program.ast`
     return _arr;
   }
 `;
-
-helpers.nonIterableSpread = () => _babelTemplate().default.program.ast`
+helpers.nonIterableSpread = helper("7.0.0-beta.0")`
   export default function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance");
   }
 `;
-
-helpers.nonIterableRest = () => _babelTemplate().default.program.ast`
+helpers.nonIterableRest = helper("7.0.0-beta.0")`
   export default function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance");
   }
 `;
-
-helpers.skipFirstGeneratorNext = () => _babelTemplate().default.program.ast`
+helpers.skipFirstGeneratorNext = helper("7.0.0-beta.0")`
   export default function _skipFirstGeneratorNext(fn) {
     return function () {
       var it = fn.apply(this, arguments);
@@ -934,8 +896,7 @@ helpers.skipFirstGeneratorNext = () => _babelTemplate().default.program.ast`
     }
   }
 `;
-
-helpers.toPropertyKey = () => _babelTemplate().default.program.ast`
+helpers.toPropertyKey = helper("7.0.0-beta.0")`
   export default function _toPropertyKey(key) {
     if (typeof key === "symbol") {
       return key;
@@ -944,8 +905,7 @@ helpers.toPropertyKey = () => _babelTemplate().default.program.ast`
     }
   }
 `;
-
-helpers.initializerWarningHelper = () => _babelTemplate().default.program.ast`
+helpers.initializerWarningHelper = helper("7.0.0-beta.0")`
     export default function _initializerWarningHelper(descriptor, context){
         throw new Error(
           'Decorating class property failed. Please ensure that ' +
@@ -955,8 +915,7 @@ helpers.initializerWarningHelper = () => _babelTemplate().default.program.ast`
         );
     }
 `;
-
-helpers.initializerDefineProperty = () => _babelTemplate().default.program.ast`
+helpers.initializerDefineProperty = helper("7.0.0-beta.0")`
     export default function _initializerDefineProperty(target, property, descriptor, context){
         if (!descriptor) return;
 
@@ -968,8 +927,7 @@ helpers.initializerDefineProperty = () => _babelTemplate().default.program.ast`
         });
     }
 `;
-
-helpers.applyDecoratedDescriptor = () => _babelTemplate().default.program.ast`
+helpers.applyDecoratedDescriptor = helper("7.0.0-beta.0")`
     export default function _applyDecoratedDescriptor(target, property, decorators, descriptor, context){
         var desc = {};
         Object['ke' + 'ys'](descriptor).forEach(function(key){
@@ -1000,15 +958,13 @@ helpers.applyDecoratedDescriptor = () => _babelTemplate().default.program.ast`
         return desc;
     }
 `;
-
-helpers.classPrivateFieldLooseKey = () => _babelTemplate().default.program.ast`
+helpers.classPrivateFieldLooseKey = helper("7.0.0-beta.0")`
   var id = 0;
   export default function _classPrivateFieldKey(name) {
     return "__private_" + (id++) + "_" + name;
   }
 `;
-
-helpers.classPrivateFieldLooseBase = () => _babelTemplate().default.program.ast`
+helpers.classPrivateFieldLooseBase = helper("7.0.0-beta.0")`
   export default function _classPrivateFieldBase(receiver, privateKey) {
     if (!Object.prototype.hasOwnProperty.call(receiver, privateKey)) {
       throw new TypeError("attempted to use private field on non-instance");
@@ -1016,22 +972,27 @@ helpers.classPrivateFieldLooseBase = () => _babelTemplate().default.program.ast`
     return receiver;
   }
 `;
-
-helpers.classPrivateFieldGet = () => _babelTemplate().default.program.ast`
+helpers.classPrivateFieldGet = helper("7.0.0-beta.0")`
   export default function _classPrivateFieldGet(receiver, privateMap) {
     if (!privateMap.has(receiver)) {
       throw new TypeError("attempted to get private field on non-instance");
     }
-    return privateMap.get(receiver);
+    return privateMap.get(receiver).value;
   }
 `;
-
-helpers.classPrivateFieldSet = () => _babelTemplate().default.program.ast`
+helpers.classPrivateFieldSet = helper("7.0.0-beta.0")`
   export default function _classPrivateFieldSet(receiver, privateMap, value) {
     if (!privateMap.has(receiver)) {
       throw new TypeError("attempted to set private field on non-instance");
     }
-    privateMap.set(receiver, value);
+    var descriptor = privateMap.get(receiver);
+    if (!descriptor.writable) {
+      // This should only throw in strict mode, but class bodies are
+      // always strict and private fields can only be used inside
+      // class bodies.
+      throw new TypeError("attempted to set read only private field");
+    }
+    descriptor.value = value;
     return value;
   }
 `;

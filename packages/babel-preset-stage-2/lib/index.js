@@ -3,113 +3,54 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
-
-function _babelHelperPluginUtils() {
-  const data = require("@gerhobbelt/babel-helper-plugin-utils");
-
-  _babelHelperPluginUtils = function () {
-    return data;
-  };
-
-  return data;
-}
-
-function _babelPresetStage() {
-  const data = _interopRequireDefault(require("@gerhobbelt/babel-preset-stage-3"));
-
-  _babelPresetStage = function () {
-    return data;
-  };
-
-  return data;
-}
-
-function _babelPluginProposalDecorators() {
-  const data = _interopRequireDefault(require("@gerhobbelt/babel-plugin-proposal-decorators"));
-
-  _babelPluginProposalDecorators = function () {
-    return data;
-  };
-
-  return data;
-}
-
-function _babelPluginProposalFunctionSent() {
-  const data = _interopRequireDefault(require("@gerhobbelt/babel-plugin-proposal-function-sent"));
-
-  _babelPluginProposalFunctionSent = function () {
-    return data;
-  };
-
-  return data;
-}
-
-function _babelPluginProposalExportNamespaceFrom() {
-  const data = _interopRequireDefault(require("@gerhobbelt/babel-plugin-proposal-export-namespace-from"));
-
-  _babelPluginProposalExportNamespaceFrom = function () {
-    return data;
-  };
-
-  return data;
-}
-
-function _babelPluginProposalNumericSeparator() {
-  const data = _interopRequireDefault(require("@gerhobbelt/babel-plugin-proposal-numeric-separator"));
-
-  _babelPluginProposalNumericSeparator = function () {
-    return data;
-  };
-
-  return data;
-}
-
-function _babelPluginProposalThrowExpressions() {
-  const data = _interopRequireDefault(require("@gerhobbelt/babel-plugin-proposal-throw-expressions"));
-
-  _babelPluginProposalThrowExpressions = function () {
-    return data;
-  };
-
-  return data;
-}
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _default = (0, _babelHelperPluginUtils().declare)((api, opts = {}) => {
-  api.assertVersion(7);
-  const {
-    loose = false,
-    useBuiltIns = false,
-    decoratorsLegacy = false
-  } = opts;
-
-  if (typeof loose !== "boolean") {
-    throw new Error("@gerhobbelt/babel-preset-stage-2 'loose' option must be a boolean.");
-  }
-
-  if (typeof useBuiltIns !== "boolean") {
-    throw new Error("@gerhobbelt/babel-preset-stage-2 'useBuiltIns' option must be a boolean.");
-  }
-
-  if (typeof decoratorsLegacy !== "boolean") {
-    throw new Error("@gerhobbelt/babel-preset-stage-2 'decoratorsLegacy' option must be a boolean.");
-  }
-
-  if (decoratorsLegacy !== true) {
-    throw new Error("The new decorators proposal is not supported yet." + ' You must pass the `"decoratorsLegacy": true` option to' + " @gerhobbelt/babel-preset-stage-2");
-  }
-
-  return {
-    presets: [[_babelPresetStage().default, {
-      loose,
-      useBuiltIns
-    }]],
-    plugins: [[_babelPluginProposalDecorators().default, {
-      legacy: decoratorsLegacy
-    }], _babelPluginProposalFunctionSent().default, _babelPluginProposalExportNamespaceFrom().default, _babelPluginProposalNumericSeparator().default, _babelPluginProposalThrowExpressions().default]
-  };
-});
-
 exports.default = _default;
+
+function _default() {
+  throw new Error(`
+As of v7.0.0-beta.55, we've removed Babel's Stage presets.
+Please consider reading our blog post on this decision at
+https://babeljs.io/blog/2018/07/27/removing-babels-stage-presets
+for more details. TL;DR is that it's more beneficial in the
+  long run to explicitly add which proposals to use.
+
+For a more automatic migration, we have updated babel-upgrade,
+https://github.com/babel/babel-upgrade to do this for you with
+"npx babel-upgrade".
+
+If you want the same configuration as before:
+
+{
+  "plugins": [
+    // Stage 2
+    ["@gerhobbelt/babel-plugin-proposal-decorators", { "legacy": true }],
+    "@gerhobbelt/babel-plugin-proposal-function-sent",
+    "@gerhobbelt/babel-plugin-proposal-export-namespace-from",
+    "@gerhobbelt/babel-plugin-proposal-numeric-separator",
+    "@gerhobbelt/babel-plugin-proposal-throw-expressions",
+
+    // Stage 3
+    "@gerhobbelt/babel-plugin-syntax-dynamic-import",
+    "@gerhobbelt/babel-plugin-syntax-import-meta",
+    ["@gerhobbelt/babel-plugin-proposal-class-properties", { "loose": false }],
+    "@gerhobbelt/babel-plugin-proposal-json-strings"
+  ]
+}
+
+If you're using the same configuration across many separate projects,
+keep in mind that you can also create your own custom presets with
+whichever plugins and presets you're looking to use.
+
+module.exports = function() {
+  return {
+    plugins: [
+      require("@gerhobbelt/babel-plugin-syntax-dynamic-import"),
+      [require("@gerhobbelt/babel-plugin-proposal-decorators"), { "legacy": true }],
+      [require("@gerhobbelt/babel-plugin-proposal-class-properties"), { "loose": false }],
+    ],
+    presets: [
+      // ...
+    ],
+  };
+};
+`);
+}

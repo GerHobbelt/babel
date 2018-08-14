@@ -56,6 +56,7 @@ function getNormalizedV8Flag(arg) {
       case "--debug-brk":
       case "--inspect":
       case "--inspect-brk":
+      case "--experimental-modules":
         args.unshift(arg);
         break;
 

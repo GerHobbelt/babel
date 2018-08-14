@@ -145,7 +145,7 @@ async function _default({
 
     const stat = _fs().default.statSync(filenameOrDir);
 
-    if (stat.isDirectory(filenameOrDir)) {
+    if (stat.isDirectory()) {
       const dirname = filenameOrDir;
       let count = 0;
       const files = util.readdir(dirname, cliOptions.includeDotfiles);
