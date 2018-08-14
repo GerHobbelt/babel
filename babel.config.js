@@ -49,7 +49,7 @@ module.exports = function(api) {
     // Our dependencies are all standard CommonJS, along with all sorts of
     // other random files in Babel's codebase, so we use script as the default,
     // and then mark actual modules as modules farther down.
-    sourceType: "script",
+    //sourceType: "script",
     comments: false,
     ignore: [
       // These may not be strictly necessary with the newly-limited scope of
