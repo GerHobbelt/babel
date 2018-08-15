@@ -1,6 +1,6 @@
 import presetStage1 from "./preset-stage-1";
 
-import transformFunctionBind from "@babel/plugin-proposal-function-bind";
+import transformFunctionBind from "@gerhobbelt/babel-plugin-proposal-function-bind";
 
 export default (_, opts = {}) => {
   const {

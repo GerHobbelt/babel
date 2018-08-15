@@ -68,7 +68,7 @@ export default class File {
     if (key === "helpersNamespace") {
       throw new Error(
         "Babel 7.0.0-beta.56 has dropped support for the 'helpersNamespace' utility." +
-          "If you are using @babel/plugin-external-helpers you will need to use a newer " +
+          "If you are using @gerhobbelt/babel-plugin-external-helpers you will need to use a newer " +
           "version than the one you currently have installed. " +
           "If you have your own implementation, you'll want to explore using 'helperGenerator' " +
           "alongside 'file.availableHelper()'.",
@@ -148,7 +148,7 @@ export default class File {
   }
 
   /**
-   * Check if a given helper is available in @babel/core's helper list.
+   * Check if a given helper is available in @gerhobbelt/babel-core's helper list.
    *
    * This _also_ allows you to pass a Babel version specifically. If the
    * helper exists, but was not available for the full given range, it will be

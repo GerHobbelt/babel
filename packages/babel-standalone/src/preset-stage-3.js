@@ -1,7 +1,7 @@
-import syntaxDynamicImport from "@babel/plugin-syntax-dynamic-import";
-import syntaxImportMeta from "@babel/plugin-syntax-import-meta";
-import transformClassProperties from "@babel/plugin-proposal-class-properties";
-import transformJsonStrings from "@babel/plugin-proposal-json-strings";
+import syntaxDynamicImport from "@gerhobbelt/babel-plugin-syntax-dynamic-import";
+import syntaxImportMeta from "@gerhobbelt/babel-plugin-syntax-import-meta";
+import transformClassProperties from "@gerhobbelt/babel-plugin-proposal-class-properties";
+import transformJsonStrings from "@gerhobbelt/babel-plugin-proposal-json-strings";
 
 export default (_, opts) => {
   let loose = false;
