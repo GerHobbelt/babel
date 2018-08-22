@@ -27,8 +27,8 @@ const BABEL_PLUGIN_ORG_RE2 = /^(@babel\/)(?!plugin-|[^/]+\/)/;
 const BABEL_PRESET_ORG_RE2 = /^(@babel\/)(?!preset-|[^/]+\/)/;
 // @foo/mypreset -> @foo/babel-preset-mypreset
 // replace with: `$1babel-${type}-`...
-const OTHER_PLUGIN_ORG_RE = /^(@(?!babel|gerhobbelt\/babel-)[^/]+\/)(?!babel-plugin(?:-|\/|$)|[^/]+\/)/;
-const OTHER_PRESET_ORG_RE = /^(@(?!babel|gerhobbelt\/babel-)[^/]+\/)(?!babel-preset(?:-|\/|$)|[^/]+\/)/;
+const OTHER_PLUGIN_ORG_RE = /^(@(?!babel\/|gerhobbelt\/babel-)[^/]+\/)(?![^/]*babel-plugin(?:-|\/|$)|[^/]+\/)/;
+const OTHER_PRESET_ORG_RE = /^(@(?!babel\/|gerhobbelt\/babel-)[^/]+\/)(?![^/]*babel-preset(?:-|\/|$)|[^/]+\/)/;
 // @foo -> @foo/babel-preset
 // replace with: `$1/babel-${type}`...
 const OTHER_ORG_DEFAULT_RE = /^(@(?!babel|gerhobbelt\/babel-$)[^/]+)$/;
