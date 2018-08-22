@@ -4,6 +4,7 @@ export default {
   "syntax-optional-catch-binding": require("@gerhobbelt/babel-plugin-syntax-optional-catch-binding"),
   "transform-async-to-generator": require("@gerhobbelt/babel-plugin-transform-async-to-generator"),
   "proposal-async-generator-functions": require("@gerhobbelt/babel-plugin-proposal-async-generator-functions"),
+  "proposal-json-strings": require("@gerhobbelt/babel-plugin-proposal-json-strings"),
   "transform-arrow-functions": require("@gerhobbelt/babel-plugin-transform-arrow-functions"),
   "transform-block-scoped-functions": require("@gerhobbelt/babel-plugin-transform-block-scoped-functions"),
   "transform-block-scoping": require("@gerhobbelt/babel-plugin-transform-block-scoping"),

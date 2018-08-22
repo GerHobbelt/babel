@@ -14,6 +14,7 @@
     "@gerhobbelt/babel-helper-module-imports": "7.0.0-beta.530006",
     "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-beta.530006",
     "@gerhobbelt/babel-plugin-proposal-async-generator-functions": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-plugin-proposal-json-strings": "7.0.0-beta.530006",
     "@gerhobbelt/babel-plugin-proposal-object-rest-spread": "7.0.0-beta.530006",
     "@gerhobbelt/babel-plugin-proposal-optional-catch-binding": "7.0.0-beta.530006",
     "@gerhobbelt/babel-plugin-proposal-unicode-property-regex": "7.0.0-beta.530006",
@@ -61,7 +62,7 @@
     "@gerhobbelt/babel-helper-fixtures": "7.0.0-beta.530006",
     "@gerhobbelt/babel-helper-plugin-test-runner": "7.0.0-beta.530006",
     "caniuse-db": "1.0.30000876",
-    "compat-table": "kangax/compat-table#e7ae7e67edd57e58ebfb118f10dfd5f0a7eaea40",
-    "electron-to-chromium": "1.3.57"
+    "compat-table": "kangax/compat-table#ce39b436201a8d037cc1b943770a21e07769d684",
+    "electron-to-chromium": "1.3.55"
   }
 }

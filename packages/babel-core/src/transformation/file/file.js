@@ -1,7 +1,7 @@
 // @flow
 
 import * as helpers from "@gerhobbelt/babel-helpers";
-import { NodePath, Hub, Scope } from "@gerhobbelt/babel-traverse";
+import { NodePath, Scope, type HubInterface } from "@gerhobbelt/babel-traverse";
 import { codeFrameColumns } from "@gerhobbelt/babel-code-frame";
 import traverse from "@gerhobbelt/babel-traverse";
 import * as t from "@gerhobbelt/babel-types";
@@ -27,9 +27,17 @@ export default class File {
   ast: Object = {};
   scope: Scope;
   metadata: {} = {};
-  hub: Hub = new Hub(this);
   code: string = "";
   inputMap: Object | null = null;
+
+  hub: HubInterface = {
+    // keep it for the usage in babel-core, ex: path.hub.file.opts.filename
+    file: this,
+    getCode: () => this.code,
+    getScope: () => this.scope,
+    addHelper: this.addHelper.bind(this),
+    buildError: this.buildCodeFrameError.bind(this),
+  };
 
   constructor(options: {}, { code, ast, inputMap }: NormalizedFile) {
     this.opts = options;
@@ -130,12 +138,6 @@ export default class File {
     } else {
       return moduleName;
     }
-  }
-
-  // TODO: Remove this before 7.x's official release. Leaving it in for now to
-  // prevent unnecessary breakage between beta versions.
-  resolveModuleSource(source: string): string {
-    return source;
   }
 
   addImport() {
