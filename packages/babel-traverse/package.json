@@ -16,7 +16,6 @@
     "@gerhobbelt/babel-types": "7.0.0-beta.530006",
     "debug": "^3.1.0",
     "globals": "^11.7.0",
-    "invariant": "^2.2.4",
     "lodash": "^4.17.10"
   },
   "devDependencies": {
