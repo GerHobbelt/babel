@@ -106,19 +106,24 @@ test-test262-update-whitelist:
 clone-license:
 	./scripts/clone-license.sh
 
-publish:
-	#git pull --rebase
+prepublish-build:
 	make clean-lib
 	rm -rf packages/babel-runtime/helpers
 	rm -rf packages/babel-runtime-corejs2/helpers
 	rm -rf packages/babel-runtime-corejs2/core-js
 	BABEL_ENV=production make build-dist
-	make test
 	make clone-license
+
+prepublish:
+	#git pull --rebase
+	make prepublish-build
+	make test
+
+publish: prepublish
 	# not using lerna independent mode atm, so only update packages that have changed since we use ^
 	# --only-explicit-updates
 	
-	#./node_modules/.bin/lerna publish --force-publish=* --exact --skip-temp-tag
+	#./node_modules/.bin/lerna publish --force-publish=* --temp-tag
 	#
 	#./node_modules/.bin/lerna publish --exact --skip-temp-tag --skip-npm --skip-git --repo-version 7.0.0-49.7
 	#make clean
