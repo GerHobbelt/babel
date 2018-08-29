@@ -103,6 +103,9 @@ test-test262-ci: bootstrap test-test262
 test-test262-update-whitelist:
 	node scripts/tests/test262/run_babel_parser_test262.js --update-whitelist
 
+clone-license:
+	./scripts/clone-license.sh
+
 publish:
 	#git pull --rebase
 	make clean-lib
@@ -111,6 +114,7 @@ publish:
 	rm -rf packages/babel-runtime-corejs2/core-js
 	BABEL_ENV=production make build-dist
 	make test
+	make clone-license
 	# not using lerna independent mode atm, so only update packages that have changed since we use ^
 	# --only-explicit-updates
 	

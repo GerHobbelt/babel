@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-core",
-  "version": "7.0.0-beta.530006",
+  "version": "7.0.0-6",
   "description": "Babel compiler core.",
   "main": "lib/index.js",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
