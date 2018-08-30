@@ -241,7 +241,7 @@ export default class Tokenizer extends LocationParser {
       // identifier core '$' instead.
       const chunkStart = this.state.pos;
       for (;;) {
-        const ch = this.fullCharCodeAtPos();
+        const ch = this.input.charCodeAt(this.state.pos); // no need to use .codePointAt()
         if (ch === code) {
           this.state.pos++;
         } else {
@@ -283,7 +283,7 @@ export default class Tokenizer extends LocationParser {
       // ...again we only accept more of the same, i.e. #id#,
       // @id@, $id$, but not mixes such as @id#:
       for (;;) {
-        const ch = this.fullCharCodeAtPos();
+        const ch = this.input.charCodeAt(this.state.pos);
         if (ch === code) {
           this.state.pos++;
         } else {
