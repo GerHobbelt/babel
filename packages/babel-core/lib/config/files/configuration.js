@@ -38,7 +38,7 @@ function _fs() {
 }
 
 function _json() {
-  const data = _interopRequireDefault(require("json5"));
+  const data = _interopRequireDefault(require("@gerhobbelt/json5"));
 
   _json = function () {
     return data;

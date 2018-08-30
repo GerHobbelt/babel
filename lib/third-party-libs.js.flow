@@ -14,7 +14,7 @@ declare module "resolve" {
   };
 }
 
-declare module "json5" {
+declare module "@gerhobbelt/json5" {
   declare export default {
     parse: (string) => mixed,
   };

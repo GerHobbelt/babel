@@ -3,7 +3,7 @@
 import buildDebug from "debug";
 import path from "path";
 import fs from "fs";
-import json5 from "json5";
+import json5 from "@gerhobbelt/json5";
 import resolve from "resolve";
 import {
   makeStrongCache,
