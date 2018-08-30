@@ -130,7 +130,8 @@ publish: prepublish
 
 bootstrap: #clean-all
 	##./node_modules/.bin/yarn --ignore-engines
-	#npm i
+	-rm -f package-lock.json
+	npm i
 	./node_modules/.bin/lerna bootstrap -- --ignore-engines
 	make build
 	cd packages/babel-plugin-transform-runtime; \
