@@ -1,6 +1,5 @@
 import browserslist from "browserslist";
 import getTargets from "../lib/targets-parser";
-import { roundToMinor } from "../src/utils";
 
 describe("getTargets", () => {
   it("parses", () => {
