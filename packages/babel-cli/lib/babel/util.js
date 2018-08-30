@@ -97,8 +97,13 @@ function addSourceMappingUrl(code, loc) {
   return code + "\n//# sourceMappingURL=" + _path().default.basename(loc);
 }
 
+const CALLER = {
+  name: "@babel/cli"
+};
+
 function transform(filename, code, opts) {
   opts = Object.assign({}, opts, {
+    caller: CALLER,
     filename
   });
   return new Promise((resolve, reject) => {
@@ -109,6 +114,9 @@ function transform(filename, code, opts) {
 }
 
 function compile(filename, opts) {
+  opts = Object.assign({}, opts, {
+    caller: CALLER
+  });
   return new Promise((resolve, reject) => {
     babel().transformFile(filename, opts, (err, result) => {
       if (err) reject(err);else resolve(result);

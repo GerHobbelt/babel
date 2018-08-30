@@ -64,10 +64,15 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
       if (!state.fileNameIdentifier) {
         const fileName = state.filename || "";
         const fileNameIdentifier = path.scope.generateUidIdentifier(FILE_NAME_VAR);
-        path.hub.file.scope.push({
-          id: fileNameIdentifier,
-          init: _babelCore().types.stringLiteral(fileName)
-        });
+        const scope = path.hub.getScope();
+
+        if (scope) {
+          scope.push({
+            id: fileNameIdentifier,
+            init: _babelCore().types.stringLiteral(fileName)
+          });
+        }
+
         state.fileNameIdentifier = fileNameIdentifier;
       }
 

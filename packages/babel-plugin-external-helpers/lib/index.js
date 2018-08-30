@@ -28,8 +28,15 @@ function _babelCore() {
 var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
   api.assertVersion(7);
   const {
-    helperVersion = "7.0.0-beta.0"
+    helperVersion = "7.0.0-beta.0",
+    whitelist = false
   } = options;
+
+  if (whitelist !== false && (!Array.isArray(whitelist) || whitelist.some(w => typeof w !== "string"))) {
+    throw new Error(".whitelist must be undefined, false, or an array of strings");
+  }
+
+  const helperWhitelist = whitelist ? new Set(whitelist) : null;
   return {
     pre(file) {
       file.set("helperGenerator", name => {
@@ -37,6 +44,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
           return;
         }
 
+        if (helperWhitelist && !helperWhitelist.has(name)) return;
         return _babelCore().types.memberExpression(_babelCore().types.identifier("babelHelpers"), _babelCore().types.identifier(name));
       });
     }

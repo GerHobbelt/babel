@@ -102,7 +102,7 @@ function applyTargetDecorators(path, state, decoratedProps) {
       const initializer = node.value ? _babelCore().types.functionExpression(null, [], _babelCore().types.blockStatement([_babelCore().types.returnStatement(node.value)])) : _babelCore().types.nullLiteral();
       node.value = _babelCore().types.callExpression(state.addHelper("initializerWarningHelper"), [descriptor, _babelCore().types.thisExpression()]);
       WARNING_CALLS.add(node.value);
-      acc = acc.concat([_babelCore().types.assignmentExpression("=", descriptor, _babelCore().types.callExpression(state.addHelper("applyDecoratedDescriptor"), [_babelCore().types.cloneNode(target), _babelCore().types.cloneNode(property), _babelCore().types.arrayExpression(decorators.map(dec => _babelCore().types.cloneNode(dec.expression))), _babelCore().types.objectExpression([_babelCore().types.objectProperty(_babelCore().types.identifier("enumerable"), _babelCore().types.booleanLiteral(true)), _babelCore().types.objectProperty(_babelCore().types.identifier("initializer"), initializer)])]))]);
+      acc = acc.concat([_babelCore().types.assignmentExpression("=", descriptor, _babelCore().types.callExpression(state.addHelper("applyDecoratedDescriptor"), [_babelCore().types.cloneNode(target), _babelCore().types.cloneNode(property), _babelCore().types.arrayExpression(decorators.map(dec => _babelCore().types.cloneNode(dec.expression))), _babelCore().types.objectExpression([_babelCore().types.objectProperty(_babelCore().types.identifier("configurable"), _babelCore().types.booleanLiteral(true)), _babelCore().types.objectProperty(_babelCore().types.identifier("enumerable"), _babelCore().types.booleanLiteral(true)), _babelCore().types.objectProperty(_babelCore().types.identifier("writable"), _babelCore().types.booleanLiteral(true)), _babelCore().types.objectProperty(_babelCore().types.identifier("initializer"), initializer)])]))]);
     } else {
       acc = acc.concat(_babelCore().types.callExpression(state.addHelper("applyDecoratedDescriptor"), [_babelCore().types.cloneNode(target), _babelCore().types.cloneNode(property), _babelCore().types.arrayExpression(decorators.map(dec => _babelCore().types.cloneNode(dec.expression))), _babelCore().types.isObjectProperty(node) || _babelCore().types.isClassProperty(node, {
         static: true
@@ -149,6 +149,8 @@ var _default = {
 
     if (replacement) {
       path.replaceWith(replacement);
+      const decl = path.get("declarations.0");
+      path.scope.updateOwnBinding(decl.node.id, path.node.kind, decl);
     }
   },
 

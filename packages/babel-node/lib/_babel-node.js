@@ -111,6 +111,9 @@ program.version(_package.default.version);
 program.usage("[options] [ -e script | script.js ] [arguments]");
 program.parse(process.argv);
 (0, _babelRegister().default)({
+  caller: {
+    name: "@babel/node"
+  },
   extensions: program.extensions,
   ignore: program.ignore,
   only: program.only,

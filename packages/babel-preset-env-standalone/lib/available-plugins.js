@@ -16,7 +16,8 @@ function _babelStandalone() {
 }
 
 const notIncludedPlugins = {
-  "transform-new-target": require("@gerhobbelt/babel-plugin-transform-new-target")
+  "transform-new-target": require("@gerhobbelt/babel-plugin-transform-new-target"),
+  "proposal-json-strings": require("@gerhobbelt/babel-plugin-proposal-json-strings")
 };
 Object.keys(notIncludedPlugins).forEach(pluginName => {
   if (!_babelStandalone().availablePlugins[pluginName]) {

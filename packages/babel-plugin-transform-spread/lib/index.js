@@ -161,7 +161,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
           args = first;
         }
 
-        path.replaceWith(_babelCore().types.callExpression(path.hub.file.addHelper("construct"), [node.callee, args]));
+        path.replaceWith(_babelCore().types.callExpression(path.hub.addHelper("construct"), [node.callee, args]));
       }
 
     }

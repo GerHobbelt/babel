@@ -145,7 +145,11 @@ function normalizeFile(pluginPasses, options, code, ast) {
   });
 }
 
-function parser(pluginPasses, options, code) {
+function parser(pluginPasses, {
+  parserOpts,
+  highlightCode = true,
+  filename = "unknown"
+}, code) {
   try {
     const results = [];
 
@@ -156,14 +160,14 @@ function parser(pluginPasses, options, code) {
         } = plugin;
 
         if (parserOverride) {
-          const ast = parserOverride(code, options.parserOpts, _babelParser().parse);
+          const ast = parserOverride(code, parserOpts, _babelParser().parse);
           if (ast !== undefined) results.push(ast);
         }
       }
     }
 
     if (results.length === 0) {
-      return (0, _babelParser().parse)(code, options.parserOpts);
+      return (0, _babelParser().parse)(code, parserOpts);
     } else if (results.length === 1) {
       if (typeof results[0].then === "function") {
         throw new Error(`You appear to be using an async codegen plugin, ` + `which your current version of Babel does not support. ` + `If you're using a published plugin, you may need to upgrade ` + `your @gerhobbelt/babel-core version.`);
@@ -189,12 +193,14 @@ function parser(pluginPasses, options, code) {
           line: loc.line,
           column: loc.column + 1
         }
-      }, options);
+      }, {
+        highlightCode
+      });
 
       if (missingPlugin) {
-        err.message = `${options.filename || "unknown"}: ` + (0, _missingPluginHelper.default)(missingPlugin[0], loc, codeFrame);
+        err.message = `${filename}: ` + (0, _missingPluginHelper.default)(missingPlugin[0], loc, codeFrame);
       } else {
-        err.message = `${options.filename || "unknown"}: ${err.message}\n\n` + codeFrame;
+        err.message = `${filename}: ${err.message}\n\n` + codeFrame;
       }
 
       err.code = "BABEL_PARSE_ERROR";

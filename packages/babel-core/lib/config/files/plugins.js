@@ -44,11 +44,13 @@ const debug = (0, _debug().default)("babel:config:loading:files:plugins");
 const EXACT_RE = /^module:/;
 const BABEL_PLUGIN_PREFIX_RE = /^(?!@|module:|[^/]+\/|babel-plugin-)/;
 const BABEL_PRESET_PREFIX_RE = /^(?!@|module:|[^/]+\/|babel-preset-)/;
-const BABEL_PLUGIN_ORG_RE = /^(@gerhobbelt\/babel-\/)(?!plugin-|[^/]+\/)/;
-const BABEL_PRESET_ORG_RE = /^(@gerhobbelt\/babel-\/)(?!preset-|[^/]+\/)/;
-const OTHER_PLUGIN_ORG_RE = /^(@(?!babel\/)[^/]+\/)(?!babel-plugin(?:-|\/|$)|[^/]+\/)/;
-const OTHER_PRESET_ORG_RE = /^(@(?!babel\/)[^/]+\/)(?!babel-preset(?:-|\/|$)|[^/]+\/)/;
-const OTHER_ORG_DEFAULT_RE = /^(@(?!babel$)[^/]+)$/;
+const BABEL_PLUGIN_ORG_RE = /^(@gerhobbelt\/babel-)(?!plugin-|[^/]+\/)/;
+const BABEL_PRESET_ORG_RE = /^(@gerhobbelt\/babel-)(?!preset-|[^/]+\/)/;
+const BABEL_PLUGIN_ORG_RE2 = /^(@babel\/)(?!plugin-|[^/]+\/)/;
+const BABEL_PRESET_ORG_RE2 = /^(@babel\/)(?!preset-|[^/]+\/)/;
+const OTHER_PLUGIN_ORG_RE = /^(@(?!babel\/|gerhobbelt\/babel-)[^/]+\/)(?![^/]*babel-plugin(?:-|\/|$)|[^/]+\/)/;
+const OTHER_PRESET_ORG_RE = /^(@(?!babel\/|gerhobbelt\/babel-)[^/]+\/)(?![^/]*babel-preset(?:-|\/|$)|[^/]+\/)/;
+const OTHER_ORG_DEFAULT_RE = /^(@(?!babel|gerhobbelt\/babel-$)[^/]+)$/;
 
 function resolvePlugin(name, dirname) {
   return resolveStandardizedName("plugin", name, dirname);
@@ -91,7 +93,7 @@ function loadPreset(name, dirname) {
 function standardizeName(type, name) {
   if (_path().default.isAbsolute(name)) return name;
   const isPreset = type === "preset";
-  return name.replace(isPreset ? BABEL_PRESET_PREFIX_RE : BABEL_PLUGIN_PREFIX_RE, `babel-${type}-`).replace(isPreset ? BABEL_PRESET_ORG_RE : BABEL_PLUGIN_ORG_RE, `$1${type}-`).replace(isPreset ? OTHER_PRESET_ORG_RE : OTHER_PLUGIN_ORG_RE, `$1babel-${type}-`).replace(OTHER_ORG_DEFAULT_RE, `$1/babel-${type}`).replace(EXACT_RE, "");
+  return name.replace(isPreset ? BABEL_PRESET_PREFIX_RE : BABEL_PLUGIN_PREFIX_RE, `@gerhobbelt/babel-${type}-`).replace(isPreset ? BABEL_PRESET_ORG_RE : BABEL_PLUGIN_ORG_RE, `@gerhobbelt/babel-${type}-`).replace(isPreset ? BABEL_PRESET_ORG_RE2 : BABEL_PLUGIN_ORG_RE2, `@gerhobbelt/babel-${type}-`).replace(isPreset ? OTHER_PRESET_ORG_RE : OTHER_PLUGIN_ORG_RE, `$1babel-${type}-`).replace(OTHER_ORG_DEFAULT_RE, `$1/babel-${type}`).replace(EXACT_RE, "");
 }
 
 function resolveStandardizedName(type, name, dirname = process.cwd()) {

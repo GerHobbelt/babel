@@ -66,6 +66,16 @@ function _includes() {
   return data;
 }
 
+function _escapeRegExp() {
+  const data = _interopRequireDefault(require("lodash/escapeRegExp"));
+
+  _escapeRegExp = function () {
+    return data;
+  };
+
+  return data;
+}
+
 var helpers = _interopRequireWildcard(require("./helpers"));
 
 function _extend() {
@@ -291,7 +301,7 @@ function run(task) {
 
   function getOpts(self) {
     const newOpts = (0, _merge().default)({
-      cwd: _path().default.dirname(self.filename),
+      cwd: _path().default.dirname(self.loc),
       filename: self.loc,
       filenameRelative: self.filename,
       sourceFileName: self.filename,
@@ -333,13 +343,14 @@ function run(task) {
 
   if (!execCode || actualCode) {
     result = babel().transform(actualCode, getOpts(actual));
+    const expectedCode = result.code.replace((0, _escapeRegExp().default)(_path().default.resolve(__dirname, "../../../")), "<CWD>");
     checkDuplicatedNodes(result.ast);
 
-    if (!expected.code && result.code && !opts.throws && _fs().default.statSync(_path().default.dirname(expected.loc)).isDirectory() && !process.env.CI) {
+    if (!expected.code && expectedCode && !opts.throws && _fs().default.statSync(_path().default.dirname(expected.loc)).isDirectory() && !process.env.CI) {
       const expectedFile = expected.loc.replace(/\.m?js$/, result.sourceType === "module" ? ".mjs" : ".js");
       console.log(`New test file created: ${expectedFile}`);
 
-      _fs().default.writeFileSync(expectedFile, `${result.code}\n`);
+      _fs().default.writeFileSync(expectedFile, `${expectedCode}\n`);
 
       if (expected.loc !== expectedFile) {
         try {
@@ -347,7 +358,7 @@ function run(task) {
         } catch (e) {}
       }
     } else {
-      actualCode = result.code.trim();
+      actualCode = expectedCode.trim();
 
       try {
         expect(actualCode).toEqualFile({
@@ -358,7 +369,7 @@ function run(task) {
         if (!process.env.OVERWRITE) throw e;
         console.log(`Updated test file: ${expected.loc}`);
 
-        _fs().default.writeFileSync(expected.loc, `${result.code}\n`);
+        _fs().default.writeFileSync(expected.loc, `${expectedCode}\n`);
       }
 
       if (actualCode) {

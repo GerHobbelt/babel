@@ -82,9 +82,15 @@ class File {
     this.path = null;
     this.ast = {};
     this.metadata = {};
-    this.hub = new (_babelTraverse().Hub)(this);
     this.code = "";
     this.inputMap = null;
+    this.hub = {
+      file: this,
+      getCode: () => this.code,
+      getScope: () => this.scope,
+      addHelper: this.addHelper.bind(this),
+      buildError: this.buildCodeFrameError.bind(this)
+    };
     this.opts = options;
     this.code = code;
     this.ast = ast;
@@ -116,7 +122,7 @@ class File {
 
   set(key, val) {
     if (key === "helpersNamespace") {
-      throw new Error("Babel 7.0.0-beta.56 has dropped support for the 'helpersNamespace' utility." + "If you are using @babel/plugin-external-helpers you will need to use a newer " + "version than the one you currently have installed. " + "If you have your own implementation, you'll want to explore using 'helperGenerator' " + "alongside 'file.availableHelper()'.");
+      throw new Error("Babel 7.0.0-beta.56 has dropped support for the 'helpersNamespace' utility." + "If you are using @gerhobbelt/babel-plugin-external-helpers you will need to use a newer " + "version than the one you currently have installed. " + "If you have your own implementation, you'll want to explore using 'helperGenerator' " + "alongside 'file.availableHelper()'.");
     }
 
     this._map.set(key, val);
@@ -161,10 +167,6 @@ class File {
     } else {
       return moduleName;
     }
-  }
-
-  resolveModuleSource(source) {
-    return source;
   }
 
   addImport() {
