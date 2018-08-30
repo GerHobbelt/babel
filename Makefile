@@ -147,10 +147,14 @@ clean-lib:
 	$(foreach source, $(SOURCES), \
 		$(call clean-source-lib, $(source)))
 
-clean-all:
+superclean: clean-all
 	rm -rf node_modules
+
+clean-all:
+	#rm -rf node_modules
 	rm -rf package-lock.json
 	rm -rf .changelog
+	rm -rf packages/\@gerhobbelt/
 
 	$(foreach source, $(SOURCES), \
 		$(call clean-source-all, $(source)))
