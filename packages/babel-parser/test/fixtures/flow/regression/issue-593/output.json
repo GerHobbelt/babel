@@ -170,7 +170,6 @@
                       "column": 27
                     }
                   },
-                  "attributes": [],
                   "name": {
                     "type": "JSXIdentifier",
                     "start": 23,
@@ -187,6 +186,7 @@
                     },
                     "name": "x"
                   },
+                  "attributes": [],
                   "selfClosing": true
                 },
                 "closingElement": null,

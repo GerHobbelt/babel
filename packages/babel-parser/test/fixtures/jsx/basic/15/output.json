@@ -71,7 +71,6 @@
                 "column": 7
               }
             },
-            "attributes": [],
             "name": {
               "type": "JSXMemberExpression",
               "start": 1,
@@ -150,6 +149,7 @@
                 "name": "c"
               }
             },
+            "attributes": [],
             "selfClosing": false
           },
           "closingElement": {

@@ -71,7 +71,6 @@
                 "column": 3
               }
             },
-            "attributes": [],
             "name": {
               "type": "JSXIdentifier",
               "start": 1,
@@ -88,6 +87,7 @@
               },
               "name": "a"
             },
+            "attributes": [],
             "selfClosing": false
           },
           "closingElement": {

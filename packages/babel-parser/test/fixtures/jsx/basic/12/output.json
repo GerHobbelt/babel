@@ -71,7 +71,6 @@
                 "column": 5
               }
             },
-            "attributes": [],
             "name": {
               "type": "JSXIdentifier",
               "start": 1,
@@ -88,6 +87,7 @@
               },
               "name": "div"
             },
+            "attributes": [],
             "selfClosing": false
           },
           "closingElement": {
@@ -150,7 +150,6 @@
                     "column": 11
                   }
                 },
-                "attributes": [],
                 "name": {
                   "type": "JSXIdentifier",
                   "start": 6,
@@ -167,6 +166,7 @@
                   },
                   "name": "br"
                 },
+                "attributes": [],
                 "selfClosing": true
               },
               "closingElement": null,

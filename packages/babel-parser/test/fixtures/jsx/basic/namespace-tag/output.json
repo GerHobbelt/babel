@@ -71,7 +71,6 @@
                 "column": 11
               }
             },
-            "attributes": [],
             "name": {
               "type": "JSXNamespacedName",
               "start": 1,
@@ -119,6 +118,7 @@
                 "name": "Bar"
               }
             },
+            "attributes": [],
             "selfClosing": true
           },
           "closingElement": null,
@@ -167,7 +167,6 @@
                 "column": 9
               }
             },
-            "attributes": [],
             "name": {
               "type": "JSXNamespacedName",
               "start": 14,
@@ -215,6 +214,7 @@
                 "name": "Bar"
               }
             },
+            "attributes": [],
             "selfClosing": false
           },
           "closingElement": {

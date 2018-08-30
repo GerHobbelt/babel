@@ -85,7 +85,6 @@
                   "column": 8
                 }
               },
-              "attributes": [],
               "name": {
                 "type": "JSXIdentifier",
                 "start": 2,
@@ -102,6 +101,7 @@
                 },
                 "name": "div"
               },
+              "attributes": [],
               "selfClosing": true
             },
             "closingElement": null,

@@ -120,7 +120,6 @@
                       "column": 9
                     }
                   },
-                  "attributes": [],
                   "name": {
                     "type": "JSXIdentifier",
                     "start": 33,
@@ -137,6 +136,7 @@
                     },
                     "name": "nav"
                   },
+                  "attributes": [],
                   "selfClosing": false
                 },
                 "closingElement": {
@@ -219,7 +219,6 @@
                           "column": 14
                         }
                       },
-                      "attributes": [],
                       "name": {
                         "type": "JSXIdentifier",
                         "start": 45,
@@ -236,6 +235,7 @@
                         },
                         "name": "Home"
                       },
+                      "attributes": [],
                       "selfClosing": true
                     },
                     "closingElement": null,
@@ -392,7 +392,6 @@
                                           "column": 28
                                         }
                                       },
-                                      "attributes": [],
                                       "name": {
                                         "type": "JSXIdentifier",
                                         "start": 113,
@@ -409,6 +408,7 @@
                                         },
                                         "name": "LogoutButton"
                                       },
+                                      "attributes": [],
                                       "selfClosing": true
                                     },
                                     "closingElement": null,
@@ -475,7 +475,6 @@
                                           "column": 27
                                         }
                                       },
-                                      "attributes": [],
                                       "name": {
                                         "type": "JSXIdentifier",
                                         "start": 161,
@@ -492,6 +491,7 @@
                                         },
                                         "name": "LoginButton"
                                       },
+                                      "attributes": [],
                                       "selfClosing": true
                                     },
                                     "closingElement": null,
