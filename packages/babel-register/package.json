@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-register",
-  "version": "7.0.0-beta.530006",
+  "version": "7.0.0-13",
   "description": "babel require hook",
   "license": "MIT",
   "publishConfig": {
@@ -19,13 +19,13 @@
     "lodash": "^4.17.10",
     "mkdirp": "^0.5.1",
     "pirates": "^4.0.0",
-    "source-map-support": "^0.5.8"
+    "source-map-support": "^0.5.9"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": ">=7.0.0-beta.50 <7.0.0-rc.0"
+    "@gerhobbelt/babel-core": "^7.0.0-0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-core": "7.0.0-13",
     "default-require-extensions": "^2.0.0"
   }
 }

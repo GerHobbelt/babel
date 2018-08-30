@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-syntax-dynamic-import",
-  "version": "7.0.0-beta.530006",
+  "version": "7.0.0-13",
   "description": "Allow parsing of import()",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-dynamic-import",
   "license": "MIT",
@@ -12,12 +12,12 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-13"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": ">=7.0.0-beta.50 <7.0.0-rc.0"
+    "@gerhobbelt/babel-core": "^7.0.0-0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-core": "7.0.0-13"
   }
 }
