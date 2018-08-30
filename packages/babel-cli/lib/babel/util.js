@@ -98,7 +98,7 @@ function addSourceMappingUrl(code, loc) {
 }
 
 const CALLER = {
-  name: "@babel/cli"
+  name: "@gerhobbelt/babel-cli"
 };
 
 function transform(filename, code, opts) {

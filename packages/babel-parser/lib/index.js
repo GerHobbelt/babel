@@ -4148,7 +4148,7 @@ var Tokenizer = function (_LocationParser) {
       var chunkStart = this.state.pos;
 
       for (;;) {
-        var ch = this.fullCharCodeAtPos();
+        var ch = this.input.charCodeAt(this.state.pos);
 
         if (ch === code) {
           this.state.pos++;
@@ -4175,7 +4175,7 @@ var Tokenizer = function (_LocationParser) {
       }
 
       for (;;) {
-        var _ch = this.fullCharCodeAtPos();
+        var _ch = this.input.charCodeAt(this.state.pos);
 
         if (_ch === code) {
           this.state.pos++;

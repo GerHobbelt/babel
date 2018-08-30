@@ -112,7 +112,7 @@ program.usage("[options] [ -e script | script.js ] [arguments]");
 program.parse(process.argv);
 (0, _babelRegister().default)({
   caller: {
-    name: "@babel/node"
+    name: "@gerhobbelt/babel-node"
   },
   extensions: program.extensions,
   ignore: program.ignore,
