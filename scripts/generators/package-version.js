@@ -55,10 +55,7 @@ function patchPackageJson(filePath, settings = {}) {
     ) => {
       return `"${m1}": "${babelPeerDependencyClause}"`;
     })
-    .replace(/"(@gerhobbelt\/babel-.*?)": "undefined"/g, (
-      m,
-      m1
-    ) => {
+    .replace(/"(@gerhobbelt\/babel-.*?)": "undefined"/g, (m, m1) => {
       return `"${m1}": "${babelPeerDependencyClause}"`;
     })
     // version patches:
@@ -102,6 +99,6 @@ codemods
   const packageJsonPath = join(id, "package.json");
 
   patchPackageJson(packageJsonPath, {
-    doNotMigrateBabelDeps: true
+    doNotMigrateBabelDeps: true,
   });
 });
