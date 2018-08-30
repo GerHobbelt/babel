@@ -126,7 +126,7 @@ export default function register(opts?: Object = {}) {
   transformOpts = {
     ...opts,
     caller: {
-      name: "@babel/register",
+      name: "@gerhobbelt/babel-register",
       ...(opts.caller || {}),
     },
   };

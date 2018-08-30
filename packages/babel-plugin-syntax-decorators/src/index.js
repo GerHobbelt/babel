@@ -20,7 +20,7 @@ export default declare((api, options) => {
   if (decoratorsBeforeExport === undefined) {
     if (!legacy) {
       throw new Error(
-        "The '@babel/plugin-syntax-decorators' plugin requires a" +
+        "The '@gerhobbelt/babel-plugin-syntax-decorators' plugin requires a" +
           " 'decoratorsBeforeExport' option, whose value must be a boolean.",
       );
     }

@@ -50,7 +50,7 @@ export function addSourceMappingUrl(code, loc) {
 }
 
 const CALLER = {
-  name: "@babel/cli",
+  name: "@gerhobbelt/babel-cli",
 };
 
 export function transform(filename, code, opts) {

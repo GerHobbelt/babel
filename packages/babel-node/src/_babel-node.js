@@ -61,7 +61,7 @@ program.parse(process.argv);
 
 register({
   caller: {
-    name: "@babel/node",
+    name: "@gerhobbelt/babel-node",
   },
   extensions: program.extensions,
   ignore: program.ignore,
