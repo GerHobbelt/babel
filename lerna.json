@@ -16,7 +16,7 @@
   },
   "command": {
     "publish": {
-      "ignore": [
+      "ignoreChanges": [
         "*.md",
         "test/**",
         "codemods/**"
