@@ -35,7 +35,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
 
   if (decoratorsBeforeExport === undefined) {
     if (!legacy) {
-      throw new Error("The '@babel/plugin-syntax-decorators' plugin requires a" + " 'decoratorsBeforeExport' option, whose value must be a boolean.");
+      throw new Error("The '@gerhobbelt/babel-plugin-syntax-decorators' plugin requires a" + " 'decoratorsBeforeExport' option, whose value must be a boolean.");
     }
   } else {
     if (legacy) {

@@ -71,7 +71,7 @@ function getRuntimeRoot(runtimeName) {
     __dirname,
     "..",
     "..",
-    runtimeName.replace(/^@babel\//, "babel-")
+    runtimeName.replace(/^@gerhobbelt\/babel-/, "babel-")
   );
 }
 
