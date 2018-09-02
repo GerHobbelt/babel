@@ -23,18 +23,24 @@ const modify = require("gulp-modify-file");
 
 // A remainder from the fight with webpack to build babel standalones which can
 // execute in node and are either minified or *not* minified.
-// 
-// Use this to diagnose generated source code via the console.error() logging 
-// in here whenever you hit sh*t again. 
+//
+// Use this to diagnose generated source code via the console.error() logging
+// in here whenever you hit sh*t again.
 function tweakUMDheader(content, path, file) {
   if (0) {
-    console.error("tweakUMDheader", content.substr(0, 1024), content.length, path, file);
+    console.error(
+      "tweakUMDheader",
+      content.substr(0, 1024),
+      content.length,
+      path,
+      file
+    );
   }
 
   return content;
 }
 
-const buildMode = (process.env.NODE_ENV || "production");
+const buildMode = process.env.NODE_ENV || "production";
 
 function webpackBuild(opts) {
   const plugins = opts.plugins || [];
@@ -74,14 +80,14 @@ function webpackBuild(opts) {
       library: opts.library,
       libraryTarget: "umd",
       // !@#$%^Y&*(O) webpack! >:-(
-      // 
+      //
       // Check out:
       // - https://github.com/webpack/webpack/issues/6522
       // - https://github.com/webpack/webpack/issues/6525
       globalObject: `typeof window !== 'undefined' ? window : typeof self !== 'undefined' ? self : this`,
     },
     optimization: {
-      minimize: (buildMode === "production"),
+      minimize: buildMode === "production",
     },
     mode: buildMode,
     plugins: [
@@ -146,7 +152,7 @@ function registerStandalonePackageTask(
       ].concat(
         modify(tweakUMDheader),
         // Minification is super slow, so we skip it in CI.
-        process.env.CI ? [] : [] /* uglify() */,
+        process.env.CI ? [] : buildMode === "production" ? uglify() : [],
         rename({ extname: ".min.js" }),
         gulp.dest(standalonePath)
       ),
