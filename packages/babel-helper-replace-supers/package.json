@@ -9,9 +9,9 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-helper-member-expression-to-functions": "7.0.0-13",
-    "@gerhobbelt/babel-helper-optimise-call-expression": "7.0.0-13",
-    "@gerhobbelt/babel-traverse": "7.0.0-13",
-    "@gerhobbelt/babel-types": "7.0.0-13"
+    "@gerhobbelt/babel-helper-member-expression-to-functions": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-helper-optimise-call-expression": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-traverse": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-types": "7.0.0-beta.530006"
   }
 }
