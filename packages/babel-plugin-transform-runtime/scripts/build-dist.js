@@ -72,7 +72,7 @@ function getRuntimeRoot(runtimeName) {
     "..",
     "..",
     runtimeName.replace(/^@gerhobbelt\/babel-/, "babel-")
-  );
+  ).replace(/\\\\?/g, '/');
 }
 
 function buildHelper(
