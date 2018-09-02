@@ -60,7 +60,7 @@ module.exports = function(api) {
       "packages/babel-standalone/babel.js",
       "packages/babel-preset-env-standalone/babel-preset-env.js",
     ].filter(Boolean),
-    presets: [["@gerhobbelt/babel-env", envOpts]],
+    presets: [["@gerhobbelt/babel-preset-env", envOpts]],
     plugins: [
       // TODO: Use @gerhobbelt/babel-preset-flow when
       // https://github.com/babel/babel/issues/7233 is fixed
@@ -75,7 +75,10 @@ module.exports = function(api) {
 
       // Explicitly use the lazy version of CommonJS modules.
       convertESM
-        ? ["@gerhobbelt/babel-transform-modules-commonjs", { lazy: true }]
+        ? [
+            "@gerhobbelt/babel-plugin-transform-modules-commonjs",
+            { lazy: true },
+          ]
         : null,
     ].filter(Boolean),
     overrides: [
@@ -83,7 +86,7 @@ module.exports = function(api) {
         test: "packages/babel-parser",
         plugins: [
           "babel-plugin-transform-charcodes",
-          ["@gerhobbelt/babel-transform-for-of", { assumeArray: true }],
+          ["@gerhobbelt/babel-plugin-transform-for-of", { assumeArray: true }],
         ],
       },
       {
@@ -92,7 +95,9 @@ module.exports = function(api) {
           // Override the root options to disable lazy imports for babel-register
           // because otherwise the require hook will try to lazy-import things
           // leading to dependency cycles.
-          convertESM ? "@gerhobbelt/babel-transform-modules-commonjs" : null,
+          convertESM
+            ? "@gerhobbelt/babel-plugin-transform-modules-commonjs"
+            : null,
         ].filter(Boolean),
       },
       {
@@ -114,7 +119,7 @@ module.exports = function(api) {
           /[\\/]node_modules[\\/](?:@gerhobbelt\/babel-runtime|@babel\/runtime|babel-runtime|core-js)[\\/]/,
         ],
         plugins: [
-          includeRuntime ? "@gerhobbelt/babel-transform-runtime" : null,
+          includeRuntime ? "@gerhobbelt/babel-plugin-transform-runtime" : null,
         ].filter(Boolean),
       },
     ].filter(Boolean),
