@@ -178,6 +178,15 @@ function run(task) {
   const opts = task.options;
   const optionsDir = task.optionsDir;
 
+  function filterExceptionStackTrace(s) {
+    return s
+      .replace(/[\\/]/g, "/")
+      .replace(
+        /\b(?:\w+:)?\/[\/\w]+?\/babel\/packages\//g,
+        "/XXXXXX/babel/packages/",
+      );
+  }
+
   function getOpts(self) {
     const newOpts = merge(
       {
@@ -237,7 +246,7 @@ function run(task) {
   if (!execCode || actualCode) {
     result = babel.transform(actualCode, getOpts(actual));
     const expectedCode = result.code.replace(
-      escapeRegExp(path.resolve(__dirname, "../../../")),
+      escapeRegExp(path.resolve(__dirname, "../../../").replace(/[\\]/g, "/")),
       "<CWD>",
     );
 
@@ -265,9 +274,9 @@ function run(task) {
     } else {
       actualCode = expectedCode.trim();
       try {
-        expect(actualCode).toEqualFile({
+        expect(filterExceptionStackTrace(actualCode)).toEqualFile({
           filename: expected.loc,
-          code: expectCode,
+          code: filterExceptionStackTrace(expectCode),
         });
       } catch (e) {
         if (!process.env.OVERWRITE) throw e;

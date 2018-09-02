@@ -426,7 +426,9 @@ suites.forEach(function(testSuite) {
             const result = generate(actualAst, options, actualCode);
 
             if (options.sourceMaps) {
-              expect(result.map).toEqual(task.sourceMap);
+              expect(result.map.replace(/[\\]/g, "/")).toEqual(
+                task.sourceMap.replace(/[\\]/g, "/"),
+              );
             }
 
             if (

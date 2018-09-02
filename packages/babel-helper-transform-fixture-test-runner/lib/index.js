@@ -299,6 +299,10 @@ function run(task) {
   const opts = task.options;
   const optionsDir = task.optionsDir;
 
+  function filterExceptionStackTrace(s) {
+    return s.replace(/[\\/]/g, '/').replace(/\b(?:\w+:)?\/[\/\w]+?\/babel\/packages\//g, '/XXXXXX/babel/packages/');
+  }
+
   function getOpts(self) {
     const newOpts = (0, _merge().default)({
       cwd: _path().default.dirname(self.loc),
@@ -343,7 +347,7 @@ function run(task) {
 
   if (!execCode || actualCode) {
     result = babel().transform(actualCode, getOpts(actual));
-    const expectedCode = result.code.replace((0, _escapeRegExp().default)(_path().default.resolve(__dirname, "../../../")), "<CWD>");
+    const expectedCode = result.code.replace((0, _escapeRegExp().default)(_path().default.resolve(__dirname, "../../../").replace(/[\\]/g, '/')), "<CWD>");
     checkDuplicatedNodes(result.ast);
 
     if (!expected.code && expectedCode && !opts.throws && _fs().default.statSync(_path().default.dirname(expected.loc)).isDirectory() && !process.env.CI) {
@@ -361,9 +365,9 @@ function run(task) {
       actualCode = expectedCode.trim();
 
       try {
-        expect(actualCode).toEqualFile({
+        expect(filterExceptionStackTrace(actualCode)).toEqualFile({
           filename: expected.loc,
-          code: expectCode
+          code: filterExceptionStackTrace(expectCode)
         });
       } catch (e) {
         if (!process.env.OVERWRITE) throw e;

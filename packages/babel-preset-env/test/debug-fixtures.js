@@ -6,6 +6,15 @@ const path = require("path");
 const fixtureLoc = path.join(__dirname, "debug-fixtures");
 const tmpLoc = path.join(__dirname, "tmp");
 
+function filterExceptionStackTrace(s) {
+  return s
+    .replace(/[\\/]/g, "/")
+    .replace(
+      /\b(?:\w+:)?\/[\/\w]+?\/babel\/packages\//g,
+      "/XXXXXX/babel/packages/",
+    );
+}
+
 const clear = () => {
   process.chdir(__dirname);
   if (fs.existsSync(tmpLoc)) fs.removeSync(tmpLoc);
@@ -27,7 +36,9 @@ const testOutputType = (type, stdTarg, opts) => {
 
   if (optsTarg) {
     const expectStdout = optsTarg.trim();
-    expect(stdTarg).toBe(expectStdout);
+    expect(filterExceptionStackTrace(stdTarg)).toBe(
+      filterExceptionStackTrace(expectStdout),
+    );
   } else {
     const file = path.join(opts.testLoc, `${type}.txt`);
     console.log(`New test file created: ${file}`);
