@@ -11,11 +11,11 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helpers",
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-template": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-traverse": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-types": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-template": "7.0.0-13",
+    "@gerhobbelt/babel-traverse": "7.0.0-13",
+    "@gerhobbelt/babel-types": "7.0.0-13"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.0.0-13"
   }
 }

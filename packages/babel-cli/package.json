@@ -36,8 +36,8 @@
     "@gerhobbelt/babel-core": "^7.0.0-0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-helper-fixtures": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-core": "7.0.0-13",
+    "@gerhobbelt/babel-helper-fixtures": "7.0.0-13"
   },
   "bin": {
     "babel": "./bin/babel.js",

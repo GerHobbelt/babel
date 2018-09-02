@@ -13,10 +13,10 @@
     "regenerator-runtime": "^0.12.1"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-helpers": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-transform-runtime": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-preset-env": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-types": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-core": "7.0.0-13",
+    "@gerhobbelt/babel-helpers": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-transform-runtime": "7.0.0-13",
+    "@gerhobbelt/babel-preset-env": "7.0.0-13",
+    "@gerhobbelt/babel-types": "7.0.0-13"
   }
 }

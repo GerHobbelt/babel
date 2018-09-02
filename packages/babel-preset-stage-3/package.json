@@ -11,20 +11,20 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-preset-stage-3",
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-async-generator-functions": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-class-properties": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-json-strings": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-object-rest-spread": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-optional-catch-binding": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-unicode-property-regex": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-syntax-dynamic-import": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-syntax-import-meta": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-async-generator-functions": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-class-properties": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-json-strings": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-object-rest-spread": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-optional-catch-binding": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-unicode-property-regex": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-syntax-dynamic-import": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-syntax-import-meta": "7.0.0-13"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "^7.0.0-0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-core": "7.0.0-13"
   }
 }

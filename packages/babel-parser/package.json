@@ -26,7 +26,7 @@
     "node": ">=6.0.0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-helper-fixtures": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-helper-fixtures": "7.0.0-13",
     "charcodes": "0.1.0",
     "unicode-11.0.0": "^0.7.7"
   },

@@ -9,10 +9,10 @@
     "src"
   ],
   "devDependencies": {
-    "@gerhobbelt/babel-plugin-proposal-json-strings": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-transform-new-target": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-preset-env": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-standalone": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-plugin-proposal-json-strings": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-transform-new-target": "7.0.0-13",
+    "@gerhobbelt/babel-preset-env": "7.0.0-13",
+    "@gerhobbelt/babel-standalone": "7.0.0-13"
   },
   "keywords": [
     "babel",

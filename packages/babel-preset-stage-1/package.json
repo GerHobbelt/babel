@@ -11,19 +11,19 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-preset-stage-1",
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-do-expressions": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-export-default-from": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-logical-assignment-operators": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-nullish-coalescing-operator": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-optional-chaining": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-plugin-proposal-pipeline-operator": "7.0.0-beta.530006",
-    "@gerhobbelt/babel-preset-stage-2": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-do-expressions": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-export-default-from": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-logical-assignment-operators": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-nullish-coalescing-operator": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-optional-chaining": "7.0.0-13",
+    "@gerhobbelt/babel-plugin-proposal-pipeline-operator": "7.0.0-13",
+    "@gerhobbelt/babel-preset-stage-2": "7.0.0-13"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "^7.0.0-0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-core": "7.0.0-13"
   }
 }

@@ -11,9 +11,9 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-module-imports",
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-types": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-types": "7.0.0-13"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-beta.530006"
+    "@gerhobbelt/babel-core": "7.0.0-13"
   }
 }
