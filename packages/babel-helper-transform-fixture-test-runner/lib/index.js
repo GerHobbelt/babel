@@ -300,7 +300,7 @@ function run(task) {
   const optionsDir = task.optionsDir;
 
   function filterExceptionStackTrace(s) {
-    return s.replace(/[\\/]/g, "/").replace(/\b(?:\w+:)?\/[/\w]+?\/babel\/packages\//g, "/XXXXXX/babel/packages/");
+    return s.replace(/[\\/]/g, "/").replace(/(?:\b\w+:)?\/[/\w]+?\/babel\/packages\//g, "/XXXXXX/babel/packages/");
   }
 
   function getOpts(self) {

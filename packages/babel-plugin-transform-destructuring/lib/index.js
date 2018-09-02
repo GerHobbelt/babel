@@ -62,17 +62,14 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
     return false;
   }
 
-  const STOP_TRAVERSAL = {};
-
-  const arrayUnpackVisitor = (node, ancestors, state) => {
-    if (!ancestors.length) {
-      return;
+  const arrayUnpackVisitor = {
+    ReferencedIdentifier(path, state) {
+      if (state.bindings[path.node.name]) {
+        state.deopt = true;
+        path.stop();
+      }
     }
 
-    if (_babelCore().types.isIdentifier(node) && _babelCore().types.isReferenced(node, ancestors[ancestors.length - 1]) && state.bindings[node.name]) {
-      state.deopt = true;
-      throw STOP_TRAVERSAL;
-    }
   };
 
   class DestructuringTransformer {
@@ -247,13 +244,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
         deopt: false,
         bindings
       };
-
-      try {
-        _babelCore().types.traverse(arr, arrayUnpackVisitor, state);
-      } catch (e) {
-        if (e !== STOP_TRAVERSAL) throw e;
-      }
-
+      this.scope.traverse(arr, arrayUnpackVisitor, state);
       return !state.deopt;
     }
 
