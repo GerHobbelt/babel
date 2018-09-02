@@ -436,22 +436,6 @@
                                     "trailingComments": [
                                       {
                                         "type": "CommentBlock",
-                                        "value": " @handle is very probably NULL! We need this one for some decent location info! ",
-                                        "start": 268,
-                                        "end": 352,
-                                        "loc": {
-                                          "start": {
-                                            "line": 7,
-                                            "column": 55
-                                          },
-                                          "end": {
-                                            "line": 7,
-                                            "column": 139
-                                          }
-                                        }
-                                      },
-                                      {
-                                        "type": "CommentBlock",
                                         "value": " ditto! ",
                                         "start": 362,
                                         "end": 374,
