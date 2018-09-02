@@ -18,13 +18,11 @@ const EXACT_RE = /^module:/;
 const BABEL_PLUGIN_PREFIX_RE = /^(?!@|module:|[^/]+\/|babel-plugin-)/;
 const BABEL_PRESET_PREFIX_RE = /^(?!@|module:|[^/]+\/|babel-preset-)/;
 // @gerhobbelt/babel-es2015 -> @gerhobbelt/babel-preset-es2015
-// replace with: `@gerhobbelt/babel-${type}-`...
-const BABEL_PLUGIN_ORG_RE = /^(@gerhobbelt\/babel-)(?!plugin-|[^/]+\/)/;
-const BABEL_PRESET_ORG_RE = /^(@gerhobbelt\/babel-)(?!preset-|[^/]+\/)/;
 // @babel/es2015 -> @gerhobbelt/babel-preset-es2015
 // replace with: `@gerhobbelt/babel-${type}-`...
-const BABEL_PLUGIN_ORG_RE2 = /^(@babel\/)(?!plugin-|[^/]+\/)/;
-const BABEL_PRESET_ORG_RE2 = /^(@babel\/)(?!preset-|[^/]+\/)/;
+// replace with: `@babel/${type}-`...
+const BABEL_PLUGIN_ORG_RE = /^(@(?:babel\/|gerhobbelt\/babel-))(?!plugin-|[^/]+\/)/;
+const BABEL_PRESET_ORG_RE = /^(@(?:babel\/|gerhobbelt\/babel-))(?!preset-|[^/]+\/)/;
 // @foo/mypreset -> @foo/babel-preset-mypreset
 // replace with: `$1babel-${type}-`...
 const OTHER_PLUGIN_ORG_RE = /^(@(?!babel\/|gerhobbelt\/babel-)[^/]+\/)(?![^/]*babel-plugin(?:-|\/|$)|[^/]+\/)/;
@@ -88,12 +86,7 @@ function standardizeName(type: "plugin" | "preset", name: string) {
       // @gerhobbelt/babel-es2015 -> @gerhobbelt/babel-preset-es2015
       .replace(
         isPreset ? BABEL_PRESET_ORG_RE : BABEL_PLUGIN_ORG_RE,
-        `@gerhobbelt/babel-${type}-`,
-      )
-      // @babel/es2015 -> @babel/preset-es2015
-      .replace(
-        isPreset ? BABEL_PRESET_ORG_RE2 : BABEL_PLUGIN_ORG_RE2,
-        `@gerhobbelt/babel-${type}-`,
+        `$1${type}-`,
       )
       // @foo/mypreset -> @foo/babel-preset-mypreset
       .replace(
@@ -132,15 +125,36 @@ function resolveStandardizedName(
     }
 
     let resolvedBabel = false;
+    let resolvedName = null;
     try {
-      resolve.sync(standardizeName(type, "@gerhobbelt/babel-" + name), {
+      resolvedName = standardizeName(type, "@gerhobbelt/babel-" + name);
+      resolve.sync(resolvedName, {
         basedir: dirname,
       });
       resolvedBabel = true;
     } catch (e2) {}
 
+    if (!resolvedBabel) {
+      try {
+        resolvedName = standardizeName(type, "@babel/" + name);
+        resolve.sync(resolvedName, {
+          basedir: dirname,
+        });
+        resolvedBabel = true;
+      } catch (e2) {}
+    }
+
+    if (!resolvedBabel) {
+      try {
+        resolvedName = standardizeName(type, "@gerhobbelt/" + name);
+        resolve.sync(resolvedName, {
+          basedir: dirname,
+        });
+        resolvedBabel = true;
+      } catch (e2) {}
+    }
     if (resolvedBabel) {
-      e.message += `\n- Did you mean "@gerhobbelt/babel-${name}"?`;
+      e.message += `\n- Did you mean "${resolvedName}"?`;
     }
 
     let resolvedOppositeType = false;
