@@ -1,9 +1,9 @@
 function f(b) {
   a: for (const k in []) {
     if (k) {
-      continue b;
+      continue a;
     } else {
-      break b;
+      break a;
     }
   }
 }
