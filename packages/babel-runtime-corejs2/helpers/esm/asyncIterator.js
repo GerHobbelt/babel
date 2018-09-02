@@ -1,6 +1,6 @@
-import _Symbol$iterator from "..\\../core-js/symbol/iterator";
-import _Symbol$asyncIterator from "..\\../core-js/symbol/async-iterator";
-import _Symbol from "..\\../core-js/symbol";
+import _Symbol$iterator from "../../core-js/symbol/iterator";
+import _Symbol$asyncIterator from "../../core-js/symbol/async-iterator";
+import _Symbol from "../../core-js/symbol";
 export default function _asyncIterator(iterable) {
   var method;
 

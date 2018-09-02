@@ -1,5 +1,5 @@
-import _Object$getOwnPropertyDescriptor from "..\\../core-js/object/get-own-property-descriptor";
-import _Object$defineProperty from "..\\../core-js/object/define-property";
+import _Object$getOwnPropertyDescriptor from "../../core-js/object/get-own-property-descriptor";
+import _Object$defineProperty from "../../core-js/object/define-property";
 export default function _interopRequireWildcard(obj) {
   if (obj && obj.__esModule) {
     return obj;

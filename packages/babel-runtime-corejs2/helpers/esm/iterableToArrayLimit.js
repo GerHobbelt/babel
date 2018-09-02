@@ -1,4 +1,4 @@
-import _getIterator from "..\\../core-js/get-iterator";
+import _getIterator from "../../core-js/get-iterator";
 export default function _iterableToArrayLimit(arr, i) {
   var _arr = [];
   var _n = true;

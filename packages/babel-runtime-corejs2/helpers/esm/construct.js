@@ -1,5 +1,5 @@
-import _Map from "..\\../core-js/map";
-import _Reflect$construct from "..\\../core-js/reflect/construct";
+import _Map from "../../core-js/map";
+import _Reflect$construct from "../../core-js/reflect/construct";
 import setPrototypeOf from "./setPrototypeOf";
 
 function isNativeReflectConstruct() {

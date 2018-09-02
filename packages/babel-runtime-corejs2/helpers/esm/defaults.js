@@ -1,6 +1,6 @@
-import _Object$defineProperty from "..\\../core-js/object/define-property";
-import _Object$getOwnPropertyDescriptor from "..\\../core-js/object/get-own-property-descriptor";
-import _Object$getOwnPropertyNames from "..\\../core-js/object/get-own-property-names";
+import _Object$defineProperty from "../../core-js/object/define-property";
+import _Object$getOwnPropertyDescriptor from "../../core-js/object/get-own-property-descriptor";
+import _Object$getOwnPropertyNames from "../../core-js/object/get-own-property-names";
 export default function _defaults(obj, defaults) {
   var keys = _Object$getOwnPropertyNames(defaults);
 
