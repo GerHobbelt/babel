@@ -4,7 +4,7 @@ const plumber = require("gulp-plumber");
 const through = require("through2");
 const chalk = require("chalk");
 const newer = require("gulp-newer");
-const babel = require("gulp-babel");
+const babel = require("@gerhobbelt/gulp-babel");
 const gulpWatch = require("gulp-watch");
 const gutil = require("gulp-util");
 const filter = require("gulp-filter");
@@ -15,7 +15,7 @@ const merge = require("merge-stream");
 const rollup = require("rollup-stream");
 const source = require("vinyl-source-stream");
 const buffer = require("vinyl-buffer");
-const rollupBabel = require("rollup-plugin-babel");
+const rollupBabel = require("@gerhobbelt/rollup-plugin-babel");
 const rollupNodeResolve = require("rollup-plugin-node-resolve");
 const registerStandalonePackageTask = require("./scripts/gulp-tasks")
   .registerStandalonePackageTask;

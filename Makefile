@@ -7,7 +7,10 @@ export FORCE_COLOR = true
 
 SOURCES = packages codemods
 
-.PHONY: build build-dist watch lint fix clean test-clean test-only test test-ci publish bootstrap update-npm-packages update-version
+.PHONY: build build-dist build-no-bundle dev watch lint fix clean test-clean test-only test test-ci publish bootstrap update-npm-packages update-version
+
+dev:
+	BABEL_ENV=development make build-no-bundle build-dist fix test
 
 build: clean clean-lib
 	./node_modules/.bin/gulp build
@@ -33,6 +36,9 @@ build-dist: build
 	scripts/build-dist.sh
 	cd packages/babel-plugin-transform-runtime; \
 	node scripts/build-dist.js
+
+build-no-bundle: clean clean-lib
+	./node_modules/.bin/gulp build-no-bundle
 
 watch: clean clean-lib
 	# Ensure that build artifacts for types are created during local
@@ -122,7 +128,7 @@ prepublish:
 publish: prepublish
 	# not using lerna independent mode atm, so only update packages that have changed since we use ^
 	# --only-explicit-updates
-	
+
 	#./node_modules/.bin/lerna publish --force-publish=* --temp-tag
 	#
 	#./node_modules/.bin/lerna publish --exact --skip-temp-tag --skip-npm --skip-git --repo-version 7.0.0-49.7

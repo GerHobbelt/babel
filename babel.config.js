@@ -65,16 +65,18 @@ module.exports = function(api) {
       // TODO: Use @gerhobbelt/babel-preset-flow when
       // https://github.com/babel/babel/issues/7233 is fixed
       "@gerhobbelt/babel-plugin-transform-flow-strip-types",
-      ["@gerhobbelt/babel-proposal-class-properties", { loose: true }],
-      "@gerhobbelt/babel-proposal-export-namespace-from",
-      "@gerhobbelt/babel-proposal-numeric-separator",
+      ["@gerhobbelt/babel-plugin-proposal-class-properties", { loose: true }],
+      "@gerhobbelt/babel-plugin-proposal-export-namespace-from",
+      "@gerhobbelt/babel-plugin-proposal-numeric-separator",
       [
-        "@gerhobbelt/babel-proposal-object-rest-spread",
+        "@gerhobbelt/babel-plugin-proposal-object-rest-spread",
         { useBuiltIns: true, loose: true },
       ],
 
       // Explicitly use the lazy version of CommonJS modules.
-      convertESM ? ["@gerhobbelt/babel-transform-modules-commonjs", { lazy: true }] : null,
+      convertESM
+        ? ["@gerhobbelt/babel-transform-modules-commonjs", { lazy: true }]
+        : null,
     ].filter(Boolean),
     overrides: [
       {
@@ -111,9 +113,9 @@ module.exports = function(api) {
           "packages/babel-runtime",
           /[\\/]node_modules[\\/](?:@gerhobbelt\/babel-runtime|@babel\/runtime|babel-runtime|core-js)[\\/]/,
         ],
-        plugins: [includeRuntime ? "@gerhobbelt/babel-transform-runtime" : null].filter(
-          Boolean
-        ),
+        plugins: [
+          includeRuntime ? "@gerhobbelt/babel-transform-runtime" : null,
+        ].filter(Boolean),
       },
     ].filter(Boolean),
   };

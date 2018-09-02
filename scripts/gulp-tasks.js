@@ -37,7 +37,7 @@ function webpackBuild(opts) {
       rules: [
         {
           test: /\.js$/,
-          loader: "babel-loader",
+          loader: "@gerhobbelt/babel-loader",
           options: {
             // Use the bundled config so that module syntax is passed through
             // for Webpack.

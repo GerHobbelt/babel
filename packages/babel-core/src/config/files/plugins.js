@@ -31,7 +31,7 @@ const OTHER_PLUGIN_ORG_RE = /^(@(?!babel\/|gerhobbelt\/babel-)[^/]+\/)(?![^/]*ba
 const OTHER_PRESET_ORG_RE = /^(@(?!babel\/|gerhobbelt\/babel-)[^/]+\/)(?![^/]*babel-preset(?:-|\/|$)|[^/]+\/)/;
 // @foo -> @foo/babel-preset
 // replace with: `$1/babel-${type}`...
-const OTHER_ORG_DEFAULT_RE = /^(@(?!babel|gerhobbelt\/babel-$)[^/]+)$/;
+const OTHER_ORG_DEFAULT_RE = /^(@(?!babel$|gerhobbelt$)[^/]+)$/;
 
 export function resolvePlugin(name: string, dirname: string): string | null {
   return resolveStandardizedName("plugin", name, dirname);
@@ -83,7 +83,7 @@ function standardizeName(type: "plugin" | "preset", name: string) {
       // foo -> babel-preset-foo
       .replace(
         isPreset ? BABEL_PRESET_PREFIX_RE : BABEL_PLUGIN_PREFIX_RE,
-        `@gerhobbelt/babel-${type}-`,
+        `babel-${type}-`,
       )
       // @gerhobbelt/babel-es2015 -> @gerhobbelt/babel-preset-es2015
       .replace(
