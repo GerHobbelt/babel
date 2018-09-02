@@ -108,7 +108,7 @@ function buildRootChain(opts, context) {
     ({
       ignore: ignoreFile,
       config: babelrcFile
-    } = (0, _files.findRelativeConfig)(pkgData, context.envName));
+    } = (0, _files.findRelativeConfig)(pkgData, context.envName, context.caller));
 
     if (ignoreFile && shouldIgnore(context, ignoreFile.ignore, null, ignoreFile.dirname)) {
       return null;
