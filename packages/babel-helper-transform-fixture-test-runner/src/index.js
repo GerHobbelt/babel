@@ -182,7 +182,7 @@ function run(task) {
     return s
       .replace(/[\\/]/g, "/")
       .replace(
-        /\b(?:\w+:)?\/[/\w]+?\/babel\/packages\//g,
+        /(?:\b\w+:)?\/[/\w]+?\/babel\/packages\//g,
         "/XXXXXX/babel/packages/",
       );
   }

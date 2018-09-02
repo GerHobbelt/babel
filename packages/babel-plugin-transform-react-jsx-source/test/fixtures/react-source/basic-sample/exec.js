@@ -12,7 +12,7 @@ var expected = multiline([
 ]);
 
 function filterExceptionStackTrace(s) {
-  return s.replace(/[\\/]/g, '/').replace(/\b(?:\w+:)?\/fake\/path\//g, '/fake/path/');
+  return s.replace(/[\\/]/g, '/').replace(/(?:\b\w+:)?\/fake\/path\//g, '/fake/path/');
 }
 
 expect(filterExceptionStackTrace(actual)).toBe(filterExceptionStackTrace(expected));
