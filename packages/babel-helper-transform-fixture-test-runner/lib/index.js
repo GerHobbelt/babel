@@ -300,7 +300,7 @@ function run(task) {
   const optionsDir = task.optionsDir;
 
   function filterExceptionStackTrace(s) {
-    return s.replace(/[\\/]/g, '/').replace(/\b(?:\w+:)?\/[\/\w]+?\/babel\/packages\//g, '/XXXXXX/babel/packages/');
+    return s.replace(/[\\/]/g, "/").replace(/\b(?:\w+:)?\/[/\w]+?\/babel\/packages\//g, "/XXXXXX/babel/packages/");
   }
 
   function getOpts(self) {
@@ -347,7 +347,7 @@ function run(task) {
 
   if (!execCode || actualCode) {
     result = babel().transform(actualCode, getOpts(actual));
-    const expectedCode = result.code.replace((0, _escapeRegExp().default)(_path().default.resolve(__dirname, "../../../").replace(/[\\]/g, '/')), "<CWD>");
+    const expectedCode = result.code.replace((0, _escapeRegExp().default)(_path().default.resolve(__dirname, "../../../").replace(/[\\]/g, "/")), "<CWD>");
     checkDuplicatedNodes(result.ast);
 
     if (!expected.code && expectedCode && !opts.throws && _fs().default.statSync(_path().default.dirname(expected.loc)).isDirectory() && !process.env.CI) {
