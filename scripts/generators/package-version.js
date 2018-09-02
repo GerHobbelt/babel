@@ -95,10 +95,13 @@ codemods
     patchPackageJson(packageJsonPath);
   });
 
-["./"].forEach(id => {
-  const packageJsonPath = join(id, "package.json");
+// do NOT update the base package.json to the (**not yet existing**!) babel npm subpackages' version:
+if (false) {
+  ["./"].forEach(id => {
+    const packageJsonPath = join(id, "package.json");
 
-  patchPackageJson(packageJsonPath, {
-    doNotMigrateBabelDeps: true,
+    patchPackageJson(packageJsonPath, {
+      doNotMigrateBabelDeps: true,
+    });
   });
-});
+}
