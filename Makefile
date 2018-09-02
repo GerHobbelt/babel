@@ -140,9 +140,7 @@ bootstrap: #clean-all
 	-rm -f package-lock.json
 	npm i
 	./node_modules/.bin/lerna bootstrap -- --ignore-engines
-	make build
-	cd packages/babel-plugin-transform-runtime; \
-	node scripts/build-dist.js
+	make build-dist
 
 update-npm-packages:
 	bash scripts/update-all-npm-package-dependencies.sh
