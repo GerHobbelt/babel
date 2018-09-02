@@ -19,6 +19,22 @@ const RootMostResolvePlugin = require("webpack-dependency-suite")
 const webpack = require("webpack");
 const webpackStream = require("webpack-stream");
 const uglify = require("gulp-uglify");
+const modify = require("gulp-modify-file");
+
+// A remainder from the fight with webpack to build babel standalones which can
+// execute in node and are either minified or *not* minified.
+// 
+// Use this to diagnose generated source code via the console.error() logging 
+// in here whenever you hit sh*t again. 
+function tweakUMDheader(content, path, file) {
+  if (0) {
+    console.error("tweakUMDheader", content.substr(0, 1024), content.length, path, file);
+  }
+
+  return content;
+}
+
+const buildMode = (process.env.NODE_ENV || "production");
 
 function webpackBuild(opts) {
   const plugins = opts.plugins || [];
@@ -57,13 +73,22 @@ function webpackBuild(opts) {
       filename: opts.filename,
       library: opts.library,
       libraryTarget: "umd",
+      // !@#$%^Y&*(O) webpack! >:-(
+      // 
+      // Check out:
+      // - https://github.com/webpack/webpack/issues/6522
+      // - https://github.com/webpack/webpack/issues/6525
+      globalObject: `typeof window !== 'undefined' ? window : typeof self !== 'undefined' ? self : this`,
     },
-    mode: process.env.NODE_ENV || "production",
+    optimization: {
+      minimize: (buildMode === "production"),
+    },
+    mode: buildMode,
     plugins: [
       new webpack.DefinePlugin({
-        "process.env.NODE_ENV": process.env.NODE_ENV || "production",
+        "process.env.NODE_ENV": buildMode,
         "process.env": JSON.stringify({
-          NODE_ENV: process.env.NODE_ENV || "development",
+          NODE_ENV: buildMode,
         }),
         BABEL_VERSION: JSON.stringify(babelVersion),
         VERSION: JSON.stringify(version),
@@ -119,8 +144,9 @@ function registerStandalonePackageTask(
         }),
         gulp.dest(standalonePath),
       ].concat(
+        modify(tweakUMDheader),
         // Minification is super slow, so we skip it in CI.
-        process.env.CI ? [] : uglify(),
+        process.env.CI ? [] : [] /* uglify() */,
         rename({ extname: ".min.js" }),
         gulp.dest(standalonePath)
       ),
