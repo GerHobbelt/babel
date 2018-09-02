@@ -14,7 +14,7 @@
     "to-fast-properties": "^2.0.0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-generator": "7.0.0-13",
-    "@gerhobbelt/babel-parser": "7.0.0-13"
+    "@gerhobbelt/babel-generator": "7.0.0-beta.530006",
+    "@gerhobbelt/babel-parser": "7.0.0-beta.49"
   }
 }

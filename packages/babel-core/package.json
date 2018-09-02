@@ -42,7 +42,7 @@
     "@gerhobbelt/babel-types": "7.0.0-beta.530006",
     "convert-source-map": "^1.5.1",
     "debug": "^3.1.0",
-    "@gerhobbelt/json5": "1.0.1",
+    "@gerhobbelt/json5": "2.0.1-37",
     "lodash": "^4.17.10",
     "resolve": "^1.8.1",
     "semver": "^5.5.1",

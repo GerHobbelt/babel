@@ -296,7 +296,7 @@ function _evaluate(path, state) {
         return left % right;
 
       case "**":
-        return left ** right;
+        return Math.pow(left, right);
 
       case "<":
         return left < right;

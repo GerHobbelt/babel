@@ -25,7 +25,7 @@
     "@gerhobbelt/babel-core": "^7.0.0-0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-13",
+    "@gerhobbelt/babel-core": "7.0.0-beta.530006",
     "default-require-extensions": "^2.0.0"
   }
 }
