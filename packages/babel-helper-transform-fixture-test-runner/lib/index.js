@@ -306,12 +306,6 @@ function run(task) {
       message: inp.message,
       stack: inp.stack
     }, null, 2) : JSON.stringify(inp, null, 2) : "" + inp;
-    console.error("filterExceptionStackTrace-2", {
-      inp,
-      s,
-      cwdPathPrefix,
-      output: s.replace(/\\\\?/g, "/").replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/").replace(RegExp((0, _escapeRegExp().default)(cwdPathPrefix), "g"), "<CWD>").replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/")
-    });
     return s.replace(/\\\\?/g, "/").replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/").replace(RegExp((0, _escapeRegExp().default)(cwdPathPrefix), "g"), "<CWD>").replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/");
   }
 

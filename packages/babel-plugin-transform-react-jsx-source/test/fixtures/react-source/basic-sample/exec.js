@@ -25,13 +25,6 @@ function filterExceptionStackTrace(inp) {
           )
         : JSON.stringify(inp, null, 2)
       : "" + inp;
-  console.error("filterExceptionStackTrace-3", {
-    inp,
-    s,
-    output: s
-      .replace(/\\\\?/g, "/")
-      .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/"),
-  });
   return s
     .replace(/\\\\?/g, "/")
     .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/");
