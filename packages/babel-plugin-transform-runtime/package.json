@@ -27,6 +27,7 @@
     "@gerhobbelt/babel-preset-env": "7.0.0-14",
     "@gerhobbelt/babel-runtime": "7.0.0-14",
     "@gerhobbelt/babel-template": "7.0.0-14",
-    "@gerhobbelt/babel-types": "7.0.0-14"
+    "@gerhobbelt/babel-types": "7.0.0-14",
+    "slash": "2.0.0"
   }
 }

@@ -6,6 +6,7 @@ const helpers = require("@gerhobbelt/babel-helpers");
 const babel = require("@gerhobbelt/babel-core");
 const template = require("@gerhobbelt/babel-template");
 const t = require("@gerhobbelt/babel-types");
+const slash = require("slash");
 
 const transformRuntime = require("../");
 const corejs2Definitions = require("../lib/definitions").default;
@@ -72,7 +73,7 @@ function getRuntimeRoot(runtimeName) {
     "..",
     "..",
     runtimeName.replace(/^@gerhobbelt\/babel-/, "babel-")
-  ).replace(/\\\\?/g, '/');
+  );
 }
 
 function buildHelper(
@@ -111,7 +112,7 @@ function buildHelper(
       [transformRuntime, { corejs, useESModules: esm }],
       buildRuntimeRewritePlugin(
         runtimeName,
-        path.relative(path.dirname(helperFilename), pkgDirname),
+        slash(path.relative(path.dirname(helperFilename), pkgDirname)),
         helperName
       ),
     ],
