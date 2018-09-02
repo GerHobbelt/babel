@@ -160,7 +160,7 @@ class File {
       moduleName += filenameRelative.replace(sourceRootReplacer, "").replace(/\.(\w*?)$/, "");
     }
 
-    moduleName = moduleName.replace(/\\/g, "/");
+    moduleName = moduleName.replace(/\\\\?/g, "/");
 
     if (getModuleId) {
       return getModuleId(moduleName) || moduleName;

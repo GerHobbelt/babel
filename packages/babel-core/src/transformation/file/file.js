@@ -130,7 +130,7 @@ export default class File {
     }
 
     // normalize path separators
-    moduleName = moduleName.replace(/\\/g, "/");
+    moduleName = moduleName.replace(/\\\\?/g, "/");
 
     if (getModuleId) {
       // If return is falsy, assume they want us to use our generated default name

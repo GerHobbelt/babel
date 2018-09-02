@@ -299,8 +299,15 @@ function run(task) {
   const opts = task.options;
   const optionsDir = task.optionsDir;
 
+  const cwdPathPrefix = _path().default.resolve(__dirname, "../../../").replace(/\\\\?/g, "/");
+
   function filterExceptionStackTrace(s) {
-    return s.replace(/[\\/]/g, "/").replace(/(?:\b\w+:)?\/[/\w]+?\/babel\/packages\//g, "/XXXXXX/babel/packages/");
+    console.error("filterExceptionStackTrace", {
+      s,
+      cwdPathPrefix,
+      output: s.replace(/\\\\?/g, "/").replace(RegExp((0, _escapeRegExp().default)(cwdPathPrefix), "g"), "<CWD>").replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/")
+    });
+    return s.replace(/\\\\?/g, "/").replace(RegExp((0, _escapeRegExp().default)(cwdPathPrefix), "g"), "<CWD>").replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/");
   }
 
   function getOpts(self) {
@@ -347,7 +354,7 @@ function run(task) {
 
   if (!execCode || actualCode) {
     result = babel().transform(actualCode, getOpts(actual));
-    const expectedCode = result.code.replace((0, _escapeRegExp().default)(_path().default.resolve(__dirname, "../../../").replace(/[\\]/g, "/")), "<CWD>");
+    const expectedCode = filterExceptionStackTrace(result.code);
     checkDuplicatedNodes(result.ast);
 
     if (!expected.code && expectedCode && !opts.throws && _fs().default.statSync(_path().default.dirname(expected.loc)).isDirectory() && !process.env.CI) {
@@ -362,10 +369,10 @@ function run(task) {
         } catch (e) {}
       }
     } else {
-      actualCode = expectedCode.trim();
+      actualCode = filterExceptionStackTrace(expectedCode.trim());
 
       try {
-        expect(filterExceptionStackTrace(actualCode)).toEqualFile({
+        expect(actualCode).toEqualFile({
           filename: expected.loc,
           code: filterExceptionStackTrace(expectCode)
         });

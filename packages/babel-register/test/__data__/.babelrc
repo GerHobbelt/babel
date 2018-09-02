@@ -1,5 +1,5 @@
 {
     "plugins": [
-        "@gerhobbelt/babel-transform-modules-commonjs"
+        "@gerhobbelt/babel-plugin-transform-modules-commonjs"
     ]
 }

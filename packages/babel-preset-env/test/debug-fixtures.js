@@ -8,7 +8,7 @@ const tmpLoc = path.join(__dirname, "tmp");
 
 function filterExceptionStackTrace(s) {
   return s
-    .replace(/[\\/]/g, "/")
+    .replace(/\\\\?/g, "/")
     .replace(
       /(?:\b\w+:)?\/[/\w]+?\/babel\/packages\//g,
       "/XXXXXX/babel/packages/",
@@ -31,7 +31,7 @@ const saveInFiles = files => {
 
 const testOutputType = (type, stdTarg, opts) => {
   stdTarg = stdTarg.trim();
-  stdTarg = stdTarg.replace(/\\/g, "/");
+  stdTarg = stdTarg.replace(/\\\\?/g, "/");
   const optsTarg = opts[type];
 
   if (optsTarg) {

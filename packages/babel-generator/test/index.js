@@ -396,6 +396,12 @@ describe("CodeGenerator", function() {
 
 const suites = fixtures(`${__dirname}/fixtures`);
 
+function filterExceptionStackTrace(s) {
+  return s
+    .replace(/\\\\?/g, "/")
+    .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/");
+}
+
 suites.forEach(function(testSuite) {
   describe("generation/" + testSuite.title, function() {
     testSuite.tests.forEach(function(task) {
@@ -426,8 +432,8 @@ suites.forEach(function(testSuite) {
             const result = generate(actualAst, options, actualCode);
 
             if (options.sourceMaps) {
-              expect(result.map.replace(/[\\]/g, "/")).toEqual(
-                task.sourceMap.replace(/[\\]/g, "/"),
+              expect(filterExceptionStackTrace(result.map)).toEqual(
+                filterExceptionStackTrace(task.sourceMap),
               );
             }
 
