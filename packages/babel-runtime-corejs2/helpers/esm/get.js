@@ -1,4 +1,4 @@
-simport _Object$getOwnPropertyDescriptor from "../../core-js/object/get-own-property-descriptor";
+import _Object$getOwnPropertyDescriptor from "../../core-js/object/get-own-property-descriptor";
 import _Reflect$get from "../../core-js/reflect/get";
 import getPrototypeOf from "./getPrototypeOf";
 import superPropBase from "./superPropBase";
