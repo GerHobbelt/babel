@@ -128,11 +128,12 @@ prepublish:
 publish: prepublish
 	# not using lerna independent mode atm, so only update packages that have changed since we use ^
 	# --only-explicit-updates
-
+    #
 	#./node_modules/.bin/lerna publish --force-publish=* --temp-tag
 	#
 	#./node_modules/.bin/lerna publish --exact --skip-temp-tag --skip-npm --skip-git --repo-version 7.0.0-49.7
 	#make clean
+	bash scripts/publish-all-packages.sh
 
 bootstrap: #clean-all
 	##./node_modules/.bin/yarn --ignore-engines
