@@ -58,10 +58,11 @@ function webpackBuild(opts) {
       library: opts.library,
       libraryTarget: "umd",
     },
+    mode: process.env.NODE_ENV || "production",
     plugins: [
       new webpack.DefinePlugin({
-        "process.env.NODE_ENV": '"production"',
-        "process.env": JSON.stringify({ NODE_ENV: "production" }),
+        "process.env.NODE_ENV": process.env.NODE_ENV || "production",
+        "process.env": JSON.stringify({ NODE_ENV: process.env.NODE_ENV || "development" }),
         BABEL_VERSION: JSON.stringify(babelVersion),
         VERSION: JSON.stringify(version),
       }),
