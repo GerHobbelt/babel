@@ -1,4 +1,3 @@
-scripts
-src
+node_modules/
 test
 *.log
