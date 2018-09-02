@@ -2,17 +2,45 @@ const child = require("child_process");
 const fs = require("fs-extra");
 const helper = require("@gerhobbelt/babel-helper-fixtures");
 const path = require("path");
+const escapeRegExp = require("lodash/escapeRegExp");
 
 const fixtureLoc = path.join(__dirname, "debug-fixtures");
 const tmpLoc = path.join(__dirname, "tmp");
 
-function filterExceptionStackTrace(s) {
+// <CWD>
+const cwdPathPrefix = path
+  .resolve(__dirname, "../../../")
+  .replace(/\\\\?/g, "/");
+
+function filterExceptionStackTrace(inp) {
+  const s =
+    typeof inp === "object"
+      ? inp instanceof Error
+        ? JSON.stringify(
+            {
+              message: inp.message,
+              stack: inp.stack,
+            },
+            null,
+            2,
+          )
+        : JSON.stringify(inp, null, 2)
+      : "" + inp;
+  console.error("filterExceptionStackTrace-4", {
+    inp,
+    s,
+    cwdPathPrefix,
+    output: s
+      .replace(/\\\\?/g, "/")
+      .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/")
+      .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
+      .replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/"),
+  });
   return s
     .replace(/\\\\?/g, "/")
-    .replace(
-      /(?:\b\w+:)?\/[/\w]+?\/babel\/packages\//g,
-      "/XXXXXX/babel/packages/",
-    );
+    .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/")
+    .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
+    .replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/");
 }
 
 const clear = () => {
@@ -30,15 +58,12 @@ const saveInFiles = files => {
 };
 
 const testOutputType = (type, stdTarg, opts) => {
-  stdTarg = stdTarg.trim();
-  stdTarg = stdTarg.replace(/\\\\?/g, "/");
+  stdTarg = filterExceptionStackTrace(stdTarg.trim());
   const optsTarg = opts[type];
 
   if (optsTarg) {
-    const expectStdout = optsTarg.trim();
-    expect(filterExceptionStackTrace(stdTarg)).toBe(
-      filterExceptionStackTrace(expectStdout),
-    );
+    const expectStdout = filterExceptionStackTrace(optsTarg.trim());
+    expect(stdTarg).toBe(expectStdout);
   } else {
     const file = path.join(opts.testLoc, `${type}.txt`);
     console.log(`New test file created: ${file}`);

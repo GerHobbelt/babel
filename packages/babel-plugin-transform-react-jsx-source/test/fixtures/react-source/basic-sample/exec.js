@@ -11,8 +11,30 @@ var expected = multiline([
   '}} />;',
 ]);
 
-function filterExceptionStackTrace(s) {
-  return s.replace(/\\\\?/g, '/').replace(/(?:\b\w+:)?\/fake\/path\//g, '/fake/path/');
+function filterExceptionStackTrace(inp) {
+  const s =
+    typeof inp === "object"
+      ? inp instanceof Error
+        ? JSON.stringify(
+            {
+              message: inp.message,
+              stack: inp.stack,
+            },
+            null,
+            2,
+          )
+        : JSON.stringify(inp, null, 2)
+      : "" + inp;
+  console.error("filterExceptionStackTrace-3", {
+    inp,
+    s,
+    output: s
+      .replace(/\\\\?/g, "/")
+      .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/"),
+  });
+  return s
+    .replace(/\\\\?/g, "/")
+    .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/");
 }
 
 expect(filterExceptionStackTrace(actual)).toBe(filterExceptionStackTrace(expected));

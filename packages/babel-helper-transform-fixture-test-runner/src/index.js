@@ -183,17 +183,33 @@ function run(task) {
     .resolve(__dirname, "../../../")
     .replace(/\\\\?/g, "/");
 
-  function filterExceptionStackTrace(s) {
-    console.error("filterExceptionStackTrace", {
+  function filterExceptionStackTrace(inp) {
+    const s =
+      typeof inp === "object"
+        ? inp instanceof Error
+          ? JSON.stringify(
+              {
+                message: inp.message,
+                stack: inp.stack,
+              },
+              null,
+              2,
+            )
+          : JSON.stringify(inp, null, 2)
+        : "" + inp;
+    console.error("filterExceptionStackTrace-2", {
+      inp,
       s,
       cwdPathPrefix,
       output: s
         .replace(/\\\\?/g, "/")
+        .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/")
         .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
         .replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/"),
     });
     return s
       .replace(/\\\\?/g, "/")
+      .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/")
       .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
       .replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/");
   }

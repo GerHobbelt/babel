@@ -5,6 +5,7 @@ import * as t from "@gerhobbelt/babel-types";
 import fs from "fs";
 import path from "path";
 import fixtures from "@gerhobbelt/babel-helper-fixtures";
+import escapeRegExp from "lodash/escapeRegExp";
 
 describe("generation", function() {
   it("completeness", function() {
@@ -396,10 +397,45 @@ describe("CodeGenerator", function() {
 
 const suites = fixtures(`${__dirname}/fixtures`);
 
-function filterExceptionStackTrace(s) {
+// <CWD>
+const cwdPathPrefix = path
+  .resolve(__dirname, "../../../")
+  .replace(/\\\\?/g, "/");
+
+function filterExceptionStackTrace(inp) {
+  if (inp && inp.sources) {
+    const srcs = inp.sources.forEach(str => filterExceptionStackTrace(str));
+    inp.sources = srcs;
+    return inp;
+  }
+  const s =
+    typeof inp === "object"
+      ? inp instanceof Error
+        ? JSON.stringify(
+            {
+              message: inp.message,
+              stack: inp.stack,
+            },
+            null,
+            2,
+          )
+        : JSON.stringify(inp, null, 2)
+      : "" + inp;
+  console.error("filterExceptionStackTrace-1", {
+    inp,
+    s,
+    cwdPathPrefix,
+    output: s
+      .replace(/\\\\?/g, "/")
+      .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/")
+      .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
+      .replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/"),
+  });
   return s
     .replace(/\\\\?/g, "/")
-    .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/");
+    .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/")
+    .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
+    .replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/");
 }
 
 suites.forEach(function(testSuite) {
