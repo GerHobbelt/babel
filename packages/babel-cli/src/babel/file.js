@@ -2,6 +2,7 @@ import convertSourceMap from "convert-source-map";
 import defaults from "lodash/defaults";
 import sourceMap from "source-map";
 import slash from "slash";
+import { sync as makeDirSync } from "make-dir";
 import path from "path";
 import fs from "fs";
 
@@ -78,6 +79,8 @@ export default async function({ cliOptions, babelOptions }) {
     const result = buildResult(fileResults);
 
     if (cliOptions.outFile) {
+      makeDirSync(path.dirname(cliOptions.outFile));
+
       // we've requested for a sourcemap to be written to disk
       if (babelOptions.sourceMaps && babelOptions.sourceMaps !== "inline") {
         const mapLoc = cliOptions.outFile + ".map";
