@@ -6,7 +6,10 @@
   "files": [
     "babel.js",
     "babel.min.js",
-    "src"
+    "src",
+    "lib",
+    "LICENSE",
+    "README.md"
   ],
   "devDependencies": {
     "@gerhobbelt/babel-core": "7.0.0-14",

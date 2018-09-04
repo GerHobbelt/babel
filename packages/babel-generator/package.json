@@ -10,9 +10,6 @@
   },
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-generator",
   "main": "lib/index.js",
-  "files": [
-    "lib"
-  ],
   "dependencies": {
     "@gerhobbelt/babel-types": "7.0.0-14",
     "jsesc": "^2.5.1",

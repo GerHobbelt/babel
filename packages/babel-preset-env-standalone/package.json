@@ -6,7 +6,10 @@
   "files": [
     "babel-preset-env.js",
     "babel-preset-env.min.js",
-    "src"
+    "lib",
+    "src",
+    "LICENSE",
+    "README.md"
   ],
   "devDependencies": {
     "@gerhobbelt/babel-plugin-proposal-json-strings": "7.0.0-14",
