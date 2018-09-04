@@ -94,9 +94,15 @@ function webpackBuild(opts) {
     plugins: [
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(buildMode),
-        "process.env": JSON.stringify({
-          NODE_ENV: buildMode,
-        }),
+        "process.env.BABEL_ENV": process.env.BABEL_ENV
+          ? JSON.stringify(process.env.BABEL_ENV)
+          : undefined,
+        "process.env.DEBUG": process.env.DEBUG
+          ? JSON.stringify(process.env.DEBUG)
+          : undefined,
+        "process.env.NODE_DEBUG": process.env.NODE_DEBUG
+          ? JSON.stringify(process.env.NODE_DEBUG)
+          : undefined,
         BABEL_VERSION: JSON.stringify(babelVersion),
         VERSION: JSON.stringify(version),
       }),

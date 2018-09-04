@@ -1,6 +1,6 @@
 //@flow
 
-import invariant from "invariant";
+import assert from "power-assert";
 import browserslist from "browserslist";
 import builtInsList from "../data/built-ins.json";
 import { defaultWebIncludes } from "./default-includes";
@@ -59,7 +59,7 @@ const expandIncludesAndExcludes = (
     (p, i) => selectedPlugins[i].length === 0,
   );
 
-  invariant(
+  assert(
     invalidRegExpList.length === 0,
     `Invalid Option: The plugins/built-ins '${invalidRegExpList.join(
       ", ",
@@ -84,7 +84,7 @@ export const checkDuplicateIncludeExcludes = (
 ): void => {
   const duplicates = include.filter(opt => exclude.indexOf(opt) >= 0);
 
-  invariant(
+  assert(
     duplicates.length === 0,
     `Invalid Option: The plugins/built-ins '${duplicates.join(
       ", ",
@@ -106,7 +106,7 @@ const normalizeTargets = (targets: any): Targets => {
 export const validateConfigPathOption = (
   configPath: string = process.cwd(),
 ) => {
-  invariant(
+  assert(
     typeof configPath === "string",
     `Invalid Option: The configPath option '${configPath}' is invalid, only strings are allowed.`,
   );
@@ -141,7 +141,7 @@ export const validateIgnoreBrowserslistConfig = (
 export const validateModulesOption = (
   modulesOpt: ModuleOption = ModulesOption.auto,
 ) => {
-  invariant(
+  assert(
     ModulesOption[modulesOpt] ||
       ModulesOption[modulesOpt] === ModulesOption.false,
     `Invalid Option: The 'modules' option must be one of \n` +
@@ -167,7 +167,7 @@ export const objectToBrowserslist = (object: Targets): Array<string> => {
 export const validateUseBuiltInsOption = (
   builtInsOpt: BuiltInsOption = false,
 ): BuiltInsOption => {
-  invariant(
+  assert(
     UseBuiltInsOption[builtInsOpt] ||
       UseBuiltInsOption[builtInsOpt] === UseBuiltInsOption.false,
     `Invalid Option: The 'useBuiltIns' option must be either

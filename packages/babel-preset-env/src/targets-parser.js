@@ -1,7 +1,7 @@
 // @flow
 
 import browserslist from "browserslist";
-import invariant from "invariant";
+import assert from "power-assert";
 import semver from "semver";
 import {
   semverify,
@@ -47,7 +47,7 @@ export const isBrowsersQueryValid = (
 ): boolean => typeof browsers === "string" || Array.isArray(browsers);
 
 const validateBrowsers = browsers => {
-  invariant(
+  assert(
     typeof browsers === "undefined" || isBrowsersQueryValid(browsers),
     `Invalid Option: '${browsers}' is not a valid browserslist query`,
   );

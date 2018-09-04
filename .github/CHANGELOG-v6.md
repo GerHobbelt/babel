@@ -3817,7 +3817,7 @@ Thanks to @samwgoldman for all the new flow support!
  * **New Feature**
   * Add support for `function.sent`.
  * **Internal**
-  * Bump `invariant` depenency version.
+  * Bump `invariant` dependency version.
  * **Polish**
   * Infer filename from the base directory when resolving plugins and presets.
   * Allow JSX pragma to be specified in line comments.

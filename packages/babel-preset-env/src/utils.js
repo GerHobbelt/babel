@@ -1,6 +1,6 @@
 // @flow
 
-import invariant from "invariant";
+import assert from "power-assert";
 import semver from "semver";
 import levenshtein from "js-levenshtein";
 import { addSideEffect } from "@gerhobbelt/babel-helper-module-imports";
@@ -17,7 +17,7 @@ export const semverify = (version: string | number): string => {
     return version;
   }
 
-  invariant(
+  assert(
     typeof version === "number" ||
       (typeof version === "string" && versionRegExp.test(version)),
     `'${version}' is not a valid version`,

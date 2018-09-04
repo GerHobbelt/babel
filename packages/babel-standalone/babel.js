@@ -31381,15 +31381,7 @@
         (function(n) {
           var a;
           (t = e.exports = J),
-            (a =
-              "object" == typeof n &&
-              { NODE_ENV: "production" }.NODE_DEBUG &&
-              /\bsemver\b/i.test({ NODE_ENV: "production" }.NODE_DEBUG)
-                ? function() {
-                    var e = Array.prototype.slice.call(arguments, 0);
-                    e.unshift("SEMVER"), console.log.apply(console, e);
-                  }
-                : function() {}),
+            (a = function() {}),
             (t.SEMVER_SPEC_VERSION = "2.0.0");
           var r = 256,
             i = Number.MAX_SAFE_INTEGER || 9007199254740991,
@@ -32395,7 +32387,7 @@
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.getEnv = function(e) {
             void 0 === e && (e = "development");
-            return { NODE_ENV: "production" }.BABEL_ENV || production || e;
+            return "development";
           });
       },
       function(e, t, n) {
@@ -33074,13 +33066,7 @@
             try {
               e = t.storage.debug;
             } catch (e) {}
-            return (
-              !e &&
-                void 0 !== a &&
-                "env" in a &&
-                (e = { NODE_ENV: "production" }.DEBUG),
-              e
-            );
+            return !e && void 0 !== a && "env" in a && (e = void 0), e;
           }
           ((t = e.exports = n(458)).log = function() {
             return (
@@ -35469,11 +35455,7 @@
             return e < 10 ? "0" + e.toString(10) : e.toString(10);
           }
           (t.debuglog = function(e) {
-            if (
-              (m(i) && (i = { NODE_ENV: "production" }.NODE_DEBUG || ""),
-              (e = e.toUpperCase()),
-              !o[e])
-            )
+            if ((m(i) && (i = ""), (e = e.toUpperCase()), !o[e]))
               if (new RegExp("\\b" + e + "\\b", "i").test(i)) {
                 var n = a.pid;
                 o[e] = function() {
@@ -38309,136 +38291,133 @@
             e
           );
         }
-        var i = "test" === production,
-          o = (function() {
-            function e(e, t, n, a) {
-              (this.queue = null),
-                (this.parentPath = a),
-                (this.scope = e),
-                (this.state = n),
-                (this.opts = t);
-            }
-            var t = e.prototype;
-            return (
-              (t.shouldVisit = function(e) {
-                var t = this.opts;
-                if (t.enter || t.exit) return !0;
-                if (t[e.type]) return !0;
-                var n = r().VISITOR_KEYS[e.type];
-                if (!n || !n.length) return !1;
-                var a = n,
-                  i = Array.isArray(a),
-                  o = 0;
-                for (a = i ? a : a[Symbol.iterator](); ; ) {
-                  var s;
-                  if (i) {
-                    if (o >= a.length) break;
-                    s = a[o++];
-                  } else {
-                    if ((o = a.next()).done) break;
-                    s = o.value;
-                  }
-                  if (e[s]) return !0;
+        var i = (function() {
+          function e(e, t, n, a) {
+            (this.queue = null),
+              (this.parentPath = a),
+              (this.scope = e),
+              (this.state = n),
+              (this.opts = t);
+          }
+          var t = e.prototype;
+          return (
+            (t.shouldVisit = function(e) {
+              var t = this.opts;
+              if (t.enter || t.exit) return !0;
+              if (t[e.type]) return !0;
+              var n = r().VISITOR_KEYS[e.type];
+              if (!n || !n.length) return !1;
+              var a = n,
+                i = Array.isArray(a),
+                o = 0;
+              for (a = i ? a : a[Symbol.iterator](); ; ) {
+                var s;
+                if (i) {
+                  if (o >= a.length) break;
+                  s = a[o++];
+                } else {
+                  if ((o = a.next()).done) break;
+                  s = o.value;
                 }
-                return !1;
-              }),
-              (t.create = function(e, t, n, r) {
-                return a.default.get({
-                  parentPath: this.parentPath,
-                  parent: e,
-                  container: t,
-                  key: n,
-                  listKey: r,
-                });
-              }),
-              (t.maybeQueue = function(e, t) {
-                if (this.trap) throw new Error("Infinite cycle detected");
-                this.queue &&
-                  (t ? this.queue.push(e) : this.priorityQueue.push(e));
-              }),
-              (t.visitMultiple = function(e, t, n) {
-                if (0 === e.length) return !1;
-                for (var a = [], r = 0; r < e.length; r++) {
-                  var i = e[r];
-                  i && this.shouldVisit(i) && a.push(this.create(t, e, r, n));
+                if (e[s]) return !0;
+              }
+              return !1;
+            }),
+            (t.create = function(e, t, n, r) {
+              return a.default.get({
+                parentPath: this.parentPath,
+                parent: e,
+                container: t,
+                key: n,
+                listKey: r,
+              });
+            }),
+            (t.maybeQueue = function(e, t) {
+              if (this.trap) throw new Error("Infinite cycle detected");
+              this.queue &&
+                (t ? this.queue.push(e) : this.priorityQueue.push(e));
+            }),
+            (t.visitMultiple = function(e, t, n) {
+              if (0 === e.length) return !1;
+              for (var a = [], r = 0; r < e.length; r++) {
+                var i = e[r];
+                i && this.shouldVisit(i) && a.push(this.create(t, e, r, n));
+              }
+              return this.visitQueue(a);
+            }),
+            (t.visitSingle = function(e, t) {
+              return (
+                !!this.shouldVisit(e[t]) &&
+                this.visitQueue([this.create(e, e, t)])
+              );
+            }),
+            (t.visitQueue = function(e) {
+              (this.queue = e), (this.priorityQueue = []);
+              var t = [],
+                n = !1,
+                a = e,
+                r = Array.isArray(a),
+                i = 0;
+              for (a = r ? a : a[Symbol.iterator](); ; ) {
+                var o;
+                if (r) {
+                  if (i >= a.length) break;
+                  o = a[i++];
+                } else {
+                  if ((i = a.next()).done) break;
+                  o = i.value;
                 }
-                return this.visitQueue(a);
-              }),
-              (t.visitSingle = function(e, t) {
-                return (
-                  !!this.shouldVisit(e[t]) &&
-                  this.visitQueue([this.create(e, e, t)])
-                );
-              }),
-              (t.visitQueue = function(e) {
-                (this.queue = e), (this.priorityQueue = []);
-                var t = [],
-                  n = !1,
-                  a = e,
-                  r = Array.isArray(a),
-                  o = 0;
-                for (a = r ? a : a[Symbol.iterator](); ; ) {
-                  var s;
-                  if (r) {
-                    if (o >= a.length) break;
-                    s = a[o++];
-                  } else {
-                    if ((o = a.next()).done) break;
-                    s = o.value;
+                var s = o;
+                if (
+                  (s.resync(),
+                  (0 !== s.contexts.length &&
+                    s.contexts[s.contexts.length - 1] === this) ||
+                    s.pushContext(this),
+                  null !== s.key && !(t.indexOf(s.node) >= 0))
+                ) {
+                  if ((t.push(s.node), s.visit())) {
+                    n = !0;
+                    break;
                   }
-                  var d = s;
                   if (
-                    (d.resync(),
-                    (0 !== d.contexts.length &&
-                      d.contexts[d.contexts.length - 1] === this) ||
-                      d.pushContext(this),
-                    null !== d.key &&
-                      (i && e.length >= 1e4 && (this.trap = !0),
-                      !(t.indexOf(d.node) >= 0)))
-                  ) {
-                    if ((t.push(d.node), d.visit())) {
-                      n = !0;
-                      break;
-                    }
-                    if (
-                      this.priorityQueue.length &&
-                      ((n = this.visitQueue(this.priorityQueue)),
-                      (this.priorityQueue = []),
-                      (this.queue = e),
-                      n)
-                    )
-                      break;
-                  }
+                    this.priorityQueue.length &&
+                    ((n = this.visitQueue(this.priorityQueue)),
+                    (this.priorityQueue = []),
+                    (this.queue = e),
+                    n)
+                  )
+                    break;
                 }
-                var u = e,
-                  l = Array.isArray(u),
-                  c = 0;
-                for (u = l ? u : u[Symbol.iterator](); ; ) {
-                  var p;
-                  if (l) {
-                    if (c >= u.length) break;
-                    p = u[c++];
-                  } else {
-                    if ((c = u.next()).done) break;
-                    p = c.value;
-                  }
-                  p.popContext();
+              }
+              var d = e,
+                u = Array.isArray(d),
+                l = 0;
+              for (d = u ? d : d[Symbol.iterator](); ; ) {
+                var c;
+                if (u) {
+                  if (l >= d.length) break;
+                  c = d[l++];
+                } else {
+                  if ((l = d.next()).done) break;
+                  c = l.value;
                 }
-                return (this.queue = null), n;
-              }),
-              (t.visit = function(e, t) {
-                var n = e[t];
-                return (
-                  !!n &&
-                  (Array.isArray(n)
-                    ? this.visitMultiple(n, e, t)
-                    : this.visitSingle(e, t))
-                );
-              }),
-              e
-            );
-          })();
-        t.default = o;
+                c.popContext();
+              }
+              return (this.queue = null), n;
+            }),
+            (t.visit = function(e, t) {
+              var n = e[t];
+              return (
+                !!n &&
+                (Array.isArray(n)
+                  ? this.visitMultiple(n, e, t)
+                  : this.visitSingle(e, t))
+              );
+            }),
+            e
+          );
+        })();
+        t.default = i;
       },
       function(e, t, n) {
         "use strict";
@@ -42618,13 +42597,7 @@
             try {
               e = t.storage.debug;
             } catch (e) {}
-            return (
-              !e &&
-                void 0 !== a &&
-                "env" in a &&
-                (e = { NODE_ENV: "production" }.DEBUG),
-              e
-            );
+            return !e && void 0 !== a && "env" in a && (e = void 0), e;
           }
           ((t = e.exports = n(378)).log = function() {
             return (
@@ -49976,7 +49949,10 @@
             o = n(436),
             s =
               "win32" === t.platform &&
-              !({ NODE_ENV: "production" }.TERM || "")
+              !(
+                { NODE_ENV: "production", BABEL_ENV: '"development"' }.TERM ||
+                ""
+              )
                 .toLowerCase()
                 .startsWith("xterm"),
             d = ["ansi", "ansi", "ansi256", "ansi16m"],

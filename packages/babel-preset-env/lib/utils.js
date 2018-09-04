@@ -5,10 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.isRequire = exports.createImport = exports.getModulePath = exports.isPolyfillSource = exports.filterStageFromList = exports.getLowestUnreleased = exports.isUnreleasedVersion = exports.prettifyTargets = exports.prettifyVersion = exports.findSuggestion = exports.getValues = exports.roundToMinor = exports.semverify = void 0;
 
-function _invariant() {
-  const data = _interopRequireDefault(require("invariant"));
+function _powerAssert() {
+  const data = _interopRequireDefault(require("power-assert"));
 
-  _invariant = function () {
+  _powerAssert = function () {
     return data;
   };
 
@@ -58,7 +58,7 @@ const semverify = version => {
     return version;
   }
 
-  (0, _invariant().default)(typeof version === "number" || typeof version === "string" && versionRegExp.test(version), `'${version}' is not a valid version`);
+  (0, _powerAssert().default)(typeof version === "number" || typeof version === "string" && versionRegExp.test(version), `'${version}' is not a valid version`);
   const split = version.toString().split(".");
 
   while (split.length < 3) {

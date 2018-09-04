@@ -4671,15 +4671,7 @@
         (function(r) {
           var n;
           (t = e.exports = X),
-            (n =
-              "object" == typeof r &&
-              { NODE_ENV: "production" }.NODE_DEBUG &&
-              /\bsemver\b/i.test({ NODE_ENV: "production" }.NODE_DEBUG)
-                ? function() {
-                    var e = Array.prototype.slice.call(arguments, 0);
-                    e.unshift("SEMVER"), console.log.apply(console, e);
-                  }
-                : function() {}),
+            (n = function() {}),
             (t.SEMVER_SPEC_VERSION = "2.0.0");
           var i = 256,
             a = Number.MAX_SAFE_INTEGER || 9007199254740991,
@@ -7375,8 +7367,6 @@
       function(e, t, r) {
         "use strict";
         e.exports = function(e, t, r, n, i, a, o, s) {
-          if ("production" !== production && void 0 === t)
-            throw new Error("invariant requires an error message argument");
           if (!e) {
             var u;
             if (void 0 === t)
@@ -27950,7 +27940,7 @@
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.getEnv = function(e) {
             void 0 === e && (e = "development");
-            return { NODE_ENV: "production" }.BABEL_ENV || production || e;
+            return "development";
           });
       },
       function(e, t, r) {
@@ -28629,13 +28619,7 @@
             try {
               e = t.storage.debug;
             } catch (e) {}
-            return (
-              !e &&
-                void 0 !== n &&
-                "env" in n &&
-                (e = { NODE_ENV: "production" }.DEBUG),
-              e
-            );
+            return !e && void 0 !== n && "env" in n && (e = void 0), e;
           }
           ((t = e.exports = r(412)).log = function() {
             return (
@@ -30988,11 +30972,7 @@
             return e < 10 ? "0" + e.toString(10) : e.toString(10);
           }
           (t.debuglog = function(e) {
-            if (
-              (g(a) && (a = { NODE_ENV: "production" }.NODE_DEBUG || ""),
-              (e = e.toUpperCase()),
-              !o[e])
-            )
+            if ((g(a) && (a = ""), (e = e.toUpperCase()), !o[e]))
               if (new RegExp("\\b" + e + "\\b", "i").test(a)) {
                 var r = n.pid;
                 o[e] = function() {
@@ -38537,136 +38517,133 @@
             e
           );
         }
-        var a = "test" === production,
-          o = (function() {
-            function e(e, t, r, n) {
-              (this.queue = null),
-                (this.parentPath = n),
-                (this.scope = e),
-                (this.state = r),
-                (this.opts = t);
-            }
-            var t = e.prototype;
-            return (
-              (t.shouldVisit = function(e) {
-                var t = this.opts;
-                if (t.enter || t.exit) return !0;
-                if (t[e.type]) return !0;
-                var r = i().VISITOR_KEYS[e.type];
-                if (!r || !r.length) return !1;
-                var n = r,
-                  a = Array.isArray(n),
-                  o = 0;
-                for (n = a ? n : n[Symbol.iterator](); ; ) {
-                  var s;
-                  if (a) {
-                    if (o >= n.length) break;
-                    s = n[o++];
-                  } else {
-                    if ((o = n.next()).done) break;
-                    s = o.value;
-                  }
-                  if (e[s]) return !0;
+        var a = (function() {
+          function e(e, t, r, n) {
+            (this.queue = null),
+              (this.parentPath = n),
+              (this.scope = e),
+              (this.state = r),
+              (this.opts = t);
+          }
+          var t = e.prototype;
+          return (
+            (t.shouldVisit = function(e) {
+              var t = this.opts;
+              if (t.enter || t.exit) return !0;
+              if (t[e.type]) return !0;
+              var r = i().VISITOR_KEYS[e.type];
+              if (!r || !r.length) return !1;
+              var n = r,
+                a = Array.isArray(n),
+                o = 0;
+              for (n = a ? n : n[Symbol.iterator](); ; ) {
+                var s;
+                if (a) {
+                  if (o >= n.length) break;
+                  s = n[o++];
+                } else {
+                  if ((o = n.next()).done) break;
+                  s = o.value;
                 }
-                return !1;
-              }),
-              (t.create = function(e, t, r, i) {
-                return n.default.get({
-                  parentPath: this.parentPath,
-                  parent: e,
-                  container: t,
-                  key: r,
-                  listKey: i,
-                });
-              }),
-              (t.maybeQueue = function(e, t) {
-                if (this.trap) throw new Error("Infinite cycle detected");
-                this.queue &&
-                  (t ? this.queue.push(e) : this.priorityQueue.push(e));
-              }),
-              (t.visitMultiple = function(e, t, r) {
-                if (0 === e.length) return !1;
-                for (var n = [], i = 0; i < e.length; i++) {
-                  var a = e[i];
-                  a && this.shouldVisit(a) && n.push(this.create(t, e, i, r));
+                if (e[s]) return !0;
+              }
+              return !1;
+            }),
+            (t.create = function(e, t, r, i) {
+              return n.default.get({
+                parentPath: this.parentPath,
+                parent: e,
+                container: t,
+                key: r,
+                listKey: i,
+              });
+            }),
+            (t.maybeQueue = function(e, t) {
+              if (this.trap) throw new Error("Infinite cycle detected");
+              this.queue &&
+                (t ? this.queue.push(e) : this.priorityQueue.push(e));
+            }),
+            (t.visitMultiple = function(e, t, r) {
+              if (0 === e.length) return !1;
+              for (var n = [], i = 0; i < e.length; i++) {
+                var a = e[i];
+                a && this.shouldVisit(a) && n.push(this.create(t, e, i, r));
+              }
+              return this.visitQueue(n);
+            }),
+            (t.visitSingle = function(e, t) {
+              return (
+                !!this.shouldVisit(e[t]) &&
+                this.visitQueue([this.create(e, e, t)])
+              );
+            }),
+            (t.visitQueue = function(e) {
+              (this.queue = e), (this.priorityQueue = []);
+              var t = [],
+                r = !1,
+                n = e,
+                i = Array.isArray(n),
+                a = 0;
+              for (n = i ? n : n[Symbol.iterator](); ; ) {
+                var o;
+                if (i) {
+                  if (a >= n.length) break;
+                  o = n[a++];
+                } else {
+                  if ((a = n.next()).done) break;
+                  o = a.value;
                 }
-                return this.visitQueue(n);
-              }),
-              (t.visitSingle = function(e, t) {
-                return (
-                  !!this.shouldVisit(e[t]) &&
-                  this.visitQueue([this.create(e, e, t)])
-                );
-              }),
-              (t.visitQueue = function(e) {
-                (this.queue = e), (this.priorityQueue = []);
-                var t = [],
-                  r = !1,
-                  n = e,
-                  i = Array.isArray(n),
-                  o = 0;
-                for (n = i ? n : n[Symbol.iterator](); ; ) {
-                  var s;
-                  if (i) {
-                    if (o >= n.length) break;
-                    s = n[o++];
-                  } else {
-                    if ((o = n.next()).done) break;
-                    s = o.value;
+                var s = o;
+                if (
+                  (s.resync(),
+                  (0 !== s.contexts.length &&
+                    s.contexts[s.contexts.length - 1] === this) ||
+                    s.pushContext(this),
+                  null !== s.key && !(t.indexOf(s.node) >= 0))
+                ) {
+                  if ((t.push(s.node), s.visit())) {
+                    r = !0;
+                    break;
                   }
-                  var u = s;
                   if (
-                    (u.resync(),
-                    (0 !== u.contexts.length &&
-                      u.contexts[u.contexts.length - 1] === this) ||
-                      u.pushContext(this),
-                    null !== u.key &&
-                      (a && e.length >= 1e4 && (this.trap = !0),
-                      !(t.indexOf(u.node) >= 0)))
-                  ) {
-                    if ((t.push(u.node), u.visit())) {
-                      r = !0;
-                      break;
-                    }
-                    if (
-                      this.priorityQueue.length &&
-                      ((r = this.visitQueue(this.priorityQueue)),
-                      (this.priorityQueue = []),
-                      (this.queue = e),
-                      r)
-                    )
-                      break;
-                  }
+                    this.priorityQueue.length &&
+                    ((r = this.visitQueue(this.priorityQueue)),
+                    (this.priorityQueue = []),
+                    (this.queue = e),
+                    r)
+                  )
+                    break;
                 }
-                var l = e,
-                  c = Array.isArray(l),
-                  p = 0;
-                for (l = c ? l : l[Symbol.iterator](); ; ) {
-                  var f;
-                  if (c) {
-                    if (p >= l.length) break;
-                    f = l[p++];
-                  } else {
-                    if ((p = l.next()).done) break;
-                    f = p.value;
-                  }
-                  f.popContext();
+              }
+              var u = e,
+                l = Array.isArray(u),
+                c = 0;
+              for (u = l ? u : u[Symbol.iterator](); ; ) {
+                var p;
+                if (l) {
+                  if (c >= u.length) break;
+                  p = u[c++];
+                } else {
+                  if ((c = u.next()).done) break;
+                  p = c.value;
                 }
-                return (this.queue = null), r;
-              }),
-              (t.visit = function(e, t) {
-                var r = e[t];
-                return (
-                  !!r &&
-                  (Array.isArray(r)
-                    ? this.visitMultiple(r, e, t)
-                    : this.visitSingle(e, t))
-                );
-              }),
-              e
-            );
-          })();
-        t.default = o;
+                p.popContext();
+              }
+              return (this.queue = null), r;
+            }),
+            (t.visit = function(e, t) {
+              var r = e[t];
+              return (
+                !!r &&
+                (Array.isArray(r)
+                  ? this.visitMultiple(r, e, t)
+                  : this.visitSingle(e, t))
+              );
+            }),
+            e
+          );
+        })();
+        t.default = a;
       },
       function(e, t, r) {
         (function(n) {
@@ -38675,13 +38652,7 @@
             try {
               e = t.storage.debug;
             } catch (e) {}
-            return (
-              !e &&
-                void 0 !== n &&
-                "env" in n &&
-                (e = { NODE_ENV: "production" }.DEBUG),
-              e
-            );
+            return !e && void 0 !== n && "env" in n && (e = void 0), e;
           }
           ((t = e.exports = r(328)).log = function() {
             return (
@@ -46120,7 +46091,10 @@
             o = r(389),
             s =
               "win32" === t.platform &&
-              !({ NODE_ENV: "production" }.TERM || "")
+              !(
+                { NODE_ENV: "production", BABEL_ENV: '"development"' }.TERM ||
+                ""
+              )
                 .toLowerCase()
                 .startsWith("xterm"),
             u = ["ansi", "ansi", "ansi256", "ansi16m"],
