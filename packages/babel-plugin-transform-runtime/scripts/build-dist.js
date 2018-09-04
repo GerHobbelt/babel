@@ -9,7 +9,8 @@ const t = require("@gerhobbelt/babel-types");
 const slash = require("slash");
 
 const transformRuntime = require("../");
-const corejs2Definitions = require("../lib/definitions").default;
+const getCorejs2Definitions = require("../lib/definitions").default;
+const corejs2Definitions = getCorejs2Definitions();
 
 writeHelpers("@gerhobbelt/babel-runtime");
 
