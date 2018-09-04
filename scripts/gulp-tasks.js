@@ -93,7 +93,7 @@ function webpackBuild(opts) {
     mode: buildMode,
     plugins: [
       new webpack.DefinePlugin({
-        "process.env.NODE_ENV": buildMode,
+        "process.env.NODE_ENV": JSON.stringify(buildMode),
         "process.env": JSON.stringify({
           NODE_ENV: buildMode,
         }),
