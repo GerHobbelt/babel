@@ -20,6 +20,7 @@ const webpack = require("webpack");
 const webpackStream = require("webpack-stream");
 const uglify = require("gulp-uglify");
 const modify = require("gulp-modify-file");
+const prettier = require("gulp-prettier");
 
 // A remainder from the fight with webpack to build babel standalones which can
 // execute in node and are either minified or *not* minified.
@@ -148,11 +149,13 @@ function registerStandalonePackageTask(
           version,
           plugins,
         }),
+        prettier(),
         gulp.dest(standalonePath),
       ].concat(
         modify(tweakUMDheader),
         // Minification is super slow, so we skip it in CI.
         process.env.CI ? [] : buildMode === "production" ? uglify() : [],
+        prettier(),
         rename({ extname: ".min.js" }),
         gulp.dest(standalonePath)
       ),
