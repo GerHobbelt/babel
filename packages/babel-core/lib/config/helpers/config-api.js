@@ -57,14 +57,17 @@ function assertVersion(range) {
       throw new Error("Expected string or integer value.");
     }
 
-    range = `^${range}.0.0-0`;
+    const cv = _semver().default.parse(_.version);
+
+    if (cv.major === range) return;
+  } else {
+    if (typeof range !== "string") {
+      throw new Error("Expected string or integer value.");
+    }
+
+    if (_semver().default.satisfies(_.version, range)) return;
   }
 
-  if (typeof range !== "string") {
-    throw new Error("Expected string or integer value.");
-  }
-
-  if (_semver().default.satisfies(_.version, range)) return;
   const limit = Error.stackTraceLimit;
 
   if (typeof limit === "number" && limit < 25) {

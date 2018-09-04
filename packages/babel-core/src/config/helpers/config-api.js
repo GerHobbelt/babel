@@ -63,13 +63,15 @@ function assertVersion(range: string | number): void {
     if (!Number.isInteger(range)) {
       throw new Error("Expected string or integer value.");
     }
-    range = `^${range}.0.0-0`;
-  }
-  if (typeof range !== "string") {
-    throw new Error("Expected string or integer value.");
-  }
+    const cv = semver.parse(coreVersion);
+    if (cv.major === range) return;
+  } else {
+    if (typeof range !== "string") {
+      throw new Error("Expected string or integer value.");
+    }
 
-  if (semver.satisfies(coreVersion, range)) return;
+    if (semver.satisfies(coreVersion, range)) return;
+  }
 
   const limit = Error.stackTraceLimit;
 

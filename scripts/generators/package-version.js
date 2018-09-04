@@ -21,7 +21,7 @@ console.log("Updating version of all babel packages to", babelVersion);
 
 // pick up the peerDependencies clause from packages/babel-cli:
 const babelPeerDependencyClause = (() => {
-  const packageJson = require(join(cwd, "packages/babel-cli/package.json"));
+  const packageJson = require(join(cwd, "lerna.json")); // packages/babel-cli/package.json
   return packageJson.peerDependencies["@gerhobbelt/babel-core"];
 })();
 
@@ -35,28 +35,6 @@ function patchPackageJson(filePath, settings = {}) {
       m1 /*, m2 */
     ) => {
       return `"${m1}": "${babelVersion}"`;
-    })
-    // peerDependencies patches:
-    .replace(/"(@gerhobbelt\/babel-.*?)": ">([=0-9.a-z-]+) <([=0-9.a-z-]+)"/g, (
-      m,
-      m1 /*, m2, m3 */
-    ) => {
-      return `"${m1}": "${babelPeerDependencyClause}"`;
-    })
-    .replace(/"(@gerhobbelt\/babel-.*?)": ">([=0-9.a-z-]+)"/g, (
-      m,
-      m1 /*, m2 */
-    ) => {
-      return `"${m1}": "${babelPeerDependencyClause}"`;
-    })
-    .replace(/"(@gerhobbelt\/babel-.*?)": "^([=0-9.a-z-]+)"/g, (
-      m,
-      m1 /*, m2 */
-    ) => {
-      return `"${m1}": "${babelPeerDependencyClause}"`;
-    })
-    .replace(/"(@gerhobbelt\/babel-.*?)": "undefined"/g, (m, m1) => {
-      return `"${m1}": "${babelPeerDependencyClause}"`;
     })
     // version patches:
     .replace(/"version": "([^"]+)"/g, (/* m, m1 */) => {
@@ -72,6 +50,18 @@ function patchPackageJson(filePath, settings = {}) {
         return `"${m1}": "${babelVersion}"`;
       });
   }
+
+  const data = JSON.parse(updatedPackageJson);
+
+  // peerDependencies patches:
+  if (
+    data.peerDependencies &&
+    data.peerDependencies["@gerhobbelt/babel-core"]
+  ) {
+    data.peerDependencies["@gerhobbelt/babel-core"] = babelPeerDependencyClause;
+  }
+
+  updatedPackageJson = JSON.stringify(data, null, 2);
 
   // write
   writeFileSync(filePath, updatedPackageJson);
