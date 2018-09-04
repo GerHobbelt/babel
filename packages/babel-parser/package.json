@@ -1,12 +1,12 @@
 {
   "name": "@gerhobbelt/babel-parser",
-  "version": "7.0.1-15",
+  "version": "7.0.1-16",
   "description": "A JavaScript parser",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
   "homepage": "https://babeljs.io/",
   "license": "MIT",
   "publishConfig": {
-    "access": "public"
+    "tag": "next"
   },
   "keywords": [
     "babel",
@@ -26,14 +26,11 @@
     "node": ">=6.0.0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-helper-fixtures": "7.0.1-15",
+    "@gerhobbelt/babel-helper-fixtures": "7.0.1-16",
     "charcodes": "0.1.0",
     "unicode-11.0.0": "^0.7.7"
   },
   "bin": {
     "parser": "./bin/babel-parser.js"
-  },
-  "publishConfig": {
-    "tag": "next"
   }
 }

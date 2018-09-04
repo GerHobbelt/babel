@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-preset-env-standalone",
-  "version": "7.0.1-15",
+  "version": "7.0.1-16",
   "description": "Standalone build of babel-prest-env for use in non-Node.js environments.",
   "main": "babel-preset-env.js",
   "files": [
@@ -12,10 +12,10 @@
     "README.md"
   ],
   "devDependencies": {
-    "@gerhobbelt/babel-plugin-proposal-json-strings": "7.0.1-15",
-    "@gerhobbelt/babel-plugin-transform-new-target": "7.0.1-15",
-    "@gerhobbelt/babel-preset-env": "7.0.1-15",
-    "@gerhobbelt/babel-standalone": "7.0.1-15"
+    "@gerhobbelt/babel-plugin-proposal-json-strings": "7.0.1-16",
+    "@gerhobbelt/babel-plugin-transform-new-target": "7.0.1-16",
+    "@gerhobbelt/babel-preset-env": "7.0.1-16",
+    "@gerhobbelt/babel-standalone": "7.0.1-16"
   },
   "keywords": [
     "babel",
