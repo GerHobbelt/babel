@@ -1,7 +1,7 @@
 // @flow
 
 import browserslist from "browserslist";
-import assert from "power-assert";
+import assert from "assert";
 import semver from "semver";
 import {
   semverify,

@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = normalizeOptions;
 exports.validateUseBuiltInsOption = exports.objectToBrowserslist = exports.validateModulesOption = exports.validateIgnoreBrowserslistConfig = exports.validateBoolOption = exports.validateConfigPathOption = exports.checkDuplicateIncludeExcludes = exports.normalizePluginName = void 0;
 
-function _powerAssert() {
-  const data = _interopRequireDefault(require("power-assert"));
+function _assert() {
+  const data = _interopRequireDefault(require("assert"));
 
-  _powerAssert = function () {
+  _assert = function () {
     return data;
   };
 
@@ -72,7 +72,7 @@ const expandIncludesAndExcludes = (plugins = [], type) => {
   if (plugins.length === 0) return [];
   const selectedPlugins = plugins.map(plugin => selectPlugins(pluginToRegExp(plugin)));
   const invalidRegExpList = plugins.filter((p, i) => selectedPlugins[i].length === 0);
-  (0, _powerAssert().default)(invalidRegExpList.length === 0, `Invalid Option: The plugins/built-ins '${invalidRegExpList.join(", ")}' passed to the '${type}' option are not
+  (0, _assert().default)(invalidRegExpList.length === 0, `Invalid Option: The plugins/built-ins '${invalidRegExpList.join(", ")}' passed to the '${type}' option are not
     valid. Please check data/[plugin-features|built-in-features].js in babel-preset-env`);
   return flatten(selectedPlugins);
 };
@@ -85,7 +85,7 @@ exports.normalizePluginName = normalizePluginName;
 
 const checkDuplicateIncludeExcludes = (include = [], exclude = []) => {
   const duplicates = include.filter(opt => exclude.indexOf(opt) >= 0);
-  (0, _powerAssert().default)(duplicates.length === 0, `Invalid Option: The plugins/built-ins '${duplicates.join(", ")}' were found in both the "include" and
+  (0, _assert().default)(duplicates.length === 0, `Invalid Option: The plugins/built-ins '${duplicates.join(", ")}' were found in both the "include" and
     "exclude" options.`);
 };
 
@@ -102,7 +102,7 @@ const normalizeTargets = targets => {
 };
 
 const validateConfigPathOption = (configPath = process.cwd()) => {
-  (0, _powerAssert().default)(typeof configPath === "string", `Invalid Option: The configPath option '${configPath}' is invalid, only strings are allowed.`);
+  (0, _assert().default)(typeof configPath === "string", `Invalid Option: The configPath option '${configPath}' is invalid, only strings are allowed.`);
   return configPath;
 };
 
@@ -127,7 +127,7 @@ const validateIgnoreBrowserslistConfig = ignoreBrowserslistConfig => validateBoo
 exports.validateIgnoreBrowserslistConfig = validateIgnoreBrowserslistConfig;
 
 const validateModulesOption = (modulesOpt = _options.ModulesOption.auto) => {
-  (0, _powerAssert().default)(_options.ModulesOption[modulesOpt] || _options.ModulesOption[modulesOpt] === _options.ModulesOption.false, `Invalid Option: The 'modules' option must be one of \n` + ` - 'false' to indicate no module processing\n` + ` - a specific module type: 'commonjs', 'amd', 'umd', 'systemjs'` + ` - 'auto' (default) which will automatically select 'false' if the current\n` + `   process is known to support ES module syntax, or "commonjs" otherwise\n`);
+  (0, _assert().default)(_options.ModulesOption[modulesOpt] || _options.ModulesOption[modulesOpt] === _options.ModulesOption.false, `Invalid Option: The 'modules' option must be one of \n` + ` - 'false' to indicate no module processing\n` + ` - a specific module type: 'commonjs', 'amd', 'umd', 'systemjs'` + ` - 'auto' (default) which will automatically select 'false' if the current\n` + `   process is known to support ES module syntax, or "commonjs" otherwise\n`);
   return modulesOpt;
 };
 
@@ -147,7 +147,7 @@ const objectToBrowserslist = object => {
 exports.objectToBrowserslist = objectToBrowserslist;
 
 const validateUseBuiltInsOption = (builtInsOpt = false) => {
-  (0, _powerAssert().default)(_options.UseBuiltInsOption[builtInsOpt] || _options.UseBuiltInsOption[builtInsOpt] === _options.UseBuiltInsOption.false, `Invalid Option: The 'useBuiltIns' option must be either
+  (0, _assert().default)(_options.UseBuiltInsOption[builtInsOpt] || _options.UseBuiltInsOption[builtInsOpt] === _options.UseBuiltInsOption.false, `Invalid Option: The 'useBuiltIns' option must be either
     'false' (default) to indicate no polyfill,
     '"entry"' to indicate replacing the entry polyfill, or
     '"usage"' to import only used polyfills per file`);

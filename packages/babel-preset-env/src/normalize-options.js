@@ -1,6 +1,6 @@
 //@flow
 
-import assert from "power-assert";
+import assert from "assert";
 import browserslist from "browserslist";
 import builtInsList from "../data/built-ins.json";
 import { defaultWebIncludes } from "./default-includes";

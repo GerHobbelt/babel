@@ -1,6 +1,6 @@
 // @flow
 
-import assert from "power-assert";
+import assert from "assert";
 import semver from "semver";
 import levenshtein from "js-levenshtein";
 import { addSideEffect } from "@gerhobbelt/babel-helper-module-imports";

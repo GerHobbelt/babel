@@ -15,10 +15,10 @@ function _browserslist() {
   return data;
 }
 
-function _powerAssert() {
-  const data = _interopRequireDefault(require("power-assert"));
+function _assert() {
+  const data = _interopRequireDefault(require("assert"));
 
-  _powerAssert = function () {
+  _assert = function () {
     return data;
   };
 
@@ -74,7 +74,7 @@ const isBrowsersQueryValid = browsers => typeof browsers === "string" || Array.i
 exports.isBrowsersQueryValid = isBrowsersQueryValid;
 
 const validateBrowsers = browsers => {
-  (0, _powerAssert().default)(typeof browsers === "undefined" || isBrowsersQueryValid(browsers), `Invalid Option: '${browsers}' is not a valid browserslist query`);
+  (0, _assert().default)(typeof browsers === "undefined" || isBrowsersQueryValid(browsers), `Invalid Option: '${browsers}' is not a valid browserslist query`);
   return browsers;
 };
 

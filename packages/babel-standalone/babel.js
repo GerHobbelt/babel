@@ -31381,6 +31381,7 @@
         (function(n) {
           var a;
           (t = e.exports = J),
+            "object" == typeof n && n.env,
             (a = function() {}),
             (t.SEMVER_SPEC_VERSION = "2.0.0");
           var r = 256,
@@ -49949,12 +49950,7 @@
             o = n(436),
             s =
               "win32" === t.platform &&
-              !(
-                { NODE_ENV: "production", BABEL_ENV: '"development"' }.TERM ||
-                ""
-              )
-                .toLowerCase()
-                .startsWith("xterm"),
+              !(t.env.TERM || "").toLowerCase().startsWith("xterm"),
             d = ["ansi", "ansi", "ansi256", "ansi16m"],
             u = new Set(["gray"]),
             l = Object.create(null);
