@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-react-jsx-compat",
-  "version": "7.0.0-14",
+  "version": "7.0.1-15",
   "description": "Turn JSX into React Pre-0.12 function calls",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx-compat",
   "license": "MIT",
@@ -12,14 +12,14 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-builder-react-jsx": "7.0.0-14",
-    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0-14"
+    "@gerhobbelt/babel-helper-builder-react-jsx": "7.0.1-15",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.0.1-15"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "^7.0.0-0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.0.0-14",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.0.0-14"
+    "@gerhobbelt/babel-core": "7.0.1-15",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.0.1-15"
   }
 }

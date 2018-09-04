@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-core",
-  "version": "7.0.0-14",
+  "version": "7.0.1-15",
   "description": "Babel compiler core.",
   "main": "lib/index.js",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
@@ -33,23 +33,23 @@
     "./lib/transform-file.js": "./lib/transform-file-browser.js"
   },
   "dependencies": {
-    "@gerhobbelt/babel-code-frame": "7.0.0-14",
-    "@gerhobbelt/babel-generator": "7.0.0-14",
-    "@gerhobbelt/babel-helpers": "7.0.0-14",
-    "@gerhobbelt/babel-parser": "7.0.0-14",
-    "@gerhobbelt/babel-template": "7.0.0-14",
-    "@gerhobbelt/babel-traverse": "7.0.0-14",
-    "@gerhobbelt/babel-types": "7.0.0-14",
+    "@gerhobbelt/babel-code-frame": "7.0.1-15",
+    "@gerhobbelt/babel-generator": "7.0.1-15",
+    "@gerhobbelt/babel-helpers": "7.0.1-15",
+    "@gerhobbelt/babel-parser": "7.0.1-15",
+    "@gerhobbelt/babel-template": "7.0.1-15",
+    "@gerhobbelt/babel-traverse": "7.0.1-15",
+    "@gerhobbelt/babel-types": "7.0.1-15",
     "convert-source-map": "^1.5.1",
     "debug": "^3.1.0",
     "@gerhobbelt/json5": "2.0.1-37",
     "lodash": "^4.17.10",
     "resolve": "^1.8.1",
     "semver": "^5.5.1",
-    "source-map": "^0.7.3"
+    "source-map": "0.6.1"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-helper-transform-fixture-test-runner": "7.0.0-14",
-    "@gerhobbelt/babel-register": "7.0.0-14"
+    "@gerhobbelt/babel-helper-transform-fixture-test-runner": "7.0.1-15",
+    "@gerhobbelt/babel-register": "7.0.1-15"
   }
 }
