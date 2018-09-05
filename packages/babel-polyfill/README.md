@@ -9,11 +9,11 @@ See our website [@gerhobbelt/babel-polyfill](https://babeljs.io/docs/en/next/bab
 Using npm:
 
 ```sh
-npm install --save-dev @gerhobbelt/babel-polyfill
+npm install @gerhobbelt/babel-polyfill
 ```
 
 or using yarn:
 
 ```sh
-yarn add @gerhobbelt/babel-polyfill --dev
+yarn add @gerhobbelt/babel-polyfill
 ```
