@@ -217,6 +217,7 @@
     "rimraf": "2.6.2",
     "rollup-plugin-node-resolve": "3.4.0",
     "rollup-stream": "1.24.1",
+	"semver": "5.5.1",
     "slash": "2.0.0",
     "source-map": "^0.6.1",
     "strip-ansi": "4.0.0",
