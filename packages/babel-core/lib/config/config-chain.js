@@ -338,7 +338,7 @@ function normalizeOptions(opts) {
   delete options.include;
   delete options.exclude;
 
-  if (options.sourceMap) {
+  if (options.hasOwnProperty("sourceMap")) {
     options.sourceMaps = options.sourceMap;
     delete options.sourceMap;
   }

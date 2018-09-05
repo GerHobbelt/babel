@@ -25,10 +25,10 @@ function _outputFileSync() {
   return data;
 }
 
-function _mkdirp() {
-  const data = require("mkdirp");
+function _makeDir() {
+  const data = require("make-dir");
 
-  _mkdirp = function () {
+  _makeDir = function () {
     return data;
   };
 
@@ -170,7 +170,7 @@ async function _default({
       util.deleteDir(cliOptions.outDir);
     }
 
-    (0, _mkdirp().sync)(cliOptions.outDir);
+    (0, _makeDir().sync)(cliOptions.outDir);
     let compiledFiles = 0;
 
     for (const filename of cliOptions.filenames) {

@@ -45,6 +45,16 @@ function _slash() {
   return data;
 }
 
+function _makeDir() {
+  const data = require("make-dir");
+
+  _makeDir = function () {
+    return data;
+  };
+
+  return data;
+}
+
 function _path() {
   const data = _interopRequireDefault(require("path"));
 
@@ -129,6 +139,8 @@ async function _default({
     const result = buildResult(fileResults);
 
     if (cliOptions.outFile) {
+      (0, _makeDir().sync)(_path().default.dirname(cliOptions.outFile));
+
       if (babelOptions.sourceMaps && babelOptions.sourceMaps !== "inline") {
         const mapLoc = cliOptions.outFile + ".map";
         result.code = util.addSourceMappingUrl(result.code, mapLoc);

@@ -77,6 +77,8 @@ function _babelHelperOptimiseCallExpression() {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+const isNoInitialTypeAnnotationProp = o => o.has("typeAnnotation") && !o.has("value");
+
 var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
   api.assertVersion(7);
   const {
@@ -259,22 +261,6 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
     }
 
   });
-  const staticPrivatePropertyHandlerLoose = {
-    handle(member) {
-      const {
-        file,
-        privateId,
-        classRef
-      } = this;
-      member.replaceWith(_babelCore().template.expression`BASE(RECEIVER, CLASS).PRIVATE_ID`({
-        BASE: file.addHelper("classStaticPrivateFieldLooseBase"),
-        RECEIVER: member.node.object,
-        CLASS: classRef,
-        PRIVATE_ID: privateId
-      }));
-    }
-
-  };
 
   function buildClassPropertySpec(ref, path, state) {
     const {
@@ -331,7 +317,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
     });
   }
 
-  function buildClassPrivatePropertyLoose(ref, path, initNodes, state) {
+  function buildClassPrivatePropertyLooseHelper(ref, path, state) {
     const {
       parentPath,
       scope
@@ -345,23 +331,39 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
       prop,
       file: state
     }, privateNameHandlerLoose));
-    initNodes.push(_babelCore().template.statement`var PROP = HELPER(NAME);`({
-      PROP: prop,
-      HELPER: state.addHelper("classPrivateFieldLooseKey"),
-      NAME: _babelCore().types.stringLiteral(name)
-    }));
-    return () => _babelCore().template.statement`
-      Object.defineProperty(REF, PROP, {
-        // configurable is false by default
-        // enumerable is false by default
-        writable: true,
-        value: VALUE
-      });
-    `({
-      REF: ref,
-      PROP: prop,
-      VALUE: path.node.value || scope.buildUndefinedNode()
-    });
+    return {
+      keyDecl: _babelCore().template.statement`var PROP = HELPER(NAME);`({
+        PROP: prop,
+        HELPER: state.addHelper("classPrivateFieldLooseKey"),
+        NAME: _babelCore().types.stringLiteral(name)
+      }),
+      buildInit: () => _babelCore().template.statement.ast`
+          Object.defineProperty(${ref}, ${prop}, {
+            // configurable is false by default
+            // enumerable is false by default
+            writable: true,
+            value: ${path.node.value || scope.buildUndefinedNode()}
+          });
+        `
+    };
+  }
+
+  function buildClassInstancePrivatePropertyLoose(ref, path, initNodes, state) {
+    const {
+      keyDecl,
+      buildInit
+    } = buildClassPrivatePropertyLooseHelper(ref, path, state);
+    initNodes.push(keyDecl);
+    return buildInit;
+  }
+
+  function buildClassStaticPrivatePropertyLoose(ref, path, state) {
+    const {
+      keyDecl,
+      buildInit
+    } = buildClassPrivatePropertyLooseHelper(ref, path, state);
+    const staticNodesToAdd = [keyDecl, buildInit()];
+    return [staticNodesToAdd];
   }
 
   function buildClassStaticPrivatePropertySpec(ref, path, state, privateClassId) {
@@ -395,42 +397,8 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
     return [staticNodesToAdd, privateClassId];
   }
 
-  function buildClassStaticPrivatePropertyLoose(ref, path, state) {
-    const {
-      scope,
-      parentPath
-    } = path;
-    const {
-      key,
-      value
-    } = path.node;
-    const {
-      name
-    } = key.id;
-    const privateId = scope.generateUidIdentifier(name);
-    parentPath.traverse(privateNameVisitor, Object.assign({
-      name,
-      privateId,
-      classRef: ref,
-      file: state
-    }, staticPrivatePropertyHandlerLoose));
-    const staticNodesToAdd = [_babelCore().template.statement`
-        Object.defineProperty(OBJ, KEY, {
-          value: VALUE,
-          enumerable: false,
-          configurable: false,
-          writable: true
-        });
-      `({
-      OBJ: ref,
-      KEY: _babelCore().types.stringLiteral(privateId.name),
-      VALUE: value || scope.buildUndefinedNode()
-    })];
-    return [staticNodesToAdd];
-  }
-
   const buildClassProperty = loose ? buildClassPropertyLoose : buildClassPropertySpec;
-  const buildClassPrivateProperty = loose ? buildClassPrivatePropertyLoose : buildClassPrivatePropertySpec;
+  const buildClassPrivateProperty = loose ? buildClassInstancePrivatePropertyLoose : buildClassPrivatePropertySpec;
   const buildClassStaticPrivateProperty = loose ? buildClassStaticPrivatePropertyLoose : buildClassStaticPrivatePropertySpec;
   return {
     inherits: _babelPluginSyntaxClassProperties().default,
@@ -525,6 +493,8 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
         let privateClassId;
 
         for (const prop of props) {
+          if (isNoInitialTypeAnnotationProp(prop)) continue;
+
           if (prop.node.static) {
             if (prop.isPrivate()) {
               let staticNodesToAdd;

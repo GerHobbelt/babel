@@ -1005,15 +1005,7 @@ helpers.classPrivateFieldSet = helper("7.0.0-beta.0")`
     return value;
   }
 `;
-helpers.classStaticPrivateFieldLooseBase = helper("7.0.0-beta.0")`
-  export default function _classStaticPrivateFieldLooseBase(receiver, classConstructor) {
-    if (receiver !== classConstructor) {
-      throw new TypeError("Private static access of wrong provenance");
-    }
-    return classConstructor;
-  }
-`;
-helpers.classStaticPrivateFieldSpecGet = helper("7.0.0-beta.0")`
+helpers.classStaticPrivateFieldSpecGet = helper("7.0.1")`
   export default function _classStaticPrivateFieldSpecGet(
     receiver, classConstructor, privateClass, privateId
   ) {
@@ -1023,7 +1015,7 @@ helpers.classStaticPrivateFieldSpecGet = helper("7.0.0-beta.0")`
     return privateClass[privateId];
   }
 `;
-helpers.classStaticPrivateFieldSpecSet = helper("7.0.0-beta.0")`
+helpers.classStaticPrivateFieldSpecSet = helper("7.0.1")`
   export default function _classStaticPrivateFieldSpecSet(
     receiver, classConstructor, privateClass, privateId, value
   ) {

@@ -18,7 +18,9 @@ const RootMostResolvePlugin = require("webpack-dependency-suite")
   .RootMostResolvePlugin;
 const webpack = require("webpack");
 const webpackStream = require("webpack-stream");
-const uglify = require("gulp-uglify");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserJsPlugin = require("terser-webpack-plugin");
+const terser = require("gulp-terser");
 const modify = require("gulp-modify-file");
 const prettier = require("gulp-prettier");
 
@@ -28,10 +30,15 @@ const prettier = require("gulp-prettier");
 // Use this to diagnose generated source code via the console.error() logging
 // in here whenever you hit sh*t again.
 function tweakUMDheader(content, path, file) {
-  if (0) {
+  // content = content.replace(/\/\*\*+\/ /g, "");
+
+  if (0x1) {
     console.error(
       "tweakUMDheader",
-      content.substr(0, 1024),
+      content
+        .split("\n")
+        .slice(0, 200)
+        .join("\n"),
       content.length,
       path,
       file
@@ -41,7 +48,13 @@ function tweakUMDheader(content, path, file) {
   return content;
 }
 
-const buildMode = process.env.NODE_ENV || "production";
+const buildMode = process.env.NODE_ENV || "development";
+
+// use UGLIFY or TERSER for minification?
+const useTerserIndex = 1 + (buildMode === "production" ? 1 : 0);
+
+// Minification is super slow, so we skip it in CI.
+const fastGulpRun = process.env.CI || buildMode !== "production";
 
 function webpackBuild(opts) {
   const plugins = opts.plugins || [];
@@ -88,9 +101,83 @@ function webpackBuild(opts) {
       globalObject: `typeof window !== 'undefined' ? window : typeof self !== 'undefined' ? self : this`,
     },
     optimization: {
-      minimize: buildMode === "production",
+      // *always* feed the webpack output through a minifier, otherwise you
+      // end up with very ugly generated code which is totally unreadable thanks
+      // to the huge number of `eval("...")` expressions which are wrapped
+      // around all the actual code chunks.
+      //
+      // To escape this horror, we tell webpack to always 'minify' and then go
+      // and tell the minifier to do *nothing* in development mode and try
+      // its hand at mangling and minification in production mode:
+      minimize: true,
+      minimizer: [
+        [
+          new UglifyJsPlugin({
+            uglifyOptions: {
+              compress: false,
+              minify: false,
+              mangle: false,
+            },
+          }),
+        ],
+        // terser in development mode:
+        [
+          new TerserJsPlugin({
+            minify(file /*, sourceMap */) {
+              let src = "";
+              for (const propName in file) {
+                src += file[propName];
+              }
+
+              src = src.replace(/\/\*\*+\/ /g, "");
+
+              return {
+                // error,
+                // map,
+                code: src,
+                // warnings,
+                // extractedComments
+              };
+            },
+            terserOptions: {
+              compress: false,
+              minify: false,
+              mangle: false,
+            },
+          }),
+        ],
+        // terser in production mode:
+        [
+          new TerserJsPlugin({
+            terserOptions: {
+              compress: true,
+              minify: true,
+              mangle: true,
+            },
+          }),
+        ],
+      ][useTerserIndex],
+      mangleWasmImports: false,
+      // Turn the next few options ALWAYS ON, as we want to treat the code
+      // the same in development and production.
+      //
+      // Post Scriptum: these are now really not necessary anymore as we've
+      // found the only way to kick webpack in the nadgers and actually
+      // comply and produce human-readable output is to always have it
+      // execute a (possibly no-op) minification phase, i.e. as far as webpack
+      // is concerned, we always execute in 'production mode', or it will
+      // create absolutely *crap* (= totally unreadable) output!
+      occurrenceOrder: true,
+      flagIncludedChunks: true,
+      usedExports: true,
+      concatenateModules: true,
+      sideEffects: true,
+      namedChunks: false,
+      namedModules: false,
     },
-    mode: buildMode,
+    // Do NOT set to anything else as then !@#$% webpack produces very unreadable code.
+    // Instead let the minimizer(s) handle this...
+    mode: "production",
     plugins: [
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(buildMode),
@@ -160,8 +247,9 @@ function registerStandalonePackageTask(
       ].concat(
         modify(tweakUMDheader),
         // Minification is super slow, so we skip it in CI.
-        process.env.CI ? [] : buildMode === "production" ? uglify() : [],
+        !fastGulpRun ? terser() : [],
         prettier(),
+        modify(tweakUMDheader),
         rename({ extname: ".min.js" }),
         gulp.dest(standalonePath)
       ),
