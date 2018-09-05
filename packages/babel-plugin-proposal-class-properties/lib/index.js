@@ -238,26 +238,19 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
     get(member) {
       const {
         file,
-        name,
-        privateClassId,
+        privateId,
         classRef
       } = this;
-      return _babelCore().types.callExpression(file.addHelper("classStaticPrivateFieldSpecGet"), [this.receiver(member), classRef, privateClassId, _babelCore().types.stringLiteral(name)]);
+      return _babelCore().types.callExpression(file.addHelper("classStaticPrivateFieldSpecGet"), [this.receiver(member), _babelCore().types.cloneNode(classRef), _babelCore().types.cloneNode(privateId)]);
     },
 
     set(member, value) {
       const {
         file,
-        name,
-        privateClassId,
+        privateId,
         classRef
       } = this;
-      return _babelCore().types.callExpression(file.addHelper("classStaticPrivateFieldSpecSet"), [this.receiver(member), classRef, privateClassId, _babelCore().types.stringLiteral(name), value]);
-    },
-
-    call(member, args) {
-      this.memoise(member, 1);
-      return (0, _babelHelperOptimiseCallExpression().default)(this.get(member), this.receiver(member), args);
+      return _babelCore().types.callExpression(file.addHelper("classStaticPrivateFieldSpecSet"), [this.receiver(member), _babelCore().types.cloneNode(classRef), _babelCore().types.cloneNode(privateId), value]);
     }
 
   });
@@ -362,39 +355,32 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
       keyDecl,
       buildInit
     } = buildClassPrivatePropertyLooseHelper(ref, path, state);
-    const staticNodesToAdd = [keyDecl, buildInit()];
-    return [staticNodesToAdd];
+    return [keyDecl, buildInit()];
   }
 
-  function buildClassStaticPrivatePropertySpec(ref, path, state, privateClassId) {
+  function buildClassStaticPrivatePropertySpec(ref, path, state) {
     const {
-      scope,
-      parentPath
+      parentPath,
+      scope
     } = path;
     const {
-      key,
-      value
-    } = path.node;
-    const {
       name
-    } = key.id;
-    const staticNodesToAdd = [];
-
-    if (!privateClassId) {
-      privateClassId = path.scope.generateUidIdentifier(ref.name + "Statics");
-      staticNodesToAdd.push(_babelCore().template.statement`const PRIVATE_CLASS_ID = Object.create(null);`({
-        PRIVATE_CLASS_ID: privateClassId
-      }));
-    }
-
+    } = path.node.key.id;
+    const privateId = scope.generateUidIdentifier(name);
     (0, _babelHelperMemberExpressionToFunctions().default)(parentPath, privateNameVisitor, Object.assign({
       name,
-      privateClassId,
+      privateId,
       classRef: ref,
       file: state
     }, staticPrivatePropertyHandlerSpec));
-    staticNodesToAdd.push(_babelCore().types.expressionStatement(_babelCore().types.callExpression(state.addHelper("defineProperty"), [privateClassId, _babelCore().types.stringLiteral(name), value || scope.buildUndefinedNode()])));
-    return [staticNodesToAdd, privateClassId];
+    return [_babelCore().template.statement.ast`
+        var ${privateId} = {
+          // configurable is always false for private elements
+          // enumerable is always false for private elements
+          writable: true,
+          value: ${path.node.value || scope.buildUndefinedNode()}
+        }
+      `];
   }
 
   const buildClassProperty = loose ? buildClassPropertyLoose : buildClassPropertySpec;
@@ -490,16 +476,13 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
         }
 
         let p = 0;
-        let privateClassId;
 
         for (const prop of props) {
           if (isNoInitialTypeAnnotationProp(prop)) continue;
 
           if (prop.node.static) {
             if (prop.isPrivate()) {
-              let staticNodesToAdd;
-              [staticNodesToAdd, privateClassId] = buildClassStaticPrivateProperty(_babelCore().types.cloneNode(ref), prop, state, privateClassId);
-              staticNodes.push(...staticNodesToAdd);
+              staticNodes.push(...buildClassStaticPrivateProperty(_babelCore().types.cloneNode(ref), prop, state));
             } else {
               staticNodes.push(buildClassProperty(_babelCore().types.cloneNode(ref), prop, state));
             }

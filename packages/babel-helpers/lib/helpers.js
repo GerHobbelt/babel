@@ -1006,23 +1006,25 @@ helpers.classPrivateFieldSet = helper("7.0.0-beta.0")`
   }
 `;
 helpers.classStaticPrivateFieldSpecGet = helper("7.0.1")`
-  export default function _classStaticPrivateFieldSpecGet(
-    receiver, classConstructor, privateClass, privateId
-  ) {
+  export default function _classStaticPrivateFieldSpecGet(receiver, classConstructor, descriptor) {
     if (receiver !== classConstructor) {
       throw new TypeError("Private static access of wrong provenance");
     }
-    return privateClass[privateId];
+    return descriptor.value;
   }
 `;
 helpers.classStaticPrivateFieldSpecSet = helper("7.0.1")`
-  export default function _classStaticPrivateFieldSpecSet(
-    receiver, classConstructor, privateClass, privateId, value
-  ) {
+  export default function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor, value) {
     if (receiver !== classConstructor) {
       throw new TypeError("Private static access of wrong provenance");
     }
-    privateClass[privateId] = value;
+    if (!descriptor.writable) {
+      // This should only throw in strict mode, but class bodies are
+      // always strict and private fields can only be used inside
+      // class bodies.
+      throw new TypeError("attempted to set read only private field");
+    }
+    descriptor.value = value;
     return value;
   }
 `;
