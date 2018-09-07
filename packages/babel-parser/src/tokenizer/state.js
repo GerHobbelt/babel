@@ -22,6 +22,8 @@ export default class State {
 
     this.inMethod = false;
     this.inFunction = false;
+    this.inArrowFunction = false;
+    this.inNonArrowFunction = false;
     this.inParameters = false;
     this.maybeInArrowParameters = false;
     this.inGenerator = false;

@@ -1169,7 +1169,7 @@ export default class ExpressionParser extends LValParser {
     if (this.eat(tt.dot)) {
       const metaProp = this.parseMetaProperty(node, meta, "target");
 
-      if (!this.state.inFunction && !this.state.inClassProperty) {
+      if (!this.state.inNonArrowFunction && !this.state.inClassProperty) {
         let error = "new.target can only be used in functions";
 
         if (this.hasPlugin("classProperties")) {
@@ -1653,7 +1653,7 @@ export default class ExpressionParser extends LValParser {
     const oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
     this.state.inGenerator = false;
     this.state.maybeInArrowParameters = false;
-    this.parseFunctionBody(node, true);
+    this.parseFunctionBody(node, true, !this.state.inNonArrowFunction);
     this.state.inGenerator = oldInGenerator;
     this.state.inFunction = oldInFunc;
     this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
@@ -1692,14 +1692,17 @@ export default class ExpressionParser extends LValParser {
     allowExpressionBody?: boolean,
   ): void {
     // $FlowIgnore (node is not bodiless if we get here)
-    this.parseFunctionBody(node, allowExpressionBody);
+    this.parseFunctionBody(node, allowExpressionBody, false);
     this.finishNode(node, type);
   }
 
   // Parse function body and check parameters.
-  parseFunctionBody(node: N.Function, allowExpression: ?boolean): void {
+  parseFunctionBody(
+    node: N.Function,
+    allowExpression: ?boolean,
+    shouldResetInNonArrowFunctionFlag: ?boolean = false,
+  ): void {
     const isExpression = allowExpression && !this.match(tt.braceL);
-
     const oldInParameters = this.state.inParameters;
     const oldInAsync = this.state.inAsync;
     this.state.inParameters = false;
@@ -1725,6 +1728,10 @@ export default class ExpressionParser extends LValParser {
 
     this.checkFunctionNameAndParams(node, allowExpression);
     this.state.inParameters = oldInParameters;
+
+    if (shouldResetInNonArrowFunctionFlag) {
+      this.state.inNonArrowFunction = false;
+    }
   }
 
   checkFunctionNameAndParams(
