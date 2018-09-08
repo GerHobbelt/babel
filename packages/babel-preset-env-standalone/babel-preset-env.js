@@ -694,9 +694,9 @@
 
           var _traverseFast = _interopRequireDefault(__webpack_require__(124));
 
-          var _shallowEqual = _interopRequireDefault(__webpack_require__(51));
+          var _shallowEqual = _interopRequireDefault(__webpack_require__(52));
 
-          var _is = _interopRequireDefault(__webpack_require__(66));
+          var _is = _interopRequireDefault(__webpack_require__(67));
 
           var _isBinding = _interopRequireDefault(__webpack_require__(286));
 
@@ -720,7 +720,7 @@
             __webpack_require__(292)
           );
 
-          var _isType = _interopRequireDefault(__webpack_require__(67));
+          var _isType = _interopRequireDefault(__webpack_require__(68));
 
           var _isValidES3Identifier = _interopRequireDefault(
             __webpack_require__(293)
@@ -1035,7 +1035,7 @@
           exports.isRestProperty = isRestProperty;
           exports.isSpreadProperty = isSpreadProperty;
 
-          var _shallowEqual = _interopRequireDefault(__webpack_require__(51));
+          var _shallowEqual = _interopRequireDefault(__webpack_require__(52));
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule
@@ -9618,9 +9618,9 @@
             return data;
           }
 
-          __webpack_require__(65);
+          __webpack_require__(66);
 
-          __webpack_require__(68);
+          __webpack_require__(69);
 
           __webpack_require__(244);
 
@@ -9688,7 +9688,7 @@
           exports.visitors = visitors;
 
           function _includes() {
-            var data = _interopRequireDefault(__webpack_require__(74));
+            var data = _interopRequireDefault(__webpack_require__(75));
 
             _includes = function _includes() {
               return data;
@@ -9911,7 +9911,7 @@
           exports.default = defineType;
           exports.DEPRECATED_KEYS = exports.BUILDER_KEYS = exports.NODE_FIELDS = exports.FLIPPED_ALIAS_KEYS = exports.ALIAS_KEYS = exports.VISITOR_KEYS = void 0;
 
-          var _is = _interopRequireDefault(__webpack_require__(66));
+          var _is = _interopRequireDefault(__webpack_require__(67));
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule
@@ -11909,7 +11909,7 @@
             __webpack_require__(296)
           );
 
-          var _targetsParser = __webpack_require__(71);
+          var _targetsParser = __webpack_require__(72);
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule
@@ -12124,7 +12124,7 @@
         /* 20 */
         function(module, exports, __webpack_require__) {
           var isFunction = __webpack_require__(92),
-            isLength = __webpack_require__(58);
+            isLength = __webpack_require__(59);
 
           function isArrayLike(value) {
             return (
@@ -12146,7 +12146,7 @@
           var virtualTypes = _interopRequireWildcard(__webpack_require__(136));
 
           function _debug() {
-            var data = _interopRequireDefault(__webpack_require__(73));
+            var data = _interopRequireDefault(__webpack_require__(74));
 
             _debug = function _debug() {
               return data;
@@ -12172,7 +12172,7 @@
           var _cache = __webpack_require__(43);
 
           function _babelGenerator() {
-            var data = _interopRequireDefault(__webpack_require__(79));
+            var data = _interopRequireDefault(__webpack_require__(80));
 
             _babelGenerator = function _babelGenerator() {
               return data;
@@ -12265,27 +12265,29 @@
 
           var NodePath = (function() {
             function NodePath(hub, parent) {
-              this.parent = parent;
-              this.hub = hub;
-              this.contexts = [];
-              this.data = {};
-              this.shouldSkip = false;
-              this.shouldStop = false;
-              this.removed = false;
-              this.state = null;
-              this.opts = null;
-              this.skipKeys = null;
-              this.parentPath = null;
-              this.context = null;
-              this.container = null;
-              this.listKey = null;
-              this.inList = false;
-              this.parentKey = null;
-              this.key = null;
-              this.node = null;
-              this.scope = null;
-              this.type = null;
-              this.typeAnnotation = null;
+              var _this = this;
+
+              _this.parent = parent;
+              _this.hub = hub;
+              _this.contexts = [];
+              _this.data = {};
+              _this.shouldSkip = false;
+              _this.shouldStop = false;
+              _this.removed = false;
+              _this.state = null;
+              _this.opts = null;
+              _this.skipKeys = null;
+              _this.parentPath = null;
+              _this.context = null;
+              _this.container = null;
+              _this.listKey = null;
+              _this.inList = false;
+              _this.parentKey = null;
+              _this.key = null;
+              _this.node = null;
+              _this.scope = null;
+              _this.type = null;
+              _this.typeAnnotation = null;
             }
 
             NodePath.get = function get(_ref) {
@@ -13788,7 +13790,7 @@
         /* 39 */
         function(module, exports, __webpack_require__) {
           var DataView = __webpack_require__(226),
-            Map = __webpack_require__(53),
+            Map = __webpack_require__(54),
             Promise = __webpack_require__(227),
             Set = __webpack_require__(105),
             WeakMap = __webpack_require__(228),
@@ -14421,6 +14423,88 @@
           Object.defineProperty(exports, "__esModule", {
             value: true,
           });
+          exports.findConfigRoot = findConfigRoot;
+          exports.findPackageData = findPackageData;
+          exports.findRelativeConfig = findRelativeConfig;
+          exports.findRootConfig = findRootConfig;
+          exports.loadConfig = loadConfig;
+          exports.resolvePlugin = resolvePlugin;
+          exports.resolvePreset = resolvePreset;
+          exports.loadPlugin = loadPlugin;
+          exports.loadPreset = loadPreset;
+
+          function findConfigRoot(cwd) {
+            throw new Error(
+              "Cannot search for filesystem config root when running in a browser"
+            );
+          }
+
+          function findPackageData(filepath) {
+            return {
+              filepath: filepath,
+              directories: [],
+              pkg: null,
+              isPackage: false,
+            };
+          }
+
+          function findRelativeConfig(pkgData, envName, caller) {
+            return {
+              pkg: null,
+              config: null,
+              ignore: null,
+            };
+          }
+
+          function findRootConfig(dirname, envName, caller) {
+            return null;
+          }
+
+          function loadConfig(name, dirname, envName, caller) {
+            throw new Error(
+              "Cannot load " +
+                name +
+                " relative to " +
+                dirname +
+                " in a browser"
+            );
+          }
+
+          function resolvePlugin(name, dirname) {
+            return null;
+          }
+
+          function resolvePreset(name, dirname) {
+            return null;
+          }
+
+          function loadPlugin(name, dirname) {
+            throw new Error(
+              "Cannot load plugin " +
+                name +
+                " relative to " +
+                dirname +
+                " in a browser"
+            );
+          }
+
+          function loadPreset(name, dirname) {
+            throw new Error(
+              "Cannot load preset " +
+                name +
+                " relative to " +
+                dirname +
+                " in a browser"
+            );
+          }
+        },
+        /* 47 */
+        function(module, exports, __webpack_require__) {
+          "use strict";
+
+          Object.defineProperty(exports, "__esModule", {
+            value: true,
+          });
           exports.createItemFromDescriptor = createItemFromDescriptor;
           exports.createConfigItem = createConfigItem;
           exports.getItemDescriptor = getItemDescriptor;
@@ -14475,26 +14559,28 @@
           }
 
           var ConfigItem = function ConfigItem(descriptor) {
-            this._descriptor = descriptor;
-            Object.defineProperty(this, "_descriptor", {
+            var _this = this;
+
+            _this._descriptor = descriptor;
+            Object.defineProperty(_this, "_descriptor", {
               enumerable: false,
             });
-            this.value = this._descriptor.value;
-            this.options = this._descriptor.options;
-            this.dirname = this._descriptor.dirname;
-            this.name = this._descriptor.name;
-            this.file = this._descriptor.file
+            _this.value = _this._descriptor.value;
+            _this.options = _this._descriptor.options;
+            _this.dirname = _this._descriptor.dirname;
+            _this.name = _this._descriptor.name;
+            _this.file = _this._descriptor.file
               ? {
-                  request: this._descriptor.file.request,
-                  resolved: this._descriptor.file.resolved,
+                  request: _this._descriptor.file.request,
+                  resolved: _this._descriptor.file.resolved,
                 }
               : undefined;
-            Object.freeze(this);
+            Object.freeze(_this);
           };
 
           Object.freeze(ConfigItem.prototype);
         },
-        /* 47 */
+        /* 48 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -14597,13 +14683,15 @@
 
           var CacheConfigurator = (function() {
             function CacheConfigurator(data) {
-              this._active = true;
-              this._never = false;
-              this._forever = false;
-              this._invalidate = false;
-              this._configured = false;
-              this._pairs = [];
-              this._data = data;
+              var _this = this;
+
+              _this._active = true;
+              _this._never = false;
+              _this._forever = false;
+              _this._invalidate = false;
+              _this._configured = false;
+              _this._pairs = [];
+              _this._data = data;
             }
 
             var _proto = CacheConfigurator.prototype;
@@ -14769,7 +14857,7 @@
             return value;
           }
         },
-        /* 48 */
+        /* 49 */
         function(module, exports, __webpack_require__) {
           var isSymbol = __webpack_require__(29);
 
@@ -14786,7 +14874,7 @@
 
           module.exports = toKey;
         },
-        /* 49 */
+        /* 50 */
         function(module, exports) {
           function _defineProperties(target, props) {
             for (var i = 0; i < props.length; i++) {
@@ -14807,7 +14895,7 @@
 
           module.exports = _createClass;
         },
-        /* 50 */
+        /* 51 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -14958,7 +15046,7 @@
 
           exports.logUsagePolyfills = logUsagePolyfills;
         },
-        /* 51 */
+        /* 52 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -14981,7 +15069,7 @@
             return true;
           }
         },
-        /* 52 */
+        /* 53 */
         function(module, exports, __webpack_require__) {
           var ListCache = __webpack_require__(32),
             stackClear = __webpack_require__(186),
@@ -15002,7 +15090,7 @@
           Stack.prototype.set = stackSet;
           module.exports = Stack;
         },
-        /* 53 */
+        /* 54 */
         function(module, exports, __webpack_require__) {
           var getNative = __webpack_require__(13),
             root = __webpack_require__(6);
@@ -15010,7 +15098,7 @@
           var Map = getNative(root, "Map");
           module.exports = Map;
         },
-        /* 54 */
+        /* 55 */
         function(module, exports, __webpack_require__) {
           var mapCacheClear = __webpack_require__(197),
             mapCacheDelete = __webpack_require__(204),
@@ -15036,7 +15124,7 @@
           MapCache.prototype.set = mapCacheSet;
           module.exports = MapCache;
         },
-        /* 55 */
+        /* 56 */
         function(module, exports, __webpack_require__) {
           var baseIsArguments = __webpack_require__(212),
             isObjectLike = __webpack_require__(7);
@@ -15059,7 +15147,7 @@
               };
           module.exports = isArguments;
         },
-        /* 56 */
+        /* 57 */
         function(module, exports, __webpack_require__) {
           /* WEBPACK VAR INJECTION */ (function(module) {
             var root = __webpack_require__(6),
@@ -15085,7 +15173,7 @@
             /* WEBPACK VAR INJECTION */
           }.call(this, __webpack_require__(37)(module)));
         },
-        /* 57 */
+        /* 58 */
         function(module, exports) {
           var MAX_SAFE_INTEGER = 9007199254740991;
           var reIsUint = /^(?:0|[1-9]\d*)$/;
@@ -15105,7 +15193,7 @@
 
           module.exports = isIndex;
         },
-        /* 58 */
+        /* 59 */
         function(module, exports) {
           var MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -15120,7 +15208,7 @@
 
           module.exports = isLength;
         },
-        /* 59 */
+        /* 60 */
         function(module, exports) {
           var objectProto = Object.prototype;
 
@@ -15133,7 +15221,7 @@
 
           module.exports = isPrototype;
         },
-        /* 60 */
+        /* 61 */
         function(module, exports, __webpack_require__) {
           var arrayLikeKeys = __webpack_require__(98),
             baseKeysIn = __webpack_require__(218),
@@ -15147,7 +15235,7 @@
 
           module.exports = keysIn;
         },
-        /* 61 */
+        /* 62 */
         function(module, exports, __webpack_require__) {
           var arrayFilter = __webpack_require__(223),
             stubArray = __webpack_require__(101);
@@ -15169,7 +15257,7 @@
               };
           module.exports = getSymbols;
         },
-        /* 62 */
+        /* 63 */
         function(module, exports) {
           function arrayPush(array, values) {
             var index = -1,
@@ -15185,14 +15273,14 @@
 
           module.exports = arrayPush;
         },
-        /* 63 */
+        /* 64 */
         function(module, exports, __webpack_require__) {
           var overArg = __webpack_require__(100);
 
           var getPrototype = overArg(Object.getPrototypeOf, Object);
           module.exports = getPrototype;
         },
-        /* 64 */
+        /* 65 */
         function(module, exports, __webpack_require__) {
           var Uint8Array = __webpack_require__(106);
 
@@ -15204,7 +15292,7 @@
 
           module.exports = cloneArrayBuffer;
         },
-        /* 65 */
+        /* 66 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -16153,7 +16241,7 @@
             },
           });
         },
-        /* 66 */
+        /* 67 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -16162,9 +16250,9 @@
           });
           exports.default = is;
 
-          var _shallowEqual = _interopRequireDefault(__webpack_require__(51));
+          var _shallowEqual = _interopRequireDefault(__webpack_require__(52));
 
-          var _isType = _interopRequireDefault(__webpack_require__(67));
+          var _isType = _interopRequireDefault(__webpack_require__(68));
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule
@@ -16186,7 +16274,7 @@
             }
           }
         },
-        /* 67 */
+        /* 68 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -16234,7 +16322,7 @@
             return false;
           }
         },
-        /* 68 */
+        /* 69 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -16245,7 +16333,7 @@
 
           var _utils = _interopRequireWildcard(__webpack_require__(12));
 
-          var _core = __webpack_require__(65);
+          var _core = __webpack_require__(66);
 
           function _interopRequireWildcard(obj) {
             if (obj && obj.__esModule) {
@@ -16848,7 +16936,7 @@
             },
           });
         },
-        /* 69 */
+        /* 70 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -16883,7 +16971,7 @@
             }
           }
         },
-        /* 70 */
+        /* 71 */
         function(module, exports) {
           function setToArray(set) {
             var index = -1,
@@ -16896,7 +16984,7 @@
 
           module.exports = setToArray;
         },
-        /* 71 */
+        /* 72 */
         function(module, exports, __webpack_require__) {
           "use strict";
           /* WEBPACK VAR INJECTION */ (function(process) {
@@ -17244,7 +17332,7 @@
             /* WEBPACK VAR INJECTION */
           }.call(this, __webpack_require__(3)));
         },
-        /* 72 */
+        /* 73 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -17398,7 +17486,7 @@
             __webpack_require__(399)
           );
 
-          var _files = __webpack_require__(83);
+          var _files = __webpack_require__(46);
 
           var _package = __webpack_require__(400);
 
@@ -17441,7 +17529,7 @@
             return data;
           }
 
-          var _item = __webpack_require__(46);
+          var _item = __webpack_require__(47);
 
           var _config = __webpack_require__(31);
 
@@ -17520,7 +17608,7 @@
             );
           }
         },
-        /* 73 */
+        /* 74 */
         function(module, exports, __webpack_require__) {
           /* WEBPACK VAR INJECTION */ (function(process) {
             if (typeof window === "undefined" && typeof self !== "undefined") {
@@ -17725,12 +17813,12 @@
             /* WEBPACK VAR INJECTION */
           }.call(this, __webpack_require__(3)));
         },
-        /* 74 */
+        /* 75 */
         function(module, exports, __webpack_require__) {
           var baseIndexOf = __webpack_require__(116),
             isArrayLike = __webpack_require__(20),
             isString = __webpack_require__(320),
-            toInteger = __webpack_require__(75),
+            toInteger = __webpack_require__(76),
             values = __webpack_require__(323);
 
           var nativeMax = Math.max;
@@ -17753,7 +17841,7 @@
 
           module.exports = includes;
         },
-        /* 75 */
+        /* 76 */
         function(module, exports, __webpack_require__) {
           var toFinite = __webpack_require__(321);
 
@@ -17769,7 +17857,7 @@
 
           module.exports = toInteger;
         },
-        /* 76 */
+        /* 77 */
         function(module, exports) {
           function arrayMap(array, iteratee) {
             var index = -1,
@@ -17785,11 +17873,11 @@
 
           module.exports = arrayMap;
         },
-        /* 77 */
+        /* 78 */
         function(module, exports, __webpack_require__) {
           var eq = __webpack_require__(25),
             isArrayLike = __webpack_require__(20),
-            isIndex = __webpack_require__(57),
+            isIndex = __webpack_require__(58),
             isObject = __webpack_require__(11);
 
           function isIterateeCall(value, index, object) {
@@ -17812,7 +17900,7 @@
 
           module.exports = isIterateeCall;
         },
-        /* 78 */
+        /* 79 */
         function(module, exports, __webpack_require__) {
           var baseToString = __webpack_require__(326);
 
@@ -17822,7 +17910,7 @@
 
           module.exports = toString;
         },
-        /* 79 */
+        /* 80 */
         function(module, __webpack_exports__, __webpack_require__) {
           "use strict";
           __webpack_require__.r(__webpack_exports__);
@@ -17971,7 +18059,7 @@
             return gen.generate();
           }
         },
-        /* 80 */
+        /* 81 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -18195,7 +18283,7 @@
             this.token(node.value);
           }
         },
-        /* 81 */
+        /* 82 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -24022,6 +24110,8 @@
               this.noArrowParamsConversionAt = [];
               this.inMethod = false;
               this.inFunction = false;
+              this.inArrowFunction = false;
+              this.inNonArrowFunction = false;
               this.inParameters = false;
               this.maybeInArrowParameters = false;
               this.inGenerator = false;
@@ -27313,7 +27403,10 @@
               if (this.eat(types.dot)) {
                 var metaProp = this.parseMetaProperty(node, meta, "target");
 
-                if (!this.state.inFunction && !this.state.inClassProperty) {
+                if (
+                  !this.state.inNonArrowFunction &&
+                  !this.state.inClassProperty
+                ) {
                   var error = "new.target can only be used in functions";
 
                   if (this.hasPlugin("classProperties")) {
@@ -27809,7 +27902,11 @@
               var oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
               this.state.inGenerator = false;
               this.state.maybeInArrowParameters = false;
-              this.parseFunctionBody(node, true);
+              this.parseFunctionBody(
+                node,
+                true,
+                !this.state.inNonArrowFunction
+              );
               this.state.inGenerator = oldInGenerator;
               this.state.inFunction = oldInFunc;
               this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
@@ -27852,14 +27949,19 @@
               type,
               allowExpressionBody
             ) {
-              this.parseFunctionBody(node, allowExpressionBody);
+              this.parseFunctionBody(node, allowExpressionBody, false);
               this.finishNode(node, type);
             };
 
             _proto.parseFunctionBody = function parseFunctionBody(
               node,
-              allowExpression
+              allowExpression,
+              shouldResetInNonArrowFunctionFlag
             ) {
+              if (shouldResetInNonArrowFunctionFlag === void 0) {
+                shouldResetInNonArrowFunctionFlag = false;
+              }
+
               var isExpression = allowExpression && !this.match(types.braceL);
               var oldInParameters = this.state.inParameters;
               var oldInAsync = this.state.inAsync;
@@ -27884,6 +27986,10 @@
               this.state.inAsync = oldInAsync;
               this.checkFunctionNameAndParams(node, allowExpression);
               this.state.inParameters = oldInParameters;
+
+              if (shouldResetInNonArrowFunctionFlag) {
+                this.state.inNonArrowFunction = false;
+              }
             };
 
             _proto.checkFunctionNameAndParams = function checkFunctionNameAndParams(
@@ -29019,6 +29125,7 @@
               var oldInGenerator = this.state.inGenerator;
               var oldInClassProperty = this.state.inClassProperty;
               this.state.inFunction = true;
+              this.state.inNonArrowFunction = true;
               this.state.inMethod = false;
               this.state.inClassProperty = false;
               this.initFunction(node, isAsync);
@@ -32699,7 +32806,7 @@
           exports.parseExpression = parseExpression;
           exports.tokTypes = types;
         },
-        /* 82 */
+        /* 83 */
         function(module, exports, __webpack_require__) {
           "use strict";
 
@@ -32820,81 +32927,6 @@
             );
           }
         },
-        /* 83 */
-        function(module, exports, __webpack_require__) {
-          "use strict";
-
-          Object.defineProperty(exports, "__esModule", {
-            value: true,
-          });
-          exports.findPackageData = findPackageData;
-          exports.findRelativeConfig = findRelativeConfig;
-          exports.findRootConfig = findRootConfig;
-          exports.loadConfig = loadConfig;
-          exports.resolvePlugin = resolvePlugin;
-          exports.resolvePreset = resolvePreset;
-          exports.loadPlugin = loadPlugin;
-          exports.loadPreset = loadPreset;
-
-          function findPackageData(filepath) {
-            return {
-              filepath: filepath,
-              directories: [],
-              pkg: null,
-              isPackage: false,
-            };
-          }
-
-          function findRelativeConfig(pkgData, envName, caller) {
-            return {
-              pkg: null,
-              config: null,
-              ignore: null,
-            };
-          }
-
-          function findRootConfig(dirname, envName, caller) {
-            return null;
-          }
-
-          function loadConfig(name, dirname, envName, caller) {
-            throw new Error(
-              "Cannot load " +
-                name +
-                " relative to " +
-                dirname +
-                " in a browser"
-            );
-          }
-
-          function resolvePlugin(name, dirname) {
-            return null;
-          }
-
-          function resolvePreset(name, dirname) {
-            return null;
-          }
-
-          function loadPlugin(name, dirname) {
-            throw new Error(
-              "Cannot load plugin " +
-                name +
-                " relative to " +
-                dirname +
-                " in a browser"
-            );
-          }
-
-          function loadPreset(name, dirname) {
-            throw new Error(
-              "Cannot load preset " +
-                name +
-                " relative to " +
-                dirname +
-                " in a browser"
-            );
-          }
-        },
         /* 84 */
         function(module, exports, __webpack_require__) {
           "use strict";
@@ -32905,14 +32937,16 @@
           exports.default = void 0;
 
           var Plugin = function Plugin(plugin, options, key) {
-            this.key = plugin.name || key;
-            this.manipulateOptions = plugin.manipulateOptions;
-            this.post = plugin.post;
-            this.pre = plugin.pre;
-            this.visitor = plugin.visitor || {};
-            this.parserOverride = plugin.parserOverride;
-            this.generatorOverride = plugin.generatorOverride;
-            this.options = options;
+            var _this = this;
+
+            _this.key = plugin.name || key;
+            _this.manipulateOptions = plugin.manipulateOptions;
+            _this.post = plugin.post;
+            _this.pre = plugin.pre;
+            _this.visitor = plugin.visitor || {};
+            _this.parserOverride = plugin.parserOverride;
+            _this.generatorOverride = plugin.generatorOverride;
+            _this.options = options;
           };
 
           exports.default = Plugin;
@@ -32942,7 +32976,7 @@
 
           var ROOT_VALIDATORS = {
             cwd: _optionAssertions.assertString,
-            root: _optionAssertions.assertString,
+            root: _optionAssertions.assertRoot,
             configFile: _optionAssertions.assertConfigFileSearch,
             caller: _optionAssertions.assertCallerMetadata,
             filename: _optionAssertions.assertString,
@@ -34763,7 +34797,7 @@
         },
         /* 91 */
         function(module, exports, __webpack_require__) {
-          var Stack = __webpack_require__(52),
+          var Stack = __webpack_require__(53),
             arrayEach = __webpack_require__(209),
             assignValue = __webpack_require__(95),
             baseAssign = __webpack_require__(210),
@@ -34779,7 +34813,7 @@
             initCloneByTag = __webpack_require__(230),
             initCloneObject = __webpack_require__(235),
             isArray = __webpack_require__(5),
-            isBuffer = __webpack_require__(56),
+            isBuffer = __webpack_require__(57),
             isMap = __webpack_require__(237),
             isObject = __webpack_require__(11),
             isSet = __webpack_require__(239),
@@ -35067,10 +35101,10 @@
         /* 98 */
         function(module, exports, __webpack_require__) {
           var baseTimes = __webpack_require__(211),
-            isArguments = __webpack_require__(55),
+            isArguments = __webpack_require__(56),
             isArray = __webpack_require__(5),
-            isBuffer = __webpack_require__(56),
-            isIndex = __webpack_require__(57),
+            isBuffer = __webpack_require__(57),
+            isIndex = __webpack_require__(58),
             isTypedArray = __webpack_require__(99);
 
           var objectProto = Object.prototype;
@@ -35140,9 +35174,9 @@
         },
         /* 102 */
         function(module, exports, __webpack_require__) {
-          var arrayPush = __webpack_require__(62),
-            getPrototype = __webpack_require__(63),
-            getSymbols = __webpack_require__(61),
+          var arrayPush = __webpack_require__(63),
+            getPrototype = __webpack_require__(64),
+            getSymbols = __webpack_require__(62),
             stubArray = __webpack_require__(101);
 
           var nativeGetSymbols = Object.getOwnPropertySymbols;
@@ -35163,7 +35197,7 @@
         /* 103 */
         function(module, exports, __webpack_require__) {
           var baseGetAllKeys = __webpack_require__(104),
-            getSymbols = __webpack_require__(61),
+            getSymbols = __webpack_require__(62),
             keys = __webpack_require__(19);
 
           function getAllKeys(object) {
@@ -35174,7 +35208,7 @@
         },
         /* 104 */
         function(module, exports, __webpack_require__) {
-          var arrayPush = __webpack_require__(62),
+          var arrayPush = __webpack_require__(63),
             isArray = __webpack_require__(5);
 
           function baseGetAllKeys(object, keysFunc, symbolsFunc) {
@@ -35529,7 +35563,7 @@
           });
           exports.default = inheritInnerComments;
 
-          var _inherit = _interopRequireDefault(__webpack_require__(69));
+          var _inherit = _interopRequireDefault(__webpack_require__(70));
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule
@@ -35545,7 +35579,7 @@
         },
         /* 115 */
         function(module, exports, __webpack_require__) {
-          var MapCache = __webpack_require__(54),
+          var MapCache = __webpack_require__(55),
             setCacheAdd = __webpack_require__(258),
             setCacheHas = __webpack_require__(259);
 
@@ -35594,7 +35628,7 @@
           });
           exports.default = inheritLeadingComments;
 
-          var _inherit = _interopRequireDefault(__webpack_require__(69));
+          var _inherit = _interopRequireDefault(__webpack_require__(70));
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule
@@ -35653,7 +35687,7 @@
           });
           exports.default = inheritTrailingComments;
 
-          var _inherit = _interopRequireDefault(__webpack_require__(69));
+          var _inherit = _interopRequireDefault(__webpack_require__(70));
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule
@@ -36849,7 +36883,7 @@
               __webpack_require__(131)
             );
 
-            var _targetsParser = __webpack_require__(71);
+            var _targetsParser = __webpack_require__(72);
 
             var _utils = __webpack_require__(17);
 
@@ -37485,7 +37519,7 @@
           "use strict";
           __webpack_require__.r(__webpack_exports__);
           /* harmony import */ var _gerhobbelt_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-            49
+            50
           );
           /* harmony import */ var _gerhobbelt_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/ __webpack_require__.n(
             _gerhobbelt_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_0__
@@ -37600,38 +37634,38 @@
               var code = _ref.code,
                 ast = _ref.ast,
                 inputMap = _ref.inputMap;
-              this._map = new Map();
-              this.declarations = {};
-              this.path = null;
-              this.ast = {};
-              this.metadata = {};
-              this.code = "";
-              this.inputMap = null;
-              this.hub = {
-                file: this,
+              _this._map = new Map();
+              _this.declarations = {};
+              _this.path = null;
+              _this.ast = {};
+              _this.metadata = {};
+              _this.code = "";
+              _this.inputMap = null;
+              _this.hub = {
+                file: _this,
                 getCode: function getCode() {
                   return _this.code;
                 },
                 getScope: function getScope() {
                   return _this.scope;
                 },
-                addHelper: this.addHelper.bind(this),
-                buildError: this.buildCodeFrameError.bind(this),
+                addHelper: _this.addHelper.bind(_this),
+                buildError: _this.buildCodeFrameError.bind(_this),
               };
-              this.opts = options;
-              this.code = code;
-              this.ast = ast;
-              this.inputMap = inputMap;
-              this.path = _babelTraverse()
+              _this.opts = options;
+              _this.code = code;
+              _this.ast = ast;
+              _this.inputMap = inputMap;
+              _this.path = _babelTraverse()
                 .NodePath.get({
-                  hub: this.hub,
+                  hub: _this.hub,
                   parentPath: null,
-                  parent: this.ast,
-                  container: this.ast,
+                  parent: _this.ast,
+                  container: _this.ast,
                   key: "program",
                 })
                 .setContext();
-              this.scope = this.path.scope;
+              _this.scope = _this.path.scope;
             }
 
             var _proto = File.prototype;
@@ -38553,7 +38587,7 @@
           "use strict";
           __webpack_require__.r(__webpack_exports__);
           /* harmony import */ var _gerhobbelt_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-            49
+            50
           );
           /* harmony import */ var _gerhobbelt_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/ __webpack_require__.n(
             _gerhobbelt_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_0__
@@ -38565,7 +38599,7 @@
           exports.default = void 0;
 
           function _includes() {
-            var data = _interopRequireDefault(__webpack_require__(74));
+            var data = _interopRequireDefault(__webpack_require__(75));
 
             _includes = function _includes() {
               return data;
@@ -38906,6 +38940,8 @@
 
           var Scope = (function() {
             function Scope(path) {
+              var _this = this;
+
               var node = path.node;
 
               var cached = _cache.scope.get(node);
@@ -38914,12 +38950,12 @@
                 return cached;
               }
 
-              _cache.scope.set(node, this);
+              _cache.scope.set(node, _this);
 
-              this.uid = uid++;
-              this.block = node;
-              this.path = path;
-              this.labels = new Map();
+              _this.uid = uid++;
+              _this.block = node;
+              _this.path = path;
+              _this.labels = new Map();
             }
 
             var _proto = Scope.prototype;
@@ -40042,9 +40078,9 @@
         /* 138 */
         function(module, exports, __webpack_require__) {
           var baseRepeat = __webpack_require__(325),
-            isIterateeCall = __webpack_require__(77),
-            toInteger = __webpack_require__(75),
-            toString = __webpack_require__(78);
+            isIterateeCall = __webpack_require__(78),
+            toInteger = __webpack_require__(76),
+            toString = __webpack_require__(79);
 
           function repeat(string, n, guard) {
             if (guard ? isIterateeCall(string, n, guard) : n === undefined) {
@@ -40069,20 +40105,23 @@
 
           var Binding = (function() {
             function Binding(_ref) {
+              var _this = this;
+
               var identifier = _ref.identifier,
                 scope = _ref.scope,
                 path = _ref.path,
                 kind = _ref.kind;
-              this.identifier = identifier;
-              this.scope = scope;
-              this.path = path;
-              this.kind = kind;
-              this.constantViolations = [];
-              this.constant = true;
-              this.referencePaths = [];
-              this.referenced = false;
-              this.references = 0;
-              this.clearValue();
+              _this.identifier = identifier;
+              _this.scope = scope;
+              _this.path = path;
+              _this.kind = kind;
+              _this.constantViolations = [];
+              _this.constant = true;
+              _this.referencePaths = [];
+              _this.referenced = false;
+              _this.references = 0;
+
+              _this.clearValue();
             }
 
             var _proto = Binding.prototype;
@@ -44201,7 +44240,7 @@
           }
 
           function _babelParser() {
-            var data = __webpack_require__(81);
+            var data = __webpack_require__(82);
 
             _babelParser = function _babelParser() {
               return data;
@@ -44602,11 +44641,11 @@
           exports.createUncachedDescriptors = createUncachedDescriptors;
           exports.createDescriptor = createDescriptor;
 
-          var _files = __webpack_require__(83);
+          var _files = __webpack_require__(46);
 
-          var _item = __webpack_require__(46);
+          var _item = __webpack_require__(47);
 
-          var _caching = __webpack_require__(47);
+          var _caching = __webpack_require__(48);
 
           function isEqualDescriptor(a, b) {
             return (
@@ -44990,7 +45029,7 @@
           }
 
           function _debug() {
-            var data = _interopRequireDefault(__webpack_require__(73));
+            var data = _interopRequireDefault(__webpack_require__(74));
 
             _debug = function _debug() {
               return data;
@@ -45005,9 +45044,9 @@
             __webpack_require__(403)
           );
 
-          var _files = __webpack_require__(83);
+          var _files = __webpack_require__(46);
 
-          var _caching = __webpack_require__(47);
+          var _caching = __webpack_require__(48);
 
           var _configDescriptors = __webpack_require__(152);
 
@@ -45116,7 +45155,7 @@
                 context.envName,
                 context.caller
               );
-            } else if (opts.configFile !== false) {
+            } else if (opts.configFile !== false && context.root !== false) {
               configFile = (0, _files.findRootConfig)(
                 context.root,
                 context.envName,
@@ -45209,6 +45248,7 @@
             var absoluteRoot = context.root;
 
             if (babelrcRoots === undefined) {
+              if (absoluteRoot === false) return false;
               return pkgData.directories.indexOf(absoluteRoot) !== -1;
             }
 
@@ -45222,6 +45262,7 @@
             });
 
             if (
+              absoluteRoot !== false &&
               babelrcPatterns.length === 1 &&
               babelrcPatterns[0] === absoluteRoot
             ) {
@@ -45734,6 +45775,7 @@
           exports.msg = msg;
           exports.access = access;
           exports.assertSourceMaps = assertSourceMaps;
+          exports.assertRoot = assertRoot;
           exports.assertCompact = assertCompact;
           exports.assertSourceType = assertSourceType;
           exports.assertCallerMetadata = assertCallerMetadata;
@@ -45788,6 +45830,20 @@
             ) {
               throw new Error(
                 msg(loc) + ' must be a boolean, "inline", "both", or undefined'
+              );
+            }
+
+            return value;
+          }
+
+          function assertRoot(loc, value) {
+            if (
+              value !== undefined &&
+              typeof value !== "boolean" &&
+              typeof value !== "string"
+            ) {
+              throw new Error(
+                msg(loc) + " must be a string, false, or undefined"
               );
             }
 
@@ -46102,13 +46158,15 @@
 
           var _util = __webpack_require__(153);
 
-          var _item = __webpack_require__(46);
+          var _item = __webpack_require__(47);
 
           var _configChain = __webpack_require__(154);
 
           var _environment = __webpack_require__(151);
 
           var _options = __webpack_require__(85);
+
+          var _files = __webpack_require__(46);
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule
@@ -46144,8 +46202,12 @@
 
             var absoluteCwd = _path().default.resolve(cwd);
 
-            var absoluteRootDir = _path().default.resolve(absoluteCwd, rootDir);
-
+            var absoluteRootDir =
+              typeof rootDir === "boolean"
+                ? rootDir
+                  ? (0, _files.findConfigRoot)(absoluteCwd)
+                  : false
+                : _path().default.resolve(absoluteCwd, rootDir);
             var context = {
               filename:
                 typeof args.filename === "string"
@@ -46212,11 +46274,13 @@
 
           var PartialConfig = (function() {
             function PartialConfig(options, babelrc, ignore, config) {
-              this.options = options;
-              this.babelignore = ignore;
-              this.babelrc = babelrc;
-              this.config = config;
-              Object.freeze(this);
+              var _this = this;
+
+              _this.options = options;
+              _this.babelignore = ignore;
+              _this.babelrc = babelrc;
+              _this.config = config;
+              Object.freeze(_this);
             }
 
             var _proto = PartialConfig.prototype;
@@ -46585,7 +46649,7 @@
         /* 162 */
         function(module, exports, __webpack_require__) {
           var castPath = __webpack_require__(163),
-            toKey = __webpack_require__(48);
+            toKey = __webpack_require__(49);
 
           function baseGet(object, path) {
             path = castPath(path, object);
@@ -46606,7 +46670,7 @@
           var isArray = __webpack_require__(5),
             isKey = __webpack_require__(86),
             stringToPath = __webpack_require__(425),
-            toString = __webpack_require__(78);
+            toString = __webpack_require__(79);
 
           function castPath(value, object) {
             if (isArray(value)) {
@@ -46792,7 +46856,7 @@
           }
 
           function _debug() {
-            var data = _interopRequireDefault(__webpack_require__(73));
+            var data = _interopRequireDefault(__webpack_require__(74));
 
             _debug = function _debug() {
               return data;
@@ -46832,7 +46896,7 @@
           }
 
           function _babelParser() {
-            var data = __webpack_require__(81);
+            var data = __webpack_require__(82);
 
             _babelParser = function _babelParser() {
               return data;
@@ -47274,7 +47338,7 @@
 
           var _builtIns = _interopRequireDefault(__webpack_require__(87));
 
-          var _debug = __webpack_require__(50);
+          var _debug = __webpack_require__(51);
 
           var _defaults = __webpack_require__(310);
 
@@ -47298,7 +47362,7 @@
             __webpack_require__(313)
           );
 
-          var _targetsParser = _interopRequireDefault(__webpack_require__(71));
+          var _targetsParser = _interopRequireDefault(__webpack_require__(72));
 
           var _availablePlugins = _interopRequireDefault(
             __webpack_require__(315)
@@ -48604,7 +48668,9 @@
 
           var ImportInjector = (function() {
             function ImportInjector(path, importedSource, opts) {
-              this._defaultOpts = {
+              var _this = this;
+
+              _this._defaultOpts = {
                 importedSource: null,
                 importedType: "commonjs",
                 importedInterop: "babel",
@@ -48615,10 +48681,10 @@
               var programPath = path.find(function(p) {
                 return p.isProgram();
               });
-              this._programPath = programPath;
-              this._programScope = programPath.scope;
-              this._hub = programPath.hub;
-              this._defaultOpts = this._applyDefaults(
+              _this._programPath = programPath;
+              _this._programScope = programPath.scope;
+              _this._hub = programPath.hub;
+              _this._defaultOpts = _this._applyDefaults(
                 importedSource,
                 opts,
                 true
@@ -49268,8 +49334,8 @@
         /* 190 */
         function(module, exports, __webpack_require__) {
           var ListCache = __webpack_require__(32),
-            Map = __webpack_require__(53),
-            MapCache = __webpack_require__(54);
+            Map = __webpack_require__(54),
+            MapCache = __webpack_require__(55);
 
           var LARGE_ARRAY_SIZE = 200;
 
@@ -49411,7 +49477,7 @@
         function(module, exports, __webpack_require__) {
           var Hash = __webpack_require__(198),
             ListCache = __webpack_require__(32),
-            Map = __webpack_require__(53);
+            Map = __webpack_require__(54);
 
           function mapCacheClear() {
             this.size = 0;
@@ -49651,7 +49717,7 @@
         /* 214 */
         function(module, exports, __webpack_require__) {
           var baseGetTag = __webpack_require__(10),
-            isLength = __webpack_require__(58),
+            isLength = __webpack_require__(59),
             isObjectLike = __webpack_require__(7);
 
           var argsTag = "[object Arguments]",
@@ -49714,7 +49780,7 @@
         },
         /* 215 */
         function(module, exports, __webpack_require__) {
-          var isPrototype = __webpack_require__(59),
+          var isPrototype = __webpack_require__(60),
             nativeKeys = __webpack_require__(216);
 
           var objectProto = Object.prototype;
@@ -49748,7 +49814,7 @@
         /* 217 */
         function(module, exports, __webpack_require__) {
           var copyObject = __webpack_require__(36),
-            keysIn = __webpack_require__(60);
+            keysIn = __webpack_require__(61);
 
           function baseAssignIn(object, source) {
             return object && copyObject(source, keysIn(source), object);
@@ -49759,7 +49825,7 @@
         /* 218 */
         function(module, exports, __webpack_require__) {
           var isObject = __webpack_require__(11),
-            isPrototype = __webpack_require__(59),
+            isPrototype = __webpack_require__(60),
             nativeKeysIn = __webpack_require__(219);
 
           var objectProto = Object.prototype;
@@ -49862,7 +49928,7 @@
         /* 222 */
         function(module, exports, __webpack_require__) {
           var copyObject = __webpack_require__(36),
-            getSymbols = __webpack_require__(61);
+            getSymbols = __webpack_require__(62);
 
           function copySymbols(source, object) {
             return copyObject(source, getSymbols(source), object);
@@ -49906,7 +49972,7 @@
         function(module, exports, __webpack_require__) {
           var baseGetAllKeys = __webpack_require__(104),
             getSymbolsIn = __webpack_require__(102),
-            keysIn = __webpack_require__(60);
+            keysIn = __webpack_require__(61);
 
           function getAllKeysIn(object) {
             return baseGetAllKeys(object, keysIn, getSymbolsIn);
@@ -49963,7 +50029,7 @@
         },
         /* 230 */
         function(module, exports, __webpack_require__) {
-          var cloneArrayBuffer = __webpack_require__(64),
+          var cloneArrayBuffer = __webpack_require__(65),
             cloneDataView = __webpack_require__(231),
             cloneRegExp = __webpack_require__(232),
             cloneSymbol = __webpack_require__(233),
@@ -50036,7 +50102,7 @@
         },
         /* 231 */
         function(module, exports, __webpack_require__) {
-          var cloneArrayBuffer = __webpack_require__(64);
+          var cloneArrayBuffer = __webpack_require__(65);
 
           function cloneDataView(dataView, isDeep) {
             var buffer = isDeep
@@ -50081,7 +50147,7 @@
         },
         /* 234 */
         function(module, exports, __webpack_require__) {
-          var cloneArrayBuffer = __webpack_require__(64);
+          var cloneArrayBuffer = __webpack_require__(65);
 
           function cloneTypedArray(typedArray, isDeep) {
             var buffer = isDeep
@@ -50099,8 +50165,8 @@
         /* 235 */
         function(module, exports, __webpack_require__) {
           var baseCreate = __webpack_require__(236),
-            getPrototype = __webpack_require__(63),
-            isPrototype = __webpack_require__(59);
+            getPrototype = __webpack_require__(64),
+            isPrototype = __webpack_require__(60);
 
           function initCloneObject(object) {
             return typeof object.constructor == "function" &&
@@ -51374,7 +51440,7 @@
 
           var _utils = _interopRequireWildcard(__webpack_require__(12));
 
-          var _es = __webpack_require__(68);
+          var _es = __webpack_require__(69);
 
           function _interopRequireWildcard(obj) {
             if (obj && obj.__esModule) {
@@ -51601,9 +51667,9 @@
 
           var _utils = _interopRequireWildcard(__webpack_require__(12));
 
-          var _core = __webpack_require__(65);
+          var _core = __webpack_require__(66);
 
-          var _es = __webpack_require__(68);
+          var _es = __webpack_require__(69);
 
           function _interopRequireWildcard(obj) {
             if (obj && obj.__esModule) {
@@ -52395,7 +52461,7 @@
           exports.assertRestProperty = assertRestProperty;
           exports.assertSpreadProperty = assertSpreadProperty;
 
-          var _is = _interopRequireDefault(__webpack_require__(66));
+          var _is = _interopRequireDefault(__webpack_require__(67));
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule
@@ -54650,7 +54716,7 @@
             arrayIncludesWith = __webpack_require__(264),
             cacheHas = __webpack_require__(117),
             createSet = __webpack_require__(265),
-            setToArray = __webpack_require__(70);
+            setToArray = __webpack_require__(71);
 
           var LARGE_ARRAY_SIZE = 200;
 
@@ -54806,7 +54872,7 @@
         function(module, exports, __webpack_require__) {
           var Set = __webpack_require__(105),
             noop = __webpack_require__(266),
-            setToArray = __webpack_require__(70);
+            setToArray = __webpack_require__(71);
 
           var INFINITY = 1 / 0;
           var createSet = !(
@@ -55484,7 +55550,7 @@
         /* 278 */
         function(module, exports, __webpack_require__) {
           var baseGetTag = __webpack_require__(10),
-            getPrototype = __webpack_require__(63),
+            getPrototype = __webpack_require__(64),
             isObjectLike = __webpack_require__(7);
 
           var objectTag = "[object Object]";
@@ -55848,7 +55914,7 @@
           });
           exports.default = isImmutable;
 
-          var _isType = _interopRequireDefault(__webpack_require__(67));
+          var _isType = _interopRequireDefault(__webpack_require__(68));
 
           var _generated = __webpack_require__(2);
 
@@ -56246,13 +56312,15 @@
 
           var ImportBuilder = (function() {
             function ImportBuilder(importedSource, scope, hub) {
-              this._statements = [];
-              this._resultName = null;
-              this._scope = null;
-              this._hub = null;
-              this._scope = scope;
-              this._hub = hub;
-              this._importedSource = importedSource;
+              var _this = this;
+
+              _this._statements = [];
+              _this._resultName = null;
+              _this._scope = null;
+              _this._hub = null;
+              _this._scope = scope;
+              _this._hub = hub;
+              _this._importedSource = importedSource;
             }
 
             var _proto = ImportBuilder.prototype;
@@ -59417,7 +59485,7 @@
           });
           exports.default = _default;
 
-          var _debug = __webpack_require__(50);
+          var _debug = __webpack_require__(51);
 
           var _utils = __webpack_require__(17);
 
@@ -59523,7 +59591,7 @@
 
           var _builtInDefinitions = __webpack_require__(314);
 
-          var _debug = __webpack_require__(50);
+          var _debug = __webpack_require__(51);
 
           var _utils = __webpack_require__(17);
 
@@ -60067,7 +60135,7 @@
           }
 
           function _babelCore() {
-            var data = __webpack_require__(72);
+            var data = __webpack_require__(73);
 
             _babelCore = function _babelCore() {
               return data;
@@ -60222,11 +60290,13 @@
 
           var TraversalContext = (function() {
             function TraversalContext(scope, opts, state, parentPath) {
-              this.queue = null;
-              this.parentPath = parentPath;
-              this.scope = scope;
-              this.state = state;
-              this.opts = opts;
+              var _this = this;
+
+              _this.queue = null;
+              _this.parentPath = parentPath;
+              _this.scope = scope;
+              _this.state = state;
+              _this.opts = opts;
             }
 
             var _proto = TraversalContext.prototype;
@@ -60852,7 +60922,7 @@
         },
         /* 324 */
         function(module, exports, __webpack_require__) {
-          var arrayMap = __webpack_require__(76);
+          var arrayMap = __webpack_require__(77);
 
           function baseValues(object, props) {
             return arrayMap(props, function(key) {
@@ -60894,7 +60964,7 @@
         /* 326 */
         function(module, exports, __webpack_require__) {
           var Symbol = __webpack_require__(18),
-            arrayMap = __webpack_require__(76),
+            arrayMap = __webpack_require__(77),
             isArray = __webpack_require__(5),
             isSymbol = __webpack_require__(29);
 
@@ -61020,9 +61090,11 @@
 
           var Renamer = (function() {
             function Renamer(binding, oldName, newName) {
-              this.newName = newName;
-              this.oldName = oldName;
-              this.binding = binding;
+              var _this = this;
+
+              _this.newName = newName;
+              _this.oldName = oldName;
+              _this.binding = binding;
             }
 
             var _proto = Renamer.prototype;
@@ -61258,8 +61330,8 @@
         function(module, exports, __webpack_require__) {
           var baseRest = __webpack_require__(140),
             eq = __webpack_require__(25),
-            isIterateeCall = __webpack_require__(77),
-            keysIn = __webpack_require__(60);
+            isIterateeCall = __webpack_require__(78),
+            keysIn = __webpack_require__(61);
 
           var objectProto = Object.prototype;
           var hasOwnProperty = objectProto.hasOwnProperty;
@@ -62915,10 +62987,12 @@
 
           var SourceMap = (function() {
             function SourceMap(opts, code) {
-              this._cachedMap = null;
-              this._code = code;
-              this._opts = opts;
-              this._rawMappings = [];
+              var _this = this;
+
+              _this._cachedMap = null;
+              _this._code = code;
+              _this._opts = opts;
+              _this._rawMappings = [];
             }
 
             var _proto = SourceMap.prototype;
@@ -64601,19 +64675,21 @@
 
           var Printer = (function() {
             function Printer(format, map) {
-              this.inForStatementInitCounter = 0;
-              this._printStack = [];
-              this._indent = 0;
-              this._insideAux = false;
-              this._printedCommentStarts = {};
-              this._parenPushNewlineState = null;
-              this._noLineTerminator = false;
-              this._printAuxAfterOnNextUserNode = false;
-              this._printedComments = new WeakSet();
-              this._endsWithInteger = false;
-              this._endsWithWord = false;
-              this.format = format || {};
-              this._buf = new _buffer.default(map);
+              var _this = this;
+
+              _this.inForStatementInitCounter = 0;
+              _this._printStack = [];
+              _this._indent = 0;
+              _this._insideAux = false;
+              _this._printedCommentStarts = {};
+              _this._parenPushNewlineState = null;
+              _this._noLineTerminator = false;
+              _this._printAuxAfterOnNextUserNode = false;
+              _this._printedComments = new WeakSet();
+              _this._endsWithInteger = false;
+              _this._endsWithWord = false;
+              _this.format = format || {};
+              _this._buf = new _buffer.default(map);
             }
 
             var _proto = Printer.prototype;
@@ -64856,7 +64932,7 @@
             };
 
             _proto.print = function print(node, parent) {
-              var _this = this;
+              var _this2 = this;
 
               if (!node) return;
               var oldConcise = this.format.concise;
@@ -64901,7 +64977,7 @@
               var loc =
                 t().isProgram(node) || t().isFile(node) ? null : node.loc;
               this.withSource("start", loc, function() {
-                _this[node.type](node, parent);
+                _this2[node.type](node, parent);
               });
 
               this._printTrailingComments(node, parent);
@@ -65102,7 +65178,7 @@
             };
 
             _proto._printComment = function _printComment(comment) {
-              var _this2 = this;
+              var _this3 = this;
 
               if (!this.format.shouldPrintComment(comment.value)) return;
               if (comment.ignore) return;
@@ -65152,7 +65228,7 @@
 
               if (this.endsWith("/")) this._space();
               this.withSource("start", comment.loc, function() {
-                _this2._append(val);
+                _this3._append(val);
               });
               this.newline(isBlockComment && !this._noLineTerminator ? 1 : 0);
             };
@@ -65200,7 +65276,7 @@
         },
         /* 346 */
         function(module, exports, __webpack_require__) {
-          var toInteger = __webpack_require__(75);
+          var toInteger = __webpack_require__(76);
 
           function isInteger(value) {
             return typeof value == "number" && value == toInteger(value);
@@ -65239,22 +65315,24 @@
 
           var Buffer = (function() {
             function Buffer(map) {
-              this._map = null;
-              this._buf = [];
-              this._last = "";
-              this._queue = [];
-              this._position = {
+              var _this = this;
+
+              _this._map = null;
+              _this._buf = [];
+              _this._last = "";
+              _this._queue = [];
+              _this._position = {
                 line: 1,
                 column: 0,
               };
-              this._sourcePosition = {
+              _this._sourcePosition = {
                 identifierName: null,
                 line: null,
                 column: null,
                 filename: null,
               };
-              this._disallowedPop = null;
-              this._map = map;
+              _this._disallowedPop = null;
+              _this._map = map;
             }
 
             var _proto = Buffer.prototype;
@@ -66239,7 +66317,7 @@
             });
           });
 
-          var _types = __webpack_require__(80);
+          var _types = __webpack_require__(81);
 
           Object.keys(_types).forEach(function(key) {
             if (key === "default" || key === "__esModule") return;
@@ -68221,7 +68299,7 @@
 
           var _modules = __webpack_require__(146);
 
-          var _types = __webpack_require__(80);
+          var _types = __webpack_require__(81);
 
           function _interopRequireWildcard(obj) {
             if (obj && obj.__esModule) {
@@ -68826,7 +68904,7 @@
             },
           });
 
-          var _types = __webpack_require__(80);
+          var _types = __webpack_require__(81);
 
           function File(node) {
             if (node.program) {
@@ -70816,7 +70894,7 @@
           var _index2 = _interopRequireDefault(__webpack_require__(21));
 
           function _babelParser() {
-            var data = __webpack_require__(81);
+            var data = __webpack_require__(82);
 
             _babelParser = function _babelParser() {
               return data;
@@ -74055,7 +74133,7 @@
           });
           exports.default = createTemplateBuilder;
 
-          var _options = __webpack_require__(82);
+          var _options = __webpack_require__(83);
 
           var _string = _interopRequireDefault(__webpack_require__(386));
 
@@ -74202,7 +74280,7 @@
           });
           exports.default = stringTemplate;
 
-          var _options = __webpack_require__(82);
+          var _options = __webpack_require__(83);
 
           var _parse = _interopRequireDefault(__webpack_require__(149));
 
@@ -74238,7 +74316,7 @@
           });
           exports.default = literalTemplate;
 
-          var _options = __webpack_require__(82);
+          var _options = __webpack_require__(83);
 
           var _parse = _interopRequireDefault(__webpack_require__(149));
 
@@ -74379,7 +74457,7 @@
           exports.is = void 0;
 
           function _includes() {
-            var data = _interopRequireDefault(__webpack_require__(74));
+            var data = _interopRequireDefault(__webpack_require__(75));
 
             _includes = function _includes() {
               return data;
@@ -75788,12 +75866,14 @@
 
           var PathHoister = (function() {
             function PathHoister(path, scope) {
-              this.breakOnScopePaths = [];
-              this.bindings = {};
-              this.scopes = [];
-              this.scope = scope;
-              this.path = path;
-              this.attachAfter = false;
+              var _this = this;
+
+              _this.breakOnScopePaths = [];
+              _this.bindings = {};
+              _this.scopes = [];
+              _this.scope = scope;
+              _this.path = path;
+              _this.attachAfter = false;
             }
 
             var _proto = PathHoister.prototype;
@@ -76849,6 +76929,23 @@
             _gerhobbelt_babel_runtime_helpers_taggedTemplateLiteralLoose__WEBPACK_IMPORTED_MODULE_0__
           );
 
+          function _templateObject64() {
+            var data = _gerhobbelt_babel_runtime_helpers_taggedTemplateLiteralLoose__WEBPACK_IMPORTED_MODULE_0___default()(
+              [
+                '\n  import toArray from "toArray";\n\n  // These comments are stripped by @babel/template\n  /*::\n  type PropertyDescriptor =\n    | {\n        value: any,\n        writable: boolean,\n        configurable: boolean,\n        enumerable: boolean,\n      }\n    | {\n        get?: () => any,\n        set?: (v: any) => void,\n        configurable: boolean,\n        enumerable: boolean,\n      };\n\n  type FieldDescriptor ={\n    writable: boolean,\n    configurable: boolean,\n    enumerable: boolean,\n  };\n\n  type Placement = "static" | "prototype" | "own";\n  type Key = string | symbol; // PrivateName is not supported yet.\n\n  type ElementDescriptor =\n    | {\n        kind: "method",\n        key: Key,\n        placement: Placement,\n        descriptor: PropertyDescriptor\n      }\n    | {\n        kind: "field",\n        key: Key,\n        placement: Placement,\n        descriptor: FieldDescriptor,\n        initializer?: () => any,\n      };\n\n  // This is exposed to the user code\n  type ElementObjectInput = ElementDescriptor & {\n    [@@toStringTag]?: "Descriptor"\n  };\n\n  // This is exposed to the user code\n  type ElementObjectOutput = ElementDescriptor & {\n    [@@toStringTag]?: "Descriptor"\n    extras?: ElementDescriptor[],\n    finisher?: ClassFinisher,\n  };\n\n  // This is exposed to the user code\n  type ClassObject = {\n    [@@toStringTag]?: "Descriptor",\n    kind: "class",\n    elements: ElementDescriptor[],\n  };\n\n  type ElementDecorator = (descriptor: ElementObjectInput) => ?ElementObjectOutput;\n  type ClassDecorator = (descriptor: ClassObject) => ?ClassObject;\n  type ClassFinisher = <A, B>(cl: Class<A>) => Class<B>;\n\n  // Only used by Babel in the transform output, not part of the spec.\n  type ElementDefinition =\n    | {\n        kind: "method",\n        value: any,\n        key: Key,\n        static?: boolean,\n        decorators?: ElementDecorator[],\n      }\n    | {\n        kind: "field",\n        value: () => any,\n        key: Key,\n        static?: boolean,\n        decorators?: ElementDecorator[],\n    };\n\n  declare function ClassFactory<C>(initialize: (instance: C) => void): {\n    F: Class<C>,\n    d: ElementDefinition[]\n  }\n\n  */\n\n  /*::\n  // Various combinations with/without extras and with one or many finishers\n\n  type ElementFinisherExtras = {\n    element: ElementDescriptor,\n    finisher?: ClassFinisher,\n    extras?: ElementDescriptor[],\n  };\n\n  type ElementFinishersExtras = {\n    element: ElementDescriptor,\n    finishers: ClassFinisher[],\n    extras: ElementDescriptor[],\n  };\n\n  type ElementsFinisher = {\n    elements: ElementDescriptor[],\n    finisher?: ClassFinisher,\n  };\n\n  type ElementsFinishers = {\n    elements: ElementDescriptor[],\n    finishers: ClassFinisher[],\n  };\n\n  */\n\n  // ClassDefinitionEvaluation (Steps 26-*)\n  export default function _decorate(\n    decorators /*: ClassDecorator[] */,\n    factory /*: ClassFactory */,\n    superClass /*: ?Class<*> */,\n  ) /*: Class<*> */ {\n    var r = factory(function initialize(O) {\n      _initializeInstanceElements(O, decorated.elements);\n    }, superClass);\n    var decorated = _decorateClass(\n      _coalesceClassElements(r.d.map(_createElementDescriptor)),\n      decorators,\n    );\n\n    _initializeClassElements(r.F, decorated.elements);\n\n    return _runClassFinishers(r.F, decorated.finishers);\n  }\n\n  // ClassElementEvaluation\n  function _createElementDescriptor(\n    def /*: ElementDefinition */,\n  ) /*: ElementDescriptor */ {\n    var descriptor /*: PropertyDescriptor */;\n    if (def.kind === "method") {\n      descriptor = {\n        value: def.value,\n        writable: true,\n        configurable: true,\n        enumerable: false,\n      };\n    } else if (def.kind === "get") {\n      descriptor = { get: def.value, configurable: true, enumerable: false };\n    } else if (def.kind === "set") {\n      descriptor = { set: def.value, configurable: true, enumerable: false };\n    } else if (def.kind === "field") {\n      descriptor = { configurable: true, writable: true, enumerable: false };\n    }\n\n    var element /*: ElementDescriptor */ = {\n      kind: def.kind === "field" ? "field" : "method",\n      key: def.key,\n      placement: def.static\n        ? "static"\n        : def.kind === "field"\n          ? "own"\n          : "prototype",\n      descriptor: descriptor,\n    };\n    if (def.decorators) element.decorators = def.decorators;\n    if (def.kind === "field") element.initializer = def.value;\n\n    return element;\n  }\n\n  // CoalesceGetterSetter\n  function _coalesceGetterSetter(\n    element /*: ElementDescriptor */,\n    other /*: ElementDescriptor */,\n  ) {\n    if (element.descriptor.get !== undefined) {\n      other.descriptor.get = element.descriptor.get;\n    } else {\n      other.descriptor.set = element.descriptor.set;\n    }\n  }\n\n  // CoalesceClassElements\n  function _coalesceClassElements(\n    elements /*: ElementDescriptor[] */,\n  ) /*: ElementDescriptor[] */ {\n    var newElements /*: ElementDescriptor[] */ = [];\n\n    var isSameElement = function(other /*: ElementDescriptor */) /*: boolean */ {\n      return (\n        other.kind === "method" &&\n        other.key === element.key &&\n        other.placement === element.placement\n      );\n    };\n\n    for (var i = 0; i < elements.length; i++) {\n      var element /*: ElementDescriptor */ = elements[i];\n      var other /*: ElementDescriptor */;\n\n      if (\n        element.kind === "method" &&\n        (other = newElements.find(isSameElement))\n      ) {\n        if (\n          _isDataDescriptor(element.descriptor) ||\n          _isDataDescriptor(other.descriptor)\n        ) {\n          if (_hasDecorators(element) || _hasDecorators(other)) {\n            throw new ReferenceError(\n              "Duplicated methods (" + element.key + ") can\'t be decorated.",\n            );\n          }\n          other.descriptor = element.descriptor;\n        } else {\n          if (_hasDecorators(element)) {\n            if (_hasDecorators(other)) {\n              throw new ReferenceError(\n                "Decorators can\'t be placed on different accessors with for " +\n                  "the same property (" +\n                  element.key +\n                  ").",\n              );\n            }\n            other.decorators = element.decorators;\n          }\n          _coalesceGetterSetter(element, other);\n        }\n      } else {\n        newElements.push(element);\n      }\n    }\n\n    return newElements;\n  }\n\n  function _hasDecorators(element /*: ElementDescriptor */) /*: boolean */ {\n    return element.decorators && element.decorators.length;\n  }\n\n  function _isDataDescriptor(desc /*: PropertyDescriptor */) /*: boolean */ {\n    return (\n      desc !== undefined &&\n      !(desc.value === undefined && desc.writable === undefined)\n    );\n  }\n\n  // InitializeClassElements\n  function _initializeClassElements /*::<C>*/(\n    F /*: Class<C> */,\n    elements /*: ElementDescriptor[] */,\n  ) {\n    var proto = F.prototype;\n\n    ["method", "field"].forEach(function(kind) {\n      elements.forEach(function(element /*: ElementDescriptor */) {\n        var placement = element.placement;\n        if (\n          element.kind === kind &&\n          (placement === "static" || placement === "prototype")\n        ) {\n          var receiver = placement === "static" ? F : proto;\n          _defineClassElement(receiver, element);\n        }\n      });\n    });\n  }\n\n  // InitializeInstanceElements\n  function _initializeInstanceElements /*::<C>*/(\n    O /*: C */,\n    elements /*: ElementDescriptor[] */,\n  ) {\n    ["method", "field"].forEach(function(kind) {\n      elements.forEach(function(element /*: ElementDescriptor */) {\n        if (element.kind === kind && element.placement === "own") {\n          _defineClassElement(O, element);\n        }\n      });\n    });\n  }\n\n  // DefineClassElement\n  function _defineClassElement /*::<C>*/(\n    receiver /*: C | Class<C> */,\n    element /*: ElementDescriptor */,\n  ) {\n    var descriptor /*: PropertyDescriptor */ = element.descriptor;\n    if (element.kind === "field") {\n      var initializer = element.initializer;\n      descriptor = {\n        enumerable: descriptor.enumerable,\n        writable: descriptor.writable,\n        configurable: descriptor.configurable,\n        value: initializer === void 0 ? void 0 : initializer.call(receiver),\n      };\n    }\n    Object.defineProperty(receiver, element.key, descriptor);\n  }\n\n  /*::\n\n  type Placements = {\n    static: Key[],\n    prototype: Key[],\n    own: Key[],\n  };\n\n  */\n\n  // DecorateClass\n  function _decorateClass(\n    elements /*: ElementDescriptor[] */,\n    decorators /*: ClassDecorator[] */,\n  ) /*: ElementsFinishers */ {\n    var newElements /*: ElementDescriptor[] */ = [];\n    var finishers /*: ClassFinisher[] */ = [];\n    var placements /*: Placements */ = { static: [], prototype: [], own: [] };\n\n    elements.forEach(function(element /*: ElementDescriptor */) {\n      _addElementPlacement(element, placements);\n    });\n\n    elements.forEach(function(element /*: ElementDescriptor */) {\n      if (!_hasDecorators(element)) return newElements.push(element);\n\n      var elementFinishersExtras /*: ElementFinishersExtras */ = _decorateElement(\n        element,\n        placements,\n      );\n      newElements.push(elementFinishersExtras.element);\n      newElements.push.apply(newElements, elementFinishersExtras.extras);\n      finishers.push.apply(finishers, elementFinishersExtras.finishers);\n    });\n\n    if (!decorators) {\n      return { elements: newElements, finishers: finishers };\n    }\n\n    var result /*: ElementsFinishers */ = _decorateConstructor(\n      newElements,\n      decorators,\n    );\n    finishers.push.apply(finishers, result.finishers);\n    result.finishers = finishers;\n\n    return result;\n  }\n\n  // AddElementPlacement\n  function _addElementPlacement(\n    element /*: ElementDescriptor */,\n    placements /*: Placements */,\n    silent /*: boolean */,\n  ) {\n    var keys = placements[element.placement];\n    if (!silent && keys.indexOf(element.key) !== -1) {\n      throw new TypeError("Duplicated element (" + element.key + ")");\n    }\n    keys.push(element.key);\n  }\n\n  // DecorateElement\n  function _decorateElement(\n    element /*: ElementDescriptor */,\n    placements /*: Placements */,\n  ) /*: ElementFinishersExtras */ {\n    var extras /*: ElementDescriptor[] */ = [];\n    var finishers /*: ClassFinisher[] */ = [];\n\n    for (\n      var decorators = element.decorators, i = decorators.length - 1;\n      i >= 0;\n      i--\n    ) {\n      // (inlined) RemoveElementPlacement\n      var keys = placements[element.placement];\n      keys.splice(keys.indexOf(element.key), 1);\n\n      var elementObject /*: ElementObjectInput */ = _fromElementDescriptor(\n        element,\n      );\n      var elementFinisherExtras /*: ElementFinisherExtras */ = _toElementFinisherExtras(\n        (0, decorators[i])(elementObject) /*: ElementObjectOutput */ ||\n          elementObject,\n      );\n\n      element = elementFinisherExtras.element;\n      _addElementPlacement(element, placements);\n\n      if (elementFinisherExtras.finisher) {\n        finishers.push(elementFinisherExtras.finisher);\n      }\n\n      var newExtras /*: ElementDescriptor[] | void */ =\n        elementFinisherExtras.extras;\n      if (newExtras) {\n        for (var j = 0; j < newExtras.length; j++) {\n          _addElementPlacement(newExtras[j], placements);\n        }\n        extras.push.apply(extras, newExtras);\n      }\n    }\n\n    return { element: element, finishers: finishers, extras: extras };\n  }\n\n  // DecorateConstructor\n  function _decorateConstructor(\n    elements /*: ElementDescriptor[] */,\n    decorators /*: ClassDecorator[] */,\n  ) /*: ElementsFinishers */ {\n    var finishers /*: ClassFinisher[] */ = [];\n\n    for (var i = decorators.length - 1; i >= 0; i--) {\n      var obj /*: ClassObject */ = _fromClassDescriptor(elements);\n      var elementsAndFinisher /*: ElementsFinisher */ = _toClassDescriptor(\n        (0, decorators[i])(obj) /*: ClassObject */ || obj,\n      );\n\n      if (elementsAndFinisher.finisher !== undefined) {\n        finishers.push(elementsAndFinisher.finisher);\n      }\n\n      if (elementsAndFinisher.elements !== undefined) {\n        elements = elementsAndFinisher.elements;\n\n        for (var j = 0; j < elements.length - 1; j++) {\n          for (var k = j + 1; k < elements.length; k++) {\n            if (\n              elements[j].key === elements[k].key &&\n              elements[j].placement === elements[k].placement\n            ) {\n              throw new TypeError("Duplicated element (" + elements[j].key + ")");\n            }\n          }\n        }\n      }\n    }\n\n    return { elements: elements, finishers: finishers };\n  }\n\n  // FromElementDescriptor\n  function _fromElementDescriptor(\n    element /*: ElementDescriptor */,\n  ) /*: ElementObject */ {\n    var obj /*: ElementObject */ = {\n      kind: element.kind,\n      key: element.key,\n      placement: element.placement,\n      descriptor: element.descriptor,\n    };\n\n    var desc = {\n      value: "Descriptor",\n      configurable: true,\n    };\n    Object.defineProperty(obj, Symbol.toStringTag, desc);\n\n    if (element.kind === "field") obj.initializer = element.initializer;\n\n    return obj;\n  }\n\n  // ToElementDescriptors\n  function _toElementDescriptors(\n    elementObjects /*: ElementObject[] */,\n  ) /*: ElementDescriptor[] */ {\n    if (elementObjects === undefined) return;\n    return toArray(elementObjects).map(function(elementObject) {\n      var element = _toElementDescriptor(elementObject);\n      _disallowProperty(elementObject, "finisher", "An element descriptor");\n      _disallowProperty(elementObject, "extras", "An element descriptor");\n      return element;\n    });\n  }\n\n  // ToElementDescriptor\n  function _toElementDescriptor(\n    elementObject /*: ElementObject */,\n  ) /*: ElementDescriptor */ {\n    var kind = String(elementObject.kind);\n    if (kind !== "method" && kind !== "field") {\n      throw new TypeError(\n        \'An element descriptor\\\'s .kind property must be either "method" or\' +\n          \' "field", but a decorator created an element descriptor with\' +\n          \' .kind "\' +\n          kind +\n          \'"\',\n      );\n    }\n\n    var key = elementObject.key;\n    if (typeof key !== "string" && typeof key !== "symbol") key = String(key);\n\n    var placement = String(elementObject.placement);\n    if (\n      placement !== "static" &&\n      placement !== "prototype" &&\n      placement !== "own"\n    ) {\n      throw new TypeError(\n        \'An element descriptor\\\'s .placement property must be one of "static",\' +\n          \' "prototype" or "own", but a decorator created an element descriptor\' +\n          \' with .placement "\' +\n          placement +\n          \'"\',\n      );\n    }\n\n    var descriptor /*: PropertyDescriptor */ = elementObject.descriptor;\n\n    _disallowProperty(elementObject, "elements", "An element descriptor");\n\n    var element /*: ElementDescriptor */ = {\n      kind: kind,\n      key: key,\n      placement: placement,\n      descriptor: Object.assign({}, descriptor),\n    };\n\n    if (kind !== "field") {\n      _disallowProperty(elementObject, "initializer", "A method descriptor");\n    } else {\n      _disallowProperty(\n        descriptor,\n        "get",\n        "The property descriptor of a field descriptor",\n      );\n      _disallowProperty(\n        descriptor,\n        "set",\n        "The property descriptor of a field descriptor",\n      );\n      _disallowProperty(\n        descriptor,\n        "value",\n        "The property descriptor of a field descriptor",\n      );\n\n      element.initializer = elementObject.initializer;\n    }\n\n    return element;\n  }\n\n  function _toElementFinisherExtras(\n    elementObject /*: ElementObject */,\n  ) /*: ElementFinisherExtras */ {\n    var element /*: ElementDescriptor */ = _toElementDescriptor(elementObject);\n    var finisher /*: ClassFinisher */ = _optionalCallableProperty(\n      elementObject,\n      "finisher",\n    );\n    var extras /*: ElementDescriptors[] */ = _toElementDescriptors(\n      elementObject.extras,\n    );\n\n    return { element: element, finisher: finisher, extras: extras };\n  }\n\n  // FromClassDescriptor\n  function _fromClassDescriptor(\n    elements /*: ElementDescriptor[] */,\n  ) /*: ClassObject */ {\n    var obj = {\n      kind: "class",\n      elements: elements.map(_fromElementDescriptor),\n    };\n\n    var desc = { value: "Descriptor", configurable: true };\n    Object.defineProperty(obj, Symbol.toStringTag, desc);\n\n    return obj;\n  }\n\n  // ToClassDescriptor\n  function _toClassDescriptor(obj /*: ClassObject */) /*: ElementsFinisher */ {\n    var kind = String(obj.kind);\n    if (kind !== "class") {\n      throw new TypeError(\n        \'A class descriptor\\\'s .kind property must be "class", but a decorator\' +\n          \' created a class descriptor with .kind "\' +\n          kind +\n          \'"\',\n      );\n    }\n\n    _disallowProperty(obj, "key", "A class descriptor");\n    _disallowProperty(obj, "placement", "A class descriptor");\n    _disallowProperty(obj, "descriptor", "A class descriptor");\n    _disallowProperty(obj, "initializer", "A class descriptor");\n    _disallowProperty(obj, "extras", "A class descriptor");\n\n    var finisher = _optionalCallableProperty(obj, "finisher");\n    var elements = _toElementDescriptors(obj.elements);\n\n    return { elements: elements, finisher: finisher };\n  }\n\n  function _disallowProperty(obj, name, objectType) {\n    if (obj[name] !== undefined) {\n      throw new TypeError(objectType + " can\'t have a ." + name + " property.");\n    }\n  }\n\n  function _optionalCallableProperty /*::<T>*/(\n    obj /*: T */,\n    name /*: $Keys<T> */,\n  ) /*: ?Function */ {\n    var value = obj[name];\n    if (value !== undefined && typeof value !== "function") {\n      throw new TypeError("Expected \'" + name + "\' to be a function");\n    }\n    return value;\n  }\n\n  // RunClassFinishers\n  function _runClassFinishers(\n    constructor /*: Class<*> */,\n    finishers /*: ClassFinisher[] */,\n  ) /*: Class<*> */ {\n    for (var i = 0; i < finishers.length; i++) {\n      var newConstructor /*: ?Class<*> */ = (0, finishers[i])(constructor);\n      if (newConstructor !== undefined) {\n        // NOTE: This should check if IsConstructor(newConstructor) is false.\n        if (typeof newConstructor !== "function") {\n          throw new TypeError("Finishers must return a constructor.");\n        }\n        constructor = newConstructor;\n      }\n    }\n    return constructor;\n  }\n  ',
+              ],
+              [
+                '\n  import toArray from "toArray";\n\n  // These comments are stripped by @babel/template\n  /*::\n  type PropertyDescriptor =\n    | {\n        value: any,\n        writable: boolean,\n        configurable: boolean,\n        enumerable: boolean,\n      }\n    | {\n        get?: () => any,\n        set?: (v: any) => void,\n        configurable: boolean,\n        enumerable: boolean,\n      };\n\n  type FieldDescriptor ={\n    writable: boolean,\n    configurable: boolean,\n    enumerable: boolean,\n  };\n\n  type Placement = "static" | "prototype" | "own";\n  type Key = string | symbol; // PrivateName is not supported yet.\n\n  type ElementDescriptor =\n    | {\n        kind: "method",\n        key: Key,\n        placement: Placement,\n        descriptor: PropertyDescriptor\n      }\n    | {\n        kind: "field",\n        key: Key,\n        placement: Placement,\n        descriptor: FieldDescriptor,\n        initializer?: () => any,\n      };\n\n  // This is exposed to the user code\n  type ElementObjectInput = ElementDescriptor & {\n    [@@toStringTag]?: "Descriptor"\n  };\n\n  // This is exposed to the user code\n  type ElementObjectOutput = ElementDescriptor & {\n    [@@toStringTag]?: "Descriptor"\n    extras?: ElementDescriptor[],\n    finisher?: ClassFinisher,\n  };\n\n  // This is exposed to the user code\n  type ClassObject = {\n    [@@toStringTag]?: "Descriptor",\n    kind: "class",\n    elements: ElementDescriptor[],\n  };\n\n  type ElementDecorator = (descriptor: ElementObjectInput) => ?ElementObjectOutput;\n  type ClassDecorator = (descriptor: ClassObject) => ?ClassObject;\n  type ClassFinisher = <A, B>(cl: Class<A>) => Class<B>;\n\n  // Only used by Babel in the transform output, not part of the spec.\n  type ElementDefinition =\n    | {\n        kind: "method",\n        value: any,\n        key: Key,\n        static?: boolean,\n        decorators?: ElementDecorator[],\n      }\n    | {\n        kind: "field",\n        value: () => any,\n        key: Key,\n        static?: boolean,\n        decorators?: ElementDecorator[],\n    };\n\n  declare function ClassFactory<C>(initialize: (instance: C) => void): {\n    F: Class<C>,\n    d: ElementDefinition[]\n  }\n\n  */\n\n  /*::\n  // Various combinations with/without extras and with one or many finishers\n\n  type ElementFinisherExtras = {\n    element: ElementDescriptor,\n    finisher?: ClassFinisher,\n    extras?: ElementDescriptor[],\n  };\n\n  type ElementFinishersExtras = {\n    element: ElementDescriptor,\n    finishers: ClassFinisher[],\n    extras: ElementDescriptor[],\n  };\n\n  type ElementsFinisher = {\n    elements: ElementDescriptor[],\n    finisher?: ClassFinisher,\n  };\n\n  type ElementsFinishers = {\n    elements: ElementDescriptor[],\n    finishers: ClassFinisher[],\n  };\n\n  */\n\n  // ClassDefinitionEvaluation (Steps 26-*)\n  export default function _decorate(\n    decorators /*: ClassDecorator[] */,\n    factory /*: ClassFactory */,\n    superClass /*: ?Class<*> */,\n  ) /*: Class<*> */ {\n    var r = factory(function initialize(O) {\n      _initializeInstanceElements(O, decorated.elements);\n    }, superClass);\n    var decorated = _decorateClass(\n      _coalesceClassElements(r.d.map(_createElementDescriptor)),\n      decorators,\n    );\n\n    _initializeClassElements(r.F, decorated.elements);\n\n    return _runClassFinishers(r.F, decorated.finishers);\n  }\n\n  // ClassElementEvaluation\n  function _createElementDescriptor(\n    def /*: ElementDefinition */,\n  ) /*: ElementDescriptor */ {\n    var descriptor /*: PropertyDescriptor */;\n    if (def.kind === "method") {\n      descriptor = {\n        value: def.value,\n        writable: true,\n        configurable: true,\n        enumerable: false,\n      };\n    } else if (def.kind === "get") {\n      descriptor = { get: def.value, configurable: true, enumerable: false };\n    } else if (def.kind === "set") {\n      descriptor = { set: def.value, configurable: true, enumerable: false };\n    } else if (def.kind === "field") {\n      descriptor = { configurable: true, writable: true, enumerable: false };\n    }\n\n    var element /*: ElementDescriptor */ = {\n      kind: def.kind === "field" ? "field" : "method",\n      key: def.key,\n      placement: def.static\n        ? "static"\n        : def.kind === "field"\n          ? "own"\n          : "prototype",\n      descriptor: descriptor,\n    };\n    if (def.decorators) element.decorators = def.decorators;\n    if (def.kind === "field") element.initializer = def.value;\n\n    return element;\n  }\n\n  // CoalesceGetterSetter\n  function _coalesceGetterSetter(\n    element /*: ElementDescriptor */,\n    other /*: ElementDescriptor */,\n  ) {\n    if (element.descriptor.get !== undefined) {\n      other.descriptor.get = element.descriptor.get;\n    } else {\n      other.descriptor.set = element.descriptor.set;\n    }\n  }\n\n  // CoalesceClassElements\n  function _coalesceClassElements(\n    elements /*: ElementDescriptor[] */,\n  ) /*: ElementDescriptor[] */ {\n    var newElements /*: ElementDescriptor[] */ = [];\n\n    var isSameElement = function(other /*: ElementDescriptor */) /*: boolean */ {\n      return (\n        other.kind === "method" &&\n        other.key === element.key &&\n        other.placement === element.placement\n      );\n    };\n\n    for (var i = 0; i < elements.length; i++) {\n      var element /*: ElementDescriptor */ = elements[i];\n      var other /*: ElementDescriptor */;\n\n      if (\n        element.kind === "method" &&\n        (other = newElements.find(isSameElement))\n      ) {\n        if (\n          _isDataDescriptor(element.descriptor) ||\n          _isDataDescriptor(other.descriptor)\n        ) {\n          if (_hasDecorators(element) || _hasDecorators(other)) {\n            throw new ReferenceError(\n              "Duplicated methods (" + element.key + ") can\'t be decorated.",\n            );\n          }\n          other.descriptor = element.descriptor;\n        } else {\n          if (_hasDecorators(element)) {\n            if (_hasDecorators(other)) {\n              throw new ReferenceError(\n                "Decorators can\'t be placed on different accessors with for " +\n                  "the same property (" +\n                  element.key +\n                  ").",\n              );\n            }\n            other.decorators = element.decorators;\n          }\n          _coalesceGetterSetter(element, other);\n        }\n      } else {\n        newElements.push(element);\n      }\n    }\n\n    return newElements;\n  }\n\n  function _hasDecorators(element /*: ElementDescriptor */) /*: boolean */ {\n    return element.decorators && element.decorators.length;\n  }\n\n  function _isDataDescriptor(desc /*: PropertyDescriptor */) /*: boolean */ {\n    return (\n      desc !== undefined &&\n      !(desc.value === undefined && desc.writable === undefined)\n    );\n  }\n\n  // InitializeClassElements\n  function _initializeClassElements /*::<C>*/(\n    F /*: Class<C> */,\n    elements /*: ElementDescriptor[] */,\n  ) {\n    var proto = F.prototype;\n\n    ["method", "field"].forEach(function(kind) {\n      elements.forEach(function(element /*: ElementDescriptor */) {\n        var placement = element.placement;\n        if (\n          element.kind === kind &&\n          (placement === "static" || placement === "prototype")\n        ) {\n          var receiver = placement === "static" ? F : proto;\n          _defineClassElement(receiver, element);\n        }\n      });\n    });\n  }\n\n  // InitializeInstanceElements\n  function _initializeInstanceElements /*::<C>*/(\n    O /*: C */,\n    elements /*: ElementDescriptor[] */,\n  ) {\n    ["method", "field"].forEach(function(kind) {\n      elements.forEach(function(element /*: ElementDescriptor */) {\n        if (element.kind === kind && element.placement === "own") {\n          _defineClassElement(O, element);\n        }\n      });\n    });\n  }\n\n  // DefineClassElement\n  function _defineClassElement /*::<C>*/(\n    receiver /*: C | Class<C> */,\n    element /*: ElementDescriptor */,\n  ) {\n    var descriptor /*: PropertyDescriptor */ = element.descriptor;\n    if (element.kind === "field") {\n      var initializer = element.initializer;\n      descriptor = {\n        enumerable: descriptor.enumerable,\n        writable: descriptor.writable,\n        configurable: descriptor.configurable,\n        value: initializer === void 0 ? void 0 : initializer.call(receiver),\n      };\n    }\n    Object.defineProperty(receiver, element.key, descriptor);\n  }\n\n  /*::\n\n  type Placements = {\n    static: Key[],\n    prototype: Key[],\n    own: Key[],\n  };\n\n  */\n\n  // DecorateClass\n  function _decorateClass(\n    elements /*: ElementDescriptor[] */,\n    decorators /*: ClassDecorator[] */,\n  ) /*: ElementsFinishers */ {\n    var newElements /*: ElementDescriptor[] */ = [];\n    var finishers /*: ClassFinisher[] */ = [];\n    var placements /*: Placements */ = { static: [], prototype: [], own: [] };\n\n    elements.forEach(function(element /*: ElementDescriptor */) {\n      _addElementPlacement(element, placements);\n    });\n\n    elements.forEach(function(element /*: ElementDescriptor */) {\n      if (!_hasDecorators(element)) return newElements.push(element);\n\n      var elementFinishersExtras /*: ElementFinishersExtras */ = _decorateElement(\n        element,\n        placements,\n      );\n      newElements.push(elementFinishersExtras.element);\n      newElements.push.apply(newElements, elementFinishersExtras.extras);\n      finishers.push.apply(finishers, elementFinishersExtras.finishers);\n    });\n\n    if (!decorators) {\n      return { elements: newElements, finishers: finishers };\n    }\n\n    var result /*: ElementsFinishers */ = _decorateConstructor(\n      newElements,\n      decorators,\n    );\n    finishers.push.apply(finishers, result.finishers);\n    result.finishers = finishers;\n\n    return result;\n  }\n\n  // AddElementPlacement\n  function _addElementPlacement(\n    element /*: ElementDescriptor */,\n    placements /*: Placements */,\n    silent /*: boolean */,\n  ) {\n    var keys = placements[element.placement];\n    if (!silent && keys.indexOf(element.key) !== -1) {\n      throw new TypeError("Duplicated element (" + element.key + ")");\n    }\n    keys.push(element.key);\n  }\n\n  // DecorateElement\n  function _decorateElement(\n    element /*: ElementDescriptor */,\n    placements /*: Placements */,\n  ) /*: ElementFinishersExtras */ {\n    var extras /*: ElementDescriptor[] */ = [];\n    var finishers /*: ClassFinisher[] */ = [];\n\n    for (\n      var decorators = element.decorators, i = decorators.length - 1;\n      i >= 0;\n      i--\n    ) {\n      // (inlined) RemoveElementPlacement\n      var keys = placements[element.placement];\n      keys.splice(keys.indexOf(element.key), 1);\n\n      var elementObject /*: ElementObjectInput */ = _fromElementDescriptor(\n        element,\n      );\n      var elementFinisherExtras /*: ElementFinisherExtras */ = _toElementFinisherExtras(\n        (0, decorators[i])(elementObject) /*: ElementObjectOutput */ ||\n          elementObject,\n      );\n\n      element = elementFinisherExtras.element;\n      _addElementPlacement(element, placements);\n\n      if (elementFinisherExtras.finisher) {\n        finishers.push(elementFinisherExtras.finisher);\n      }\n\n      var newExtras /*: ElementDescriptor[] | void */ =\n        elementFinisherExtras.extras;\n      if (newExtras) {\n        for (var j = 0; j < newExtras.length; j++) {\n          _addElementPlacement(newExtras[j], placements);\n        }\n        extras.push.apply(extras, newExtras);\n      }\n    }\n\n    return { element: element, finishers: finishers, extras: extras };\n  }\n\n  // DecorateConstructor\n  function _decorateConstructor(\n    elements /*: ElementDescriptor[] */,\n    decorators /*: ClassDecorator[] */,\n  ) /*: ElementsFinishers */ {\n    var finishers /*: ClassFinisher[] */ = [];\n\n    for (var i = decorators.length - 1; i >= 0; i--) {\n      var obj /*: ClassObject */ = _fromClassDescriptor(elements);\n      var elementsAndFinisher /*: ElementsFinisher */ = _toClassDescriptor(\n        (0, decorators[i])(obj) /*: ClassObject */ || obj,\n      );\n\n      if (elementsAndFinisher.finisher !== undefined) {\n        finishers.push(elementsAndFinisher.finisher);\n      }\n\n      if (elementsAndFinisher.elements !== undefined) {\n        elements = elementsAndFinisher.elements;\n\n        for (var j = 0; j < elements.length - 1; j++) {\n          for (var k = j + 1; k < elements.length; k++) {\n            if (\n              elements[j].key === elements[k].key &&\n              elements[j].placement === elements[k].placement\n            ) {\n              throw new TypeError("Duplicated element (" + elements[j].key + ")");\n            }\n          }\n        }\n      }\n    }\n\n    return { elements: elements, finishers: finishers };\n  }\n\n  // FromElementDescriptor\n  function _fromElementDescriptor(\n    element /*: ElementDescriptor */,\n  ) /*: ElementObject */ {\n    var obj /*: ElementObject */ = {\n      kind: element.kind,\n      key: element.key,\n      placement: element.placement,\n      descriptor: element.descriptor,\n    };\n\n    var desc = {\n      value: "Descriptor",\n      configurable: true,\n    };\n    Object.defineProperty(obj, Symbol.toStringTag, desc);\n\n    if (element.kind === "field") obj.initializer = element.initializer;\n\n    return obj;\n  }\n\n  // ToElementDescriptors\n  function _toElementDescriptors(\n    elementObjects /*: ElementObject[] */,\n  ) /*: ElementDescriptor[] */ {\n    if (elementObjects === undefined) return;\n    return toArray(elementObjects).map(function(elementObject) {\n      var element = _toElementDescriptor(elementObject);\n      _disallowProperty(elementObject, "finisher", "An element descriptor");\n      _disallowProperty(elementObject, "extras", "An element descriptor");\n      return element;\n    });\n  }\n\n  // ToElementDescriptor\n  function _toElementDescriptor(\n    elementObject /*: ElementObject */,\n  ) /*: ElementDescriptor */ {\n    var kind = String(elementObject.kind);\n    if (kind !== "method" && kind !== "field") {\n      throw new TypeError(\n        \'An element descriptor\\\\\'s .kind property must be either "method" or\' +\n          \' "field", but a decorator created an element descriptor with\' +\n          \' .kind "\' +\n          kind +\n          \'"\',\n      );\n    }\n\n    var key = elementObject.key;\n    if (typeof key !== "string" && typeof key !== "symbol") key = String(key);\n\n    var placement = String(elementObject.placement);\n    if (\n      placement !== "static" &&\n      placement !== "prototype" &&\n      placement !== "own"\n    ) {\n      throw new TypeError(\n        \'An element descriptor\\\\\'s .placement property must be one of "static",\' +\n          \' "prototype" or "own", but a decorator created an element descriptor\' +\n          \' with .placement "\' +\n          placement +\n          \'"\',\n      );\n    }\n\n    var descriptor /*: PropertyDescriptor */ = elementObject.descriptor;\n\n    _disallowProperty(elementObject, "elements", "An element descriptor");\n\n    var element /*: ElementDescriptor */ = {\n      kind: kind,\n      key: key,\n      placement: placement,\n      descriptor: Object.assign({}, descriptor),\n    };\n\n    if (kind !== "field") {\n      _disallowProperty(elementObject, "initializer", "A method descriptor");\n    } else {\n      _disallowProperty(\n        descriptor,\n        "get",\n        "The property descriptor of a field descriptor",\n      );\n      _disallowProperty(\n        descriptor,\n        "set",\n        "The property descriptor of a field descriptor",\n      );\n      _disallowProperty(\n        descriptor,\n        "value",\n        "The property descriptor of a field descriptor",\n      );\n\n      element.initializer = elementObject.initializer;\n    }\n\n    return element;\n  }\n\n  function _toElementFinisherExtras(\n    elementObject /*: ElementObject */,\n  ) /*: ElementFinisherExtras */ {\n    var element /*: ElementDescriptor */ = _toElementDescriptor(elementObject);\n    var finisher /*: ClassFinisher */ = _optionalCallableProperty(\n      elementObject,\n      "finisher",\n    );\n    var extras /*: ElementDescriptors[] */ = _toElementDescriptors(\n      elementObject.extras,\n    );\n\n    return { element: element, finisher: finisher, extras: extras };\n  }\n\n  // FromClassDescriptor\n  function _fromClassDescriptor(\n    elements /*: ElementDescriptor[] */,\n  ) /*: ClassObject */ {\n    var obj = {\n      kind: "class",\n      elements: elements.map(_fromElementDescriptor),\n    };\n\n    var desc = { value: "Descriptor", configurable: true };\n    Object.defineProperty(obj, Symbol.toStringTag, desc);\n\n    return obj;\n  }\n\n  // ToClassDescriptor\n  function _toClassDescriptor(obj /*: ClassObject */) /*: ElementsFinisher */ {\n    var kind = String(obj.kind);\n    if (kind !== "class") {\n      throw new TypeError(\n        \'A class descriptor\\\\\'s .kind property must be "class", but a decorator\' +\n          \' created a class descriptor with .kind "\' +\n          kind +\n          \'"\',\n      );\n    }\n\n    _disallowProperty(obj, "key", "A class descriptor");\n    _disallowProperty(obj, "placement", "A class descriptor");\n    _disallowProperty(obj, "descriptor", "A class descriptor");\n    _disallowProperty(obj, "initializer", "A class descriptor");\n    _disallowProperty(obj, "extras", "A class descriptor");\n\n    var finisher = _optionalCallableProperty(obj, "finisher");\n    var elements = _toElementDescriptors(obj.elements);\n\n    return { elements: elements, finisher: finisher };\n  }\n\n  function _disallowProperty(obj, name, objectType) {\n    if (obj[name] !== undefined) {\n      throw new TypeError(objectType + " can\'t have a ." + name + " property.");\n    }\n  }\n\n  function _optionalCallableProperty /*::<T>*/(\n    obj /*: T */,\n    name /*: $Keys<T> */,\n  ) /*: ?Function */ {\n    var value = obj[name];\n    if (value !== undefined && typeof value !== "function") {\n      throw new TypeError("Expected \'" + name + "\' to be a function");\n    }\n    return value;\n  }\n\n  // RunClassFinishers\n  function _runClassFinishers(\n    constructor /*: Class<*> */,\n    finishers /*: ClassFinisher[] */,\n  ) /*: Class<*> */ {\n    for (var i = 0; i < finishers.length; i++) {\n      var newConstructor /*: ?Class<*> */ = (0, finishers[i])(constructor);\n      if (newConstructor !== undefined) {\n        // NOTE: This should check if IsConstructor(newConstructor) is false.\n        if (typeof newConstructor !== "function") {\n          throw new TypeError("Finishers must return a constructor.");\n        }\n        constructor = newConstructor;\n      }\n    }\n    return constructor;\n  }\n  ',
+              ]
+            );
+
+            _templateObject64 = function _templateObject64() {
+              return data;
+            };
+
+            return data;
+          }
+
           function _templateObject63() {
             var data = _gerhobbelt_babel_runtime_helpers_taggedTemplateLiteralLoose__WEBPACK_IMPORTED_MODULE_0___default()(
               [
@@ -77903,6 +78000,7 @@
           helpers.classStaticPrivateFieldSpecSet = helper("7.0.1")(
             _templateObject63()
           );
+          helpers.decorate = helper("7.0.1")(_templateObject64());
         },
         /* 399 */
         function(module, __webpack_exports__, __webpack_require__) {
@@ -77945,7 +78043,7 @@
           }
 
           function _babelGenerator() {
-            var data = _interopRequireDefault(__webpack_require__(79));
+            var data = _interopRequireDefault(__webpack_require__(80));
 
             _babelGenerator = function _babelGenerator() {
               return data;
@@ -78254,11 +78352,11 @@
 
           var _util = __webpack_require__(153);
 
-          var context = _interopRequireWildcard(__webpack_require__(72));
+          var context = _interopRequireWildcard(__webpack_require__(73));
 
           var _plugin = _interopRequireDefault(__webpack_require__(84));
 
-          var _item = __webpack_require__(46);
+          var _item = __webpack_require__(47);
 
           var _configChain = __webpack_require__(154);
 
@@ -78272,7 +78370,7 @@
             return data;
           }
 
-          var _caching = __webpack_require__(47);
+          var _caching = __webpack_require__(48);
 
           var _options = __webpack_require__(85);
 
@@ -78820,7 +78918,7 @@
         },
         /* 404 */
         function(module, exports, __webpack_require__) {
-          var toString = __webpack_require__(78);
+          var toString = __webpack_require__(79);
 
           var reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
             reHasRegExpChar = RegExp(reRegExpChar.source);
@@ -78923,9 +79021,9 @@
             return data;
           }
 
-          var _ = __webpack_require__(72);
+          var _ = __webpack_require__(73);
 
-          var _caching = __webpack_require__(47);
+          var _caching = __webpack_require__(48);
 
           function _interopRequireDefault(obj) {
             return obj && obj.__esModule
@@ -79095,12 +79193,14 @@
 
           var PluginPass = (function() {
             function PluginPass(file, key, options) {
-              this._map = new Map();
-              this.key = key;
-              this.file = file;
-              this.opts = options || {};
-              this.cwd = file.opts.cwd;
-              this.filename = file.opts.filename;
+              var _this = this;
+
+              _this._map = new Map();
+              _this.key = key;
+              _this.file = file;
+              _this.opts = options || {};
+              _this.cwd = file.opts.cwd;
+              _this.filename = file.opts.filename;
             }
 
             var _proto = PluginPass.prototype;
@@ -79226,7 +79326,7 @@
           var baseFlatten = __webpack_require__(411),
             baseOrderBy = __webpack_require__(413),
             baseRest = __webpack_require__(140),
-            isIterateeCall = __webpack_require__(77);
+            isIterateeCall = __webpack_require__(78);
 
           var sortBy = baseRest(function(collection, iteratees) {
             if (collection == null) {
@@ -79253,7 +79353,7 @@
         },
         /* 411 */
         function(module, exports, __webpack_require__) {
-          var arrayPush = __webpack_require__(62),
+          var arrayPush = __webpack_require__(63),
             isFlattenable = __webpack_require__(412);
 
           function baseFlatten(array, depth, predicate, isStrict, result) {
@@ -79284,7 +79384,7 @@
         /* 412 */
         function(module, exports, __webpack_require__) {
           var Symbol = __webpack_require__(18),
-            isArguments = __webpack_require__(55),
+            isArguments = __webpack_require__(56),
             isArray = __webpack_require__(5);
 
           var spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
@@ -79301,7 +79401,7 @@
         },
         /* 413 */
         function(module, exports, __webpack_require__) {
-          var arrayMap = __webpack_require__(76),
+          var arrayMap = __webpack_require__(77),
             baseIteratee = __webpack_require__(414),
             baseMap = __webpack_require__(434),
             baseSortBy = __webpack_require__(440),
@@ -79384,7 +79484,7 @@
         },
         /* 416 */
         function(module, exports, __webpack_require__) {
-          var Stack = __webpack_require__(52),
+          var Stack = __webpack_require__(53),
             baseIsEqual = __webpack_require__(158);
 
           var COMPARE_PARTIAL_FLAG = 1,
@@ -79460,13 +79560,13 @@
         },
         /* 417 */
         function(module, exports, __webpack_require__) {
-          var Stack = __webpack_require__(52),
+          var Stack = __webpack_require__(53),
             equalArrays = __webpack_require__(159),
             equalByTag = __webpack_require__(419),
             equalObjects = __webpack_require__(421),
             getTag = __webpack_require__(39),
             isArray = __webpack_require__(5),
-            isBuffer = __webpack_require__(56),
+            isBuffer = __webpack_require__(57),
             isTypedArray = __webpack_require__(99);
 
           var COMPARE_PARTIAL_FLAG = 1;
@@ -79586,7 +79686,7 @@
             eq = __webpack_require__(25),
             equalArrays = __webpack_require__(159),
             mapToArray = __webpack_require__(420),
-            setToArray = __webpack_require__(70);
+            setToArray = __webpack_require__(71);
 
           var COMPARE_PARTIAL_FLAG = 1,
             COMPARE_UNORDERED_FLAG = 2;
@@ -79832,7 +79932,7 @@
             isKey = __webpack_require__(86),
             isStrictComparable = __webpack_require__(160),
             matchesStrictComparable = __webpack_require__(161),
-            toKey = __webpack_require__(48);
+            toKey = __webpack_require__(49);
 
           var COMPARE_PARTIAL_FLAG = 1,
             COMPARE_UNORDERED_FLAG = 2;
@@ -79916,7 +80016,7 @@
         },
         /* 427 */
         function(module, exports, __webpack_require__) {
-          var MapCache = __webpack_require__(54);
+          var MapCache = __webpack_require__(55);
 
           var FUNC_ERROR_TEXT = "Expected a function";
 
@@ -79971,11 +80071,11 @@
         /* 430 */
         function(module, exports, __webpack_require__) {
           var castPath = __webpack_require__(163),
-            isArguments = __webpack_require__(55),
+            isArguments = __webpack_require__(56),
             isArray = __webpack_require__(5),
-            isIndex = __webpack_require__(57),
-            isLength = __webpack_require__(58),
-            toKey = __webpack_require__(48);
+            isIndex = __webpack_require__(58),
+            isLength = __webpack_require__(59),
+            toKey = __webpack_require__(49);
 
           function hasPath(object, path, hasFunc) {
             path = castPath(path, object);
@@ -80013,7 +80113,7 @@
           var baseProperty = __webpack_require__(432),
             basePropertyDeep = __webpack_require__(433),
             isKey = __webpack_require__(86),
-            toKey = __webpack_require__(48);
+            toKey = __webpack_require__(49);
 
           function property(path) {
             return isKey(path)
@@ -80611,7 +80711,7 @@
           }
 
           function _babelGenerator() {
-            var data = _interopRequireDefault(__webpack_require__(79));
+            var data = _interopRequireDefault(__webpack_require__(80));
 
             _babelGenerator = function _babelGenerator() {
               return data;
