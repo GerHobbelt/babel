@@ -18,7 +18,7 @@ function _path() {
 }
 
 function _debug() {
-  const data = _interopRequireDefault(require("debug"));
+  const data = _interopRequireDefault(require("@gerhobbelt/debug"));
 
   _debug = function () {
     return data;
@@ -397,15 +397,23 @@ function configFieldIsApplicable(context, test, dirname) {
 
 function shouldIgnore(context, ignore, only, dirname) {
   if (ignore && matchesPatterns(context, ignore, dirname)) {
+    console.error("shouldIgnore-1: Ignored %o because it matched one of %O from %o", context.filename, ignore, dirname);
     debug("Ignored %o because it matched one of %O from %o", context.filename, ignore, dirname);
     return true;
   }
 
   if (only && !matchesPatterns(context, only, dirname)) {
+    console.error("shouldIgnore-2: Ignored %o because it matched one of %O from %o", context.filename, ignore, dirname);
     debug("Ignored %o because it failed to match one of %O from %o", context.filename, only, dirname);
     return true;
   }
 
+  debug("shouldIgnore-3: ", {
+    contextFilename: context.filename,
+    ignore,
+    only,
+    dirname
+  });
   return false;
 }
 

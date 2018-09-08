@@ -1,6 +1,6 @@
 // @flow
 
-import buildDebug from "debug";
+import buildDebug from "@gerhobbelt/debug";
 import path from "path";
 import fs from "fs";
 import json5 from "@gerhobbelt/json5";

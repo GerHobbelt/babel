@@ -16,7 +16,7 @@ function _path() {
 }
 
 function _debug() {
-  const data = _interopRequireDefault(require("debug"));
+  const data = _interopRequireDefault(require("@gerhobbelt/debug"));
 
   _debug = function () {
     return data;

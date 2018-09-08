@@ -1,7 +1,7 @@
 // @flow
 
 import path from "path";
-import buildDebug from "debug";
+import buildDebug from "@gerhobbelt/debug";
 import cloneDeep from "lodash/cloneDeep";
 import * as t from "@gerhobbelt/babel-types";
 import type { PluginPasses } from "../config";

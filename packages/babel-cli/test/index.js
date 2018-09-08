@@ -92,12 +92,6 @@ const assertTest = function(stdout, stderr, opts, cwd) {
   if (opts.outFiles) {
     const actualFiles = readDir(path.join(tmpLoc), fileFilter);
 
-    console.error("actualFiles + opts.inFiles + opts.outFiles:", {
-      actualFiles,
-      inFiles: opts.inFiles,
-      outFiles: opts.outFiles,
-    });
-
     Object.keys(actualFiles).forEach(function(filename) {
       if (
         // saveInFiles always creates an empty .babelrc, so lets exclude for now
@@ -106,6 +100,15 @@ const assertTest = function(stdout, stderr, opts, cwd) {
       ) {
         const expected = opts.outFiles[filename];
         const actual = actualFiles[filename];
+
+        if (!expected) {
+          console.error("actualFiles + opts.inFiles + opts.outFiles:", {
+            actualFiles,
+            inFiles: opts.inFiles,
+            outFiles: opts.outFiles,
+            options: opts,
+          });
+        }
 
         expect(expected).not.toBeUndefined();
 
@@ -192,6 +195,8 @@ fs.readdirSync(fixtureLoc).forEach(function(binName) {
 
       const opts = {
         args: [],
+        binName,
+        testName,
       };
 
       const optionsLoc = path.join(testLoc, "options.json");

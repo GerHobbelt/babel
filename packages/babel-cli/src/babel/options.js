@@ -138,6 +138,7 @@ commander.option(
   "Include dotfiles when compiling and copying non-compilable files",
 );
 commander.option("--verbose", "Log everything");
+commander.option("--debug", "Log everything, including debug diagnostics");
 commander.option(
   "--delete-dir-on-start",
   "Delete the out directory before compilation",
@@ -213,6 +214,10 @@ export default function parseArgv(args: Array<string>) {
 
   const opts = commander.opts();
 
+  if (opts.debug) {
+    opts.verbose = opts.verbose || opts.debug;
+  }
+
   return {
     babelOptions: {
       presets: opts.presets,
@@ -255,6 +260,7 @@ export default function parseArgv(args: Array<string>) {
       copyFiles: opts.copyFiles,
       includeDotfiles: opts.includeDotfiles,
       verbose: opts.verbose,
+      debug: opts.debug,
       deleteDirOnStart: opts.deleteDirOnStart,
       sourceMapTarget: opts.sourceMapTarget,
     },

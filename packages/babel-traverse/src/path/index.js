@@ -1,7 +1,7 @@
 import type { HubInterface } from "../hub";
 import type TraversalContext from "../context";
 import * as virtualTypes from "./lib/virtual-types";
-import buildDebug from "debug";
+import buildDebug from "@gerhobbelt/debug";
 import traverse from "../index";
 import Scope from "../scope";
 import * as t from "@gerhobbelt/babel-types";

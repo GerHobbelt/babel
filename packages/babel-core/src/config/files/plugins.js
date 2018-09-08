@@ -4,7 +4,7 @@
  * This file handles all logic for converting string-based configuration references into loaded objects.
  */
 
-import buildDebug from "debug";
+import buildDebug from "@gerhobbelt/debug";
 import resolve from "resolve";
 import path from "path";
 

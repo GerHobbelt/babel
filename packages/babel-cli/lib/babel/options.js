@@ -125,6 +125,8 @@ _commander().default.option("--include-dotfiles", "Include dotfiles when compili
 
 _commander().default.option("--verbose", "Log everything");
 
+_commander().default.option("--debug", "Log everything, including debug diagnostics");
+
 _commander().default.option("--delete-dir-on-start", "Delete the out directory before compilation");
 
 _commander().default.version(_package.default.version + " (@gerhobbelt/babel-core " + _babelCore().version + ")");
@@ -191,6 +193,10 @@ function parseArgv(args) {
 
   const opts = _commander().default.opts();
 
+  if (opts.debug) {
+    opts.verbose = opts.verbose || opts.debug;
+  }
+
   return {
     babelOptions: {
       presets: opts.presets,
@@ -228,6 +234,7 @@ function parseArgv(args) {
       copyFiles: opts.copyFiles,
       includeDotfiles: opts.includeDotfiles,
       verbose: opts.verbose,
+      debug: opts.debug,
       deleteDirOnStart: opts.deleteDirOnStart,
       sourceMapTarget: opts.sourceMapTarget
     }
