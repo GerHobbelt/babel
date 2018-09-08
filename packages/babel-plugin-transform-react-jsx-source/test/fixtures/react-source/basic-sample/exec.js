@@ -1,3 +1,10 @@
+const unify = require("unify-paths");
+const path = require("path");
+
+// <CWD>
+const cwdPathPrefix = path
+  .resolve(__dirname, "../../../");
+
 var actual = transform(
   'var x = <sometag />',
   Object.assign({}, opts, { filename: '/fake/path/mock.js' })
@@ -25,9 +32,14 @@ function filterExceptionStackTrace(inp) {
           )
         : JSON.stringify(inp, null, 2)
       : "" + inp;
-  return s
-    .replace(/\\\\?/g, "/")
-    .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/");
+  return unify(s, {
+    hasExplicitEscapes: true,
+    reducePaths: [
+      "fake",
+      "babel",
+    ],
+    cwdPathPrefix: cwdPathPrefix
+  });
 }
 
 expect(filterExceptionStackTrace(actual)).toBe(filterExceptionStackTrace(expected));

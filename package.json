@@ -227,6 +227,7 @@
     "through2": "2.0.3",
     "uglify-js": "3.4.9",
     "unicode-11.0.0": "0.7.7",
+    "unify-paths": "^1.0.1",
     "vinyl-buffer": "1.0.1",
     "vinyl-source-stream": "2.0.0",
     "webpack": "4.17.2",

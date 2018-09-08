@@ -5,7 +5,7 @@ import * as t from "@gerhobbelt/babel-types";
 import fs from "fs";
 import path from "path";
 import fixtures from "@gerhobbelt/babel-helper-fixtures";
-import escapeRegExp from "lodash/escapeRegExp";
+import unify from "unify-paths";
 
 describe("generation", function() {
   it("completeness", function() {
@@ -398,9 +398,7 @@ describe("CodeGenerator", function() {
 const suites = fixtures(`${__dirname}/fixtures`);
 
 // <CWD>
-const cwdPathPrefix = path
-  .resolve(__dirname, "../../../")
-  .replace(/\\\\?/g, "/");
+const cwdPathPrefix = path.resolve(__dirname, "../../../");
 
 // this function is duplicated in packages\babel-helper-transform-fixture-test-runner\src\index.js
 function filterExceptionStackTrace(inp) {
@@ -422,17 +420,11 @@ function filterExceptionStackTrace(inp) {
           )
         : JSON.stringify(inp, null, 2)
       : "" + inp;
-  return s
-    .replace(/(?=\\[^uxwbn])\\\\?/g, "/")
-    .replace(
-      /(^|[^\w_\\/:-])(?!http:|https:)(?:\w+:)?\/fake\/path\//g,
-      "$1/fake/path/",
-    )
-    .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
-    .replace(
-      /(^|[^\w_\\/:-])(?!http:|https:)(?:\b\w+:)?\/[/\w]+?\/babel\//g,
-      "$1/XXXXXX/babel/",
-    );
+  return unify(s, {
+    hasExplicitEscapes: true,
+    reducePaths: ["fake", "babel"],
+    cwdPathPrefix: cwdPathPrefix,
+  });
 }
 
 suites.forEach(function(testSuite) {

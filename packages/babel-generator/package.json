@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@gerhobbelt/babel-helper-fixtures": "7.0.1-16",
-    "@gerhobbelt/babel-parser": "7.0.1-16"
+    "@gerhobbelt/babel-parser": "7.0.1-16",
+    "unify-paths": "1.0.1"
   }
 }

@@ -46,7 +46,8 @@
     "lodash": "^4.17.10",
     "resolve": "^1.8.1",
     "semver": "^5.5.1",
-    "source-map": "0.6.1"
+    "source-map": "0.6.1",
+    "unify-paths": "1.0.1"
   },
   "devDependencies": {
     "@gerhobbelt/babel-helper-transform-fixture-test-runner": "7.0.1-16",

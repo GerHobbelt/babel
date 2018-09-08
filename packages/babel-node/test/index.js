@@ -5,11 +5,15 @@ const rimraf = require("rimraf");
 const outputFileSync = require("output-file-sync");
 const child = require("child_process");
 const merge = require("lodash/merge");
+const unify = require("unify-paths");
 const path = require("path");
 const fs = require("fs");
 
 const fixtureLoc = path.join(__dirname, "fixtures");
 const tmpLoc = path.join(__dirname, "tmp");
+
+// <CWD>
+const cwdPathPrefix = path.resolve(__dirname, "../../../");
 
 const fileFilter = function(x) {
   return x !== ".DS_Store";
@@ -61,7 +65,10 @@ const assertTest = function(stdout, stderr, opts) {
 
   const expectStdout = opts.stdout.trim();
   stdout = stdout.trim();
-  stdout = stdout.replace(/\\\\?/g, "/");
+  stdout = unify(stdout, {
+    reducePaths: ["fake", "babel"],
+    cwdPathPrefix: cwdPathPrefix,
+  });
 
   if (opts.stdout) {
     if (opts.stdoutContains) {

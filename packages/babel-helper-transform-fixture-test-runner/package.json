@@ -19,6 +19,7 @@
     "jest-diff": "^23.5.0",
     "lodash": "^4.17.10",
     "resolve": "^1.8.1",
-    "source-map": "0.6.1"
+    "source-map": "0.6.1",
+    "unify-paths": "1.0.1"
   }
 }

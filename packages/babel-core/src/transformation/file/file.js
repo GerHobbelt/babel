@@ -6,6 +6,7 @@ import { codeFrameColumns } from "@gerhobbelt/babel-code-frame";
 import traverse from "@gerhobbelt/babel-traverse";
 import * as t from "@gerhobbelt/babel-types";
 import semver from "semver";
+import unify from "unify-paths";
 
 import type { NormalizedFile } from "../normalize-file";
 
@@ -130,7 +131,7 @@ export default class File {
     }
 
     // normalize path separators
-    moduleName = moduleName.replace(/\\\\?/g, "/");
+    moduleName = unify(moduleName);
 
     if (getModuleId) {
       // If return is falsy, assume they want us to use our generated default name

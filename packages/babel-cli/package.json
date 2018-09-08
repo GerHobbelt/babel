@@ -26,7 +26,6 @@
     "lodash": "^4.17.10",
     "make-dir": "^1.3.0",
     "output-file-sync": "^2.0.1",
-    "slash": "^2.0.0",
     "source-map": "0.6.1"
   },
   "optionalDependencies": {
@@ -37,7 +36,8 @@
   },
   "devDependencies": {
     "@gerhobbelt/babel-core": "7.0.1-16",
-    "@gerhobbelt/babel-helper-fixtures": "7.0.1-16"
+    "@gerhobbelt/babel-helper-fixtures": "7.0.1-16",
+    "unify-paths": "^1.0.1"
   },
   "bin": {
     "babel": "./bin/babel.js",

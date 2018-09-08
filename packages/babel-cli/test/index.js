@@ -4,7 +4,7 @@ const rimraf = require("rimraf");
 const outputFileSync = require("output-file-sync");
 const child = require("child_process");
 const merge = require("lodash/merge");
-const slash = require("slash");
+const unify = require("unify-paths");
 const path = require("path");
 const fs = require("fs");
 
@@ -46,14 +46,10 @@ const saveInFiles = function(files) {
 };
 
 const replacePaths = function(str, cwd) {
-  let prev;
-  do {
-    prev = str;
-    str = str.replace(cwd, "<CWD>");
-  } while (str !== prev);
-
   // Unify Windows and UNIX paths: make Windows paths look like UNIX ones:
-  str = slash(str.replace(/[A-Z]:[\\/]/g, "/"));
+  str = unify(str, {
+    cwdPathPrefix: cwd,
+  });
 
   return str;
 };
@@ -77,7 +73,10 @@ const assertTest = function(stdout, stderr, opts, cwd) {
 
   const expectStdout = opts.stdout.trim();
   stdout = stdout.trim();
-  stdout = stdout.replace(/\\\\?/g, "/");
+  stdout = unify(stdout, {
+    reducePaths: ["fake", "babel"],
+    cwdPathPrefix: cwd,
+  });
 
   if (opts.stdout) {
     if (opts.stdoutContains) {

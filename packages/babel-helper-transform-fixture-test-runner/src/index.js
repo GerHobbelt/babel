@@ -6,7 +6,6 @@ import sourceMap from "source-map";
 import { codeFrameColumns } from "@gerhobbelt/babel-code-frame";
 import defaults from "lodash/defaults";
 import includes from "lodash/includes";
-import escapeRegExp from "lodash/escapeRegExp";
 import * as helpers from "./helpers";
 import extend from "lodash/extend";
 import merge from "lodash/merge";
@@ -15,6 +14,7 @@ import assert from "assert";
 import fs from "fs";
 import path from "path";
 import vm from "vm";
+import unify from "unify-paths";
 
 import diff from "jest-diff";
 
@@ -182,9 +182,7 @@ function run(task) {
   const optionsDir = task.optionsDir;
 
   // <CWD>
-  const cwdPathPrefix = path
-    .resolve(__dirname, "../../../")
-    .replace(/\\\\?/g, "/");
+  const cwdPathPrefix = path.resolve(__dirname, "../../../");
 
   // this function is duplicated in packages\babel-generator\test\index.js
   function filterExceptionStackTrace(inp) {
@@ -201,17 +199,11 @@ function run(task) {
             )
           : JSON.stringify(inp, null, 2)
         : "" + inp;
-    return s
-      .replace(/(?=\\[^uxwbn])\\\\?/g, "/")
-      .replace(
-        /(^|[^\w_\\/:-])(?!http:|https:)(?:\w+:)?\/fake\/path\//g,
-        "$1/fake/path/",
-      )
-      .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
-      .replace(
-        /(^|[^\w_\\/:-])(?!http:|https:)(?:\b\w+:)?\/[/\w]+?\/babel\//g,
-        "$1/XXXXXX/babel/",
-      );
+    return unify(s, {
+      hasExplicitEscapes: true,
+      reducePaths: ["fake", "babel"],
+      cwdPathPrefix: cwdPathPrefix,
+    });
   }
 
   function getOpts(self) {

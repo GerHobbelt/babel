@@ -2,15 +2,13 @@ const child = require("child_process");
 const fs = require("fs-extra");
 const helper = require("@gerhobbelt/babel-helper-fixtures");
 const path = require("path");
-const escapeRegExp = require("lodash/escapeRegExp");
+const unify = require("unify-paths");
 
 const fixtureLoc = path.join(__dirname, "debug-fixtures");
 const tmpLoc = path.join(__dirname, "tmp");
 
 // <CWD>
-const cwdPathPrefix = path
-  .resolve(__dirname, "../../../")
-  .replace(/\\\\?/g, "/");
+const cwdPathPrefix = path.resolve(__dirname, "../../../");
 
 function filterExceptionStackTrace(inp) {
   const s =
@@ -26,11 +24,11 @@ function filterExceptionStackTrace(inp) {
           )
         : JSON.stringify(inp, null, 2)
       : "" + inp;
-  return s
-    .replace(/\\\\?/g, "/")
-    .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/")
-    .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
-    .replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/");
+  return unify(s, {
+    hasExplicitEscapes: true,
+    reducePaths: ["fake", "babel"],
+    cwdPathPrefix: cwdPathPrefix,
+  });
 }
 
 const clear = () => {
