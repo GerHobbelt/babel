@@ -186,6 +186,7 @@ function run(task) {
     .resolve(__dirname, "../../../")
     .replace(/\\\\?/g, "/");
 
+  // this function is duplicated in packages\babel-generator\test\index.js
   function filterExceptionStackTrace(inp) {
     const s =
       typeof inp === "object"
@@ -201,12 +202,15 @@ function run(task) {
           : JSON.stringify(inp, null, 2)
         : "" + inp;
     return s
-      .replace(/\\\\?(?![uxwbn])/g, "/")
-      .replace(/(?:\b(?!http|https)\w+:)?\/fake\/path\//g, "/fake/path/")
+      .replace(/(?=\\[^uxwbn])\\\\?/g, "/")
+      .replace(
+        /(^|[^\w_\\/:-])(?!http:|https:)(?:\w+:)?\/fake\/path\//g,
+        "$1/fake/path/",
+      )
       .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
       .replace(
-        /(?:\b(?!http|https)\w+:)?\/[/\w]+?\/babel\//g,
-        "/XXXXXX/babel/",
+        /(^|[^\w_\\/:-])(?!http:|https:)(?:\b\w+:)?\/[/\w]+?\/babel\//g,
+        "$1/XXXXXX/babel/",
       );
   }
 

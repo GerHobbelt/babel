@@ -310,7 +310,7 @@ function run(task) {
       message: inp.message,
       stack: inp.stack
     }, null, 2) : JSON.stringify(inp, null, 2) : "" + inp;
-    return s.replace(/\\\\?(?![uxwbn])/g, "/").replace(/(?:\b(?!http|https)\w+:)?\/fake\/path\//g, "/fake/path/").replace(RegExp((0, _escapeRegExp().default)(cwdPathPrefix), "g"), "<CWD>").replace(/(?:\b(?!http|https)\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/");
+    return s.replace(/(?=\\[^uxwbn])\\\\?/g, "/").replace(/(^|[^\w_\\/:-])(?!http:|https:)(?:\w+:)?\/fake\/path\//g, "$1/fake/path/").replace(RegExp((0, _escapeRegExp().default)(cwdPathPrefix), "g"), "<CWD>").replace(/(^|[^\w_\\/:-])(?!http:|https:)(?:\b\w+:)?\/[/\w]+?\/babel\//g, "$1/XXXXXX/babel/");
   }
 
   function getOpts(self) {

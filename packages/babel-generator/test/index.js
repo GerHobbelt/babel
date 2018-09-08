@@ -402,6 +402,7 @@ const cwdPathPrefix = path
   .resolve(__dirname, "../../../")
   .replace(/\\\\?/g, "/");
 
+// this function is duplicated in packages\babel-helper-transform-fixture-test-runner\src\index.js
 function filterExceptionStackTrace(inp) {
   if (inp && inp.sources) {
     const srcs = inp.sources.forEach(str => filterExceptionStackTrace(str));
@@ -422,10 +423,16 @@ function filterExceptionStackTrace(inp) {
         : JSON.stringify(inp, null, 2)
       : "" + inp;
   return s
-    .replace(/\\\\?/g, "/")
-    .replace(/(?:\b\w+:)?\/fake\/path\//g, "/fake/path/")
+    .replace(/(?=\\[^uxwbn])\\\\?/g, "/")
+    .replace(
+      /(^|[^\w_\\/:-])(?!http:|https:)(?:\w+:)?\/fake\/path\//g,
+      "$1/fake/path/",
+    )
     .replace(RegExp(escapeRegExp(cwdPathPrefix), "g"), "<CWD>")
-    .replace(/(?:\b\w+:)?\/[/\w]+?\/babel\//g, "/XXXXXX/babel/");
+    .replace(
+      /(^|[^\w_\\/:-])(?!http:|https:)(?:\b\w+:)?\/[/\w]+?\/babel\//g,
+      "$1/XXXXXX/babel/",
+    );
 }
 
 suites.forEach(function(testSuite) {
