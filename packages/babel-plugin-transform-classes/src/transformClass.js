@@ -78,6 +78,81 @@ function setThisAssert(p) {
   b && b.setData("_assertThisInitialized", 1);
 }
 
+function findNearestBlock(p) {
+  let last = p;
+  return p.find(p => {
+    if (p.isBlockParent() || p.isSequenceExpression()) {
+      // exclude CallExpression as an object key name.
+      if (last && p.isMethod({ key: last.node })) {
+        return false;
+      }
+      return true;
+    }
+    last = p;
+  });
+}
+
+const checkSuperCalleeVisitor = traverse.visitors.merge([
+  environmentVisitor,
+  {
+    Super(path, state) {
+      const { node, parentPath } = path;
+      if (
+        parentPath.isCallExpression({ callee: node }) &&
+        !isInConditional(parentPath, state.root)
+      ) {
+        state.path = path;
+        path.stop();
+      }
+    },
+  },
+]);
+
+function findPrevSiblingSuper(p) {
+  let ret;
+  return (
+    p.getAllPrevSiblings().some(p => {
+      const state = { path: null, root: p };
+      return p.traverse(checkSuperCalleeVisitor, state), (ret = state.path);
+    }) && ret
+  );
+}
+
+function isInConditional(p, ref) {
+  do {
+    if (p.isConditional() || p.isLogicalExpression() || p.isSwitchStatement()) {
+      return true;
+    } else if (p === ref) return false;
+  } while ((p = p.parentPath));
+  return false;
+}
+
+function findUp(p, fn) {
+  do {
+    if (!p || p.isClassBody()) return false;
+    else if (fn(p)) return p;
+  } while ((p = p.parentPath));
+  return false;
+}
+
+// Check block assertion of `assertThisInitialized`
+const isThisAsserted = p =>
+  findUp(p, p => !!p.getData("_assertThisInitialized"));
+
+// Find `super()` in forwards and upwards
+const findUpwardsSuper = p => {
+  let ret;
+  return (
+    findUp(p, p => !!(ret = findPrevSiblingSuper(p.getStatementParent()))), ret
+  );
+};
+
+// Add path with assertThisInitialized flag
+const setThisAssert = p => {
+  const b = findNearestBlock(p);
+  b && b.setData("_assertThisInitialized", 1);
+};
+
 const verifyConstructorVisitor = traverse.visitors.merge([
   environmentVisitor,
   {
@@ -439,33 +514,38 @@ export default function transformClass(
       return (thisRef.ref = ref);
     };
 
-    // traverse constructor for some verifies and fixtures.
+    // Traverse THIS within constructor for some verifies and fixtures.
     for (const path of ctorThises) {
       const { node } = path;
       if (node === thisRef.thisAlias) continue;
 
       // Fix issue #8335, traverse all of the `this` expressions with assertion and aliases
       if (isDerived && !isThisAsserted(path)) {
-        const block = findNearestBlock(path);
-        const stateLine = path.find(p => p.parentPath === block);
-
-        // Prevent add `assertThisInitialized` if find `super()` before current statement
-        if (hasPrevSiblingSuper(stateLine)) {
-          setThisAssert(block);
-          if (block.isSequenceExpression() && !isInConditional(block, body)) {
-            setThisAssert(body);
-          }
+        const superPath = findUpwardsSuper(path);
+        if (superPath) {
+          setThisAssert(superPath);
         } else {
-          const assertion = t.callExpression(
-            file.addHelper("assertThisInitialized"),
-            [thisRef()],
-          );
-          if (!isInConditional(path, stateLine)) {
-            // skip mark if in condtional
+          const block = findNearestBlock(path);
+          const stateLine = path.find(p => p.parentPath === block);
+
+          // Prevent add `assertThisInitialized` if find `super()` before current statement
+          if (findPrevSiblingSuper(stateLine)) {
             setThisAssert(path);
+            if (block.isSequenceExpression() && !isInConditional(block, body)) {
+              setThisAssert(body);
+            }
+          } else {
+            const assertion = t.callExpression(
+              file.addHelper("assertThisInitialized"),
+              [thisRef()],
+            );
+            if (!isInConditional(path, stateLine)) {
+              // skip mark if in conditional
+              setThisAssert(path);
+            }
+            path.replaceWith(assertion);
+            continue;
           }
-          path.replaceWith(assertion);
-          continue;
         }
       }
 
