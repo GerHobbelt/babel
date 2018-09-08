@@ -18409,21 +18409,23 @@
           var postfix = true;
 
           var TokenType = function TokenType(label, conf) {
+            var _this = this;
+
             if (conf === void 0) {
               conf = {};
             }
 
-            this.label = label;
-            this.keyword = conf.keyword;
-            this.beforeExpr = !!conf.beforeExpr;
-            this.startsExpr = !!conf.startsExpr;
-            this.rightAssociative = !!conf.rightAssociative;
-            this.isLoop = !!conf.isLoop;
-            this.isAssign = !!conf.isAssign;
-            this.prefix = !!conf.prefix;
-            this.postfix = !!conf.postfix;
-            this.binop = conf.binop === 0 ? 0 : conf.binop || null;
-            this.updateContext = null;
+            _this.label = label;
+            _this.keyword = conf.keyword;
+            _this.beforeExpr = !!conf.beforeExpr;
+            _this.startsExpr = !!conf.startsExpr;
+            _this.rightAssociative = !!conf.rightAssociative;
+            _this.isLoop = !!conf.isLoop;
+            _this.isAssign = !!conf.isAssign;
+            _this.prefix = !!conf.prefix;
+            _this.postfix = !!conf.postfix;
+            _this.binop = conf.binop === 0 ? 0 : conf.binop || null;
+            _this.updateContext = null;
           };
 
           function KeywordTokenType(keyword, options) {
@@ -23091,10 +23093,12 @@
             preserveSpace,
             override
           ) {
-            this.token = token;
-            this.isExpr = !!isExpr;
-            this.preserveSpace = !!preserveSpace;
-            this.override = override;
+            var _this = this;
+
+            _this.token = token;
+            _this.isExpr = !!isExpr;
+            _this.preserveSpace = !!preserveSpace;
+            _this.override = override;
           };
 
           var types$1 = {
@@ -23820,13 +23824,17 @@
           }
 
           var Position = function Position(line, col) {
-            this.line = line;
-            this.column = col;
+            var _this = this;
+
+            _this.line = line;
+            _this.column = col;
           };
 
           var SourceLocation = function SourceLocation(start, end) {
-            this.start = start;
-            this.end = end;
+            var _this2 = this;
+
+            _this2.start = start;
+            _this2.end = end;
           };
 
           function getLineInfo(input, offset) {
@@ -24193,26 +24201,28 @@
           );
 
           var Token = function Token(state) {
-            this.type = state.type;
-            this.value = state.value;
-            this.start = state.start;
-            this.end = state.end;
-            this.loc = new SourceLocation(state.startLoc, state.endLoc);
+            var _this = this;
+
+            _this.type = state.type;
+            _this.value = state.value;
+            _this.start = state.start;
+            _this.end = state.end;
+            _this.loc = new SourceLocation(state.startLoc, state.endLoc);
           };
 
           var Tokenizer = (function(_LocationParser) {
             _inheritsLoose(Tokenizer, _LocationParser);
 
             function Tokenizer(options, input) {
-              var _this;
+              var _this2;
 
-              _this = _LocationParser.call(this) || this;
-              _this.state = new State();
+              _this2 = _LocationParser.call(this) || this;
+              _this2.state = new State();
 
-              _this.state.init(options, input);
+              _this2.state.init(options, input);
 
-              _this.isLookahead = false;
-              return _this;
+              _this2.isLookahead = false;
+              return _this2;
             }
 
             var _proto = Tokenizer.prototype;
@@ -25667,24 +25677,26 @@
 
           var Node = (function() {
             function Node(parser, pos, loc) {
-              this.type = "";
-              this.start = pos;
-              this.end = 0;
-              this.loc = new SourceLocation(loc);
-              if (parser && parser.options.ranges) this.range = [pos, 0];
+              var _this = this;
+
+              _this.type = "";
+              _this.start = pos;
+              _this.end = 0;
+              _this.loc = new SourceLocation(loc);
+              if (parser && parser.options.ranges) _this.range = [pos, 0];
               if (parser && parser.filename)
-                this.loc.filename = parser.filename;
+                _this.loc.filename = parser.filename;
             }
 
             var _proto = Node.prototype;
 
             _proto.__clone = function __clone() {
-              var _this = this;
+              var _this2 = this;
 
               var node2 = new Node();
               Object.keys(this).forEach(function(key) {
                 if (commentKeys.indexOf(key) < 0) {
-                  node2[key] = _this[key];
+                  node2[key] = _this2[key];
                 }
               });
               return node2;
