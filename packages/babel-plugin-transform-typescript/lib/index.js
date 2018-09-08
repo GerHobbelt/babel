@@ -257,7 +257,15 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, {
       },
 
       TSAsExpression(path) {
-        path.replaceWith(path.node.expression);
+        let {
+          node
+        } = path;
+
+        do {
+          node = node.expression;
+        } while (_babelCore().types.isTSAsExpression(node));
+
+        path.replaceWith(node);
       },
 
       TSNonNullExpression(path) {

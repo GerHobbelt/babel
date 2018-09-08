@@ -3967,6 +3967,8 @@ var State = function () {
     this.noArrowParamsConversionAt = [];
     this.inMethod = false;
     this.inFunction = false;
+    this.inArrowFunction = false;
+    this.inNonArrowFunction = false;
     this.inParameters = false;
     this.maybeInArrowParameters = false;
     this.inGenerator = false;
@@ -6588,7 +6590,7 @@ var ExpressionParser = function (_LValParser) {
     if (this.eat(types.dot)) {
       var metaProp = this.parseMetaProperty(node, meta, "target");
 
-      if (!this.state.inFunction && !this.state.inClassProperty) {
+      if (!this.state.inNonArrowFunction && !this.state.inClassProperty) {
         var error = "new.target can only be used in functions";
 
         if (this.hasPlugin("classProperties")) {
@@ -6917,7 +6919,7 @@ var ExpressionParser = function (_LValParser) {
     var oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
     this.state.inGenerator = false;
     this.state.maybeInArrowParameters = false;
-    this.parseFunctionBody(node, true);
+    this.parseFunctionBody(node, true, !this.state.inNonArrowFunction);
     this.state.inGenerator = oldInGenerator;
     this.state.inFunction = oldInFunc;
     this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
@@ -6945,11 +6947,15 @@ var ExpressionParser = function (_LValParser) {
   };
 
   _proto.parseFunctionBodyAndFinish = function parseFunctionBodyAndFinish(node, type, allowExpressionBody) {
-    this.parseFunctionBody(node, allowExpressionBody);
+    this.parseFunctionBody(node, allowExpressionBody, false);
     this.finishNode(node, type);
   };
 
-  _proto.parseFunctionBody = function parseFunctionBody(node, allowExpression) {
+  _proto.parseFunctionBody = function parseFunctionBody(node, allowExpression, shouldResetInNonArrowFunctionFlag) {
+    if (shouldResetInNonArrowFunctionFlag === void 0) {
+      shouldResetInNonArrowFunctionFlag = false;
+    }
+
     var isExpression = allowExpression && !this.match(types.braceL);
     var oldInParameters = this.state.inParameters;
     var oldInAsync = this.state.inAsync;
@@ -6974,6 +6980,10 @@ var ExpressionParser = function (_LValParser) {
     this.state.inAsync = oldInAsync;
     this.checkFunctionNameAndParams(node, allowExpression);
     this.state.inParameters = oldInParameters;
+
+    if (shouldResetInNonArrowFunctionFlag) {
+      this.state.inNonArrowFunction = false;
+    }
   };
 
   _proto.checkFunctionNameAndParams = function checkFunctionNameAndParams(node, isArrowFunction) {
@@ -7836,6 +7846,7 @@ var StatementParser = function (_ExpressionParser) {
     var oldInGenerator = this.state.inGenerator;
     var oldInClassProperty = this.state.inClassProperty;
     this.state.inFunction = true;
+    this.state.inNonArrowFunction = true;
     this.state.inMethod = false;
     this.state.inClassProperty = false;
     this.initFunction(node, isAsync);

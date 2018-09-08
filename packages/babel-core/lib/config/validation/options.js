@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const ROOT_VALIDATORS = {
   cwd: _optionAssertions.assertString,
-  root: _optionAssertions.assertString,
+  root: _optionAssertions.assertRoot,
   configFile: _optionAssertions.assertConfigFileSearch,
   caller: _optionAssertions.assertCallerMetadata,
   filename: _optionAssertions.assertString,

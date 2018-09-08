@@ -712,6 +712,7 @@ class StatementParser extends _expression.default {
     const oldInGenerator = this.state.inGenerator;
     const oldInClassProperty = this.state.inClassProperty;
     this.state.inFunction = true;
+    this.state.inNonArrowFunction = true;
     this.state.inMethod = false;
     this.state.inClassProperty = false;
     this.initFunction(node, isAsync);

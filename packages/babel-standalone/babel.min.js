@@ -123605,7 +123605,7 @@
                 result[i] = Object.assign({}, scriptData, {
                   content: script.innerHTML,
                   loaded: true,
-                  url: null,
+                  url: script.getAttribute("data-module") || null,
                 });
               }
             });

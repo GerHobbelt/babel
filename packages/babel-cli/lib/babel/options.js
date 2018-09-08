@@ -148,20 +148,20 @@ function parseArgv(args) {
   filenames = (0, _uniq().default)(filenames);
   filenames.forEach(function (filename) {
     if (!_fs().default.existsSync(filename)) {
-      errors.push(filename + " doesn't exist");
+      errors.push(filename + " does not exist");
     }
   });
 
   if (_commander().default.outDir && !filenames.length) {
-    errors.push("filenames required for --out-dir");
+    errors.push("--out-dir requires filenames");
   }
 
   if (_commander().default.outFile && _commander().default.outDir) {
-    errors.push("cannot have --out-file and --out-dir");
+    errors.push("--out-file and --out-dir cannot be used together");
   }
 
   if (_commander().default.relative && !_commander().default.outDir) {
-    errors.push("output directory required for --relative");
+    errors.push("--relative requires --out-dir usage");
   }
 
   if (_commander().default.watch) {
@@ -187,7 +187,10 @@ function parseArgv(args) {
   }
 
   if (errors.length) {
-    console.error(errors.join(". "));
+    console.error("babel:");
+    errors.forEach(function (e) {
+      console.error("  " + e);
+    });
     process.exit(2);
   }
 

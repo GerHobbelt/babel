@@ -894,7 +894,7 @@ class ExpressionParser extends _lval.default {
     if (this.eat(_types.types.dot)) {
       const metaProp = this.parseMetaProperty(node, meta, "target");
 
-      if (!this.state.inFunction && !this.state.inClassProperty) {
+      if (!this.state.inNonArrowFunction && !this.state.inClassProperty) {
         let error = "new.target can only be used in functions";
 
         if (this.hasPlugin("classProperties")) {
@@ -1223,7 +1223,7 @@ class ExpressionParser extends _lval.default {
     const oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
     this.state.inGenerator = false;
     this.state.maybeInArrowParameters = false;
-    this.parseFunctionBody(node, true);
+    this.parseFunctionBody(node, true, !this.state.inNonArrowFunction);
     this.state.inGenerator = oldInGenerator;
     this.state.inFunction = oldInFunc;
     this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
@@ -1251,11 +1251,11 @@ class ExpressionParser extends _lval.default {
   }
 
   parseFunctionBodyAndFinish(node, type, allowExpressionBody) {
-    this.parseFunctionBody(node, allowExpressionBody);
+    this.parseFunctionBody(node, allowExpressionBody, false);
     this.finishNode(node, type);
   }
 
-  parseFunctionBody(node, allowExpression) {
+  parseFunctionBody(node, allowExpression, shouldResetInNonArrowFunctionFlag = false) {
     const isExpression = allowExpression && !this.match(_types.types.braceL);
     const oldInParameters = this.state.inParameters;
     const oldInAsync = this.state.inAsync;
@@ -1280,6 +1280,10 @@ class ExpressionParser extends _lval.default {
     this.state.inAsync = oldInAsync;
     this.checkFunctionNameAndParams(node, allowExpression);
     this.state.inParameters = oldInParameters;
+
+    if (shouldResetInNonArrowFunctionFlag) {
+      this.state.inNonArrowFunction = false;
+    }
   }
 
   checkFunctionNameAndParams(node, isArrowFunction) {

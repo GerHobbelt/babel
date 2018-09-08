@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.findConfigRoot = findConfigRoot;
 exports.findPackageData = findPackageData;
 exports.findRelativeConfig = findRelativeConfig;
 exports.findRootConfig = findRootConfig;
@@ -11,6 +12,10 @@ exports.resolvePlugin = resolvePlugin;
 exports.resolvePreset = resolvePreset;
 exports.loadPlugin = loadPlugin;
 exports.loadPreset = loadPreset;
+
+function findConfigRoot(cwd) {
+  throw new Error(`Cannot search for filesystem config root when running in a browser`);
+}
 
 function findPackageData(filepath) {
   return {

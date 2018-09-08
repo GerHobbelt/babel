@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.findConfigRoot = findConfigRoot;
 exports.findRelativeConfig = findRelativeConfig;
 exports.findRootConfig = findRootConfig;
 exports.loadConfig = loadConfig;
@@ -72,6 +73,23 @@ const BABEL_CONFIG_JS_FILENAME = "babel.config.js";
 const BABELRC_FILENAME = ".babelrc";
 const BABELRC_JS_FILENAME = ".babelrc.js";
 const BABELIGNORE_FILENAME = ".babelignore";
+
+function findConfigRoot(cwd) {
+  let dirname = cwd;
+
+  while (true) {
+    if (_fs().default.existsSync(_path().default.join(dirname, BABEL_CONFIG_JS_FILENAME))) {
+      return dirname;
+    }
+
+    const nextDir = _path().default.dirname(dirname);
+
+    if (dirname === nextDir) break;
+    dirname = nextDir;
+  }
+
+  throw new Error(`Babel was run with root:true but a root babel.config.js could not ` + `be found when searching from "${dirname}"`);
+}
 
 function findRelativeConfig(packageData, envName, caller) {
   let config = null;

@@ -25,17 +25,13 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
     throw new Error("'legacy' must be a boolean.");
   }
 
-  if (legacy !== true) {
-    throw new Error("The new decorators proposal is not supported yet." + ' You must pass the `"legacy": true` option to' + " @gerhobbelt/babel-plugin-syntax-decorators");
-  }
-
   const {
     decoratorsBeforeExport
   } = options;
 
   if (decoratorsBeforeExport === undefined) {
     if (!legacy) {
-      throw new Error("The '@gerhobbelt/babel-plugin-syntax-decorators' plugin requires a" + " 'decoratorsBeforeExport' option, whose value must be a boolean.");
+      throw new Error("The '@gerhobbelt/babel-plugin-syntax-decorators' plugin requires a" + " 'decoratorsBeforeExport' option, whose value must be a boolean." + " If you want to use the legacy decorators semantics, you can set" + " the 'legacy: true' option.");
     }
   } else {
     if (legacy) {

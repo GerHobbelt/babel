@@ -28,6 +28,8 @@ var _environment = require("./helpers/environment");
 
 var _options = require("./validation/options");
 
+var _files = require("./files");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function loadPrivatePartialConfig(inputOpts) {
@@ -45,8 +47,7 @@ function loadPrivatePartialConfig(inputOpts) {
 
   const absoluteCwd = _path().default.resolve(cwd);
 
-  const absoluteRootDir = _path().default.resolve(absoluteCwd, rootDir);
-
+  const absoluteRootDir = typeof rootDir === "boolean" ? rootDir ? (0, _files.findConfigRoot)(absoluteCwd) : false : _path().default.resolve(absoluteCwd, rootDir);
   const context = {
     filename: typeof args.filename === "string" ? _path().default.resolve(cwd, args.filename) : undefined,
     cwd: absoluteCwd,

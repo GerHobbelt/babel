@@ -74,7 +74,7 @@ function buildRootChain(opts, context) {
 
   if (typeof opts.configFile === "string") {
     configFile = (0, _files.loadConfig)(opts.configFile, context.cwd, context.envName, context.caller);
-  } else if (opts.configFile !== false) {
+  } else if (opts.configFile !== false && context.root !== false) {
     configFile = (0, _files.findRootConfig)(context.root, context.envName, context.caller);
   }
 
@@ -137,6 +137,7 @@ function babelrcLoadEnabled(context, pkgData, babelrcRoots) {
   const absoluteRoot = context.root;
 
   if (babelrcRoots === undefined) {
+    if (absoluteRoot === false) return false;
     return pkgData.directories.indexOf(absoluteRoot) !== -1;
   }
 
@@ -146,7 +147,7 @@ function babelrcLoadEnabled(context, pkgData, babelrcRoots) {
     return typeof pat === "string" ? _path().default.resolve(context.cwd, pat) : pat;
   });
 
-  if (babelrcPatterns.length === 1 && babelrcPatterns[0] === absoluteRoot) {
+  if (absoluteRoot !== false && babelrcPatterns.length === 1 && babelrcPatterns[0] === absoluteRoot) {
     return pkgData.directories.indexOf(absoluteRoot) !== -1;
   }
 
