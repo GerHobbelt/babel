@@ -4,13 +4,13 @@
 /packages/*/node_modules
 *.log
 *.cache
-/build
+# /build
 /.eslintcache
-/browser.js
-/browser-polyfill.js
-/runtime.js
+# /browser.js
+# /browser-polyfill.js
+# /runtime.js
 coverage
-dist
+# dist
 /.package.json
 
 /packages/babel-register/test/.babel
@@ -21,6 +21,7 @@ dist
 /babel.sublime-workspace
 #/codemods/*/lib
 /codemods/*/node_modules
-/packages/babel-parser/build
+# /packages/babel-parser/build
 .idea/
 /.changelog
+/tmp/
