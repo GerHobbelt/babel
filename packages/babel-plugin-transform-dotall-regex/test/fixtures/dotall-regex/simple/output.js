@@ -1,2 +1,2 @@
 var a = /./;
-var b = /[\0-\uFFFF]/;
+var b = /[/0-/uFFFF]/;

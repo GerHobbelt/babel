@@ -47,13 +47,13 @@ function test(x) {
       _this.log = {
         error: x
       };
-      _this.dispatchTransaction = _this.dispatchTransaction.bind(babelHelpers.assertThisInitialized(babelHelpers.assertThisInitialized(_this)));
+      _this.dispatchTransaction = _this.dispatchTransaction.bind(_this);
 
       _this.f1 = function () {
         return x;
       };
 
-      _this.f1 = _this.f1.bind(babelHelpers.assertThisInitialized(babelHelpers.assertThisInitialized(_this)));
+      _this.f1 = _this.f1.bind(_this);
       _this.end = 1;
       return _this;
     }

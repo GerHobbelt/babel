@@ -44,14 +44,14 @@ function test(x) {
 
       babelHelpers.classCallCheck(this, Foo);
       _this = babelHelpers.possibleConstructorReturn(this, babelHelpers.getPrototypeOf(Foo).call(this));
-      babelHelpers.defineProperty(babelHelpers.assertThisInitialized(babelHelpers.assertThisInitialized(_this)), "log", {
+      babelHelpers.defineProperty(_this, "log", {
         error: x
       });
-      babelHelpers.defineProperty(babelHelpers.assertThisInitialized(babelHelpers.assertThisInitialized(_this)), "dispatchTransaction", _this.dispatchTransaction.bind(babelHelpers.assertThisInitialized(babelHelpers.assertThisInitialized(_this))));
-      babelHelpers.defineProperty(babelHelpers.assertThisInitialized(babelHelpers.assertThisInitialized(_this)), "f1", function () {
+      babelHelpers.defineProperty(_this, "dispatchTransaction", _this.dispatchTransaction.bind(_this));
+      babelHelpers.defineProperty(_this, "f1", function () {
         return x;
       });
-      _this.f1 = _this.f1.bind(babelHelpers.assertThisInitialized(babelHelpers.assertThisInitialized(_this)));
+      _this.f1 = _this.f1.bind(_this);
       _this.end = 1;
       return _this;
     }

@@ -71,6 +71,53 @@
                 "column": 11
               }
             },
+            "name": {
+              "type": "JSXNamespacedName",
+              "start": 1,
+              "end": 4,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 4
+                }
+              },
+              "namespace": {
+                "type": "JSXIdentifier",
+                "start": 1,
+                "end": 2,
+                "loc": {
+                  "start": {
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 2
+                  }
+                },
+                "name": "n"
+              },
+              "name": {
+                "type": "JSXIdentifier",
+                "start": 3,
+                "end": 4,
+                "loc": {
+                  "start": {
+                    "line": 1,
+                    "column": 3
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 4
+                  }
+                },
+                "name": "a"
+              }
+            },
             "attributes": [
               {
                 "type": "JSXAttribute",
@@ -136,53 +183,6 @@
                 "value": null
               }
             ],
-            "name": {
-              "type": "JSXNamespacedName",
-              "start": 1,
-              "end": 4,
-              "loc": {
-                "start": {
-                  "line": 1,
-                  "column": 1
-                },
-                "end": {
-                  "line": 1,
-                  "column": 4
-                }
-              },
-              "namespace": {
-                "type": "JSXIdentifier",
-                "start": 1,
-                "end": 2,
-                "loc": {
-                  "start": {
-                    "line": 1,
-                    "column": 1
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 2
-                  }
-                },
-                "name": "n"
-              },
-              "name": {
-                "type": "JSXIdentifier",
-                "start": 3,
-                "end": 4,
-                "loc": {
-                  "start": {
-                    "line": 1,
-                    "column": 3
-                  },
-                  "end": {
-                    "line": 1,
-                    "column": 4
-                  }
-                },
-                "name": "a"
-              }
-            },
             "selfClosing": true
           },
           "closingElement": null,

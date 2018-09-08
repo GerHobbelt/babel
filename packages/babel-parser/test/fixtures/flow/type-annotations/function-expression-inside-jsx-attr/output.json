@@ -71,6 +71,22 @@
                 "column": 42
               }
             },
+            "name": {
+              "type": "JSXIdentifier",
+              "start": 1,
+              "end": 4,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 4
+                }
+              },
+              "name": "bar"
+            },
             "attributes": [
               {
                 "type": "JSXAttribute",
@@ -253,22 +269,6 @@
                 }
               }
             ],
-            "name": {
-              "type": "JSXIdentifier",
-              "start": 1,
-              "end": 4,
-              "loc": {
-                "start": {
-                  "line": 1,
-                  "column": 1
-                },
-                "end": {
-                  "line": 1,
-                  "column": 4
-                }
-              },
-              "name": "bar"
-            },
             "selfClosing": true
           },
           "closingElement": null,

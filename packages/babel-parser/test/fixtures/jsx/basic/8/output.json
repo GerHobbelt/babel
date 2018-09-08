@@ -71,6 +71,22 @@
                 "column": 27
               }
             },
+            "name": {
+              "type": "JSXIdentifier",
+              "start": 1,
+              "end": 2,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 2
+                }
+              },
+              "name": "a"
+            },
             "attributes": [
               {
                 "type": "JSXAttribute",
@@ -175,7 +191,6 @@
                             "column": 15
                           }
                         },
-                        "attributes": [],
                         "name": {
                           "type": "JSXIdentifier",
                           "start": 11,
@@ -192,6 +207,7 @@
                           },
                           "name": "c"
                         },
+                        "attributes": [],
                         "selfClosing": true
                       },
                       "closingElement": null,
@@ -225,7 +241,6 @@
                             "column": 23
                           }
                         },
-                        "attributes": [],
                         "name": {
                           "type": "JSXIdentifier",
                           "start": 19,
@@ -242,6 +257,7 @@
                           },
                           "name": "d"
                         },
+                        "attributes": [],
                         "selfClosing": true
                       },
                       "closingElement": null,
@@ -251,22 +267,6 @@
                 }
               }
             ],
-            "name": {
-              "type": "JSXIdentifier",
-              "start": 1,
-              "end": 2,
-              "loc": {
-                "start": {
-                  "line": 1,
-                  "column": 1
-                },
-                "end": {
-                  "line": 1,
-                  "column": 2
-                }
-              },
-              "name": "a"
-            },
             "selfClosing": true
           },
           "closingElement": null,

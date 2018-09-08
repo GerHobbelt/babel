@@ -71,6 +71,22 @@
                 "column": 15
               }
             },
+            "name": {
+              "type": "JSXIdentifier",
+              "start": 1,
+              "end": 2,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "line": 1,
+                  "column": 2
+                }
+              },
+              "name": "a"
+            },
             "attributes": [
               {
                 "type": "JSXAttribute",
@@ -155,22 +171,6 @@
                 }
               }
             ],
-            "name": {
-              "type": "JSXIdentifier",
-              "start": 1,
-              "end": 2,
-              "loc": {
-                "start": {
-                  "line": 1,
-                  "column": 1
-                },
-                "end": {
-                  "line": 1,
-                  "column": 2
-                }
-              },
-              "name": "a"
-            },
             "selfClosing": false
           },
           "closingElement": {
@@ -305,7 +305,6 @@
                     "column": 27
                   }
                 },
-                "attributes": [],
                 "name": {
                   "type": "JSXIdentifier",
                   "start": 25,
@@ -322,6 +321,7 @@
                   },
                   "name": "b"
                 },
+                "attributes": [],
                 "selfClosing": false
               },
               "closingElement": {
@@ -384,7 +384,6 @@
                         "column": 32
                       }
                     },
-                    "attributes": [],
                     "name": {
                       "type": "JSXIdentifier",
                       "start": 28,
@@ -401,6 +400,7 @@
                       },
                       "name": "c"
                     },
+                    "attributes": [],
                     "selfClosing": true
                   },
                   "closingElement": null,

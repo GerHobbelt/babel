@@ -101,7 +101,6 @@
                   "column": 15
                 }
               },
-              "attributes": [],
               "name": {
                 "type": "JSXIdentifier",
                 "start": 9,
@@ -118,6 +117,7 @@
                 },
                 "name": "div"
               },
+              "attributes": [],
               "selfClosing": true
             },
             "closingElement": null,
@@ -155,7 +155,6 @@
                   "column": 26
                 }
               },
-              "attributes": [],
               "name": {
                 "type": "JSXIdentifier",
                 "start": 20,
@@ -172,6 +171,7 @@
                 },
                 "name": "div"
               },
+              "attributes": [],
               "selfClosing": true
             },
             "closingElement": null,
