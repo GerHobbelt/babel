@@ -19,49 +19,12 @@ function buildConstructor(classRef, constructorBody, node) {
   return func;
 }
 
-function findNearestBlock(p) {
-  let last = p;
-  return p.find(p => {
-    if (p.isBlockParent() || p.isSequenceExpression()) {
-      // exclude CallExpression as an object key name.
-      if (last && p.isMethod({ key: last.node })) {
-        return false;
-      }
-      return true;
-    }
-    last = p;
-  });
-}
-
-function hasPrevSiblingSuper(p) {
-  return p.getAllPrevSiblings().some(p => {
-    const state = { assert: false, root: p };
-    return p.traverse(checkSuperCalleeVisitor, state), state.assert;
-  });
-}
-
-function isInConditional(p, ref) {
-  do {
-    if (p.isConditional() || p.isLogicalExpression() || p.isSwitchStatement()) {
-      return true;
-    } else if (p === ref) return false;
-  } while ((p = p.parentPath));
-  return false;
-}
-
-// Check block assertion of `assertThisInitialized`
-function isThisAsserted(p) {
-  do {
-    if (!p || p.isClassBody()) return false;
-    else if (p.getData("_assertThisInitialized")) return true;
-  } while ((p = p.parentPath));
-  return false;
-}
-
-function setThisAssert(p) {
-  const b = findNearestBlock(p);
-  b && b.setData("_assertThisInitialized", 1);
-}
+// function hasPrevSiblingSuper(p) {
+//   return p.getAllPrevSiblings().some(p => {
+//     const state = { assert: false, root: p };
+//     return p.traverse(checkSuperCalleeVisitor, state), state.assert;
+//   });
+// }
 
 function findNearestBlock(p) {
   let last = p;
