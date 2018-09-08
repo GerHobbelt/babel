@@ -33,21 +33,6 @@ function findNearestBlock(p) {
   });
 }
 
-const checkSuperCalleeVisitor = traverse.visitors.merge([
-  environmentVisitor,
-  {
-    Super(path, state) {
-      const { node, parentPath } = path;
-      if (
-        parentPath.isCallExpression({ callee: node }) &&
-        !isInConditional(parentPath, state.root)
-      ) {
-        state.assert = true;
-      }
-    },
-  },
-]);
-
 function hasPrevSiblingSuper(p) {
   return p.getAllPrevSiblings().some(p => {
     const state = { assert: false, root: p };
@@ -101,6 +86,7 @@ const checkSuperCalleeVisitor = traverse.visitors.merge([
         parentPath.isCallExpression({ callee: node }) &&
         !isInConditional(parentPath, state.root)
       ) {
+        state.assert = true;
         state.path = path;
         path.stop();
       }
