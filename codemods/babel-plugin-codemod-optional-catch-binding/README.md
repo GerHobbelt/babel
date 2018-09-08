@@ -34,7 +34,7 @@ npm install --save-dev @gerhobbelt/babel-plugin-codemod-optional-catch-binding
 
 **.babelrc**
 
-```json
+```jsonc
 {
   "plugins": ["@gerhobbelt/babel-plugin-codemod-optional-catch-binding"]
 }

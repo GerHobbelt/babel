@@ -16,6 +16,8 @@
   ],
   "dependencies": {
     "@gerhobbelt/babel-helper-plugin-utils": "7.0.1-16",
+    "@gerhobbelt/babel-helper-replace-supers": "7.0.1-16",
+    "@gerhobbelt/babel-helper-split-export-declaration": "7.0.1-16",
     "@gerhobbelt/babel-plugin-syntax-decorators": "7.0.1-16"
   },
   "peerDependencies": {

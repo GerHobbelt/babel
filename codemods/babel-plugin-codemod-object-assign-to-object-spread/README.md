@@ -36,7 +36,7 @@ npm install --save-dev @gerhobbelt/babel-plugin-codemod-object-assign-to-object-
 
 **.babelrc**
 
-```json
+```jsonc
 {
   "plugins": ["@gerhobbelt/babel-plugin-codemod-object-assign-to-object-spread"]
 }
