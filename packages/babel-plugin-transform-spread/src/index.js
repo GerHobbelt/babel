@@ -57,19 +57,44 @@ export default declare((api, options) => {
         if (!hasSpread(elements)) return;
 
         const nodes = build(elements, scope);
-        const first = nodes.shift();
+        const first = nodes[0];
 
-        if (nodes.length === 0 && first !== elements[0].argument) {
+        // If there is only one element in the ArrayExpression and
+        // the element was transformed (Array.prototype.slice.call or toConsumableArray)
+        // we know that the transformed code already takes care of cloning the array.
+        // So we can simply return that element.
+        if (nodes.length === 1 && first !== elements[0].argument) {
           path.replaceWith(first);
           return;
         }
 
-        path.replaceWith(
-          t.callExpression(
-            t.memberExpression(first, t.identifier("concat")),
-            nodes,
-          ),
-        );
+        // If the first element is a ArrayExpression we can directly call
+        // concat on it.
+        // [..].concat(..)
+        // If not then we have to use Array.prototype.concat() and not identifier.concat
+        // because identifier could be extended/modified (e.g. Immutable) and we do not know exactly
+        // what concat would produce.
+        if (t.isArrayExpression(first)) {
+          path.replaceWith(
+            t.callExpression(
+              t.memberExpression(nodes.shift(), t.identifier("concat")),
+              nodes,
+            ),
+          );
+        } else {
+          path.replaceWith(
+            t.callExpression(
+              t.memberExpression(
+                t.memberExpression(
+                  t.identifier("Array"),
+                  t.identifier("prototype"),
+                ),
+                t.identifier("concat"),
+              ),
+              nodes,
+            ),
+          );
+        }
       },
 
       CallExpression(path) {
