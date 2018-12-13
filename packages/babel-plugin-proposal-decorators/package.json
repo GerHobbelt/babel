@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-proposal-decorators",
-  "version": "7.1.4-19",
+  "version": "7.1.5-20",
   "author": "Logan Smyth <loganfsmyth@gmail.com>",
   "license": "MIT",
   "publishConfig": {
@@ -15,16 +15,16 @@
     "decorators"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.4-19",
-    "@gerhobbelt/babel-helper-replace-supers": "7.1.4-19",
-    "@gerhobbelt/babel-helper-split-export-declaration": "7.1.4-19",
-    "@gerhobbelt/babel-plugin-syntax-decorators": "7.1.4-19"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.1.5-20",
+    "@gerhobbelt/babel-helper-replace-supers": "7.1.5-20",
+    "@gerhobbelt/babel-helper-split-export-declaration": "7.1.5-20",
+    "@gerhobbelt/babel-plugin-syntax-decorators": "7.1.5-20"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.4-19"
+    "@gerhobbelt/babel-core": "~7.1.5-20"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.4-19",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.4-19"
+    "@gerhobbelt/babel-core": "7.1.5-20",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.5-20"
   }
 }

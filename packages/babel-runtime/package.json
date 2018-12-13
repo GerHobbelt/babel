@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-runtime",
-  "version": "7.1.4-19",
+  "version": "7.1.5-20",
   "description": "babel selfContained runtime",
   "license": "MIT",
   "publishConfig": {
@@ -13,10 +13,10 @@
     "regenerator-runtime": "^0.12.1"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.4-19",
-    "@gerhobbelt/babel-helpers": "7.1.4-19",
-    "@gerhobbelt/babel-plugin-transform-runtime": "7.1.4-19",
-    "@gerhobbelt/babel-preset-env": "7.1.4-19",
-    "@gerhobbelt/babel-types": "7.1.4-19"
+    "@gerhobbelt/babel-core": "7.1.5-20",
+    "@gerhobbelt/babel-helpers": "7.1.5-20",
+    "@gerhobbelt/babel-plugin-transform-runtime": "7.1.5-20",
+    "@gerhobbelt/babel-preset-env": "7.1.5-20",
+    "@gerhobbelt/babel-types": "7.1.5-20"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-wrap-function",
-  "version": "7.1.4-19",
+  "version": "7.1.5-20",
   "description": "Helper to wrap functions inside a function call.",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-wrap-function",
   "license": "MIT",
@@ -9,9 +9,9 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-helper-function-name": "7.1.4-19",
-    "@gerhobbelt/babel-template": "7.1.4-19",
-    "@gerhobbelt/babel-traverse": "7.1.4-19",
-    "@gerhobbelt/babel-types": "7.1.4-19"
+    "@gerhobbelt/babel-helper-function-name": "7.1.5-20",
+    "@gerhobbelt/babel-template": "7.1.5-20",
+    "@gerhobbelt/babel-traverse": "7.1.5-20",
+    "@gerhobbelt/babel-types": "7.1.5-20"
   }
 }
