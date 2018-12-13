@@ -41,7 +41,7 @@
     "@gerhobbelt/babel-traverse": "7.1.5-20",
     "@gerhobbelt/babel-types": "7.1.5-20",
     "convert-source-map": "^1.5.1",
-    "debug": "^3.1.0",
+    "debug": "^4.1.0",
     "@gerhobbelt/json5": "2.0.1-37",
     "lodash": "^4.17.10",
     "resolve": "^1.8.1",

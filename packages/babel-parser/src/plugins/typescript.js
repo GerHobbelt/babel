@@ -598,8 +598,8 @@ export default (superClass: Class<Parser>): Class<Parser> =>
           const type = this.match(tt._void)
             ? "TSVoidKeyword"
             : this.match(tt._null)
-              ? "TSNullKeyword"
-              : keywordTypeFromName(this.state.value);
+            ? "TSNullKeyword"
+            : keywordTypeFromName(this.state.value);
           if (type !== undefined && this.lookahead().type !== tt.dot) {
             const node: N.TsKeywordType = this.startNode();
             this.next();
@@ -692,8 +692,8 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       return operator
         ? this.tsParseTypeOperator(operator)
         : this.isContextual("infer")
-          ? this.tsParseInferType()
-          : this.tsParseArrayTypeOrHigher();
+        ? this.tsParseInferType()
+        : this.tsParseArrayTypeOrHigher();
     }
 
     tsParseUnionOrIntersectionType(
@@ -1382,8 +1382,8 @@ export default (superClass: Class<Parser>): Class<Parser> =>
         type === "FunctionDeclaration"
           ? "TSDeclareFunction"
           : type === "ClassMethod"
-            ? "TSDeclareMethod"
-            : undefined;
+          ? "TSDeclareMethod"
+          : undefined;
       if (bodilessType && !this.match(tt.braceL) && this.isLineTerminator()) {
         this.finishNode(node, bodilessType);
         return;
