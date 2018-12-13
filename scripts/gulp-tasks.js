@@ -13,6 +13,9 @@
 
 const path = require("path");
 const pump = require("pump");
+const chalk = require("chalk");
+const through = require("through2");
+const gutil = require("gulp-util");
 const rename = require("gulp-rename");
 const RootMostResolvePlugin = require("webpack-dependency-suite")
   .RootMostResolvePlugin;
@@ -54,7 +57,7 @@ const buildMode = process.env.NODE_ENV || "development";
 const useTerserIndex = 1 + (buildMode === "production" ? 1 : 0);
 
 // Minification is super slow, so we skip it in CI.
-const fastGulpRun = process.env.CI || buildMode !== "production";
+const fastGulpRun = process.env.IS_PUBLISH || buildMode !== "production";
 
 function webpackBuild(opts) {
   const plugins = opts.plugins || [];
@@ -222,6 +225,30 @@ function webpackBuild(opts) {
   });*/
 }
 
+function logUglify() {
+  return through.obj(function(file, enc, callback) {
+    gutil.log(
+      `Minifying '${chalk.cyan(
+        path.relative(path.join(__dirname, ".."), file.path)
+      )}'...`
+    );
+    callback(null, file);
+  });
+}
+
+function logNoUglify() {
+  return through.obj(function(file, enc, callback) {
+    gutil.log(
+      chalk.yellow(
+        `Skipped minification of '${chalk.cyan(
+          path.relative(path.join(__dirname, ".."), file.path)
+        )}' because not publishing`
+      )
+    );
+    callback(null, file);
+  });
+}
+
 function registerStandalonePackageTask(
   gulp,
   name,
@@ -246,7 +273,8 @@ function registerStandalonePackageTask(
         gulp.dest(standalonePath),
       ].concat(
         modify(tweakUMDheader),
-        // Minification is super slow, so we skip it in CI.
+        // Minification is super slow, so we skip it unless we are publishing
+        !fastGulpRun ? logUglify() : logNoUglify(),
         !fastGulpRun ? terser() : [],
         prettier(),
         modify(tweakUMDheader),

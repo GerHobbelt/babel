@@ -229,7 +229,6 @@
     "terser-webpack-plugin": "1.0.2",
     "test262-stream": "1.2.0",
     "through2": "2.0.3",
-    "uglify-js": "3.4.9",
     "unicode-11.0.0": "0.7.7",
     "unify-paths": "1.0.1",
     "vinyl-buffer": "1.0.1",

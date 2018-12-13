@@ -1,28 +1,22 @@
-import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
-import pluginClassFeatures, {
-  enableFeature,
-  FEATURES,
-} from "@gerhobbelt/babel-plugin-class-features";
+/* eslint-disable local-rules/plugin-name */
 
-const isNoInitialTypeAnnotationProp = o =>
-  o.has("typeAnnotation") && !o.has("value");
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import {
+  createClassFeaturePlugin,
+  FEATURES,
+} from "@gerhobbelt/babel-helper-create-class-features-plugin";
 
 export default declare((api, options) => {
   api.assertVersion(7);
 
-  const { loose } = options;
-
-  return {
+  return createClassFeaturePlugin({
     name: "proposal-class-properties",
 
-    inherits: pluginClassFeatures,
+    feature: FEATURES.fields,
+    loose: options.loose,
 
     manipulateOptions(opts, parserOpts) {
       parserOpts.plugins.push("classProperties", "classPrivateProperties");
     },
-
-    pre() {
-      enableFeature(this.file, FEATURES.fields, loose);
-    },
-  };
+  });
 });
