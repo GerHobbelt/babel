@@ -391,7 +391,6 @@ export default class StatementParser extends ExpressionParser {
 
     let forAwait = false;
     if (this.state.inAsync && this.isContextual("await")) {
-      this.expectPlugin("asyncGenerators");
       forAwait = true;
       this.next();
     }
@@ -556,7 +555,6 @@ export default class StatementParser extends ExpressionParser {
         this.checkLVal(clause.param, true, clashes, "catch clause");
         this.expect(tt.parenR);
       } else {
-        this.expectPlugin("optionalCatchBinding");
         clause.param = null;
       }
       clause.body = this.parseBlock();
@@ -844,6 +842,7 @@ export default class StatementParser extends ExpressionParser {
   ): T {
     const oldInFunc = this.state.inFunction;
     const oldInMethod = this.state.inMethod;
+    const oldInAsync = this.state.inAsync;
     const oldInGenerator = this.state.inGenerator;
     const oldInClassProperty = this.state.inClassProperty;
     this.state.inFunction = true;
@@ -854,9 +853,6 @@ export default class StatementParser extends ExpressionParser {
     this.initFunction(node, isAsync);
 
     if (this.match(tt.star)) {
-      if (node.async) {
-        this.expectPlugin("asyncGenerators");
-      }
       node.generator = true;
       this.next();
     }
@@ -878,11 +874,18 @@ export default class StatementParser extends ExpressionParser {
     // valid because yield is parsed as if it was outside the generator.
     // Therefore, this.state.inGenerator is set before or after parsing the
     // function id according to the "isStatement" parameter.
-    if (!isStatement) this.state.inGenerator = node.generator;
+    // The same applies to await & async functions.
+    if (!isStatement) {
+      this.state.inAsync = isAsync;
+      this.state.inGenerator = node.generator;
+    }
     if (this.match(tt.name) || this.match(tt._yield)) {
       node.id = this.parseBindingIdentifier();
     }
-    if (isStatement) this.state.inGenerator = node.generator;
+    if (isStatement) {
+      this.state.inAsync = isAsync;
+      this.state.inGenerator = node.generator;
+    }
 
     this.parseFunctionParams(node);
     this.parseFunctionBodyAndFinish(
@@ -893,6 +896,7 @@ export default class StatementParser extends ExpressionParser {
 
     this.state.inFunction = oldInFunc;
     this.state.inMethod = oldInMethod;
+    this.state.inAsync = oldInAsync;
     this.state.inGenerator = oldInGenerator;
     this.state.inClassProperty = oldInClassProperty;
 
@@ -1154,11 +1158,7 @@ export default class StatementParser extends ExpressionParser {
       }
     } else if (isSimple && key.name === "async" && !this.isLineTerminator()) {
       // an async method
-      const isGenerator = this.match(tt.star);
-      if (isGenerator) {
-        this.expectPlugin("asyncGenerators");
-        this.next();
-      }
+      const isGenerator = this.eat(tt.star);
 
       method.kind = "method";
       // The so-called parsed name would have been "async": get the real name.

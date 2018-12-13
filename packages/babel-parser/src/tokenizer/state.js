@@ -41,7 +41,7 @@ export default class State {
 
     this.decoratorStack = [[]];
 
-    this.yieldInPossibleArrowParameters = null;
+    this.yieldOrAwaitInPossibleArrowParameters = null;
 
     this.tokens = [];
 
@@ -128,10 +128,10 @@ export default class State {
   // where @foo belongs to the outer class and @bar to the inner
   decoratorStack: Array<Array<N.Decorator>>;
 
-  // The first yield expression inside parenthesized expressions and arrow
-  // function parameters. It is used to disallow yield in arrow function
-  // parameters.
-  yieldInPossibleArrowParameters: ?N.YieldExpression;
+  // The first yield or await expression inside parenthesized expressions
+  // and arrow function parameters. It is used to disallow yield and await in
+  // arrow function parameters.
+  yieldOrAwaitInPossibleArrowParameters: ?N.YieldExpression;
 
   // Token store.
   tokens: Array<Token | N.Comment>;
