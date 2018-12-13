@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-transform-fixture-test-runner",
-  "version": "7.1.1-16",
+  "version": "7.1.1-17",
   "description": "Transform test runner for @gerhobbelt/babel-helper-fixtures module",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
   "homepage": "https://babeljs.io/",
@@ -11,10 +11,10 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-transform-fixture-test-runner",
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-code-frame": "7.1.1-16",
-    "@gerhobbelt/babel-core": "7.1.1-16",
-    "@gerhobbelt/babel-helper-fixtures": "7.1.1-16",
-    "@gerhobbelt/babel-polyfill": "7.1.1-16",
+    "@gerhobbelt/babel-code-frame": "7.1.1-17",
+    "@gerhobbelt/babel-core": "7.1.1-17",
+    "@gerhobbelt/babel-helper-fixtures": "7.1.1-17",
+    "@gerhobbelt/babel-polyfill": "7.1.1-17",
     "jest": "^23.5.0",
     "jest-diff": "^23.5.0",
     "lodash": "^4.17.10",
