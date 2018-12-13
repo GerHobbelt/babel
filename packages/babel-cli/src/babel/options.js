@@ -226,36 +226,47 @@ export default function parseArgv(args: Array<string>) {
     opts.verbose = opts.verbose || opts.debug;
   }
 
-  return {
-    babelOptions: {
-      presets: opts.presets,
-      plugins: opts.plugins,
-      rootMode: opts.rootMode,
-      configFile: opts.configFile,
-      envName: opts.envName,
-      sourceType: opts.sourceType,
-      ignore: opts.ignore,
-      only: opts.only,
-      retainLines: opts.retainLines,
-      compact: opts.compact,
-      minified: opts.minified,
-      auxiliaryCommentBefore: opts.auxiliaryCommentBefore,
-      auxiliaryCommentAfter: opts.auxiliaryCommentAfter,
-      sourceMaps: opts.sourceMaps,
-      sourceFileName: opts.sourceFileName,
-      sourceRoot: opts.sourceRoot,
-      moduleRoot: opts.moduleRoot,
-      moduleIds: opts.moduleIds,
-      moduleId: opts.moduleId,
+  const babelOptions = {
+    presets: opts.presets,
+    plugins: opts.plugins,
+    rootMode: opts.rootMode,
+    configFile: opts.configFile,
+    envName: opts.envName,
+    sourceType: opts.sourceType,
+    ignore: opts.ignore,
+    only: opts.only,
+    retainLines: opts.retainLines,
+    compact: opts.compact,
+    minified: opts.minified,
+    auxiliaryCommentBefore: opts.auxiliaryCommentBefore,
+    auxiliaryCommentAfter: opts.auxiliaryCommentAfter,
+    sourceMaps: opts.sourceMaps,
+    sourceFileName: opts.sourceFileName,
+    sourceRoot: opts.sourceRoot,
+    moduleRoot: opts.moduleRoot,
+    moduleIds: opts.moduleIds,
+    moduleId: opts.moduleId,
 
-      // Commander will default the "--no-" arguments to true, but we want to
-      // leave them undefined so that @gerhobbelt/babel-core can handle the
-      // default-assignment logic on its own.
-      babelrc: opts.babelrc === true ? undefined : opts.babelrc,
-      highlightCode:
-        opts.highlightCode === true ? undefined : opts.highlightCode,
-      comments: opts.comments === true ? undefined : opts.comments,
-    },
+    // Commander will default the "--no-" arguments to true, but we want to
+    // leave them undefined so that @gerhobbelt/babel-core can handle the
+    // default-assignment logic on its own.
+    babelrc: opts.babelrc === true ? undefined : opts.babelrc,
+    highlightCode: opts.highlightCode === true ? undefined : opts.highlightCode,
+    comments: opts.comments === true ? undefined : opts.comments,
+  };
+
+  // If the @gerhobbelt/babel-cli version is newer than the @gerhobbelt/babel-core version, and we have added
+  // new options for @gerhobbelt/babel-core, we'll potentially get option validation errors from
+  // @gerhobbelt/babel-core. To avoid that, we delete undefined options, so @gerhobbelt/babel-core will only
+  // give the error if users actually pass an unsupported CLI option.
+  for (const key of Object.keys(babelOptions)) {
+    if (babelOptions[key] === undefined) {
+      delete babelOptions[key];
+    }
+  }
+
+  return {
+    babelOptions,
     cliOptions: {
       filename: opts.filename,
       filenames,
