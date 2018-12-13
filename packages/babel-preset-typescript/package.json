@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-preset-typescript",
-  "version": "7.1.6-21",
+  "version": "7.2.1-23",
   "description": "Babel preset for TypeScript.",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-preset-typescript",
   "license": "MIT",
@@ -13,14 +13,14 @@
     "typescript"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.6-21",
-    "@gerhobbelt/babel-plugin-transform-typescript": "7.1.6-21"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-23",
+    "@gerhobbelt/babel-plugin-transform-typescript": "7.2.1-23"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.6-21"
+    "@gerhobbelt/babel-core": "~7.2.1-23"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.6-21",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.6-21"
+    "@gerhobbelt/babel-core": "7.2.1-23",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-23"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-replace-supers",
-  "version": "7.1.6-21",
+  "version": "7.2.1-23",
   "description": "Helper function to replace supers",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-replace-supers",
   "license": "MIT",
@@ -9,9 +9,9 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-helper-member-expression-to-functions": "7.1.6-21",
-    "@gerhobbelt/babel-helper-optimise-call-expression": "7.1.6-21",
-    "@gerhobbelt/babel-traverse": "7.1.6-21",
-    "@gerhobbelt/babel-types": "7.1.6-21"
+    "@gerhobbelt/babel-helper-member-expression-to-functions": "7.2.1-23",
+    "@gerhobbelt/babel-helper-optimise-call-expression": "7.2.1-23",
+    "@gerhobbelt/babel-traverse": "7.2.1-23",
+    "@gerhobbelt/babel-types": "7.2.1-23"
   }
 }

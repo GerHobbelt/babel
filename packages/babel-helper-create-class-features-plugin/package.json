@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-create-class-features-plugin",
-  "version": "7.2.0",
+  "version": "7.2.1-23",
   "author": "The Babel Team (https://babeljs.io/team)",
   "license": "MIT",
   "description": "Compile class public and private fields, private methods and decorators to ES6",
@@ -21,7 +21,7 @@
     "@gerhobbelt/babel-helper-replace-supers": "^7.1.0"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "^7.0.0"
+    "@gerhobbelt/babel-core": "~7.2.1-23"
   },
   "devDependencies": {
     "@gerhobbelt/babel-core": "^7.2.0",

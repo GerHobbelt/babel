@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-syntax-numeric-separator",
-  "version": "7.1.6-21",
+  "version": "7.2.1-23",
   "description": "Allow parsing of Decimal, Binary, Hex and Octal literals that contain a Numeric Literal Separator",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-numeric-separator",
   "license": "MIT",
@@ -12,12 +12,12 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.6-21"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-23"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.6-21"
+    "@gerhobbelt/babel-core": "~7.2.1-23"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.6-21"
+    "@gerhobbelt/babel-core": "7.2.1-23"
   }
 }

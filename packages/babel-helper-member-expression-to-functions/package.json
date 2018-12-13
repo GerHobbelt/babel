@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-member-expression-to-functions",
-  "version": "7.1.6-21",
+  "version": "7.2.1-23",
   "description": "Helper function to replace certain member expressions with function calls",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-member-expression-to-functions",
   "license": "MIT",
@@ -10,6 +10,6 @@
   "main": "lib/index.js",
   "author": "Justin Ridgewell <justin@ridgewell.name>",
   "dependencies": {
-    "@gerhobbelt/babel-types": "7.1.6-21"
+    "@gerhobbelt/babel-types": "7.2.1-23"
   }
 }
