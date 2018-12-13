@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-simple-access",
-  "version": "7.0.1-16",
+  "version": "7.1.1-16",
   "description": "Babel helper for ensuring that access to a given value is performed through simple accesses",
   "author": "Logan Smyth <loganfsmyth@gmail.com>",
   "homepage": "https://babeljs.io/",
@@ -11,7 +11,7 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-simple-access",
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-template": "7.0.1-16",
-    "@gerhobbelt/babel-types": "7.0.1-16"
+    "@gerhobbelt/babel-template": "7.1.1-16",
+    "@gerhobbelt/babel-types": "7.1.1-16"
   }
 }
