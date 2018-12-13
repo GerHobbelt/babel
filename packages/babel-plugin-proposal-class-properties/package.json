@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-proposal-class-properties",
-  "version": "7.1.1-17",
+  "version": "7.1.4-19",
   "description": "This plugin transforms static class properties as well as properties declared with the property initializer syntax",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-proposal-class-properties",
   "license": "MIT",
@@ -12,18 +12,18 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-function-name": "7.1.1-17",
-    "@gerhobbelt/babel-helper-member-expression-to-functions": "7.1.1-17",
-    "@gerhobbelt/babel-helper-optimise-call-expression": "7.1.1-17",
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.1-17",
-    "@gerhobbelt/babel-helper-replace-supers": "7.1.1-17",
-    "@gerhobbelt/babel-plugin-syntax-class-properties": "7.1.1-17"
+    "@gerhobbelt/babel-helper-function-name": "7.1.4-19",
+    "@gerhobbelt/babel-helper-member-expression-to-functions": "7.1.4-19",
+    "@gerhobbelt/babel-helper-optimise-call-expression": "7.1.4-19",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.1.4-19",
+    "@gerhobbelt/babel-helper-replace-supers": "7.1.4-19",
+    "@gerhobbelt/babel-plugin-syntax-class-properties": "7.1.4-19"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.1-17"
+    "@gerhobbelt/babel-core": "~7.1.4-19"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.1-17",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.1-17"
+    "@gerhobbelt/babel-core": "7.1.4-19",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.4-19"
   }
 }

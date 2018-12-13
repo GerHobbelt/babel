@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-proposal-logical-assignment-operators",
-  "version": "7.1.1-17",
+  "version": "7.1.4-19",
   "description": "Transforms logical assignment operators into short-circuited assignments",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-proposal-logical-assignment-operators",
   "license": "MIT",
@@ -12,16 +12,16 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.1-17",
-    "@gerhobbelt/babel-plugin-syntax-logical-assignment-operators": "7.1.1-17"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.1.4-19",
+    "@gerhobbelt/babel-plugin-syntax-logical-assignment-operators": "7.1.4-19"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.1-17"
+    "@gerhobbelt/babel-core": "~7.1.4-19"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.1-17",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.1-17",
-    "@gerhobbelt/babel-plugin-proposal-nullish-coalescing-operator": "7.1.1-17",
-    "@gerhobbelt/babel-plugin-syntax-nullish-coalescing-operator": "7.1.1-17"
+    "@gerhobbelt/babel-core": "7.1.4-19",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.4-19",
+    "@gerhobbelt/babel-plugin-proposal-nullish-coalescing-operator": "7.1.4-19",
+    "@gerhobbelt/babel-plugin-syntax-nullish-coalescing-operator": "7.1.4-19"
   }
 }

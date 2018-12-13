@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-syntax-json-strings",
-  "version": "7.1.1-17",
+  "version": "7.1.4-19",
   "description": "Allow parsing of the U+2028 LINE SEPARATOR and U+2029 PARAGRAPH SEPARATOR in JS strings",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-json-strings",
   "license": "MIT",
@@ -12,12 +12,12 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.1-17"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.1.4-19"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.1-17"
+    "@gerhobbelt/babel-core": "~7.1.4-19"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.1-17"
+    "@gerhobbelt/babel-core": "7.1.4-19"
   }
 }

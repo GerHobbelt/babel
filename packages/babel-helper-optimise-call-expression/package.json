@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-optimise-call-expression",
-  "version": "7.1.1-17",
+  "version": "7.1.4-19",
   "description": "Helper function to optimise call expression",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-optimise-call-expression",
   "license": "MIT",
@@ -9,6 +9,6 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-types": "7.1.1-17"
+    "@gerhobbelt/babel-types": "7.1.4-19"
   }
 }
