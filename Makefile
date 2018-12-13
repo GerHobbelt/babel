@@ -54,8 +54,11 @@ flow:
 lint:
 	./node_modules/.bin/eslint scripts $(SOURCES) '*.js' --format=codeframe
 
-fix:
+fix: fix-json
 	./node_modules/.bin/eslint scripts $(SOURCES) '*.js' --format=codeframe --fix
+
+fix-json:
+	./node_modules/.bin/prettier "{packages,codemod}/*/test/fixtures/**/options.json" --write --loglevel warn
 
 clean: test-clean
 	rm -rf packages/babel-polyfill/browser*
