@@ -11,12 +11,10 @@ import type { CallerMetadata } from "../validation/options";
 
 export type { ConfigFile, IgnoreFile, RelativeConfig, FilePackageData };
 
-export function findConfigRoot(
-  cwd: string, // eslint-disable-line no-unused-vars
-): string {
-  throw new Error(
-    `Cannot search for filesystem config root when running in a browser`,
-  );
+export function findConfigUpwards(
+  rootDir: string, // eslint-disable-line no-unused-vars
+): string | null {
+  return null;
 }
 
 export function findPackageData(filepath: string): FilePackageData {

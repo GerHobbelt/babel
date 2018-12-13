@@ -157,7 +157,7 @@ export default class File {
    * helper exists, but was not available for the full given range, it will be
    * considered unavailable.
    */
-  availableHelper(name: string, versionRange: ?string) {
+  availableHelper(name: string, versionRange: ?string): boolean {
     let minVersion;
     try {
       minVersion = helpers.minVersion(name);
@@ -166,6 +166,8 @@ export default class File {
 
       return false;
     }
+
+    if (typeof versionRange !== "string") return true;
 
     // semver.intersects() has some surprising behavior with comparing ranges
     // with preprelease versions. We add '^' to ensure that we are always
@@ -187,9 +189,8 @@ export default class File {
     if (semver.valid(versionRange)) versionRange = `^${versionRange}`;
 
     return (
-      typeof versionRange !== "string" ||
-      (!semver.intersects(`<${minVersion}`, versionRange) &&
-        !semver.intersects(`>=8.0.0`, versionRange))
+      !semver.intersects(`<${minVersion}`, versionRange) &&
+      !semver.intersects(`>=8.0.0`, versionRange)
     );
   }
 

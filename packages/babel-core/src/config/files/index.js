@@ -10,7 +10,7 @@ import typeof * as indexType from "./index";
 export { findPackageData } from "./package";
 
 export {
-  findConfigRoot,
+  findConfigUpwards,
   findRelativeConfig,
   findRootConfig,
   loadConfig,
