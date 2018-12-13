@@ -398,7 +398,7 @@ export type ObjectMemberBase = NodeBase & {
   decorators: $ReadOnlyArray<Decorator>,
   kind?: "get" | "set" | "method",
   method: boolean, // TODO: Not in spec
-
+  typeParameters?: ?TypeParameterInstantiationBase, // TODO: Not in spec
   variance?: ?FlowVariance, // TODO: Not in spec
 };
 
@@ -1104,6 +1104,8 @@ export type TsType =
   | TsTypeLiteral
   | TsArrayType
   | TsTupleType
+  | TsOptionalType
+  | TsRestType
   | TsUnionOrIntersectionType
   | TsConditionalType
   | TsInferType
@@ -1119,6 +1121,7 @@ export type TsTypeBase = NodeBase;
 
 export type TsKeywordTypeType =
   | "TSAnyKeyword"
+  | "TSUnknownKeyword"
   | "TSNumberKeyword"
   | "TSObjectKeyword"
   | "TSBooleanKeyword"
@@ -1181,6 +1184,16 @@ export type TsArrayType = TsTypeBase & {
 export type TsTupleType = TsTypeBase & {
   type: "TSTupleType",
   elementTypes: $ReadOnlyArray<TsType>,
+};
+
+export type TsOptionalType = TsTypeBase & {
+  type: "TSOptionalType",
+  typeAnnotation: TsType,
+};
+
+export type TsRestType = TsTypeBase & {
+  type: "TSRestType",
+  typeAnnotation: TsType,
 };
 
 export type TsUnionOrIntersectionType = TsUnionType | TsIntersectionType;

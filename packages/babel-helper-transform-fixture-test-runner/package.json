@@ -15,6 +15,7 @@
     "@gerhobbelt/babel-core": "7.1.1-17",
     "@gerhobbelt/babel-helper-fixtures": "7.1.1-17",
     "@gerhobbelt/babel-polyfill": "7.1.1-17",
+    "babel-check-duplicated-nodes": "^1.0.0",
     "jest": "^23.5.0",
     "jest-diff": "^23.5.0",
     "lodash": "^4.17.10",

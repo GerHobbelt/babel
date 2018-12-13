@@ -57,6 +57,8 @@ function keywordTypeFromName(
       return "TSSymbolKeyword";
     case "undefined":
       return "TSUndefinedKeyword";
+    case "unknown":
+      return "TSUnknownKeyword";
     default:
       return undefined;
   }
@@ -502,11 +504,30 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       const node: N.TsTupleType = this.startNode();
       node.elementTypes = this.tsParseBracketedList(
         "TupleElementTypes",
-        this.tsParseType.bind(this),
+        this.tsParseTupleElementType.bind(this),
         /* bracket */ true,
         /* skipFirstToken */ false,
       );
       return this.finishNode(node, "TSTupleType");
+    }
+
+    tsParseTupleElementType(): N.TsType {
+      // parses `...TsType[]`
+      if (this.match(tt.ellipsis)) {
+        const restNode: N.TsRestType = this.startNode();
+        this.next(); // skips ellipsis
+        restNode.typeAnnotation = this.tsParseType();
+        return this.finishNode(restNode, "TSRestType");
+      }
+
+      const type = this.tsParseType();
+      // parses `TsType?`
+      if (this.eat(tt.question)) {
+        const optionalTypeNode: N.TsOptionalType = this.startNodeAtNode(type);
+        optionalTypeNode.typeAnnotation = type;
+        return this.finishNode(optionalTypeNode, "TSOptionalType");
+      }
+      return type;
     }
 
     tsParseParenthesizedType(): N.TsParenthesizedType {
@@ -1367,10 +1388,11 @@ export default (superClass: Class<Parser>): Class<Parser> =>
         return this.finishNode(nonNullExpression, "TSNonNullExpression");
       }
 
-      // There are number of things we are going to "maybe" parse, like type arguments on
-      // tagged template expressions. If any of them fail, walk it back and continue.
-      const result = this.tsTryParseAndCatch(() => {
-        if (this.isRelational("<")) {
+      if (this.isRelational("<")) {
+        // tsTryParseAndCatch is expensive, so avoid if not necessary.
+        // There are number of things we are going to "maybe" parse, like type arguments on
+        // tagged template expressions. If any of them fail, walk it back and continue.
+        const result = this.tsTryParseAndCatch(() => {
           if (!noCalls && this.atPossibleAsync(base)) {
             // Almost certainly this is a generic async function `async <T>() => ...
             // But it might be a call with a type argument `async<T>();`
@@ -1408,12 +1430,12 @@ export default (superClass: Class<Parser>): Class<Parser> =>
               );
             }
           }
-        }
 
-        this.unexpected();
-      });
+          this.unexpected();
+        });
 
-      if (result) return result;
+        if (result) return result;
+      }
 
       return super.parseSubscript(base, startPos, startLoc, noCalls, state);
     }
@@ -2043,6 +2065,22 @@ export default (superClass: Class<Parser>): Class<Parser> =>
         default:
           return super.parseBindingAtom();
       }
+    }
+
+    parseMaybeDecoratorArguments(expr: N.Expression): N.Expression {
+      if (this.isRelational("<")) {
+        const typeArguments = this.tsParseTypeArguments();
+
+        if (this.match(tt.parenL)) {
+          const call = super.parseMaybeDecoratorArguments(expr);
+          call.typeParameters = typeArguments;
+          return call;
+        }
+
+        this.unexpected(this.state.start, tt.parenL);
+      }
+
+      return super.parseMaybeDecoratorArguments(expr);
     }
 
     // === === === === === === === === === === === === === === === ===
