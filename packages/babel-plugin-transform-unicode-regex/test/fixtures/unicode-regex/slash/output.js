@@ -1,1 +1,1 @@
-/^https?:\/\//.test(string);
+/^https?://///.test(string);

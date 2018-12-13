@@ -1,4 +1,4 @@
-const unify = require("unify-paths");
+const unify = require("unify-paths").default;
 const path = require("path");
 
 // <CWD>

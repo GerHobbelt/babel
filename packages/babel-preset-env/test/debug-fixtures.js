@@ -2,7 +2,7 @@ const child = require("child_process");
 const fs = require("fs-extra");
 const helper = require("@gerhobbelt/babel-helper-fixtures");
 const path = require("path");
-const unify = require("unify-paths");
+const unify = require("unify-paths").default;
 
 const fixtureLoc = path.join(__dirname, "debug-fixtures");
 const tmpLoc = path.join(__dirname, "tmp");

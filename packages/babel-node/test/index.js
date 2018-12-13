@@ -5,7 +5,7 @@ const rimraf = require("rimraf");
 const outputFileSync = require("output-file-sync");
 const child = require("child_process");
 const merge = require("lodash/merge");
-const unify = require("unify-paths");
+const unify = require("unify-paths").default;
 const path = require("path");
 const fs = require("fs");
 

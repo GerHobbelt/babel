@@ -66,16 +66,6 @@ function _includes() {
   return data;
 }
 
-function _escapeRegExp() {
-  const data = _interopRequireDefault(require("lodash/escapeRegExp"));
-
-  _escapeRegExp = function () {
-    return data;
-  };
-
-  return data;
-}
-
 var helpers = _interopRequireWildcard(require("./helpers"));
 
 function _extend() {
@@ -142,6 +132,16 @@ function _vm() {
   const data = _interopRequireDefault(require("vm"));
 
   _vm = function () {
+    return data;
+  };
+
+  return data;
+}
+
+function _unifyPaths() {
+  const data = _interopRequireDefault(require("unify-paths"));
+
+  _unifyPaths = function () {
     return data;
   };
 
@@ -303,14 +303,18 @@ function run(task) {
   const opts = task.options;
   const optionsDir = task.optionsDir;
 
-  const cwdPathPrefix = _path().default.resolve(__dirname, "../../../").replace(/\\\\?/g, "/");
+  const cwdPathPrefix = _path().default.resolve(__dirname, "../../../");
 
   function filterExceptionStackTrace(inp) {
     const s = typeof inp === "object" ? inp instanceof Error ? JSON.stringify({
       message: inp.message,
       stack: inp.stack
     }, null, 2) : JSON.stringify(inp, null, 2) : "" + inp;
-    return s.replace(/(?=\\[^uxwbn])\\\\?/g, "/").replace(/(^|[^\w_\\/:-])(?!http:|https:)(?:\w+:)?\/fake\/path\//g, "$1/fake/path/").replace(RegExp((0, _escapeRegExp().default)(cwdPathPrefix), "g"), "<CWD>").replace(/(^|[^\w_\\/:-])(?!http:|https:)(?:\b\w+:)?\/[/\w]+?\/babel\//g, "$1/XXXXXX/babel/");
+    return (0, _unifyPaths().default)(s, {
+      hasExplicitEscapes: true,
+      reducePaths: ["fake", "babel"],
+      cwdPathPrefix: cwdPathPrefix
+    });
   }
 
   function getOpts(self) {

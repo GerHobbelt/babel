@@ -32,7 +32,7 @@ const prettier = require("gulp-prettier");
 function tweakUMDheader(content, path, file) {
   // content = content.replace(/\/\*\*+\/ /g, "");
 
-  if (0x1) {
+  if (0x0) {
     console.error(
       "tweakUMDheader",
       content
