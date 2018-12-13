@@ -10,6 +10,8 @@ export { version } from "../package.json";
 export { getEnv } from "./config/helpers/environment";
 
 export * as types from "@gerhobbelt/babel-types";
+export { tokTypes } from "@gerhobbelt/babel-parser";
+
 export { default as traverse } from "@gerhobbelt/babel-traverse";
 export { default as template } from "@gerhobbelt/babel-template";
 
