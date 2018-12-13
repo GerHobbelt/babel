@@ -12,12 +12,8 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-function-name": "7.1.6-21",
-    "@gerhobbelt/babel-helper-member-expression-to-functions": "7.1.6-21",
-    "@gerhobbelt/babel-helper-optimise-call-expression": "7.1.6-21",
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.6-21",
-    "@gerhobbelt/babel-helper-replace-supers": "7.1.6-21",
-    "@gerhobbelt/babel-plugin-syntax-class-properties": "7.1.6-21"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.0.0",
+    "@gerhobbelt/babel-plugin-class-features": "7.1.4"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.1.6-21"

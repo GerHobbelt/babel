@@ -117,6 +117,8 @@ export default declare((api, options) => {
   };
 
   return {
+    name: "transform-modules-commonjs",
+
     visitor: {
       Program: {
         exit(path, state) {
