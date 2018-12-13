@@ -1,14 +1,10 @@
 .DS_Store
 /node_modules_backup
 /node_modules
-/packages/*/node_modules
 *.log
 *.cache
 # /build
 /.eslintcache
-# /browser.js
-# /browser-polyfill.js
-# /runtime.js
 coverage
 # dist
 /.package.json
@@ -16,12 +12,9 @@ coverage
 /packages/babel-register/test/.babel
 /packages/babel-cli/test/tmp
 /packages/babel-node/test/tmp
-#/packages/*/lib
 .nyc_output
 /babel.sublime-workspace
-#/codemods/*/lib
 /codemods/*/node_modules
-# /packages/babel-parser/build
 .idea/
 /.changelog
 /tmp/
