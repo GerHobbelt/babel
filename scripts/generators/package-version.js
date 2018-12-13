@@ -19,11 +19,12 @@ const codemods = readdirSync(codemodDir);
 const babelVersion = require(join(cwd, "lerna.json")).version;
 console.log("Updating version of all babel packages to", babelVersion);
 
-// pick up the peerDependencies clause from packages/babel-cli:
+// pick up the peerDependencies clause from packages/babel-core:
 const babelPeerDependencyClause = (() => {
-  const packageJson = require(join(cwd, "lerna.json")); // packages/babel-cli/package.json
+  const packageJson = require(join(cwd, "lerna.json"));
   return packageJson.peerDependencies["@gerhobbelt/babel-core"];
 })();
+console.log("Updating all peerDependencies of all babel packages to the expression:", babelPeerDependencyClause);
 
 function patchPackageJson(filePath, settings = {}) {
   const packageJson = readFileSync(filePath, "utf8");
