@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-proposal-throw-expressions",
-  "version": "7.1.6-21",
+  "version": "7.0.0",
   "description": "Wraps Throw Expressions in an IIFE",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-proposal-throw-expressions",
   "license": "MIT",
@@ -13,13 +13,13 @@
   ],
   "dependencies": {
     "@gerhobbelt/babel-helper-plugin-utils": "7.1.6-21",
-    "@gerhobbelt/babel-plugin-syntax-throw-expressions": "7.1.6-21"
+    "@babel/plugin-syntax-throw-expressions": "^7.0.0"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.1.6-21"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.6-21",
+    "@babel/core": "^7.0.0",
     "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.6-21"
   }
 }
