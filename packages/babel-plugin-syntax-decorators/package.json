@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-syntax-decorators",
-  "version": "7.1.5-20",
+  "version": "7.1.6-21",
   "description": "Allow parsing of decorators",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-decorators",
   "license": "MIT",
@@ -12,12 +12,12 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.5-20"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.1.6-21"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.5-20"
+    "@gerhobbelt/babel-core": "~7.1.6-21"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.5-20"
+    "@gerhobbelt/babel-core": "7.1.6-21"
   }
 }

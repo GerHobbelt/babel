@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-syntax-export-namespace-from",
-  "version": "7.1.5-20",
+  "version": "7.1.6-21",
   "description": "Allow parsing of export namespace from",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-export-namespace-from",
   "license": "MIT",
@@ -12,12 +12,12 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.5-20"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.1.6-21"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.5-20"
+    "@gerhobbelt/babel-core": "~7.1.6-21"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.5-20"
+    "@gerhobbelt/babel-core": "7.1.6-21"
   }
 }

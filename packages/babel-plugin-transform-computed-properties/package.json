@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-computed-properties",
-  "version": "7.1.5-20",
+  "version": "7.1.6-21",
   "description": "Compile ES2015 computed properties to ES5",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-computed-properties",
   "license": "MIT",
@@ -12,13 +12,13 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.5-20"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.1.6-21"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.5-20"
+    "@gerhobbelt/babel-core": "~7.1.6-21"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.5-20",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.5-20"
+    "@gerhobbelt/babel-core": "7.1.6-21",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.6-21"
   }
 }

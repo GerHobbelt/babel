@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-preset-stage-2",
-  "version": "7.1.5-20",
+  "version": "7.1.6-21",
   "description": "Babel preset for stage 2 plugins",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
   "homepage": "https://babeljs.io/",
@@ -11,18 +11,18 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-preset-stage-2",
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.5-20",
-    "@gerhobbelt/babel-plugin-proposal-decorators": "7.1.5-20",
-    "@gerhobbelt/babel-plugin-proposal-export-namespace-from": "7.1.5-20",
-    "@gerhobbelt/babel-plugin-proposal-function-sent": "7.1.5-20",
-    "@gerhobbelt/babel-plugin-proposal-numeric-separator": "7.1.5-20",
-    "@gerhobbelt/babel-plugin-proposal-throw-expressions": "7.1.5-20",
-    "@gerhobbelt/babel-preset-stage-3": "7.1.5-20"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.1.6-21",
+    "@gerhobbelt/babel-plugin-proposal-decorators": "7.1.6-21",
+    "@gerhobbelt/babel-plugin-proposal-export-namespace-from": "7.1.6-21",
+    "@gerhobbelt/babel-plugin-proposal-function-sent": "7.1.6-21",
+    "@gerhobbelt/babel-plugin-proposal-numeric-separator": "7.1.6-21",
+    "@gerhobbelt/babel-plugin-proposal-throw-expressions": "7.1.6-21",
+    "@gerhobbelt/babel-preset-stage-3": "7.1.6-21"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.5-20"
+    "@gerhobbelt/babel-core": "~7.1.6-21"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.5-20"
+    "@gerhobbelt/babel-core": "7.1.6-21"
   }
 }

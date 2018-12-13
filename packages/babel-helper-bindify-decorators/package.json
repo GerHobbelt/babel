@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-bindify-decorators",
-  "version": "7.1.5-20",
+  "version": "7.1.6-21",
   "description": "Helper function to bindify decorators",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-bindify-decorators",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-traverse": "7.1.5-20",
-    "@gerhobbelt/babel-types": "7.1.5-20"
+    "@gerhobbelt/babel-traverse": "7.1.6-21",
+    "@gerhobbelt/babel-types": "7.1.6-21"
   }
 }

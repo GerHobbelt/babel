@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-modules-commonjs",
-  "version": "7.1.5-20",
+  "version": "7.1.6-21",
   "description": "This plugin transforms ES2015 modules to CommonJS",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-modules-commonjs",
   "license": "MIT",
@@ -9,19 +9,19 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-helper-module-transforms": "7.1.5-20",
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.5-20",
-    "@gerhobbelt/babel-helper-simple-access": "7.1.5-20"
+    "@gerhobbelt/babel-helper-module-transforms": "7.1.6-21",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.1.6-21",
+    "@gerhobbelt/babel-helper-simple-access": "7.1.6-21"
   },
   "keywords": [
     "babel-plugin"
   ],
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.5-20"
+    "@gerhobbelt/babel-core": "~7.1.6-21"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.5-20",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.5-20",
-    "@gerhobbelt/babel-plugin-syntax-object-rest-spread": "7.1.5-20"
+    "@gerhobbelt/babel-core": "7.1.6-21",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.6-21",
+    "@gerhobbelt/babel-plugin-syntax-object-rest-spread": "7.1.6-21"
   }
 }

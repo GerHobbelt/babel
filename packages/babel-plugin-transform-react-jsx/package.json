@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-react-jsx",
-  "version": "7.1.5-20",
+  "version": "7.1.6-21",
   "description": "Turn JSX into React function calls",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx",
   "license": "MIT",
@@ -12,15 +12,15 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-builder-react-jsx": "7.1.5-20",
-    "@gerhobbelt/babel-helper-plugin-utils": "7.1.5-20",
-    "@gerhobbelt/babel-plugin-syntax-jsx": "7.1.5-20"
+    "@gerhobbelt/babel-helper-builder-react-jsx": "7.1.6-21",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.1.6-21",
+    "@gerhobbelt/babel-plugin-syntax-jsx": "7.1.6-21"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.1.5-20"
+    "@gerhobbelt/babel-core": "~7.1.6-21"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.1.5-20",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.5-20"
+    "@gerhobbelt/babel-core": "7.1.6-21",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.1.6-21"
   }
 }
