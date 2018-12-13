@@ -2,6 +2,7 @@ import syntaxDynamicImport from "@gerhobbelt/babel-plugin-syntax-dynamic-import"
 import syntaxImportMeta from "@gerhobbelt/babel-plugin-syntax-import-meta";
 import transformClassProperties from "@gerhobbelt/babel-plugin-proposal-class-properties";
 import transformJsonStrings from "@gerhobbelt/babel-plugin-proposal-json-strings";
+import transformPrivateMethods from "@gerhobbelt/babel-plugin-proposal-private-methods";
 
 export default (_, opts) => {
   let loose = false;
@@ -16,6 +17,7 @@ export default (_, opts) => {
       syntaxImportMeta,
       [transformClassProperties, { loose }],
       transformJsonStrings,
+      [transformPrivateMethods, { loose }],
     ],
   };
 };

@@ -30,6 +30,7 @@
     "@gerhobbelt/babel-plugin-proposal-optional-catch-binding": "7.1.6-21",
     "@gerhobbelt/babel-plugin-proposal-optional-chaining": "7.1.6-21",
     "@gerhobbelt/babel-plugin-proposal-pipeline-operator": "7.1.6-21",
+    "@gerhobbelt/babel-plugin-proposal-private-methods": "^7.0.0",
     "@gerhobbelt/babel-plugin-proposal-throw-expressions": "7.1.6-21",
     "@gerhobbelt/babel-plugin-proposal-unicode-property-regex": "7.1.6-21",
     "@gerhobbelt/babel-plugin-syntax-async-generators": "7.1.6-21",
