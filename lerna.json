@@ -1,8 +1,8 @@
 {
   "lerna": "2.11.0",
-  "version": "7.2.1-23",
+  "version": "7.2.1-26",
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.1-23"
+    "@gerhobbelt/babel-core": "~7.2.1-26"
   },
   "changelog": {
     "repo": "babel/babel",

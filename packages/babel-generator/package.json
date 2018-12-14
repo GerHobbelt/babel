@@ -12,8 +12,8 @@
   "main": "lib/index.js",
   "dependencies": {
     "@gerhobbelt/babel-types": "7.2.1-23",
-    "jsesc": "^2.5.1",
-    "lodash": "^4.17.10",
+    "jsesc": "^2.5.2",
+    "lodash": "^4.17.11",
     "source-map": "0.6.1",
     "trim-right": "^1.0.1"
   },

@@ -12,8 +12,8 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-create-class-features-plugin": "^7.2.0",
-    "@gerhobbelt/babel-helper-plugin-utils": "^7.0.0"
+    "@gerhobbelt/babel-helper-create-class-features-plugin": "7.2.1-25",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-23"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.2.1-23"

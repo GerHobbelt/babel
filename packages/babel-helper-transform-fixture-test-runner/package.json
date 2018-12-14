@@ -16,9 +16,9 @@
     "@gerhobbelt/babel-helper-fixtures": "7.2.1-23",
     "@gerhobbelt/babel-polyfill": "7.2.1-23",
     "babel-check-duplicated-nodes": "^1.0.0",
-    "jest": "^23.5.0",
-    "jest-diff": "^23.5.0",
-    "lodash": "^4.17.10",
+    "jest": "^23.6.0",
+    "jest-diff": "^23.6.0",
+    "lodash": "^4.17.11",
     "resolve": "^1.8.1",
     "source-map": "0.6.1",
     "unify-paths": "1.0.1"

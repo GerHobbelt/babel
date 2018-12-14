@@ -13,13 +13,13 @@
   ],
   "dependencies": {
     "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-23",
-    "@gerhobbelt/babel-plugin-syntax-throw-expressions": "^7.0.0"
+    "@gerhobbelt/babel-plugin-syntax-throw-expressions": "7.2.1-23"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.2.1-23"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "^7.0.0",
+    "@gerhobbelt/babel-core": "7.2.1-23",
     "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-23"
   }
 }

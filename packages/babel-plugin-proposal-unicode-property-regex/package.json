@@ -24,7 +24,7 @@
   "dependencies": {
     "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-23",
     "@gerhobbelt/babel-helper-regex": "7.2.1-23",
-    "regexpu-core": "^4.2.0"
+    "regexpu-core": "^4.4.0"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.2.1-23"
