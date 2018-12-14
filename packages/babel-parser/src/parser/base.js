@@ -12,11 +12,16 @@ export default class BaseParser {
   inModule: boolean;
   plugins: PluginsMap;
   filename: ?string;
-  sawUnambiguousESM: boolean = false;
+  // sawUnambiguousESM: boolean = false;
+  sawUnambiguousESM: boolean;
 
   // Initialized by Tokenizer
   state: State;
   input: string;
+
+  constructor() {
+    this.sawUnambiguousESM = false;
+  }
 
   isReservedWord(word: string): boolean {
     if (word === "await") {
