@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-duplicate-keys",
-  "version": "7.2.1-23",
+  "version": "7.2.1-26",
   "description": "Compile objects with duplicate keys to valid strict ES5",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-duplicate-keys",
   "license": "MIT",
@@ -12,13 +12,13 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-23"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-26"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.1-23"
+    "@gerhobbelt/babel-core": "~7.2.1-26"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.2.1-23",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-23"
+    "@gerhobbelt/babel-core": "7.2.1-26",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-26"
   }
 }

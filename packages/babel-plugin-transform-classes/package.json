@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-classes",
-  "version": "7.2.1-23",
+  "version": "7.2.1-26",
   "description": "Compile ES2015 classes to ES5",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-classes",
   "license": "MIT",
@@ -9,23 +9,23 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-helper-annotate-as-pure": "7.2.1-23",
-    "@gerhobbelt/babel-helper-define-map": "7.2.1-23",
-    "@gerhobbelt/babel-helper-function-name": "7.2.1-23",
-    "@gerhobbelt/babel-helper-optimise-call-expression": "7.2.1-23",
-    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-23",
-    "@gerhobbelt/babel-helper-replace-supers": "7.2.1-23",
-    "@gerhobbelt/babel-helper-split-export-declaration": "7.2.1-23",
+    "@gerhobbelt/babel-helper-annotate-as-pure": "7.2.1-26",
+    "@gerhobbelt/babel-helper-define-map": "7.2.1-26",
+    "@gerhobbelt/babel-helper-function-name": "7.2.1-26",
+    "@gerhobbelt/babel-helper-optimise-call-expression": "7.2.1-26",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-26",
+    "@gerhobbelt/babel-helper-replace-supers": "7.2.1-26",
+    "@gerhobbelt/babel-helper-split-export-declaration": "7.2.1-26",
     "globals": "^11.9.0"
   },
   "keywords": [
     "babel-plugin"
   ],
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.1-23"
+    "@gerhobbelt/babel-core": "~7.2.1-26"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.2.1-23",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-23"
+    "@gerhobbelt/babel-core": "7.2.1-26",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-26"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-parameters",
-  "version": "7.2.1-23",
+  "version": "7.2.1-26",
   "description": "Compile ES2015 default and rest parameters to ES5",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-parameters",
   "license": "MIT",
@@ -9,18 +9,18 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-helper-call-delegate": "7.2.1-23",
-    "@gerhobbelt/babel-helper-get-function-arity": "7.2.1-23",
-    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-23"
+    "@gerhobbelt/babel-helper-call-delegate": "7.2.1-26",
+    "@gerhobbelt/babel-helper-get-function-arity": "7.2.1-26",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-26"
   },
   "keywords": [
     "babel-plugin"
   ],
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.1-23"
+    "@gerhobbelt/babel-core": "~7.2.1-26"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.2.1-23",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-23"
+    "@gerhobbelt/babel-core": "7.2.1-26",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-26"
   }
 }

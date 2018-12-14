@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-arrow-functions",
-  "version": "7.2.1-23",
+  "version": "7.2.1-26",
   "description": "Compile ES2015 arrow functions to ES5",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-arrow-functions",
   "license": "MIT",
@@ -12,14 +12,14 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-23"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-26"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.1-23"
+    "@gerhobbelt/babel-core": "~7.2.1-26"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.2.1-23",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-23",
-    "@gerhobbelt/babel-traverse": "7.2.1-23"
+    "@gerhobbelt/babel-core": "7.2.1-26",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-26",
+    "@gerhobbelt/babel-traverse": "7.2.1-26"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-node",
-  "version": "7.2.1-23",
+  "version": "7.2.1-26",
   "description": "Babel command line",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
   "homepage": "https://babeljs.io/",
@@ -19,18 +19,18 @@
     "compiler"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-polyfill": "7.2.1-23",
-    "@gerhobbelt/babel-register": "7.2.1-23",
+    "@gerhobbelt/babel-polyfill": "7.2.1-26",
+    "@gerhobbelt/babel-register": "7.2.1-26",
     "commander": "^2.19.0",
     "lodash": "^4.17.11",
     "v8flags": "^3.1.1"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.1-23"
+    "@gerhobbelt/babel-core": "~7.2.1-26"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.2.1-23",
-    "@gerhobbelt/babel-helper-fixtures": "7.2.1-23",
+    "@gerhobbelt/babel-core": "7.2.1-26",
+    "@gerhobbelt/babel-helper-fixtures": "7.2.1-26",
     "fs-readdir-recursive": "1.1.0",
     "output-file-sync": "2.0.1",
     "unify-paths": "1.0.1"

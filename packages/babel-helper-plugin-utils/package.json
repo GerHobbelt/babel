@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-plugin-utils",
-  "version": "7.2.1-23",
+  "version": "7.2.1-26",
   "description": "General utilities for plugins to use",
   "author": "Logan Smyth <loganfsmyth@gmail.com>",
   "homepage": "https://babeljs.io/",
