@@ -24,7 +24,10 @@ const babelPeerDependencyClause = (() => {
   const packageJson = require(join(cwd, "lerna.json"));
   return packageJson.peerDependencies["@gerhobbelt/babel-core"];
 })();
-console.log("Updating all peerDependencies of all babel packages to the expression:", babelPeerDependencyClause);
+console.log(
+  "Updating all peerDependencies of all babel packages to the expression:",
+  babelPeerDependencyClause
+);
 
 function patchPackageJson(filePath, settings = {}) {
   const packageJson = readFileSync(filePath, "utf8");
