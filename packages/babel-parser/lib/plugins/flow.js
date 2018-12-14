@@ -9,11 +9,13 @@ var _types = require("../tokenizer/types");
 
 var N = _interopRequireWildcard(require("../types"));
 
+var _context = require("../tokenizer/context");
+
 var _identifier = require("../util/identifier");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
-const primitiveTypes = ["any", "bool", "boolean", "empty", "false", "mixed", "null", "number", "static", "string", "true", "typeof", "void"];
+const reservedTypes = ["any", "bool", "boolean", "empty", "false", "mixed", "null", "number", "static", "string", "true", "typeof", "void", "interface", "extends", "_"];
 
 function isEsModuleType(bodyElement) {
   return bodyElement.type === "DeclareExportAllDeclaration" || bodyElement.type === "DeclareExportDeclaration" && (!bodyElement.declaration || bodyElement.declaration.type !== "TypeAlias" && bodyElement.declaration.type !== "InterfaceDeclaration");
@@ -357,7 +359,13 @@ var _default = superClass => class extends superClass {
       } while (this.eat(_types.types.comma));
     }
 
-    node.body = this.flowParseObjectType(isClass, false, false, isClass);
+    node.body = this.flowParseObjectType({
+      allowStatic: isClass,
+      allowExact: false,
+      allowSpread: false,
+      allowProto: isClass,
+      allowInexact: false
+    });
   }
 
   flowParseInterfaceExtends() {
@@ -378,9 +386,15 @@ var _default = superClass => class extends superClass {
     return this.finishNode(node, "InterfaceDeclaration");
   }
 
+  checkNotUnderscore(word) {
+    if (word === "_") {
+      throw this.unexpected(null, "`_` is only allowed as a type argument to call or new");
+    }
+  }
+
   checkReservedType(word, startLoc) {
-    if (primitiveTypes.indexOf(word) > -1) {
-      this.raise(startLoc, `Cannot overwrite primitive type ${word}`);
+    if (reservedTypes.indexOf(word) > -1) {
+      this.raise(startLoc, `Cannot overwrite reserved type ${word}`);
     }
   }
 
@@ -496,9 +510,32 @@ var _default = superClass => class extends superClass {
     node.params = [];
     this.state.inType = true;
     this.expectRelational("<");
+    const oldNoAnonFunctionType = this.state.noAnonFunctionType;
+    this.state.noAnonFunctionType = false;
 
     while (!this.isRelational(">")) {
       node.params.push(this.flowParseType());
+
+      if (!this.isRelational(">")) {
+        this.expect(_types.types.comma);
+      }
+    }
+
+    this.state.noAnonFunctionType = oldNoAnonFunctionType;
+    this.expectRelational(">");
+    this.state.inType = oldInType;
+    return this.finishNode(node, "TypeParameterInstantiation");
+  }
+
+  flowParseTypeParameterInstantiationCallOrNew() {
+    const node = this.startNode();
+    const oldInType = this.state.inType;
+    node.params = [];
+    this.state.inType = true;
+    this.expectRelational("<");
+
+    while (!this.isRelational(">")) {
+      node.params.push(this.flowParseTypeOrImplicitInstantiation());
 
       if (!this.isRelational(">")) {
         this.expect(_types.types.comma);
@@ -521,7 +558,13 @@ var _default = superClass => class extends superClass {
       } while (this.eat(_types.types.comma));
     }
 
-    node.body = this.flowParseObjectType(false, false, false, false);
+    node.body = this.flowParseObjectType({
+      allowStatic: false,
+      allowExact: false,
+      allowSpread: false,
+      allowProto: false,
+      allowInexact: false
+    });
     return this.finishNode(node, "InterfaceTypeAnnotation");
   }
 
@@ -604,7 +647,13 @@ var _default = superClass => class extends superClass {
     return this.finishNode(node, "ObjectTypeCallProperty");
   }
 
-  flowParseObjectType(allowStatic, allowExact, allowSpread, allowProto) {
+  flowParseObjectType({
+    allowStatic,
+    allowExact,
+    allowSpread,
+    allowProto,
+    allowInexact
+  }) {
     const oldInType = this.state.inType;
     this.state.inType = true;
     const nodeStart = this.startNode();
@@ -614,6 +663,7 @@ var _default = superClass => class extends superClass {
     nodeStart.internalSlots = [];
     let endDelim;
     let exact;
+    let inexact = false;
 
     if (allowExact && this.match(_types.types.braceBarL)) {
       this.expect(_types.types.braceBarL);
@@ -689,19 +739,30 @@ var _default = superClass => class extends superClass {
           }
         }
 
-        nodeStart.properties.push(this.flowParseObjectTypeProperty(node, isStatic, protoStart, variance, kind, allowSpread));
+        const propOrInexact = this.flowParseObjectTypeProperty(node, isStatic, protoStart, variance, kind, allowSpread, allowInexact);
+
+        if (propOrInexact === null) {
+          inexact = true;
+        } else {
+          nodeStart.properties.push(propOrInexact);
+        }
       }
 
       this.flowObjectTypeSemicolon();
     }
 
     this.expect(endDelim);
+
+    if (allowSpread) {
+      nodeStart.inexact = inexact;
+    }
+
     const out = this.finishNode(nodeStart, "ObjectTypeAnnotation");
     this.state.inType = oldInType;
     return out;
   }
 
-  flowParseObjectTypeProperty(node, isStatic, protoStart, variance, kind, allowSpread) {
+  flowParseObjectTypeProperty(node, isStatic, protoStart, variance, kind, allowSpread, allowInexact) {
     if (this.match(_types.types.ellipsis)) {
       if (!allowSpread) {
         this.unexpected(null, "Spread operator cannot appear in class or interface definitions");
@@ -716,6 +777,21 @@ var _default = superClass => class extends superClass {
       }
 
       this.expect(_types.types.ellipsis);
+      const isInexactToken = this.eat(_types.types.comma) || this.eat(_types.types.semi);
+
+      if (this.match(_types.types.braceR)) {
+        if (allowInexact) return null;
+        this.unexpected(null, "Explicit inexact syntax is only allowed inside inexact objects");
+      }
+
+      if (this.match(_types.types.braceBarR)) {
+        this.unexpected(null, "Explicit inexact syntax cannot appear inside an explicit exact object type");
+      }
+
+      if (isInexactToken) {
+        this.unexpected(null, "Explicit inexact syntax must appear at the end of an inexact object");
+      }
+
       node.argument = this.flowParseType();
       return this.finishNode(node, "ObjectTypeSpreadProperty");
     } else {
@@ -910,6 +986,7 @@ var _default = superClass => class extends superClass {
         return this.finishNode(node, "StringTypeAnnotation");
 
       default:
+        this.checkNotUnderscore(id.name);
         return this.flowParseGenericType(startPos, startLoc, id);
     }
   }
@@ -932,10 +1009,22 @@ var _default = superClass => class extends superClass {
         return this.flowIdentToTypeAnnotation(startPos, startLoc, node, this.parseIdentifier());
 
       case _types.types.braceL:
-        return this.flowParseObjectType(false, false, true, false);
+        return this.flowParseObjectType({
+          allowStatic: false,
+          allowExact: false,
+          allowSpread: true,
+          allowProto: false,
+          allowInexact: true
+        });
 
       case _types.types.braceBarL:
-        return this.flowParseObjectType(false, true, true, false);
+        return this.flowParseObjectType({
+          allowStatic: false,
+          allowExact: true,
+          allowSpread: true,
+          allowProto: false,
+          allowInexact: false
+        });
 
       case _types.types.bracketL:
         return this.flowParseTupleType();
@@ -1116,6 +1205,17 @@ var _default = superClass => class extends superClass {
     this.state.inType = oldInType;
     this.state.exprAllowed = this.state.exprAllowed || this.state.noAnonFunctionType;
     return type;
+  }
+
+  flowParseTypeOrImplicitInstantiation() {
+    if (this.state.type === _types.types.name && this.state.value === "_") {
+      const startPos = this.state.start;
+      const startLoc = this.state.startLoc;
+      const node = this.parseIdentifier();
+      return this.flowParseGenericType(startPos, startLoc, node);
+    } else {
+      return this.flowParseType();
+    }
   }
 
   flowParseTypeAnnotation() {
@@ -1493,30 +1593,16 @@ var _default = superClass => class extends superClass {
     return super.toAssignableList(exprList, isBinding, contextDescription);
   }
 
-  toReferencedList(exprList) {
+  toReferencedList(exprList, isParenthesizedExpr) {
     for (let i = 0; i < exprList.length; i++) {
       const expr = exprList[i];
 
-      if (expr && expr._exprListItem && expr.type === "TypeCastExpression") {
-        this.raise(expr.start, "Unexpected type cast");
+      if (expr && expr.type === "TypeCastExpression" && (!expr.extra || !expr.extra.parenthesized) && (exprList.length > 1 || !isParenthesizedExpr)) {
+        this.raise(expr.typeAnnotation.start, "The type cast expression is expected to be wrapped with parenthesis");
       }
     }
 
     return exprList;
-  }
-
-  parseExprListItem(allowEmpty, refShorthandDefaultPos, refNeedsArrowPos) {
-    const container = this.startNode();
-    const node = super.parseExprListItem(allowEmpty, refShorthandDefaultPos, refNeedsArrowPos);
-
-    if (this.match(_types.types.colon)) {
-      container._exprListItem = true;
-      container.expression = node;
-      container.typeAnnotation = this.flowParseTypeAnnotation();
-      return this.finishNode(container, "TypeCastExpression");
-    } else {
-      return node;
-    }
   }
 
   checkLVal(expr, isBinding, checkClashes, contextDescription) {
@@ -1800,7 +1886,7 @@ var _default = superClass => class extends superClass {
   parseMaybeAssign(noIn, refShorthandDefaultPos, afterLeftParse, refNeedsArrowPos) {
     let jsxError = null;
 
-    if (_types.types.jsxTagStart && this.match(_types.types.jsxTagStart)) {
+    if (this.hasPlugin("jsx") && (this.match(_types.types.jsxTagStart) || this.isRelational("<"))) {
       const state = this.state.clone();
 
       try {
@@ -1808,7 +1894,12 @@ var _default = superClass => class extends superClass {
       } catch (err) {
         if (err instanceof SyntaxError) {
           this.state = state;
-          this.state.context.length -= 2;
+          const cLength = this.state.context.length;
+
+          if (this.state.context[cLength - 1] === _context.types.j_oTag) {
+            this.state.context.length -= 2;
+          }
+
           jsxError = err;
         } else {
           throw err;
@@ -1944,7 +2035,7 @@ var _default = superClass => class extends superClass {
       const state = this.state.clone();
 
       try {
-        node.typeArguments = this.flowParseTypeParameterInstantiation();
+        node.typeArguments = this.flowParseTypeParameterInstantiationCallOrNew();
         this.expect(_types.types.parenL);
         node.arguments = this.parseCallExpressionArguments(_types.types.parenR, false);
 
@@ -1973,7 +2064,7 @@ var _default = superClass => class extends superClass {
       const state = this.state.clone();
 
       try {
-        targs = this.flowParseTypeParameterInstantiation();
+        targs = this.flowParseTypeParameterInstantiationCallOrNew();
       } catch (e) {
         if (e instanceof SyntaxError) {
           this.state = state;

@@ -67,6 +67,7 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
   }
 
   return {
+    name: "proposal-function-bind",
     inherits: _babelPluginSyntaxFunctionBind().default,
     visitor: {
       CallExpression({

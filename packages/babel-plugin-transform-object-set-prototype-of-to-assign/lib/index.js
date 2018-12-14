@@ -18,6 +18,7 @@ function _babelHelperPluginUtils() {
 var _default = (0, _babelHelperPluginUtils().declare)(api => {
   api.assertVersion(7);
   return {
+    name: "transform-object-set-prototype-of-to-assign",
     visitor: {
       CallExpression(path, file) {
         if (path.get("callee").matchesPattern("Object.setPrototypeOf")) {

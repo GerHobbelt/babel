@@ -44,6 +44,8 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
   }
 
   return {
+    name: "syntax-decorators",
+
     manipulateOptions(opts, parserOpts) {
       parserOpts.plugins.push(legacy ? "decorators-legacy" : ["decorators", {
         decoratorsBeforeExport

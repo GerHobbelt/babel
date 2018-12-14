@@ -442,6 +442,9 @@ var _default = superClass => class extends superClass {
       return this.parseLiteral(this.state.value, "JSXText");
     } else if (this.match(_types.types.jsxTagStart)) {
       return this.jsxParseElement();
+    } else if (this.isRelational("<") && this.state.input.charCodeAt(this.state.pos) !== 33) {
+      this.finishToken(_types.types.jsxTagStart);
+      return this.jsxParseElement();
     } else {
       return super.parseExprAtom(refShortHandDefaultPos);
     }
@@ -470,7 +473,7 @@ var _default = superClass => class extends superClass {
       }
     }
 
-    if (code === 60 && this.state.exprAllowed) {
+    if (code === 60 && this.state.exprAllowed && this.state.input.charCodeAt(this.state.pos + 1) !== 33) {
       ++this.state.pos;
       return this.finishToken(_types.types.jsxTagStart);
     }

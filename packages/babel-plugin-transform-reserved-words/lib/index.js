@@ -28,6 +28,7 @@ function _babelCore() {
 var _default = (0, _babelHelperPluginUtils().declare)(api => {
   api.assertVersion(7);
   return {
+    name: "transform-reserved-words",
     visitor: {
       "BindingIdentifier|ReferencedIdentifier"(path) {
         if (!_babelCore().types.isValidES3Identifier(path.node.name)) {

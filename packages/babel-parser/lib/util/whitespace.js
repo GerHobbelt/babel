@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.isNewLine = isNewLine;
 exports.isWhitespace = isWhitespace;
-exports.lineBreakG = exports.lineBreak = void 0;
+exports.skipWhiteSpace = exports.lineBreakG = exports.lineBreak = void 0;
 const lineBreak = /\r\n?|\n|\u2028|\u2029/;
 exports.lineBreak = lineBreak;
 const lineBreakG = new RegExp(lineBreak.source, "g");
@@ -23,6 +23,9 @@ function isNewLine(code) {
       return false;
   }
 }
+
+const skipWhiteSpace = /(?:\s|\/\/.*|\/\*[^]*?\*\/)*/g;
+exports.skipWhiteSpace = skipWhiteSpace;
 
 function isWhitespace(code) {
   switch (code) {

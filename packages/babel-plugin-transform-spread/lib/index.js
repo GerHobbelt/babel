@@ -75,6 +75,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
   }
 
   return {
+    name: "transform-spread",
     visitor: {
       ArrayExpression(path) {
         const {

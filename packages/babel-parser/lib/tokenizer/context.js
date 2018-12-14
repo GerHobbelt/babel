@@ -23,11 +23,12 @@ exports.TokContext = TokContext;
 const types = {
   braceStatement: new TokContext("{", false),
   braceExpression: new TokContext("{", true),
-  templateQuasi: new TokContext("${", true),
+  templateQuasi: new TokContext("${", false),
   parenStatement: new TokContext("(", false),
   parenExpression: new TokContext("(", true),
   template: new TokContext("`", true, true, p => p.readTmplToken()),
-  functionExpression: new TokContext("function", true)
+  functionExpression: new TokContext("function", true),
+  functionStatement: new TokContext("function", false)
 };
 exports.types = types;
 
@@ -37,31 +38,25 @@ _types.types.parenR.updateContext = _types.types.braceR.updateContext = function
     return;
   }
 
-  const out = this.state.context.pop();
+  let out = this.state.context.pop();
 
-  if (out === types.braceStatement && this.curContext() === types.functionExpression) {
-    this.state.context.pop();
-    this.state.exprAllowed = false;
-  } else if (out === types.templateQuasi) {
-    this.state.exprAllowed = true;
-  } else {
-    this.state.exprAllowed = !out.isExpr;
+  if (out === types.braceStatement && this.curContext().token === "function") {
+    out = this.state.context.pop();
   }
+
+  this.state.exprAllowed = !out.isExpr;
 };
 
 _types.types.name.updateContext = function (prevType) {
-  if (this.state.value === "of" && this.curContext() === types.parenStatement) {
-    this.state.exprAllowed = !prevType.beforeExpr;
-    return;
-  }
+  let allowed = false;
 
-  this.state.exprAllowed = false;
-
-  if (prevType === _types.types._let || prevType === _types.types._const || prevType === _types.types._var) {
-    if (_whitespace.lineBreak.test(this.input.slice(this.state.end))) {
-      this.state.exprAllowed = true;
+  if (prevType !== _types.types.dot) {
+    if (this.state.value === "of" && !this.state.exprAllowed || this.state.value === "yield" && this.state.inGenerator) {
+      allowed = true;
     }
   }
+
+  this.state.exprAllowed = allowed;
 
   if (this.state.isIterator) {
     this.state.isIterator = false;
@@ -86,9 +81,11 @@ _types.types.parenL.updateContext = function (prevType) {
 
 _types.types.incDec.updateContext = function () {};
 
-_types.types._function.updateContext = function (prevType) {
-  if (this.state.exprAllowed && !this.braceIsBlock(prevType)) {
+_types.types._function.updateContext = _types.types._class.updateContext = function (prevType) {
+  if (prevType.beforeExpr && prevType !== _types.types.semi && prevType !== _types.types._else && !(prevType === _types.types._return && _whitespace.lineBreak.test(this.input.slice(this.state.lastTokEnd, this.state.start))) && !((prevType === _types.types.colon || prevType === _types.types.braceL) && this.curContext() === types.b_stat)) {
     this.state.context.push(types.functionExpression);
+  } else {
+    this.state.context.push(types.functionStatement);
   }
 
   this.state.exprAllowed = false;

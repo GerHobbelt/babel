@@ -24,6 +24,7 @@ var _default = (_, opts = {}) => {
     loose = false,
     useBuiltIns = false,
     decoratorsLegacy = false,
+    decoratorsBeforeExport,
     pipelineProposal = "minimal"
   } = opts;
   return {
@@ -31,6 +32,7 @@ var _default = (_, opts = {}) => {
       loose,
       useBuiltIns,
       decoratorsLegacy,
+      decoratorsBeforeExport,
       pipelineProposal
     }]],
     plugins: [_babelPluginProposalFunctionBind().default]

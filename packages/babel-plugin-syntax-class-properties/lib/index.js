@@ -18,8 +18,10 @@ function _babelHelperPluginUtils() {
 var _default = (0, _babelHelperPluginUtils().declare)(api => {
   api.assertVersion(7);
   return {
+    name: "syntax-class-properties",
+
     manipulateOptions(opts, parserOpts) {
-      parserOpts.plugins.push("classProperties", "classPrivateProperties");
+      parserOpts.plugins.push("classProperties", "classPrivateProperties", "classPrivateMethods");
     }
 
   };

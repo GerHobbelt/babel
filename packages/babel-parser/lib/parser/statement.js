@@ -11,6 +11,8 @@ var _types2 = require("../tokenizer/types");
 
 var _expression = _interopRequireDefault(require("./expression"));
 
+var _identifier = require("../util/identifier");
+
 var _whitespace = require("../util/whitespace");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -256,21 +258,25 @@ class StatementParser extends _expression.default {
         }
       }
 
-      if (this.eat(_types2.types.parenL)) {
-        const node = this.startNodeAt(startPos, startLoc);
-        node.callee = expr;
-        node.arguments = this.parseCallExpressionArguments(_types2.types.parenR, false);
-        this.toReferencedList(node.arguments);
-        expr = this.finishNode(node, "CallExpression");
-      }
-
-      node.expression = expr;
+      node.expression = this.parseMaybeDecoratorArguments(expr);
       this.state.decoratorStack.pop();
     } else {
       node.expression = this.parseMaybeAssign();
     }
 
     return this.finishNode(node, "Decorator");
+  }
+
+  parseMaybeDecoratorArguments(expr) {
+    if (this.eat(_types2.types.parenL)) {
+      const node = this.startNodeAtNode(expr);
+      node.callee = expr;
+      node.arguments = this.parseCallExpressionArguments(_types2.types.parenR, false);
+      this.toReferencedList(node.arguments);
+      return this.finishNode(node, "CallExpression");
+    }
+
+    return expr;
   }
 
   parseBreakContinueStatement(node, keyword) {
@@ -313,7 +319,7 @@ class StatementParser extends _expression.default {
   parseDoStatement(node) {
     this.next();
     this.state.labels.push(loopLabel);
-    node.body = this.parseStatement(false);
+    node.body = this.withTopicForbiddingContext(() => this.parseStatement(false));
     this.state.labels.pop();
     this.expect(_types2.types._while);
     node.test = this.parseParenExpression();
@@ -327,7 +333,6 @@ class StatementParser extends _expression.default {
     let forAwait = false;
 
     if (this.state.inAsync && this.isContextual("await")) {
-      this.expectPlugin("asyncGenerators");
       forAwait = true;
       this.next();
     }
@@ -491,11 +496,10 @@ class StatementParser extends _expression.default {
         this.checkLVal(clause.param, true, clashes, "catch clause");
         this.expect(_types2.types.parenR);
       } else {
-        this.expectPlugin("optionalCatchBinding");
         clause.param = null;
       }
 
-      clause.body = this.parseBlock();
+      clause.body = this.withTopicForbiddingContext(() => this.parseBlock(false));
       node.handler = this.finishNode(clause, "CatchClause");
     }
 
@@ -520,7 +524,7 @@ class StatementParser extends _expression.default {
     this.next();
     node.test = this.parseParenExpression();
     this.state.labels.push(loopLabel);
-    node.body = this.parseStatement(false);
+    node.body = this.withTopicForbiddingContext(() => this.parseStatement(false));
     this.state.labels.pop();
     return this.finishNode(node, "WhileStatement");
   }
@@ -532,7 +536,7 @@ class StatementParser extends _expression.default {
 
     this.next();
     node.object = this.parseParenExpression();
-    node.body = this.parseStatement(false);
+    node.body = this.withTopicForbiddingContext(() => this.parseStatement(false));
     return this.finishNode(node, "WithStatement");
   }
 
@@ -646,7 +650,7 @@ class StatementParser extends _expression.default {
     this.expect(_types2.types.semi);
     node.update = this.match(_types2.types.parenR) ? null : this.parseExpression();
     this.expect(_types2.types.parenR);
-    node.body = this.parseStatement(false);
+    node.body = this.withTopicForbiddingContext(() => this.parseStatement(false));
     this.state.labels.pop();
     return this.finishNode(node, "ForStatement");
   }
@@ -667,7 +671,7 @@ class StatementParser extends _expression.default {
     node.left = init;
     node.right = this.parseExpression();
     this.expect(_types2.types.parenR);
-    node.body = this.parseStatement(false);
+    node.body = this.withTopicForbiddingContext(() => this.parseStatement(false));
     this.state.labels.pop();
     return this.finishNode(node, type);
   }
@@ -706,9 +710,10 @@ class StatementParser extends _expression.default {
     this.checkLVal(decl.id, true, undefined, "variable declaration");
   }
 
-  parseFunction(node, isStatement, allowExpressionBody, isAsync, optionalId) {
+  parseFunction(node, isStatement, allowExpressionBody = false, isAsync = false, optionalId = false) {
     const oldInFunc = this.state.inFunction;
     const oldInMethod = this.state.inMethod;
+    const oldInAsync = this.state.inAsync;
     const oldInGenerator = this.state.inGenerator;
     const oldInClassProperty = this.state.inClassProperty;
     this.state.inFunction = true;
@@ -718,10 +723,6 @@ class StatementParser extends _expression.default {
     this.initFunction(node, isAsync);
 
     if (this.match(_types2.types.star)) {
-      if (node.async) {
-        this.expectPlugin("asyncGenerators");
-      }
-
       node.generator = true;
       this.next();
     }
@@ -730,17 +731,27 @@ class StatementParser extends _expression.default {
       this.unexpected();
     }
 
-    if (!isStatement) this.state.inGenerator = node.generator;
+    if (!isStatement) {
+      this.state.inAsync = isAsync;
+      this.state.inGenerator = node.generator;
+    }
 
     if (this.match(_types2.types.name) || this.match(_types2.types._yield)) {
       node.id = this.parseBindingIdentifier();
     }
 
-    if (isStatement) this.state.inGenerator = node.generator;
+    if (isStatement) {
+      this.state.inAsync = isAsync;
+      this.state.inGenerator = node.generator;
+    }
+
     this.parseFunctionParams(node);
-    this.parseFunctionBodyAndFinish(node, isStatement ? "FunctionDeclaration" : "FunctionExpression", allowExpressionBody);
+    this.withTopicForbiddingContext(() => {
+      this.parseFunctionBodyAndFinish(node, isStatement ? "FunctionDeclaration" : "FunctionExpression", allowExpressionBody);
+    });
     this.state.inFunction = oldInFunc;
     this.state.inMethod = oldInMethod;
+    this.state.inAsync = oldInAsync;
     this.state.inGenerator = oldInGenerator;
     this.state.inClassProperty = oldInClassProperty;
     return node;
@@ -786,35 +797,36 @@ class StatementParser extends _expression.default {
     const classBody = this.startNode();
     classBody.body = [];
     this.expect(_types2.types.braceL);
+    this.withTopicForbiddingContext(() => {
+      while (!this.eat(_types2.types.braceR)) {
+        if (this.eat(_types2.types.semi)) {
+          if (decorators.length > 0) {
+            this.raise(this.state.lastTokEnd, "Decorators must not be followed by a semicolon");
+          }
 
-    while (!this.eat(_types2.types.braceR)) {
-      if (this.eat(_types2.types.semi)) {
-        if (decorators.length > 0) {
-          this.raise(this.state.lastTokEnd, "Decorators must not be followed by a semicolon");
+          continue;
         }
 
-        continue;
+        if (this.match(_types2.types.at)) {
+          decorators.push(this.parseDecorator());
+          continue;
+        }
+
+        const member = this.startNode();
+
+        if (decorators.length) {
+          member.decorators = decorators;
+          this.resetStartLocationFromNode(member, decorators[0]);
+          decorators = [];
+        }
+
+        this.parseClassMember(classBody, member, state);
+
+        if (member.kind === "constructor" && member.decorators && member.decorators.length > 0) {
+          this.raise(member.start, "Decorators can't be used with a constructor. Did you mean '@dec class { ... }'?");
+        }
       }
-
-      if (this.match(_types2.types.at)) {
-        decorators.push(this.parseDecorator());
-        continue;
-      }
-
-      const member = this.startNode();
-
-      if (decorators.length) {
-        member.decorators = decorators;
-        this.resetStartLocationFromNode(member, decorators[0]);
-        decorators = [];
-      }
-
-      this.parseClassMember(classBody, member, state);
-
-      if (member.kind === "constructor" && member.decorators && member.decorators.length > 0) {
-        this.raise(member.start, "Decorators can't be used with a constructor. Did you mean '@dec class { ... }'?");
-      }
-    }
+    });
 
     if (decorators.length) {
       this.raise(this.state.start, "You have trailing decorators with no method");
@@ -920,13 +932,7 @@ class StatementParser extends _expression.default {
         this.pushClassProperty(classBody, publicProp);
       }
     } else if (isSimple && key.name === "async" && !this.isLineTerminator()) {
-      const isGenerator = this.match(_types2.types.star);
-
-      if (isGenerator) {
-        this.expectPlugin("asyncGenerators");
-        this.next();
-      }
-
+      const isGenerator = this.eat(_types2.types.star);
       method.kind = "method";
       this.parseClassPropertyName(method);
 
@@ -1106,15 +1112,32 @@ class StatementParser extends _expression.default {
     return this.finishNode(node, "ExportNamedDeclaration");
   }
 
+  isAsyncFunction() {
+    if (!this.isContextual("async")) return false;
+    const {
+      input,
+      pos
+    } = this.state;
+    _whitespace.skipWhiteSpace.lastIndex = pos;
+
+    const skip = _whitespace.skipWhiteSpace.exec(input);
+
+    if (!skip || !skip.length) return false;
+    const next = pos + skip[0].length;
+    return !_whitespace.lineBreak.test(input.slice(pos, next)) && input.slice(next, next + 8) === "function" && (next + 8 === input.length || !(0, _identifier.isIdentifierChar)(input.charAt(next + 8)));
+  }
+
   parseExportDefaultExpression() {
     const expr = this.startNode();
+    const isAsync = this.isAsyncFunction();
 
-    if (this.eat(_types2.types._function)) {
-      return this.parseFunction(expr, true, false, false, true);
-    } else if (this.isContextual("async") && this.lookahead().type === _types2.types._function) {
-      this.eatContextual("async");
-      this.eat(_types2.types._function);
-      return this.parseFunction(expr, true, false, true, true);
+    if (this.eat(_types2.types._function) || isAsync) {
+      if (isAsync) {
+        this.eatContextual("async");
+        this.expect(_types2.types._function);
+      }
+
+      return this.parseFunction(expr, true, false, isAsync, true);
     } else if (this.match(_types2.types._class)) {
       return this.parseClass(expr, true, true);
     } else if (this.match(_types2.types.at)) {
@@ -1209,7 +1232,7 @@ class StatementParser extends _expression.default {
       }
     }
 
-    return this.state.type.keyword === "var" || this.state.type.keyword === "const" || this.state.type.keyword === "let" || this.state.type.keyword === "function" || this.state.type.keyword === "class" || this.isContextual("async");
+    return this.state.type.keyword === "var" || this.state.type.keyword === "const" || this.state.type.keyword === "let" || this.state.type.keyword === "function" || this.state.type.keyword === "class" || this.isAsyncFunction();
   }
 
   checkExport(node, checkNames, isDefault) {

@@ -44,6 +44,7 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
   }
 
   return {
+    name: "transform-block-scoped-functions",
     visitor: {
       BlockStatement(path) {
         const {

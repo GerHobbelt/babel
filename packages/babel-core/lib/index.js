@@ -40,6 +40,12 @@ Object.defineProperty(exports, "getEnv", {
     return _environment.getEnv;
   }
 });
+Object.defineProperty(exports, "tokTypes", {
+  enumerable: true,
+  get: function () {
+    return _babelParser().tokTypes;
+  }
+});
 Object.defineProperty(exports, "traverse", {
   enumerable: true,
   get: function () {
@@ -170,6 +176,16 @@ Object.defineProperty(exports, "types", {
     return _types();
   }
 });
+
+function _babelParser() {
+  const data = require("@gerhobbelt/babel-parser");
+
+  _babelParser = function () {
+    return data;
+  };
+
+  return data;
+}
 
 function _babelTraverse() {
   const data = _interopRequireDefault(require("@gerhobbelt/babel-traverse"));

@@ -58,6 +58,7 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
   }
 
   return {
+    name: "transform-proto-to-assign",
     visitor: {
       AssignmentExpression(path, file) {
         if (!isProtoAssignmentExpression(path.node)) return;

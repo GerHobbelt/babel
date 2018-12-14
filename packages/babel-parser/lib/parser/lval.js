@@ -117,7 +117,21 @@ class LValParser extends _node.NodeUtils {
     return exprList;
   }
 
-  toReferencedList(exprList) {
+  toReferencedList(exprList, isParenthesizedExpr) {
+    return exprList;
+  }
+
+  toReferencedListDeep(exprList, isParenthesizedExpr) {
+    this.toReferencedList(exprList, isParenthesizedExpr);
+
+    for (let _i = 0; _i < exprList.length; _i++) {
+      const expr = exprList[_i];
+
+      if (expr && expr.type === "ArrayExpression") {
+        this.toReferencedListDeep(expr.elements);
+      }
+    }
+
     return exprList;
   }
 
@@ -182,7 +196,15 @@ class LValParser extends _node.NodeUtils {
         break;
       } else if (this.match(_types.types.ellipsis)) {
         elts.push(this.parseAssignableListItemTypes(this.parseRest()));
-        this.expect(close);
+
+        if (this.state.inFunction && this.state.inParameters && this.match(_types.types.comma)) {
+          const nextTokenType = this.lookahead().type;
+          const errorMessage = nextTokenType === _types.types.parenR ? "A trailing comma is not permitted after the rest element" : "Rest parameter must be last formal parameter";
+          this.raise(this.state.start, errorMessage);
+        } else {
+          this.expect(close);
+        }
+
         break;
       } else {
         const decorators = [];
@@ -251,8 +273,8 @@ class LValParser extends _node.NodeUtils {
         break;
 
       case "ObjectPattern":
-        for (let _i = 0, _expr$properties = expr.properties; _i < _expr$properties.length; _i++) {
-          let prop = _expr$properties[_i];
+        for (let _i2 = 0, _expr$properties = expr.properties; _i2 < _expr$properties.length; _i2++) {
+          let prop = _expr$properties[_i2];
           if (prop.type === "ObjectProperty") prop = prop.value;
           this.checkLVal(prop, isBinding, checkClashes, "object destructuring pattern");
         }
@@ -260,8 +282,8 @@ class LValParser extends _node.NodeUtils {
         break;
 
       case "ArrayPattern":
-        for (let _i2 = 0, _expr$elements = expr.elements; _i2 < _expr$elements.length; _i2++) {
-          const elem = _expr$elements[_i2];
+        for (let _i3 = 0, _expr$elements = expr.elements; _i3 < _expr$elements.length; _i3++) {
+          const elem = _expr$elements[_i3];
 
           if (elem) {
             this.checkLVal(elem, isBinding, checkClashes, "array destructuring pattern");

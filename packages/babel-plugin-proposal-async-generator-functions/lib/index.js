@@ -119,6 +119,7 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
 
   };
   return {
+    name: "proposal-async-generator-functions",
     inherits: _babelPluginSyntaxAsyncGenerators().default,
     visitor: {
       Program(path, state) {

@@ -57,6 +57,7 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
   }
 
   return {
+    name: "proposal-numeric-separator",
     inherits: _babelPluginSyntaxNumericSeparator().default,
     visitor: {
       CallExpression: replaceNumberArg,

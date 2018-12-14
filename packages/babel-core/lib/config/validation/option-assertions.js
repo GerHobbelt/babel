@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.msg = msg;
 exports.access = access;
+exports.assertRootMode = assertRootMode;
 exports.assertSourceMaps = assertSourceMaps;
-exports.assertRoot = assertRoot;
 exports.assertCompact = assertCompact;
 exports.assertSourceType = assertSourceType;
 exports.assertCallerMetadata = assertCallerMetadata;
@@ -52,17 +52,17 @@ function access(loc, name) {
   };
 }
 
-function assertSourceMaps(loc, value) {
-  if (value !== undefined && typeof value !== "boolean" && value !== "inline" && value !== "both") {
-    throw new Error(`${msg(loc)} must be a boolean, "inline", "both", or undefined`);
+function assertRootMode(loc, value) {
+  if (value !== undefined && value !== "root" && value !== "upward" && value !== "upward-optional") {
+    throw new Error(`${msg(loc)} must be a "root", "upward", "upward-optional" or undefined`);
   }
 
   return value;
 }
 
-function assertRoot(loc, value) {
-  if (value !== undefined && typeof value !== "boolean" && typeof value !== "string") {
-    throw new Error(`${msg(loc)} must be a string, false, or undefined`);
+function assertSourceMaps(loc, value) {
+  if (value !== undefined && typeof value !== "boolean" && value !== "inline" && value !== "both") {
+    throw new Error(`${msg(loc)} must be a boolean, "inline", "both", or undefined`);
   }
 
   return value;

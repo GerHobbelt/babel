@@ -28,6 +28,7 @@ function _babelCore() {
 var _default = (0, _babelHelperPluginUtils().declare)(api => {
   api.assertVersion(7);
   return {
+    name: "transform-typeof-symbol",
     visitor: {
       Scope({
         scope

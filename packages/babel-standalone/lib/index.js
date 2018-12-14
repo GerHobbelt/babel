@@ -141,6 +141,7 @@ registerPlugins({
   "proposal-export-default-from": require("@gerhobbelt/babel-plugin-proposal-export-default-from"),
   "proposal-export-namespace-from": require("@gerhobbelt/babel-plugin-proposal-export-namespace-from"),
   "proposal-pipeline-operator": require("@gerhobbelt/babel-plugin-proposal-pipeline-operator"),
+  "proposal-private-methods": require("@gerhobbelt/babel-plugin-proposal-private-methods"),
   "transform-arrow-functions": require("@gerhobbelt/babel-plugin-transform-arrow-functions"),
   "transform-block-scoped-functions": require("@gerhobbelt/babel-plugin-transform-block-scoped-functions"),
   "transform-block-scoping": require("@gerhobbelt/babel-plugin-transform-block-scoping"),

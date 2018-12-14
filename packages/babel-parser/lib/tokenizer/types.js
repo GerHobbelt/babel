@@ -216,7 +216,9 @@ const keywords = {
   super: new KeywordTokenType("super", {
     startsExpr
   }),
-  class: new KeywordTokenType("class"),
+  class: new KeywordTokenType("class", {
+    startsExpr
+  }),
   extends: new KeywordTokenType("extends", {
     beforeExpr
   }),

@@ -45,6 +45,16 @@ function _babelPluginProposalJsonStrings() {
   return data;
 }
 
+function _babelPluginProposalPrivateMethods() {
+  const data = _interopRequireDefault(require("@gerhobbelt/babel-plugin-proposal-private-methods"));
+
+  _babelPluginProposalPrivateMethods = function () {
+    return data;
+  };
+
+  return data;
+}
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = (_, opts) => {
@@ -57,7 +67,9 @@ var _default = (_, opts) => {
   return {
     plugins: [_babelPluginSyntaxDynamicImport().default, _babelPluginSyntaxImportMeta().default, [_babelPluginProposalClassProperties().default, {
       loose
-    }], _babelPluginProposalJsonStrings().default]
+    }], _babelPluginProposalJsonStrings().default, [_babelPluginProposalPrivateMethods().default, {
+      loose
+    }]]
   };
 };
 

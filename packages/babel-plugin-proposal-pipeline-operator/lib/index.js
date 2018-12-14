@@ -40,6 +40,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = (0, _babelHelperPluginUtils().declare)(api => {
   api.assertVersion(7);
   return {
+    name: "proposal-pipeline-operator",
     inherits: _babelPluginSyntaxPipelineOperator().default,
     visitor: {
       BinaryExpression(path) {

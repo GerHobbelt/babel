@@ -128,7 +128,7 @@ function findFile(filepath, allowJSON) {
     throw new Error(`Found conflicting file matches: ${matches.join(", ")}`);
   }
 
-  return matches[0] || filepath + ".js";
+  return matches[0];
 }
 
 function get(entryLoc) {
@@ -155,9 +155,24 @@ function get(entryLoc) {
     }
 
     function push(taskName, taskDir) {
-      const actualLoc = findFile(taskDir + "/input");
-      const expectLoc = findFile(taskDir + "/output", true);
+      const taskDirStats = _fs().default.statSync(taskDir);
+
+      let actualLoc = findFile(taskDir + "/input");
       let execLoc = findFile(taskDir + "/exec");
+
+      if (taskDirStats.isDirectory() && !actualLoc && !execLoc) {
+        if (_fs().default.readdirSync(taskDir).length > 0) {
+          console.warn(`Skipped test folder with invalid layout: ${taskDir}`);
+        }
+
+        return;
+      } else if (!actualLoc) {
+        actualLoc = taskDir + "/input.js";
+      } else if (!execLoc) {
+        execLoc = taskDir + "/exec.js";
+      }
+
+      const expectLoc = findFile(taskDir + "/output", true) || taskDir + "/output.js";
 
       const actualLocAlias = suiteName + "/" + taskName + "/" + _path().default.basename(actualLoc);
 
@@ -165,7 +180,7 @@ function get(entryLoc) {
 
       let execLocAlias = suiteName + "/" + taskName + "/" + _path().default.basename(actualLoc);
 
-      if (_fs().default.statSync(taskDir).isFile()) {
+      if (taskDirStats.isFile()) {
         const ext = _path().default.extname(taskDir);
 
         if (EXTENSIONS.indexOf(ext) === -1) return;

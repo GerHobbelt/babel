@@ -40,6 +40,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = (0, _babelHelperPluginUtils().declare)(api => {
   api.assertVersion(7);
   return {
+    name: "transform-exponentiation-operator",
     visitor: (0, _babelHelperBuilderBinaryAssignmentOperatorVisitor().default)({
       operator: "**",
 

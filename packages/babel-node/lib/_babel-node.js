@@ -105,12 +105,13 @@ program.option("-i, --ignore [globs]", "A comma-separated list of glob patterns 
 program.option("-x, --extensions [extensions]", "List of extensions to hook into [.es6,.js,.es,.jsx,.mjs]", collect);
 program.option("--config-file [path]", "Path to the babel config file to use. Defaults to working directory babel.config.js");
 program.option("--env-name [name]", "The name of the 'env' to use when loading configs and plugins. " + "Defaults to the value of BABEL_ENV, or else NODE_ENV, or else 'development'.");
+program.option("--root-mode [mode]", "The project-root resolution mode. " + "One of 'root' (the default), 'upward', or 'upward-optional'.");
 program.option("-w, --plugins [string]", "", collect);
 program.option("-b, --presets [string]", "", collect);
 program.version(_package.default.version);
 program.usage("[options] [ -e script | script.js ] [arguments]");
 program.parse(process.argv);
-(0, _babelRegister().default)({
+const babelOptions = {
   caller: {
     name: "@gerhobbelt/babel-node"
   },
@@ -121,8 +122,17 @@ program.parse(process.argv);
   presets: program.presets,
   configFile: program.configFile,
   envName: program.envName,
+  rootMode: program.rootMode,
   babelrc: program.babelrc === true ? undefined : program.babelrc
-});
+};
+
+for (const key of Object.keys(babelOptions)) {
+  if (babelOptions[key] === undefined) {
+    delete babelOptions[key];
+  }
+}
+
+(0, _babelRegister().default)(babelOptions);
 
 const replPlugin = ({
   types: t

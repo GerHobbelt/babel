@@ -201,29 +201,51 @@ class ExpressionParser extends _lval.default {
 
         const op = this.state.type;
 
-        if (op === _types.types.nullishCoalescing) {
-          this.expectPlugin("nullishCoalescingOperator");
-        } else if (op === _types.types.pipeline) {
+        if (op === _types.types.pipeline) {
           this.expectPlugin("pipelineOperator");
+          this.state.inPipeline = true;
+          this.checkPipelineAtInfixOperator(left, leftStartPos);
+        } else if (op === _types.types.nullishCoalescing) {
+          this.expectPlugin("nullishCoalescingOperator");
         }
 
         this.next();
-        const startPos = this.state.start;
-        const startLoc = this.state.startLoc;
 
-        if (op === _types.types.pipeline) {
+        if (op === _types.types.pipeline && this.getPluginOption("pipelineOperator", "proposal") === "minimal") {
           if (this.match(_types.types.name) && this.state.value === "await" && this.state.inAsync) {
             throw this.raise(this.state.start, `Unexpected "await" after pipeline body; await must have parentheses in minimal proposal`);
           }
         }
 
-        node.right = this.parseExprOp(this.parseMaybeUnary(), startPos, startLoc, op.rightAssociative ? prec - 1 : prec, noIn);
+        node.right = this.parseExprOpRightExpr(op, prec, noIn);
         this.finishNode(node, op === _types.types.logicalOR || op === _types.types.logicalAND || op === _types.types.nullishCoalescing ? "LogicalExpression" : "BinaryExpression");
         return this.parseExprOp(node, leftStartPos, leftStartLoc, minPrec, noIn);
       }
     }
 
     return left;
+  }
+
+  parseExprOpRightExpr(op, prec, noIn) {
+    switch (op) {
+      case _types.types.pipeline:
+        if (this.getPluginOption("pipelineOperator", "proposal") === "smart") {
+          const startPos = this.state.start;
+          const startLoc = this.state.startLoc;
+          return this.withTopicPermittingContext(() => {
+            return this.parseSmartPipelineBody(this.parseExprOpBaseRightExpr(op, prec, noIn), startPos, startLoc);
+          });
+        }
+
+      default:
+        return this.parseExprOpBaseRightExpr(op, prec, noIn);
+    }
+  }
+
+  parseExprOpBaseRightExpr(op, prec, noIn) {
+    const startPos = this.state.start;
+    const startLoc = this.state.startLoc;
+    return this.parseExprOp(this.parseMaybeUnary(), startPos, startLoc, op.rightAssociative ? prec - 1 : prec, noIn);
   }
 
   parseMaybeUnary(refShorthandDefaultPos) {
@@ -372,9 +394,13 @@ class ExpressionParser extends _lval.default {
 
       return this.finishNode(node, "MemberExpression");
     } else if (!noCalls && this.match(_types.types.parenL)) {
+      const oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
+      const oldYOAIPAP = this.state.yieldOrAwaitInPossibleArrowParameters;
+      this.state.maybeInArrowParameters = true;
+      this.state.yieldOrAwaitInPossibleArrowParameters = null;
       const possibleAsync = this.atPossibleAsync(base);
       this.next();
-      const node = this.startNodeAt(startPos, startLoc);
+      let node = this.startNodeAt(startPos, startLoc);
       node.callee = base;
       const refTrailingCommaPos = {
         start: -1
@@ -394,11 +420,14 @@ class ExpressionParser extends _lval.default {
           this.raise(refTrailingCommaPos.start, "A trailing comma is not permitted after the rest element");
         }
 
-        return this.parseAsyncArrowFromCallExpression(this.startNodeAt(startPos, startLoc), node);
+        node = this.parseAsyncArrowFromCallExpression(this.startNodeAt(startPos, startLoc), node);
+        this.state.yieldOrAwaitInPossibleArrowParameters = oldYOAIPAP;
       } else {
-        this.toReferencedList(node.arguments);
+        this.toReferencedListDeep(node.arguments);
+        this.state.yieldOrAwaitInPossibleArrowParameters = this.state.yieldOrAwaitInPossibleArrowParameters || oldYOAIPAP;
       }
 
+      this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
       return node;
     } else if (this.match(_types.types.backQuote)) {
       return this.parseTaggedTemplateExpression(startPos, startLoc, base, state);
@@ -493,11 +522,8 @@ class ExpressionParser extends _lval.default {
   }
 
   parseAsyncArrowFromCallExpression(node, call) {
-    const oldYield = this.state.yieldInPossibleArrowParameters;
-    this.state.yieldInPossibleArrowParameters = null;
     this.expect(_types.types.arrow);
     this.parseArrowExpression(node, call.arguments, true);
-    this.state.yieldInPossibleArrowParameters = oldYield;
     return node;
   }
 
@@ -508,6 +534,7 @@ class ExpressionParser extends _lval.default {
   }
 
   parseExprAtom(refShorthandDefaultPos) {
+    if (this.state.type === _types.types.slash) this.readRegexp();
     const canBeArrow = this.state.potentialArrowAt === this.state.start;
     let node;
 
@@ -568,21 +595,24 @@ class ExpressionParser extends _lval.default {
           } else if (!containsEsc && id.name === "async" && this.match(_types.types._function) && !this.canInsertSemicolon()) {
             this.next();
             return this.parseFunction(node, false, false, true);
-          } else if (canBeArrow && id.name === "async" && this.match(_types.types.name)) {
-            const oldYield = this.state.yieldInPossibleArrowParameters;
-            this.state.yieldInPossibleArrowParameters = null;
+          } else if (canBeArrow && !this.canInsertSemicolon() && id.name === "async" && this.match(_types.types.name)) {
+            const oldYOAIPAP = this.state.yieldOrAwaitInPossibleArrowParameters;
+            const oldInAsync = this.state.inAsync;
+            this.state.yieldOrAwaitInPossibleArrowParameters = null;
+            this.state.inAsync = true;
             const params = [this.parseIdentifier()];
             this.expect(_types.types.arrow);
             this.parseArrowExpression(node, params, true);
-            this.state.yieldInPossibleArrowParameters = oldYield;
+            this.state.yieldOrAwaitInPossibleArrowParameters = oldYOAIPAP;
+            this.state.inAsync = oldInAsync;
             return node;
           }
 
           if (canBeArrow && !this.canInsertSemicolon() && this.eat(_types.types.arrow)) {
-            const oldYield = this.state.yieldInPossibleArrowParameters;
-            this.state.yieldInPossibleArrowParameters = null;
+            const oldYOAIPAP = this.state.yieldOrAwaitInPossibleArrowParameters;
+            this.state.yieldOrAwaitInPossibleArrowParameters = null;
             this.parseArrowExpression(node, [id]);
-            this.state.yieldInPossibleArrowParameters = oldYield;
+            this.state.yieldOrAwaitInPossibleArrowParameters = oldYOAIPAP;
             return node;
           }
 
@@ -638,7 +668,11 @@ class ExpressionParser extends _lval.default {
         node = this.startNode();
         this.next();
         node.elements = this.parseExprList(_types.types.bracketR, true, refShorthandDefaultPos);
-        this.toReferencedList(node.elements);
+
+        if (!this.state.maybeInArrowParameters) {
+          this.toReferencedList(node.elements);
+        }
+
         return this.finishNode(node, "ArrayExpression");
 
       case _types.types.braceL:
@@ -675,6 +709,27 @@ class ExpressionParser extends _lval.default {
           }
         }
 
+      case _types.types.hash:
+        {
+          if (this.state.inPipeline) {
+            node = this.startNode();
+
+            if (this.getPluginOption("pipelineOperator", "proposal") !== "smart") {
+              this.raise(node.start, "Primary Topic Reference found but pipelineOperator not passed 'smart' for 'proposal' option.");
+            }
+
+            this.next();
+
+            if (this.primaryTopicReferenceIsAllowedInCurrentTopicContext()) {
+              this.registerTopicReference();
+              return this.finishNode(node, "PipelinePrimaryTopicReference");
+            } else {
+              throw this.raise(node.start, `Topic reference was used in a lexical context without topic binding`);
+            }
+          }
+          throw this.unexpected();
+        }
+
       default:
         throw this.unexpected();
     }
@@ -693,7 +748,15 @@ class ExpressionParser extends _lval.default {
     if (isPrivate) {
       this.expectOnePlugin(["classPrivateProperties", "classPrivateMethods"]);
       const node = this.startNode();
+      const columnHashEnd = this.state.end;
       this.next();
+      const columnIdentifierStart = this.state.start;
+      const spacesBetweenHashAndIdentifier = columnIdentifierStart - columnHashEnd;
+
+      if (spacesBetweenHashAndIdentifier != 0) {
+        this.raise(columnIdentifierStart, "Unexpected space between # and identifier");
+      }
+
       node.id = this.parseIdentifier(true);
       return this.finishNode(node, "PrivateName");
     } else {
@@ -703,7 +766,9 @@ class ExpressionParser extends _lval.default {
 
   parseFunctionExpression() {
     const node = this.startNode();
-    const meta = this.parseIdentifier(true);
+    let meta = this.startNode();
+    this.next();
+    meta = this.createIdentifier(meta, "function");
 
     if (this.state.inGenerator && this.eat(_types.types.dot)) {
       return this.parseMetaProperty(node, meta, "sent");
@@ -780,9 +845,9 @@ class ExpressionParser extends _lval.default {
     let val;
     this.expect(_types.types.parenL);
     const oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
-    const oldYield = this.state.yieldInPossibleArrowParameters;
+    const oldYOAIPAP = this.state.yieldOrAwaitInPossibleArrowParameters;
     this.state.maybeInArrowParameters = true;
-    this.state.yieldInPossibleArrowParameters = null;
+    this.state.yieldOrAwaitInPossibleArrowParameters = null;
     const innerStartPos = this.state.start;
     const innerStartLoc = this.state.startLoc;
     const exprList = [];
@@ -814,8 +879,10 @@ class ExpressionParser extends _lval.default {
         spreadStart = this.state.start;
         exprList.push(this.parseParenItem(this.parseRest(), spreadNodeStartPos, spreadNodeStartLoc));
 
-        if (this.match(_types.types.comma) && this.lookahead().type === _types.types.parenR) {
-          this.raise(this.state.start, "A trailing comma is not permitted after the rest element");
+        if (this.match(_types.types.comma)) {
+          const nextTokenType = this.lookahead().type;
+          const errorMessage = nextTokenType === _types.types.parenR ? "A trailing comma is not permitted after the rest element" : "Rest parameter must be last formal parameter";
+          this.raise(this.state.start, errorMessage);
         }
 
         break;
@@ -840,11 +907,11 @@ class ExpressionParser extends _lval.default {
       }
 
       this.parseArrowExpression(arrowNode, exprList);
-      this.state.yieldInPossibleArrowParameters = oldYield;
+      this.state.yieldOrAwaitInPossibleArrowParameters = oldYOAIPAP;
       return arrowNode;
     }
 
-    this.state.yieldInPossibleArrowParameters = oldYield;
+    this.state.yieldOrAwaitInPossibleArrowParameters = this.state.yieldOrAwaitInPossibleArrowParameters || oldYOAIPAP;
 
     if (!exprList.length) {
       this.unexpected(this.state.lastTokStart);
@@ -858,11 +925,11 @@ class ExpressionParser extends _lval.default {
     }
 
     if (refNeedsArrowPos.start) this.unexpected(refNeedsArrowPos.start);
+    this.toReferencedListDeep(exprList, true);
 
     if (exprList.length > 1) {
       val = this.startNodeAt(innerStartPos, innerStartLoc);
       val.expressions = exprList;
-      this.toReferencedList(val.expressions);
       this.finishNodeAt(val, "SequenceExpression", innerEndPos, innerEndLoc);
     } else {
       val = exprList[0];
@@ -1008,7 +1075,6 @@ class ExpressionParser extends _lval.default {
       }
 
       if (this.match(_types.types.ellipsis)) {
-        this.expectPlugin("objectRestSpread");
         prop = this.parseSpread(isPattern ? {
           start: 0
         } : undefined);
@@ -1059,13 +1125,7 @@ class ExpressionParser extends _lval.default {
           prop.computed = false;
         } else {
           isAsync = true;
-
-          if (this.match(_types.types.star)) {
-            this.expectPlugin("asyncGenerators");
-            this.next();
-            isGenerator = true;
-          }
-
+          isGenerator = this.eat(_types.types.star);
           this.parsePropertyName(prop);
         }
       } else {
@@ -1195,9 +1255,11 @@ class ExpressionParser extends _lval.default {
   parseMethod(node, isGenerator, isAsync, isConstructor, type) {
     const oldInFunc = this.state.inFunction;
     const oldInMethod = this.state.inMethod;
+    const oldInAsync = this.state.inAsync;
     const oldInGenerator = this.state.inGenerator;
     this.state.inFunction = true;
     this.state.inMethod = node.kind || true;
+    this.state.inAsync = isAsync;
     this.state.inGenerator = isGenerator;
     this.initFunction(node, isAsync);
     node.generator = !!isGenerator;
@@ -1206,24 +1268,34 @@ class ExpressionParser extends _lval.default {
     this.parseFunctionBodyAndFinish(node, type);
     this.state.inFunction = oldInFunc;
     this.state.inMethod = oldInMethod;
+    this.state.inAsync = oldInAsync;
     this.state.inGenerator = oldInGenerator;
     return node;
   }
 
-  parseArrowExpression(node, params, isAsync) {
-    if (this.state.yieldInPossibleArrowParameters) {
-      this.raise(this.state.yieldInPossibleArrowParameters.start, "yield is not allowed in the parameters of an arrow function" + " inside a generator");
+  parseArrowExpression(node, params, isAsync = false) {
+    const yOAIPAP = this.state.yieldOrAwaitInPossibleArrowParameters;
+
+    if (yOAIPAP) {
+      if (yOAIPAP.type === "YieldExpression") {
+        this.raise(yOAIPAP.start, "yield is not allowed in the parameters of an arrow function" + " inside a generator");
+      } else {
+        this.raise(yOAIPAP.start, "await is not allowed in the parameters of an arrow function" + " inside an async function");
+      }
     }
 
     const oldInFunc = this.state.inFunction;
     this.state.inFunction = true;
     this.initFunction(node, isAsync);
     if (params) this.setArrowFunctionParameters(node, params);
+    const oldInAsync = this.state.inAsync;
     const oldInGenerator = this.state.inGenerator;
     const oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
+    this.state.inAsync = isAsync;
     this.state.inGenerator = false;
     this.state.maybeInArrowParameters = false;
     this.parseFunctionBody(node, true, !this.state.inNonArrowFunction);
+    this.state.inAsync = oldInAsync;
     this.state.inGenerator = oldInGenerator;
     this.state.inFunction = oldInFunc;
     this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
@@ -1258,9 +1330,7 @@ class ExpressionParser extends _lval.default {
   parseFunctionBody(node, allowExpression, shouldResetInNonArrowFunctionFlag = false) {
     const isExpression = allowExpression && !this.match(_types.types.braceL);
     const oldInParameters = this.state.inParameters;
-    const oldInAsync = this.state.inAsync;
     this.state.inParameters = false;
-    this.state.inAsync = node.async;
 
     if (isExpression) {
       node.body = this.parseMaybeAssign();
@@ -1277,7 +1347,6 @@ class ExpressionParser extends _lval.default {
       this.state.labels = oldLabels;
     }
 
-    this.state.inAsync = oldInAsync;
     this.checkFunctionNameAndParams(node, allowExpression);
     this.state.inParameters = oldInParameters;
 
@@ -1354,6 +1423,10 @@ class ExpressionParser extends _lval.default {
   parseIdentifier(liberal) {
     const node = this.startNode();
     const name = this.parseIdentifierName(node.start, liberal);
+    return this.createIdentifier(node, name);
+  }
+
+  createIdentifier(node, name) {
     node.name = name;
     node.loc.identifierName = name;
     return this.finishNode(node, "Identifier");
@@ -1370,6 +1443,10 @@ class ExpressionParser extends _lval.default {
       name = this.state.value;
     } else if (this.state.type.keyword) {
       name = this.state.type.keyword;
+
+      if ((name === "class" || name === "function") && (this.state.lastTokEnd !== this.state.lastTokStart + 1 || this.input.charCodeAt(this.state.lastTokStart) !== 46)) {
+        this.state.context.pop();
+      }
     } else {
       throw this.unexpected();
     }
@@ -1405,8 +1482,16 @@ class ExpressionParser extends _lval.default {
       this.unexpected();
     }
 
+    if (this.state.inParameters) {
+      this.raise(node.start, "await is not allowed in async function parameters");
+    }
+
     if (this.match(_types.types.star)) {
       this.raise(node.start, "await* has been removed from the async functions proposal. Use Promise.all() instead.");
+    }
+
+    if (this.state.maybeInArrowParameters && !this.state.yieldOrAwaitInPossibleArrowParameters) {
+      this.state.yieldOrAwaitInPossibleArrowParameters = node;
     }
 
     node.argument = this.parseMaybeUnary();
@@ -1420,8 +1505,8 @@ class ExpressionParser extends _lval.default {
       this.raise(node.start, "yield is not allowed in generator parameters");
     }
 
-    if (this.state.maybeInArrowParameters && !this.state.yieldInPossibleArrowParameters) {
-      this.state.yieldInPossibleArrowParameters = node;
+    if (this.state.maybeInArrowParameters && !this.state.yieldOrAwaitInPossibleArrowParameters) {
+      this.state.yieldOrAwaitInPossibleArrowParameters = node;
     }
 
     this.next();
@@ -1435,6 +1520,119 @@ class ExpressionParser extends _lval.default {
     }
 
     return this.finishNode(node, "YieldExpression");
+  }
+
+  checkPipelineAtInfixOperator(left, leftStartPos) {
+    if (this.getPluginOption("pipelineOperator", "proposal") === "smart") {
+      if (left.type === "SequenceExpression") {
+        throw this.raise(leftStartPos, `Pipeline head should not be a comma-separated sequence expression`);
+      }
+    }
+  }
+
+  parseSmartPipelineBody(childExpression, startPos, startLoc) {
+    const pipelineStyle = this.checkSmartPipelineBodyStyle(childExpression);
+    this.checkSmartPipelineBodyEarlyErrors(childExpression, pipelineStyle, startPos);
+    return this.parseSmartPipelineBodyInStyle(childExpression, pipelineStyle, startPos, startLoc);
+  }
+
+  checkSmartPipelineBodyEarlyErrors(childExpression, pipelineStyle, startPos) {
+    if (this.match(_types.types.arrow)) {
+      throw this.raise(this.state.start, `Unexpected arrow "=>" after pipeline body; arrow function in pipeline body must be parenthesized`);
+    } else if (pipelineStyle === "PipelineTopicExpression" && childExpression.type === "SequenceExpression") {
+      throw this.raise(startPos, `Pipeline body may not be a comma-separated sequence expression`);
+    }
+  }
+
+  parseSmartPipelineBodyInStyle(childExpression, pipelineStyle, startPos, startLoc) {
+    const bodyNode = this.startNodeAt(startPos, startLoc);
+
+    switch (pipelineStyle) {
+      case "PipelineBareFunction":
+        bodyNode.callee = childExpression;
+        break;
+
+      case "PipelineBareConstructor":
+        bodyNode.callee = childExpression.callee;
+        break;
+
+      case "PipelineBareAwaitedFunction":
+        bodyNode.callee = childExpression.argument;
+        break;
+
+      case "PipelineTopicExpression":
+        if (!this.topicReferenceWasUsedInCurrentTopicContext()) {
+          throw this.raise(startPos, `Pipeline is in topic style but does not use topic reference`);
+        }
+
+        bodyNode.expression = childExpression;
+        break;
+
+      default:
+        throw this.raise(startPos, `Unknown pipeline style ${pipelineStyle}`);
+    }
+
+    return this.finishNode(bodyNode, pipelineStyle);
+  }
+
+  checkSmartPipelineBodyStyle(expression) {
+    switch (expression.type) {
+      default:
+        return this.isSimpleReference(expression) ? "PipelineBareFunction" : "PipelineTopicExpression";
+    }
+  }
+
+  isSimpleReference(expression) {
+    switch (expression.type) {
+      case "MemberExpression":
+        return !expression.computed && this.isSimpleReference(expression.object);
+
+      case "Identifier":
+        return true;
+
+      default:
+        return false;
+    }
+  }
+
+  withTopicPermittingContext(callback) {
+    const outerContextTopicState = this.state.topicContext;
+    this.state.topicContext = {
+      maxNumOfResolvableTopics: 1,
+      maxTopicIndex: null
+    };
+
+    try {
+      return callback();
+    } finally {
+      this.state.topicContext = outerContextTopicState;
+    }
+  }
+
+  withTopicForbiddingContext(callback) {
+    const outerContextTopicState = this.state.topicContext;
+    this.state.topicContext = {
+      maxNumOfResolvableTopics: 0,
+      maxTopicIndex: null
+    };
+
+    try {
+      return callback();
+    } finally {
+      this.state.topicContext = outerContextTopicState;
+    }
+  }
+
+  registerTopicReference() {
+    this.state.topicContext.maxTopicIndex = 0;
+  }
+
+  primaryTopicReferenceIsAllowedInCurrentTopicContext() {
+    return this.state.topicContext.maxNumOfResolvableTopics >= 1;
+  }
+
+  topicReferenceWasUsedInCurrentTopicContext() {
+    return this.state.topicContext.maxTopicIndex != null && this.state.topicContext.maxTopicIndex >= 0;
   }
 
 }

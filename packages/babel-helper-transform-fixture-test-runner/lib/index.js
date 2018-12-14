@@ -148,6 +148,16 @@ function _unifyPaths() {
   return data;
 }
 
+function _babelCheckDuplicatedNodes() {
+  const data = _interopRequireDefault(require("babel-check-duplicated-nodes"));
+
+  _babelCheckDuplicatedNodes = function () {
+    return data;
+  };
+
+  return data;
+}
+
 function _jestDiff() {
   const data = _interopRequireDefault(require("jest-diff"));
 
@@ -253,49 +263,6 @@ function wrapPackagesArray(type, names, optionsDir) {
   });
 }
 
-function checkDuplicatedNodes(ast) {
-  const nodes = new WeakSet();
-  const parents = new WeakMap();
-
-  const setParent = (child, parent) => {
-    if (typeof child === "object" && child !== null) {
-      let p = parents.get(child);
-
-      if (!p) {
-        p = [];
-        parents.set(child, p);
-      }
-
-      p.unshift(parent);
-    }
-  };
-
-  const registerChildren = node => {
-    for (const key in node) {
-      if (Array.isArray(node[key])) {
-        node[key].forEach(child => setParent(child, node));
-      } else {
-        setParent(node[key], node);
-      }
-    }
-  };
-
-  const hidePrivateProperties = (key, val) => {
-    if (key[0] === "_") return "[Private]";
-    return val;
-  };
-
-  babel().types.traverseFast(ast, node => {
-    registerChildren(node);
-
-    if (nodes.has(node)) {
-      throw new Error("Do not reuse nodes. Use `t.cloneNode` to copy them.\n" + JSON.stringify(node, hidePrivateProperties, 2) + "\nParent:\n" + JSON.stringify(parents.get(node), hidePrivateProperties, 2));
-    }
-
-    nodes.add(node);
-  });
-}
-
 function run(task) {
   const actual = task.actual;
   const expected = task.expect;
@@ -345,7 +312,7 @@ function run(task) {
   if (execCode) {
     const execOpts = getOpts(exec);
     result = babel().transform(execCode, execOpts);
-    checkDuplicatedNodes(result.ast);
+    (0, _babelCheckDuplicatedNodes().default)(babel(), result.ast);
     execCode = result.code;
 
     try {
@@ -362,7 +329,7 @@ function run(task) {
   if (!execCode || actualCode) {
     result = babel().transform(actualCode, getOpts(actual));
     const expectedCode = filterExceptionStackTrace(result.code);
-    checkDuplicatedNodes(result.ast);
+    (0, _babelCheckDuplicatedNodes().default)(babel(), result.ast);
 
     if (!expected.code && expectedCode && !opts.throws && _fs().default.statSync(_path().default.dirname(expected.loc)).isDirectory() && !process.env.CI) {
       const expectedFile = expected.loc.replace(/\.m?js$/, result.sourceType === "module" ? ".mjs" : ".js");

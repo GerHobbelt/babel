@@ -30,16 +30,21 @@ class State {
     this.maybeInArrowParameters = false;
     this.inGenerator = false;
     this.inAsync = false;
+    this.inPipeline = false;
     this.inPropertyName = false;
     this.inType = false;
     this.inClassProperty = false;
     this.noAnonFunctionType = false;
     this.hasFlowComment = false;
     this.isIterator = false;
+    this.topicContext = {
+      maxNumOfResolvableTopics: 0,
+      maxTopicIndex: null
+    };
     this.classLevel = 0;
     this.labels = [];
     this.decoratorStack = [[]];
-    this.yieldInPossibleArrowParameters = null;
+    this.yieldOrAwaitInPossibleArrowParameters = null;
     this.tokens = [];
     this.comments = [];
     this.trailingComments = [];

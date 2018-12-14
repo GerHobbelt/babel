@@ -18,6 +18,8 @@ function _babelHelperPluginUtils() {
 var _default = (0, _babelHelperPluginUtils().declare)(api => {
   api.assertVersion(7);
   return {
+    name: "syntax-jsx",
+
     manipulateOptions(opts, parserOpts) {
       if (parserOpts.plugins.some(p => (Array.isArray(p) ? p[0] : p) === "typescript")) {
         return;

@@ -111,6 +111,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
   }
 
   return {
+    name: "transform-computed-properties",
     visitor: {
       ObjectExpression: {
         exit(path, state) {

@@ -130,6 +130,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
 
   };
   return {
+    name: "transform-modules-commonjs",
     visitor: {
       Program: {
         exit(path, state) {

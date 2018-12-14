@@ -17,13 +17,14 @@ function _semver() {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function hasMinVersion(minVersion, runtimeVersion) {
+  if (!runtimeVersion) return true;
+  if (_semver().default.valid(runtimeVersion)) runtimeVersion = `^${runtimeVersion}`;
+  return !_semver().default.intersects(`<${minVersion}`, runtimeVersion) && !_semver().default.intersects(`>=8.0.0`, runtimeVersion);
+}
+
 var _default = runtimeVersion => {
-  let includeMathModule = true;
-
-  if (runtimeVersion) {
-    includeMathModule = !_semver().default.intersects(`<=7.0.0`, runtimeVersion) && !_semver().default.intersects(`>=8.0.0`, runtimeVersion);
-  }
-
+  const includeMathModule = hasMinVersion("7.0.1", runtimeVersion);
   return {
     builtins: {
       Symbol: "symbol",

@@ -32,6 +32,32 @@ var _files = require("./files");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function resolveRootMode(rootDir, rootMode) {
+  switch (rootMode) {
+    case "root":
+      return rootDir;
+
+    case "upward-optional":
+      {
+        const upwardRootDir = (0, _files.findConfigUpwards)(rootDir);
+        return upwardRootDir === null ? rootDir : upwardRootDir;
+      }
+
+    case "upward":
+      {
+        const upwardRootDir = (0, _files.findConfigUpwards)(rootDir);
+        if (upwardRootDir !== null) return upwardRootDir;
+        throw Object.assign(new Error(`Babel was run with rootMode:"upward" but a root could not ` + `be found when searching upward from "${rootDir}"`), {
+          code: "BABEL_ROOT_NOT_FOUND",
+          dirname: rootDir
+        });
+      }
+
+    default:
+      throw new Error(`Assertion failure - unknown rootMode value`);
+  }
+}
+
 function loadPrivatePartialConfig(inputOpts) {
   if (inputOpts != null && (typeof inputOpts !== "object" || Array.isArray(inputOpts))) {
     throw new Error("Babel options must be an object, null, or undefined");
@@ -42,12 +68,13 @@ function loadPrivatePartialConfig(inputOpts) {
     envName = (0, _environment.getEnv)(),
     cwd = ".",
     root: rootDir = ".",
+    rootMode = "root",
     caller
   } = args;
 
   const absoluteCwd = _path().default.resolve(cwd);
 
-  const absoluteRootDir = typeof rootDir === "boolean" ? rootDir ? (0, _files.findConfigRoot)(absoluteCwd) : false : _path().default.resolve(absoluteCwd, rootDir);
+  const absoluteRootDir = resolveRootMode(_path().default.resolve(absoluteCwd, rootDir), rootMode);
   const context = {
     filename: typeof args.filename === "string" ? _path().default.resolve(cwd, args.filename) : undefined,
     cwd: absoluteCwd,

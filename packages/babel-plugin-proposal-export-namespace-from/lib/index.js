@@ -40,6 +40,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = (0, _babelHelperPluginUtils().declare)(api => {
   api.assertVersion(7);
   return {
+    name: "proposal-export-namespace-from",
     inherits: _babelPluginSyntaxExportNamespaceFrom().default,
     visitor: {
       ExportNamedDeclaration(path) {

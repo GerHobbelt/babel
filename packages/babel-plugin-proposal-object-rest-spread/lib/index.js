@@ -195,6 +195,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, opts) => {
   }
 
   return {
+    name: "proposal-object-rest-spread",
     inherits: _babelPluginSyntaxObjectRestSpread().default,
     visitor: {
       Function(path) {

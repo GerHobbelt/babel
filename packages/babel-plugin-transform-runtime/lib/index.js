@@ -149,6 +149,8 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options, dirname) =>
   }
 
   return {
+    name: "transform-runtime",
+
     pre(file) {
       if (useRuntimeHelpers) {
         file.set("helperGenerator", name => {

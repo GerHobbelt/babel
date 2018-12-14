@@ -42,6 +42,7 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
   const FLOW_DIRECTIVE = "@flow";
   let skipStrip = false;
   return {
+    name: "transform-flow-strip-types",
     inherits: _babelPluginSyntaxFlow().default,
     visitor: {
       Program(path, {
@@ -55,11 +56,16 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
         skipStrip = false;
         let directiveFound = false;
 
-        for (const comment of comments) {
-          if (comment.value.indexOf(FLOW_DIRECTIVE) >= 0) {
-            directiveFound = true;
-            comment.value = comment.value.replace(FLOW_DIRECTIVE, "");
-            if (!comment.value.replace(/\*/g, "").trim()) comment.ignore = true;
+        if (comments) {
+          for (const comment of comments) {
+            if (comment.value.indexOf(FLOW_DIRECTIVE) >= 0) {
+              directiveFound = true;
+              comment.value = comment.value.replace(FLOW_DIRECTIVE, "");
+
+              if (!comment.value.replace(/\*/g, "").trim()) {
+                comment.ignore = true;
+              }
+            }
           }
         }
 

@@ -25,7 +25,15 @@ function _babelPluginSyntaxDecorators() {
   return data;
 }
 
-var _transformer = _interopRequireDefault(require("./transformer"));
+function _babelHelperCreateClassFeaturesPlugin() {
+  const data = require("@gerhobbelt/babel-helper-create-class-features-plugin");
+
+  _babelHelperCreateClassFeaturesPlugin = function () {
+    return data;
+  };
+
+  return data;
+}
 
 var _transformerLegacy = _interopRequireDefault(require("./transformer-legacy"));
 
@@ -59,17 +67,36 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
     }
   }
 
-  return {
-    inherits: _babelPluginSyntaxDecorators().default,
+  if (legacy) {
+    return {
+      name: "proposal-decorators",
+      inherits: _babelPluginSyntaxDecorators().default,
+
+      manipulateOptions({
+        generatorOpts
+      }) {
+        generatorOpts.decoratorsBeforeExport = decoratorsBeforeExport;
+      },
+
+      visitor: _transformerLegacy.default
+    };
+  }
+
+  return (0, _babelHelperCreateClassFeaturesPlugin().createClassFeaturePlugin)({
+    name: "proposal-decorators",
+    feature: _babelHelperCreateClassFeaturesPlugin().FEATURES.decorators,
 
     manipulateOptions({
-      generatorOpts
+      generatorOpts,
+      parserOpts
     }) {
+      parserOpts.plugins.push(["decorators", {
+        decoratorsBeforeExport
+      }]);
       generatorOpts.decoratorsBeforeExport = decoratorsBeforeExport;
-    },
+    }
 
-    visitor: legacy ? _transformerLegacy.default : _transformer.default
-  };
+  });
 });
 
 exports.default = _default;

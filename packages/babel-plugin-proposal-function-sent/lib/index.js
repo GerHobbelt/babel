@@ -79,6 +79,7 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
 
   };
   return {
+    name: "proposal-function-sent",
     inherits: _babelPluginSyntaxFunctionSent().default,
     visitor: {
       MetaProperty(path, state) {

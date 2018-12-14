@@ -18,6 +18,8 @@ function _babelHelperPluginUtils() {
 var _default = (0, _babelHelperPluginUtils().declare)(api => {
   api.assertVersion(7);
   return {
+    name: "syntax-optional-chaining",
+
     manipulateOptions(opts, parserOpts) {
       parserOpts.plugins.push("optionalChaining");
     }

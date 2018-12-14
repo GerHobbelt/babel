@@ -53,6 +53,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
   }
 
   return {
+    name: "transform-template-literals",
     visitor: {
       TaggedTemplateExpression(path) {
         const {

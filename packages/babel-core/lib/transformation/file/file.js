@@ -55,6 +55,16 @@ function _semver() {
   return data;
 }
 
+function _unifyPaths() {
+  const data = _interopRequireDefault(require("unify-paths"));
+
+  _unifyPaths = function () {
+    return data;
+  };
+
+  return data;
+}
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -160,7 +170,7 @@ class File {
       moduleName += filenameRelative.replace(sourceRootReplacer, "").replace(/\.(\w*?)$/, "");
     }
 
-    moduleName = moduleName.replace(/\\\\?/g, "/");
+    moduleName = (0, _unifyPaths().default)(moduleName);
 
     if (getModuleId) {
       return getModuleId(moduleName) || moduleName;
@@ -183,7 +193,9 @@ class File {
       return false;
     }
 
-    return typeof versionRange !== "string" || !_semver().default.intersects(`<${minVersion}`, versionRange) && !_semver().default.intersects(`>=8.0.0`, versionRange);
+    if (typeof versionRange !== "string") return true;
+    if (_semver().default.valid(versionRange)) versionRange = `^${versionRange}`;
+    return !_semver().default.intersects(`<${minVersion}`, versionRange) && !_semver().default.intersects(`>=8.0.0`, versionRange);
   }
 
   addHelper(name) {

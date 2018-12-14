@@ -9,10 +9,10 @@ Object.defineProperty(exports, "findPackageData", {
     return _package.findPackageData;
   }
 });
-Object.defineProperty(exports, "findConfigRoot", {
+Object.defineProperty(exports, "findConfigUpwards", {
   enumerable: true,
   get: function () {
-    return _configuration.findConfigRoot;
+    return _configuration.findConfigUpwards;
   }
 });
 Object.defineProperty(exports, "findRelativeConfig", {

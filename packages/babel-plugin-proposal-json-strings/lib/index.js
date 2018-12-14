@@ -38,6 +38,7 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
   }
 
   return {
+    name: "proposal-json-strings",
     inherits: _babelPluginSyntaxJsonStrings().default,
     visitor: {
       "DirectiveLiteral|StringLiteral"({

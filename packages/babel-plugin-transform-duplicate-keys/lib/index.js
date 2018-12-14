@@ -36,6 +36,7 @@ function getName(key) {
 var _default = (0, _babelHelperPluginUtils().declare)(api => {
   api.assertVersion(7);
   return {
+    name: "transform-duplicate-keys",
     visitor: {
       ObjectExpression(path) {
         const {

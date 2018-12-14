@@ -905,13 +905,27 @@ helpers.skipFirstGeneratorNext = helper("7.0.0-beta.0")`
     }
   }
 `;
-helpers.toPropertyKey = helper("7.0.0-beta.0")`
-  export default function _toPropertyKey(key) {
-    if (typeof key === "symbol") {
-      return key;
-    } else {
-      return String(key);
+helpers.toPrimitive = helper("7.1.5")`
+  export default function _toPrimitive(
+    input,
+    hint /*: "default" | "string" | "number" | void */
+  ) {
+    if (typeof input !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (typeof res !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
     }
+    return (hint === "string" ? String : Number)(input);
+  }
+`;
+helpers.toPropertyKey = helper("7.1.5")`
+  import toPrimitive from "toPrimitive";
+
+  export default function _toPropertyKey(arg) {
+    var key = toPrimitive(arg, "string");
+    return typeof key === "symbol" ? key : String(key);
   }
 `;
 helpers.initializerWarningHelper = helper("7.0.0-beta.0")`
@@ -1005,7 +1019,7 @@ helpers.classPrivateFieldSet = helper("7.0.0-beta.0")`
     return value;
   }
 `;
-helpers.classStaticPrivateFieldSpecGet = helper("7.0.1")`
+helpers.classStaticPrivateFieldSpecGet = helper("7.0.2")`
   export default function _classStaticPrivateFieldSpecGet(receiver, classConstructor, descriptor) {
     if (receiver !== classConstructor) {
       throw new TypeError("Private static access of wrong provenance");
@@ -1013,7 +1027,7 @@ helpers.classStaticPrivateFieldSpecGet = helper("7.0.1")`
     return descriptor.value;
   }
 `;
-helpers.classStaticPrivateFieldSpecSet = helper("7.0.1")`
+helpers.classStaticPrivateFieldSpecSet = helper("7.0.2")`
   export default function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor, value) {
     if (receiver !== classConstructor) {
       throw new TypeError("Private static access of wrong provenance");
@@ -1028,8 +1042,9 @@ helpers.classStaticPrivateFieldSpecSet = helper("7.0.1")`
     return value;
   }
 `;
-helpers.decorate = helper("7.0.1")`
+helpers.decorate = helper("7.1.5")`
   import toArray from "toArray";
+  import toPropertyKey from "toPropertyKey";
 
   // These comments are stripped by @babel/template
   /*::
@@ -1168,6 +1183,8 @@ helpers.decorate = helper("7.0.1")`
   function _createElementDescriptor(
     def /*: ElementDefinition */,
   ) /*: ElementDescriptor */ {
+    var key = toPropertyKey(def.key);
+
     var descriptor /*: PropertyDescriptor */;
     if (def.kind === "method") {
       descriptor = {
@@ -1176,17 +1193,21 @@ helpers.decorate = helper("7.0.1")`
         configurable: true,
         enumerable: false,
       };
+      Object.defineProperty(def.value, "name", {
+        value: typeof key === "symbol" ? "" : key,
+        configurable: true,
+      });
     } else if (def.kind === "get") {
       descriptor = { get: def.value, configurable: true, enumerable: false };
     } else if (def.kind === "set") {
       descriptor = { set: def.value, configurable: true, enumerable: false };
     } else if (def.kind === "field") {
-      descriptor = { configurable: true, writable: true, enumerable: false };
+      descriptor = { configurable: true, writable: true, enumerable: true };
     }
 
     var element /*: ElementDescriptor */ = {
       kind: def.kind === "field" ? "field" : "method",
-      key: def.key,
+      key: key,
       placement: def.static
         ? "static"
         : def.kind === "field"
@@ -1523,8 +1544,7 @@ helpers.decorate = helper("7.0.1")`
       );
     }
 
-    var key = elementObject.key;
-    if (typeof key !== "string" && typeof key !== "symbol") key = String(key);
+    var key = toPropertyKey(elementObject.key);
 
     var placement = String(elementObject.placement);
     if (
@@ -1665,4 +1685,17 @@ helpers.decorate = helper("7.0.1")`
     }
     return constructor;
   }
-  `;
+`;
+helpers.classPrivateMethodGet = helper("7.1.6")`
+  export default function _classPrivateMethodGet(receiver, privateSet, fn) {
+    if (!privateSet.has(receiver)) {
+      throw new TypeError("attempted to get private field on non-instance");
+    }
+    return fn;
+  }
+`;
+helpers.classPrivateMethodSet = helper("7.1.6")`
+  export default function _classPrivateMethodSet() {
+    throw new TypeError("attempted to reassign private method");
+  }
+`;

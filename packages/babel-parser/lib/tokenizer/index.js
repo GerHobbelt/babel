@@ -286,6 +286,29 @@ class Tokenizer extends _location.default {
     this.updateContext(prevType);
   }
 
+  readToken_numberSign() {
+    if (this.state.pos === 0 && this.readToken_interpreter()) {
+      return;
+    }
+
+    const nextPos = this.state.pos + 1;
+    const next = this.input.charCodeAt(nextPos);
+
+    if (next >= 48 && next <= 57) {
+      this.raise(this.state.pos, "Unexpected digit after hash token");
+    }
+
+    if ((this.hasPlugin("classPrivateProperties") || this.hasPlugin("classPrivateMethods")) && this.state.classLevel > 0) {
+      ++this.state.pos;
+      this.finishToken(_types.types.hash);
+      return;
+    } else if (this.getPluginOption("pipelineOperator", "proposal") === "smart") {
+      this.finishOp(_types.types.hash, 1);
+    } else {
+      this.raise(this.state.pos, "Unexpected character '#'");
+    }
+  }
+
   readToken_dot() {
     const next = this.input.charCodeAt(this.state.pos + 1);
 
@@ -489,17 +512,8 @@ class Tokenizer extends _location.default {
   getTokenFromCode(code) {
     switch (code) {
       case 35:
-        if (this.state.pos === 0 && this.readToken_interpreter()) {
-          return;
-        }
-
-        if ((this.hasPlugin("classPrivateProperties") || this.hasPlugin("classPrivateMethods")) && this.state.classLevel > 0) {
-          ++this.state.pos;
-          this.finishToken(_types.types.hash);
-          return;
-        } else {
-          this.raise(this.state.pos, `Unexpected character '${String.fromCodePoint(code)}'`);
-        }
+        this.readToken_numberSign();
+        return;
 
       case 46:
         this.readToken_dot();
@@ -800,7 +814,6 @@ class Tokenizer extends _location.default {
 
   readNumber(startsWithDot) {
     const start = this.state.pos;
-    let octal = this.input.charCodeAt(start) === 48;
     let isFloat = false;
     let isBigInt = false;
 
@@ -808,7 +821,18 @@ class Tokenizer extends _location.default {
       this.raise(start, "Invalid number");
     }
 
-    if (octal && this.state.pos == start + 1) octal = false;
+    let octal = this.state.pos - start >= 2 && this.input.charCodeAt(start) === 48;
+
+    if (octal) {
+      if (this.state.strict) {
+        this.raise(start, "Legacy octal literals are not allowed in strict mode");
+      }
+
+      if (/[89]/.test(this.input.slice(start, this.state.pos))) {
+        octal = false;
+      }
+    }
+
     let next = this.input.charCodeAt(this.state.pos);
 
     if (next === 46 && !octal) {
@@ -849,20 +873,7 @@ class Tokenizer extends _location.default {
       return;
     }
 
-    let val;
-
-    if (isFloat) {
-      val = parseFloat(str);
-    } else if (!octal || str.length === 1) {
-      val = parseInt(str, 10);
-    } else if (this.state.strict) {
-      this.raise(start, "Invalid number");
-    } else if (/[89]/.test(str)) {
-      val = parseInt(str, 10);
-    } else {
-      val = parseInt(str, 8);
-    }
-
+    const val = octal ? parseInt(str, 8) : parseFloat(str);
     this.finishToken(_types.types.num, val);
   }
 
@@ -895,7 +906,6 @@ class Tokenizer extends _location.default {
   readString(quote) {
     let out = "",
         chunkStart = ++this.state.pos;
-    const hasJsonStrings = this.hasPlugin("jsonStrings");
 
     for (;;) {
       if (this.state.pos >= this.input.length) {
@@ -909,8 +919,9 @@ class Tokenizer extends _location.default {
         out += this.input.slice(chunkStart, this.state.pos);
         out += this.readEscapedChar(false);
         chunkStart = this.state.pos;
-      } else if (hasJsonStrings && (ch === 8232 || ch === 8233)) {
+      } else if (ch === 8232 || ch === 8233) {
         ++this.state.pos;
+        ++this.state.curLine;
       } else if ((0, _whitespace.isNewLine)(ch)) {
         this.raise(this.state.start, "Unterminated string constant");
       } else {
@@ -1149,24 +1160,30 @@ class Tokenizer extends _location.default {
   }
 
   braceIsBlock(prevType) {
-    if (prevType === _types.types.colon) {
-      const parent = this.curContext();
+    const parent = this.curContext();
 
-      if (parent === _context.types.braceStatement || parent === _context.types.braceExpression) {
-        return !parent.isExpr;
-      }
+    if (parent === _context.types.functionExpression || parent === _context.types.functionStatement) {
+      return true;
     }
 
-    if (prevType === _types.types._return) {
+    if (prevType === _types.types.colon && (parent === _context.types.braceStatement || parent === _context.types.braceExpression)) {
+      return !parent.isExpr;
+    }
+
+    if (prevType === _types.types._return || prevType === _types.types._yield || prevType === _types.types.name && this.state.exprAllowed) {
       return _whitespace.lineBreak.test(this.input.slice(this.state.lastTokEnd, this.state.start));
     }
 
-    if (prevType === _types.types._else || prevType === _types.types.semi || prevType === _types.types.eof || prevType === _types.types.parenR) {
+    if (prevType === _types.types._else || prevType === _types.types.semi || prevType === _types.types.eof || prevType === _types.types.parenR || prevType === _types.types.arrow) {
       return true;
     }
 
     if (prevType === _types.types.braceL) {
-      return this.curContext() === _context.types.braceStatement;
+      return parent === _context.types.braceStatement;
+    }
+
+    if (prevType === _types.types._var || prevType === _types.types._let || prevType === _types.types._const) {
+      return false;
     }
 
     if (prevType === _types.types.relational) {

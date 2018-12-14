@@ -28,6 +28,8 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, {
   }
 
   return {
+    name: "syntax-pipeline-operator",
+
     manipulateOptions(opts, parserOpts) {
       parserOpts.plugins.push(["pipelineOperator", {
         proposal

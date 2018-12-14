@@ -61,6 +61,7 @@ var _default = (0, _babelHelperPluginUtils().declare)(api => {
   }
 
   return {
+    name: "transform-flow-comments",
     inherits: _babelPluginSyntaxFlow().default,
     visitor: {
       TypeCastExpression(path) {

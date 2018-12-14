@@ -52,11 +52,14 @@ function isInType(path) {
   }
 }
 
+const PARSED_PARAMS = new WeakSet();
+
 var _default = (0, _babelHelperPluginUtils().declare)((api, {
   jsxPragma = "React"
 }) => {
   api.assertVersion(7);
   return {
+    name: "transform-typescript",
     inherits: _babelPluginSyntaxTypescript().default,
     visitor: {
       Pattern: visitPattern,
@@ -69,7 +72,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, {
         for (const stmt of path.get("body")) {
           if (_babelCore().types.isImportDeclaration(stmt)) {
             if (stmt.node.specifiers.length === 0) {
-              return;
+              continue;
             }
 
             let allElided = true;
@@ -121,48 +124,6 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, {
         if (node.accessibility) node.accessibility = null;
         if (node.abstract) node.abstract = null;
         if (node.optional) node.optional = null;
-
-        if (node.kind !== "constructor") {
-          return;
-        }
-
-        const parameterProperties = [];
-
-        for (const param of node.params) {
-          if (param.type === "TSParameterProperty") {
-            parameterProperties.push(param.parameter);
-          }
-        }
-
-        if (!parameterProperties.length) {
-          return;
-        }
-
-        const assigns = parameterProperties.map(p => {
-          let name;
-
-          if (_babelCore().types.isIdentifier(p)) {
-            name = p.name;
-          } else if (_babelCore().types.isAssignmentPattern(p) && _babelCore().types.isIdentifier(p.left)) {
-            name = p.left.name;
-          } else {
-            throw path.buildCodeFrameError("Parameter properties can not be destructuring patterns.");
-          }
-
-          const assign = _babelCore().types.assignmentExpression("=", _babelCore().types.memberExpression(_babelCore().types.thisExpression(), _babelCore().types.identifier(name)), _babelCore().types.identifier(name));
-
-          return _babelCore().types.expressionStatement(assign);
-        });
-        const statements = node.body.body;
-        const first = statements[0];
-
-        const startsWithSuperCall = first !== undefined && _babelCore().types.isExpressionStatement(first) && _babelCore().types.isCallExpression(first.expression) && _babelCore().types.isSuper(first.expression.callee);
-
-        node.body.body = startsWithSuperCall ? [first, ...assigns, ...statements.slice(1)] : [...assigns, ...statements];
-      },
-
-      TSParameterProperty(path) {
-        path.replaceWith(path.node.parameter);
       },
 
       ClassProperty(path) {
@@ -202,10 +163,47 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, {
         if (node.superTypeParameters) node.superTypeParameters = null;
         if (node.implements) node.implements = null;
         path.get("body.body").forEach(child => {
-          if (child.isClassProperty()) {
-            child.node.typeAnnotation = null;
+          const childNode = child.node;
 
-            if (!child.node.value && !child.node.decorators) {
+          if (_babelCore().types.isClassMethod(childNode, {
+            kind: "constructor"
+          })) {
+            const parameterProperties = [];
+
+            for (const param of childNode.params) {
+              if (param.type === "TSParameterProperty" && !PARSED_PARAMS.has(param.parameter)) {
+                PARSED_PARAMS.add(param.parameter);
+                parameterProperties.push(param.parameter);
+              }
+            }
+
+            if (parameterProperties.length) {
+              const assigns = parameterProperties.map(p => {
+                let name;
+
+                if (_babelCore().types.isIdentifier(p)) {
+                  name = p.name;
+                } else if (_babelCore().types.isAssignmentPattern(p) && _babelCore().types.isIdentifier(p.left)) {
+                  name = p.left.name;
+                } else {
+                  throw path.buildCodeFrameError("Parameter properties can not be destructuring patterns.");
+                }
+
+                const assign = _babelCore().types.assignmentExpression("=", _babelCore().types.memberExpression(_babelCore().types.thisExpression(), _babelCore().types.identifier(name)), _babelCore().types.identifier(name));
+
+                return _babelCore().types.expressionStatement(assign);
+              });
+              const statements = childNode.body.body;
+              const first = statements[0];
+
+              const startsWithSuperCall = first !== undefined && _babelCore().types.isExpressionStatement(first) && _babelCore().types.isCallExpression(first.expression) && _babelCore().types.isSuper(first.expression.callee);
+
+              childNode.body.body = startsWithSuperCall ? [first, ...assigns, ...statements.slice(1)] : [...assigns, ...statements];
+            }
+          } else if (child.isClassProperty()) {
+            childNode.typeAnnotation = null;
+
+            if (!childNode.value && !childNode.decorators) {
               child.remove();
             }
           }
@@ -222,6 +220,10 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, {
         if (p0 && _babelCore().types.isIdentifier(p0) && p0.name === "this") {
           node.params.shift();
         }
+
+        node.params = node.params.map(p => {
+          return p.type === "TSParameterProperty" ? p.parameter : p;
+        });
       },
 
       TSModuleDeclaration(path) {

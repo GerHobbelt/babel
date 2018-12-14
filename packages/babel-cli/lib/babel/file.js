@@ -186,7 +186,7 @@ async function _default({
 
       if (stat.isDirectory()) {
         const dirname = filename;
-        util.readdirForCompilable(filename, cliOptions.includeDotfiles).forEach(function (filename) {
+        util.readdirForCompilable(filename, cliOptions.includeDotfiles, cliOptions.extensions).forEach(function (filename) {
           _filenames.push(_path().default.join(dirname, filename));
         });
       } else {

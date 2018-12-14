@@ -74,13 +74,15 @@ var _default = (_, opts = {}) => {
     loose = false,
     useBuiltIns = false,
     decoratorsLegacy = false,
+    decoratorsBeforeExport,
     pipelineProposal = "minimal"
   } = opts;
   return {
     presets: [[_presetStage.default, {
       loose,
       useBuiltIns,
-      decoratorsLegacy
+      decoratorsLegacy,
+      decoratorsBeforeExport
     }]],
     plugins: [_babelPluginProposalExportDefaultFrom().default, _babelPluginProposalLogicalAssignmentOperators().default, [_babelPluginProposalOptionalChaining().default, {
       loose

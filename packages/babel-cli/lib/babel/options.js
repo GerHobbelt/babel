@@ -69,6 +69,8 @@ _commander().default.option("--config-file [path]", "Path a to .babelrc file to 
 
 _commander().default.option("--env-name [name]", "The name of the 'env' to use when loading configs and plugins. " + "Defaults to the value of BABEL_ENV, or else NODE_ENV, or else 'development'.");
 
+_commander().default.option("--root-mode [mode]", "The project-root resolution mode. " + "One of 'root' (the default), 'upward', or 'upward-optional'.");
+
 _commander().default.option("--source-type [script|module]", "");
 
 _commander().default.option("--no-babelrc", "Whether or not to look up .babelrc and .babelignore files");
@@ -200,30 +202,39 @@ function parseArgv(args) {
     opts.verbose = opts.verbose || opts.debug;
   }
 
+  const babelOptions = {
+    presets: opts.presets,
+    plugins: opts.plugins,
+    rootMode: opts.rootMode,
+    configFile: opts.configFile,
+    envName: opts.envName,
+    sourceType: opts.sourceType,
+    ignore: opts.ignore,
+    only: opts.only,
+    retainLines: opts.retainLines,
+    compact: opts.compact,
+    minified: opts.minified,
+    auxiliaryCommentBefore: opts.auxiliaryCommentBefore,
+    auxiliaryCommentAfter: opts.auxiliaryCommentAfter,
+    sourceMaps: opts.sourceMaps,
+    sourceFileName: opts.sourceFileName,
+    sourceRoot: opts.sourceRoot,
+    moduleRoot: opts.moduleRoot,
+    moduleIds: opts.moduleIds,
+    moduleId: opts.moduleId,
+    babelrc: opts.babelrc === true ? undefined : opts.babelrc,
+    highlightCode: opts.highlightCode === true ? undefined : opts.highlightCode,
+    comments: opts.comments === true ? undefined : opts.comments
+  };
+
+  for (const key of Object.keys(babelOptions)) {
+    if (babelOptions[key] === undefined) {
+      delete babelOptions[key];
+    }
+  }
+
   return {
-    babelOptions: {
-      presets: opts.presets,
-      plugins: opts.plugins,
-      configFile: opts.configFile,
-      envName: opts.envName,
-      sourceType: opts.sourceType,
-      ignore: opts.ignore,
-      only: opts.only,
-      retainLines: opts.retainLines,
-      compact: opts.compact,
-      minified: opts.minified,
-      auxiliaryCommentBefore: opts.auxiliaryCommentBefore,
-      auxiliaryCommentAfter: opts.auxiliaryCommentAfter,
-      sourceMaps: opts.sourceMaps,
-      sourceFileName: opts.sourceFileName,
-      sourceRoot: opts.sourceRoot,
-      moduleRoot: opts.moduleRoot,
-      moduleIds: opts.moduleIds,
-      moduleId: opts.moduleId,
-      babelrc: opts.babelrc === true ? undefined : opts.babelrc,
-      highlightCode: opts.highlightCode === true ? undefined : opts.highlightCode,
-      comments: opts.comments === true ? undefined : opts.comments
-    },
+    babelOptions,
     cliOptions: {
       filename: opts.filename,
       filenames,

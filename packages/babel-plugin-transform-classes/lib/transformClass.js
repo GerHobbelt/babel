@@ -567,7 +567,7 @@ function transformClass(path, file, builtinClasses, isLoose) {
 
       let func = _babelCore().types.functionExpression(null, node.params, node.body, node.generator, node.async);
 
-      func.returnType = node.returnType;
+      _babelCore().types.inherits(func, node);
 
       const key = _babelCore().types.toComputedKey(node, node.key);
 

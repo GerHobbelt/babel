@@ -44,7 +44,7 @@ function getPluginOption(plugins, name, option) {
   return null;
 }
 
-const PIPELINE_PROPOSALS = ["minimal"];
+const PIPELINE_PROPOSALS = ["minimal", "smart"];
 
 function validatePlugins(plugins) {
   if (hasPlugin(plugins, "decorators")) {
@@ -66,7 +66,7 @@ function validatePlugins(plugins) {
   }
 
   if (hasPlugin(plugins, "pipelineOperator") && !PIPELINE_PROPOSALS.includes(getPluginOption(plugins, "pipelineOperator", "proposal"))) {
-    throw new Error("'pipelineOperator' requires 'proposal' option whose value should be one of: " + PIPELINE_PROPOSALS.join(", "));
+    throw new Error("'pipelineOperator' requires 'proposal' option whose value should be one of: " + PIPELINE_PROPOSALS.map(p => `'${p}'`).join(", "));
   }
 }
 

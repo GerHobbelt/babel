@@ -42,6 +42,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, {
 }) => {
   api.assertVersion(7);
   return {
+    name: "proposal-nullish-coalescing-operator",
     inherits: _babelPluginSyntaxNullishCoalescingOperator().default,
     visitor: {
       LogicalExpression(path) {

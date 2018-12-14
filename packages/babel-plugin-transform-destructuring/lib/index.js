@@ -160,19 +160,23 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
     }
 
     pushObjectRest(pattern, objRef, spreadProp, spreadPropIndex) {
-      let keys = [];
+      const keys = [];
+      let allLiteral = true;
 
       for (let i = 0; i < pattern.properties.length; i++) {
         const prop = pattern.properties[i];
         if (i >= spreadPropIndex) break;
         if (_babelCore().types.isRestElement(prop)) continue;
-        let key = prop.key;
+        const key = prop.key;
 
         if (_babelCore().types.isIdentifier(key) && !prop.computed) {
-          key = _babelCore().types.stringLiteral(prop.key.name);
+          keys.push(_babelCore().types.stringLiteral(key.name));
+        } else if (_babelCore().types.isLiteral(key)) {
+          keys.push(_babelCore().types.stringLiteral(String(key.value)));
+        } else {
+          keys.push(_babelCore().types.cloneNode(key));
+          allLiteral = false;
         }
-
-        keys.push(_babelCore().types.cloneNode(key));
       }
 
       let value;
@@ -180,8 +184,13 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
       if (keys.length === 0) {
         value = _babelCore().types.callExpression(getExtendsHelper(this), [_babelCore().types.objectExpression([]), _babelCore().types.cloneNode(objRef)]);
       } else {
-        keys = _babelCore().types.arrayExpression(keys);
-        value = _babelCore().types.callExpression(this.addHelper(`objectWithoutProperties${loose ? "Loose" : ""}`), [_babelCore().types.cloneNode(objRef), keys]);
+        let keyExpression = _babelCore().types.arrayExpression(keys);
+
+        if (!allLiteral) {
+          keyExpression = _babelCore().types.callExpression(_babelCore().types.memberExpression(keyExpression, _babelCore().types.identifier("map")), [this.addHelper("toPropertyKey")]);
+        }
+
+        value = _babelCore().types.callExpression(this.addHelper(`objectWithoutProperties${loose ? "Loose" : ""}`), [_babelCore().types.cloneNode(objRef), keyExpression]);
       }
 
       this.nodes.push(this.buildVariableAssignment(spreadProp.argument, value));
@@ -321,6 +330,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
   }
 
   return {
+    name: "transform-destructuring",
     visitor: {
       ExportNamedDeclaration(path) {
         const declaration = path.get("declaration");
@@ -418,7 +428,12 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
         destructuring.init(node.left, ref || node.right);
 
         if (ref) {
-          nodes.push(_babelCore().types.expressionStatement(_babelCore().types.cloneNode(ref)));
+          if (path.parentPath.isArrowFunctionExpression()) {
+            path.replaceWith(_babelCore().types.blockStatement([]));
+            nodes.push(_babelCore().types.returnStatement(_babelCore().types.cloneNode(ref)));
+          } else {
+            nodes.push(_babelCore().types.expressionStatement(_babelCore().types.cloneNode(ref)));
+          }
         }
 
         path.replaceWithMultiple(nodes);

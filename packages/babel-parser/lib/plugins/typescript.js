@@ -57,6 +57,9 @@ function keywordTypeFromName(value) {
     case "undefined":
       return "TSUndefinedKeyword";
 
+    case "unknown":
+      return "TSUnknownKeyword";
+
     default:
       return undefined;
   }
@@ -264,8 +267,8 @@ var _default = superClass => class extends superClass {
 
   tsParseBindingListForSignature() {
     return this.parseBindingList(_types.types.parenR).map(pattern => {
-      if (pattern.type !== "Identifier" && pattern.type !== "RestElement") {
-        throw this.unexpected(pattern.start, "Name in a signature must be an Identifier.");
+      if (pattern.type !== "Identifier" && pattern.type !== "RestElement" && pattern.type !== "ObjectPattern") {
+        throw this.unexpected(pattern.start, `Name in a signature must be an Identifier or ObjectPattern, instead got ${pattern.type}`);
       }
 
       return pattern;
@@ -435,8 +438,39 @@ var _default = superClass => class extends superClass {
 
   tsParseTupleType() {
     const node = this.startNode();
-    node.elementTypes = this.tsParseBracketedList("TupleElementTypes", this.tsParseType.bind(this), true, false);
+    node.elementTypes = this.tsParseBracketedList("TupleElementTypes", this.tsParseTupleElementType.bind(this), true, false);
+    let seenOptionalElement = false;
+    node.elementTypes.forEach((elementNode, i) => {
+      if (elementNode.type === "TSRestType") {
+        if (i !== node.elementTypes.length - 1) {
+          this.raise(elementNode.start, "A rest element must be last in a tuple type.");
+        }
+      } else if (elementNode.type === "TSOptionalType") {
+        seenOptionalElement = true;
+      } else if (seenOptionalElement) {
+        this.raise(elementNode.start, "A required element cannot follow an optional element.");
+      }
+    });
     return this.finishNode(node, "TSTupleType");
+  }
+
+  tsParseTupleElementType() {
+    if (this.match(_types.types.ellipsis)) {
+      const restNode = this.startNode();
+      this.next();
+      restNode.typeAnnotation = this.tsParseType();
+      return this.finishNode(restNode, "TSRestType");
+    }
+
+    const type = this.tsParseType();
+
+    if (this.eat(_types.types.question)) {
+      const optionalTypeNode = this.startNodeAtNode(type);
+      optionalTypeNode.typeAnnotation = type;
+      return this.finishNode(optionalTypeNode, "TSOptionalType");
+    }
+
+    return type;
   }
 
   tsParseParenthesizedType() {
@@ -630,6 +664,23 @@ var _default = superClass => class extends superClass {
       return true;
     }
 
+    if (this.match(_types.types.braceL)) {
+      let braceStackCounter = 1;
+      this.next();
+
+      while (braceStackCounter > 0) {
+        if (this.match(_types.types.braceL)) {
+          ++braceStackCounter;
+        } else if (this.match(_types.types.braceR)) {
+          --braceStackCounter;
+        }
+
+        this.next();
+      }
+
+      return true;
+    }
+
     return false;
   }
 
@@ -767,7 +818,7 @@ var _default = superClass => class extends superClass {
     }
 
     const body = this.startNode();
-    body.body = this.tsParseObjectTypeMembers();
+    body.body = this.tsInType(this.tsParseObjectTypeMembers.bind(this));
     node.body = this.finishNode(body, "TSInterfaceBody");
     return this.finishNode(node, "TSInterfaceDeclaration");
   }
@@ -1102,11 +1153,17 @@ var _default = superClass => class extends superClass {
       return undefined;
     }
 
+    const oldInAsync = this.state.inAsync;
+    const oldInGenerator = this.state.inGenerator;
+    this.state.inAsync = true;
+    this.state.inGenerator = false;
     res.id = null;
     res.generator = false;
     res.expression = true;
     res.async = true;
     this.parseFunctionBody(res, true);
+    this.state.inAsync = oldInAsync;
+    this.state.inGenerator = oldInGenerator;
     return this.finishNode(res, "ArrowFunctionExpression");
   }
 
@@ -1205,8 +1262,8 @@ var _default = superClass => class extends superClass {
       return this.finishNode(nonNullExpression, "TSNonNullExpression");
     }
 
-    const result = this.tsTryParseAndCatch(() => {
-      if (this.isRelational("<")) {
+    if (this.isRelational("<")) {
+      const result = this.tsTryParseAndCatch(() => {
         if (!noCalls && this.atPossibleAsync(base)) {
           const asyncArrowFn = this.tsTryParseGenericAsyncArrowFunction(startPos, startLoc);
 
@@ -1228,11 +1285,12 @@ var _default = superClass => class extends superClass {
             return this.parseTaggedTemplateExpression(startPos, startLoc, base, state, typeArguments);
           }
         }
-      }
 
-      this.unexpected();
-    });
-    if (result) return result;
+        this.unexpected();
+      });
+      if (result) return result;
+    }
+
     return super.parseSubscript(base, startPos, startLoc, noCalls, state);
   }
 
@@ -1501,10 +1559,8 @@ var _default = superClass => class extends superClass {
   }
 
   parseObjPropValue(prop, ...args) {
-    if (this.isRelational("<")) {
-      throw new Error("TODO");
-    }
-
+    const typeParameters = this.tsTryParseTypeParameters();
+    if (typeParameters) prop.typeParameters = typeParameters;
     super.parseObjPropValue(prop, ...args);
   }
 
@@ -1692,6 +1748,22 @@ var _default = superClass => class extends superClass {
     }
   }
 
+  parseMaybeDecoratorArguments(expr) {
+    if (this.isRelational("<")) {
+      const typeArguments = this.tsParseTypeArguments();
+
+      if (this.match(_types.types.parenL)) {
+        const call = super.parseMaybeDecoratorArguments(expr);
+        call.typeParameters = typeArguments;
+        return call;
+      }
+
+      this.unexpected(this.state.start, _types.types.parenL);
+    }
+
+    return super.parseMaybeDecoratorArguments(expr);
+  }
+
   isClassMethod() {
     return this.isRelational("<") || super.isClassMethod();
   }
@@ -1735,7 +1807,7 @@ var _default = superClass => class extends superClass {
     return this.finishNodeAt(node.expression, node.expression.type, node.typeAnnotation.end, node.typeAnnotation.loc.end);
   }
 
-  toReferencedList(exprList) {
+  toReferencedList(exprList, isInParens) {
     for (let i = 0; i < exprList.length; i++) {
       const expr = exprList[i];
 

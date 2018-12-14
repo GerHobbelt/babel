@@ -63,7 +63,8 @@ var _default = (_, opts = {}) => {
   const {
     loose = false,
     useBuiltIns = false,
-    decoratorsLegacy = false
+    decoratorsLegacy = false,
+    decoratorsBeforeExport
   } = opts;
   return {
     presets: [[_presetStage.default, {
@@ -71,7 +72,8 @@ var _default = (_, opts = {}) => {
       useBuiltIns
     }]],
     plugins: [[_babelPluginProposalDecorators().default, {
-      legacy: decoratorsLegacy
+      legacy: decoratorsLegacy,
+      decoratorsBeforeExport
     }], _babelPluginProposalFunctionSent().default, _babelPluginProposalExportNamespaceFrom().default, _babelPluginProposalNumericSeparator().default, _babelPluginProposalThrowExpressions().default]
   };
 };
