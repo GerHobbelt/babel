@@ -31,7 +31,7 @@ function patchPackageJson(filePath, settings = {}) {
 
   // apply patches:
   let updatedPackageJson = packageJson
-    .replace(/"(@gerhobbelt\/babel-.*?)": "([0-9.a-z-]+)"/g, (
+    .replace(/"(@gerhobbelt\/babel-.*?)": "([^~]?[0-9.a-z-]+)"/g, (
       m,
       m1 /*, m2 */
     ) => {
@@ -44,7 +44,7 @@ function patchPackageJson(filePath, settings = {}) {
   if (!settings.doNotMigrateBabelDeps) {
     updatedPackageJson = updatedPackageJson
       .replace(/@babel\//g, "@gerhobbelt/babel-")
-      .replace(/"(@gerhobbelt\/babel-.*?)": "([0-9.a-z-]+)"/g, (
+      .replace(/"(@gerhobbelt\/babel-.*?)": "([^~]?[0-9.a-z-]+)"/g, (
         m,
         m1 /*, m2 */
       ) => {
