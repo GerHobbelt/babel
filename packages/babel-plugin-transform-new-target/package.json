@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-new-target",
-  "version": "7.2.1-27",
+  "version": "7.2.2-27",
   "description": "Transforms new.target meta property",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-new-target",
   "license": "MIT",
@@ -12,15 +12,15 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-27"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.2-27"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.1-27"
+    "@gerhobbelt/babel-core": "~7.2.2-27"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.2.1-27",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-27",
-    "@gerhobbelt/babel-plugin-proposal-class-properties": "7.2.1-27",
-    "@gerhobbelt/babel-plugin-transform-arrow-functions": "7.2.1-27"
+    "@gerhobbelt/babel-core": "7.2.2-27",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.2-27",
+    "@gerhobbelt/babel-plugin-proposal-class-properties": "7.2.2-27",
+    "@gerhobbelt/babel-plugin-transform-arrow-functions": "7.2.2-27"
   }
 }

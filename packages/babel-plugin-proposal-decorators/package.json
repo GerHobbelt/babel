@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-proposal-decorators",
-  "version": "7.2.1-27",
+  "version": "7.2.2-27",
   "author": "Logan Smyth <loganfsmyth@gmail.com>",
   "license": "MIT",
   "publishConfig": {
@@ -15,15 +15,15 @@
     "decorators"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-27",
-    "@gerhobbelt/babel-helper-create-class-features-plugin": "7.2.1-27",
-    "@gerhobbelt/babel-plugin-syntax-decorators": "7.2.1-27"
+    "@gerhobbelt/babel-helper-create-class-features-plugin": "7.2.2-27",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.2-27",
+    "@gerhobbelt/babel-plugin-syntax-decorators": "7.2.2-27"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.1-27"
+    "@gerhobbelt/babel-core": "~7.2.2-27"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.2.1-27",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-27"
+    "@gerhobbelt/babel-core": "7.2.2-27",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.2-27"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-function-name",
-  "version": "7.2.1-27",
+  "version": "7.2.2-27",
   "description": "Apply ES2015 function.name semantics to all functions",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-function-name",
   "license": "MIT",
@@ -12,14 +12,14 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-function-name": "7.2.1-27",
-    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-27"
+    "@gerhobbelt/babel-helper-function-name": "7.2.2-27",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.2-27"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.1-27"
+    "@gerhobbelt/babel-core": "~7.2.2-27"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.2.1-27",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-27"
+    "@gerhobbelt/babel-core": "7.2.2-27",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.2-27"
   }
 }
