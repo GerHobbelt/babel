@@ -6,8 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 class PluginPass {
+  _map = new Map();
+
   constructor(file, key, options) {
-    this._map = new Map();
     this.key = key;
     this.file = file;
     this.opts = options || {};

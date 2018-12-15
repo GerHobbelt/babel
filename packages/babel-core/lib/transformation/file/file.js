@@ -82,25 +82,26 @@ const errorVisitor = {
 };
 
 class File {
+  _map = new Map();
+  declarations = {};
+  path = null;
+  ast = {};
+  metadata = {};
+  code = "";
+  inputMap = null;
+  hub = {
+    file: this,
+    getCode: () => this.code,
+    getScope: () => this.scope,
+    addHelper: this.addHelper.bind(this),
+    buildError: this.buildCodeFrameError.bind(this)
+  };
+
   constructor(options, {
     code,
     ast,
     inputMap
   }) {
-    this._map = new Map();
-    this.declarations = {};
-    this.path = null;
-    this.ast = {};
-    this.metadata = {};
-    this.code = "";
-    this.inputMap = null;
-    this.hub = {
-      file: this,
-      getCode: () => this.code,
-      getScope: () => this.scope,
-      addHelper: this.addHelper.bind(this),
-      buildError: this.buildCodeFrameError.bind(this)
-    };
     this.opts = options;
     this.code = code;
     this.ast = ast;

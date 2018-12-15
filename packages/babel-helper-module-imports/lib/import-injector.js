@@ -34,15 +34,16 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class ImportInjector {
+  _defaultOpts = {
+    importedSource: null,
+    importedType: "commonjs",
+    importedInterop: "babel",
+    importingInterop: "babel",
+    ensureLiveReference: false,
+    ensureNoContext: false
+  };
+
   constructor(path, importedSource, opts) {
-    this._defaultOpts = {
-      importedSource: null,
-      importedType: "commonjs",
-      importedInterop: "babel",
-      importingInterop: "babel",
-      ensureLiveReference: false,
-      ensureNoContext: false
-    };
     const programPath = path.find(p => p.isProgram());
     this._programPath = programPath;
     this._programScope = programPath.scope;

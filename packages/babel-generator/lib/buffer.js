@@ -21,23 +21,24 @@ const SPACES_RE = /^[ \t]+$/;
 
 class Buffer {
   constructor(map) {
-    this._map = null;
-    this._buf = [];
-    this._last = "";
-    this._queue = [];
-    this._position = {
-      line: 1,
-      column: 0
-    };
-    this._sourcePosition = {
-      identifierName: null,
-      line: null,
-      column: null,
-      filename: null
-    };
-    this._disallowedPop = null;
     this._map = map;
   }
+
+  _map = null;
+  _buf = [];
+  _last = "";
+  _queue = [];
+  _position = {
+    line: 1,
+    column: 0
+  };
+  _sourcePosition = {
+    identifierName: null,
+    line: null,
+    column: null,
+    filename: null
+  };
+  _disallowedPop = null;
 
   get() {
     this._flush();

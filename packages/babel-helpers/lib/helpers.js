@@ -1041,6 +1041,7 @@ helpers.classStaticPrivateFieldSpecSet = helper("7.0.2")`
     descriptor.value = value;
     return value;
   }
+  
 `;
 helpers.decorate = helper("7.1.5")`
   import toArray from "toArray";

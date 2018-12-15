@@ -727,7 +727,6 @@ class ExpressionParser extends _lval.default {
               throw this.raise(node.start, `Topic reference was used in a lexical context without topic binding`);
             }
           }
-          throw this.unexpected();
         }
 
       default:

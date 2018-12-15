@@ -51,20 +51,21 @@ const NON_DECIMAL_LITERAL = /^0[box]/;
 
 class Printer {
   constructor(format, map) {
-    this.inForStatementInitCounter = 0;
-    this._printStack = [];
-    this._indent = 0;
-    this._insideAux = false;
-    this._printedCommentStarts = {};
-    this._parenPushNewlineState = null;
-    this._noLineTerminator = false;
-    this._printAuxAfterOnNextUserNode = false;
-    this._printedComments = new WeakSet();
-    this._endsWithInteger = false;
-    this._endsWithWord = false;
     this.format = format || {};
     this._buf = new _buffer.default(map);
   }
+
+  inForStatementInitCounter = 0;
+  _printStack = [];
+  _indent = 0;
+  _insideAux = false;
+  _printedCommentStarts = {};
+  _parenPushNewlineState = null;
+  _noLineTerminator = false;
+  _printAuxAfterOnNextUserNode = false;
+  _printedComments = new WeakSet();
+  _endsWithInteger = false;
+  _endsWithWord = false;
 
   generate(ast) {
     this.print(ast);
