@@ -11,11 +11,11 @@ module.exports = function(api) {
     debug: true,
     exclude: ["transform-typeof-symbol"],
     targets: {
-      // node: "current",
+      node: "current",
 
       // node: "6.9",
 
-      node: "4",
+      // node: "4",
       // browsers: "> 5%",
     },
   };
