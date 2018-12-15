@@ -7,20 +7,20 @@ exports.hasOwnDecorators = hasOwnDecorators;
 exports.hasDecorators = hasDecorators;
 exports.buildDecoratedClass = buildDecoratedClass;
 
-function _core() {
-  const data = require("@babel/core");
+function _babelCore() {
+  const data = require("@gerhobbelt/babel-core");
 
-  _core = function () {
+  _babelCore = function () {
     return data;
   };
 
   return data;
 }
 
-function _helperReplaceSupers() {
-  const data = _interopRequireDefault(require("@babel/helper-replace-supers"));
+function _babelHelperReplaceSupers() {
+  const data = _interopRequireDefault(require("@gerhobbelt/babel-helper-replace-supers"));
 
-  _helperReplaceSupers = function () {
+  _babelHelperReplaceSupers = function () {
     return data;
   };
 
@@ -39,11 +39,11 @@ function hasDecorators(node) {
 
 function prop(key, value) {
   if (!value) return null;
-  return _core().types.objectProperty(_core().types.identifier(key), value);
+  return _babelCore().types.objectProperty(_babelCore().types.identifier(key), value);
 }
 
 function value(body, params = [], async, generator) {
-  const method = _core().types.objectMethod("method", _core().types.identifier("value"), params, body);
+  const method = _babelCore().types.objectMethod("method", _babelCore().types.identifier("value"), params, body);
 
   method.async = !!async;
   method.generator = !!generator;
@@ -54,7 +54,7 @@ function takeDecorators(node) {
   let result;
 
   if (node.decorators && node.decorators.length > 0) {
-    result = _core().types.arrayExpression(node.decorators.map(decorator => decorator.expression));
+    result = _babelCore().types.arrayExpression(node.decorators.map(decorator => decorator.expression));
   }
 
   node.decorators = undefined;
@@ -64,10 +64,10 @@ function takeDecorators(node) {
 function getKey(node) {
   if (node.computed) {
     return node.key;
-  } else if (_core().types.isIdentifier(node.key)) {
-    return _core().types.stringLiteral(node.key.name);
+  } else if (_babelCore().types.isIdentifier(node.key)) {
+    return _babelCore().types.stringLiteral(node.key.name);
   } else {
-    return _core().types.stringLiteral(String(node.key.value));
+    return _babelCore().types.stringLiteral(String(node.key.value));
   }
 }
 
@@ -82,7 +82,7 @@ function extractElementDescriptor(classRef, superRef, path) {
     throw path.buildCodeFrameError(`Private ${isMethod ? "methods" : "fields"} in decorated classes are not supported yet.`);
   }
 
-  new (_helperReplaceSupers().default)({
+  new (_babelHelperReplaceSupers().default)({
     methodPath: path,
     methodNode: node,
     objectRef: classRef,
@@ -91,9 +91,9 @@ function extractElementDescriptor(classRef, superRef, path) {
     scope,
     file: this
   }, true).replace();
-  const properties = [prop("kind", _core().types.stringLiteral(isMethod ? node.kind : "field")), prop("decorators", takeDecorators(node)), prop("static", node.static && _core().types.booleanLiteral(true)), prop("key", getKey(node)), isMethod ? value(node.body, node.params, node.async, node.generator) : node.value ? value(_core().template.ast`{ return ${node.value} }`) : prop("value", scope.buildUndefinedNode())].filter(Boolean);
+  const properties = [prop("kind", _babelCore().types.stringLiteral(isMethod ? node.kind : "field")), prop("decorators", takeDecorators(node)), prop("static", node.static && _babelCore().types.booleanLiteral(true)), prop("key", getKey(node)), isMethod ? value(node.body, node.params, node.async, node.generator) : node.value ? value(_babelCore().template.ast`{ return ${node.value} }`) : prop("value", scope.buildUndefinedNode())].filter(Boolean);
   path.remove();
-  return _core().types.objectExpression(properties);
+  return _babelCore().types.objectExpression(properties);
 }
 
 function addDecorateHelper(file) {
@@ -101,7 +101,7 @@ function addDecorateHelper(file) {
     return file.addHelper("decorate");
   } catch (err) {
     if (err.code === "BABEL_HELPER_UNKNOWN") {
-      err.message += "\n  '@babel/plugin-transform-decorators' in non-legacy mode" + " requires '@babel/core' version ^7.0.2 and you appear to be using" + " an older version.";
+      err.message += "\n  '@gerhobbelt/babel-plugin-transform-decorators' in non-legacy mode" + " requires '@gerhobbelt/babel-core' version ^7.0.2 and you appear to be using" + " an older version.";
     }
 
     throw err;
@@ -120,7 +120,7 @@ function buildDecoratedClass(ref, path, elements, file) {
     superClass
   } = node;
   node.type = "ClassDeclaration";
-  if (!node.id) node.id = _core().types.cloneNode(ref);
+  if (!node.id) node.id = _babelCore().types.cloneNode(ref);
   let superId;
 
   if (superClass) {
@@ -130,14 +130,14 @@ function buildDecoratedClass(ref, path, elements, file) {
 
   const classDecorators = takeDecorators(node);
 
-  const definitions = _core().types.arrayExpression(elements.map(extractElementDescriptor.bind(file, node.id, superId)));
+  const definitions = _babelCore().types.arrayExpression(elements.map(extractElementDescriptor.bind(file, node.id, superId)));
 
-  let replacement = _core().template.expression.ast`
+  let replacement = _babelCore().template.expression.ast`
     ${addDecorateHelper(file)}(
-      ${classDecorators || _core().types.nullLiteral()},
+      ${classDecorators || _babelCore().types.nullLiteral()},
       function (${initializeId}, ${superClass ? superId : null}) {
         ${node}
-        return { F: ${_core().types.cloneNode(node.id)}, d: ${definitions} };
+        return { F: ${_babelCore().types.cloneNode(node.id)}, d: ${definitions} };
       },
       ${superClass}
     )
@@ -145,16 +145,16 @@ function buildDecoratedClass(ref, path, elements, file) {
   let classPathDesc = "arguments.1.body.body.0";
 
   if (!isStrict) {
-    replacement.arguments[1].body.directives.push(_core().types.directive(_core().types.directiveLiteral("use strict")));
+    replacement.arguments[1].body.directives.push(_babelCore().types.directive(_babelCore().types.directiveLiteral("use strict")));
   }
 
   if (isDeclaration) {
-    replacement = _core().template.ast`let ${ref} = ${replacement}`;
+    replacement = _babelCore().template.ast`let ${ref} = ${replacement}`;
     classPathDesc = "declarations.0.init." + classPathDesc;
   }
 
   return {
-    instanceNodes: [_core().template.statement.ast`${initializeId}(this)`],
+    instanceNodes: [_babelCore().template.statement.ast`${initializeId}(this)`],
 
     wrapClass(path) {
       path.replaceWith(replacement);

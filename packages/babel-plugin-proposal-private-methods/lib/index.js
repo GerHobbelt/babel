@@ -5,31 +5,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function _helperPluginUtils() {
-  const data = require("@babel/helper-plugin-utils");
+function _babelHelperPluginUtils() {
+  const data = require("@gerhobbelt/babel-helper-plugin-utils");
 
-  _helperPluginUtils = function () {
+  _babelHelperPluginUtils = function () {
     return data;
   };
 
   return data;
 }
 
-function _helperCreateClassFeaturesPlugin() {
-  const data = require("@babel/helper-create-class-features-plugin");
+function _babelHelperCreateClassFeaturesPlugin() {
+  const data = require("@gerhobbelt/babel-helper-create-class-features-plugin");
 
-  _helperCreateClassFeaturesPlugin = function () {
+  _babelHelperCreateClassFeaturesPlugin = function () {
     return data;
   };
 
   return data;
 }
 
-var _default = (0, _helperPluginUtils().declare)((api, options) => {
+var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
   api.assertVersion(7);
-  return (0, _helperCreateClassFeaturesPlugin().createClassFeaturePlugin)({
+  return (0, _babelHelperCreateClassFeaturesPlugin().createClassFeaturePlugin)({
     name: "proposal-private-methods",
-    feature: _helperCreateClassFeaturesPlugin().FEATURES.privateMethods,
+    feature: _babelHelperCreateClassFeaturesPlugin().FEATURES.privateMethods,
     loose: options.loose,
 
     manipulateOptions(opts, parserOpts) {

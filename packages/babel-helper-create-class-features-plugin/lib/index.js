@@ -11,20 +11,20 @@ Object.defineProperty(exports, "FEATURES", {
   }
 });
 
-function _helperFunctionName() {
-  const data = _interopRequireDefault(require("@babel/helper-function-name"));
+function _babelHelperFunctionName() {
+  const data = _interopRequireDefault(require("@gerhobbelt/babel-helper-function-name"));
 
-  _helperFunctionName = function () {
+  _babelHelperFunctionName = function () {
     return data;
   };
 
   return data;
 }
 
-function _helperSplitExportDeclaration() {
-  const data = _interopRequireDefault(require("@babel/helper-split-export-declaration"));
+function _babelHelperSplitExportDeclaration() {
+  const data = _interopRequireDefault(require("@gerhobbelt/babel-helper-split-export-declaration"));
 
-  _helperSplitExportDeclaration = function () {
+  _babelHelperSplitExportDeclaration = function () {
     return data;
   };
 
@@ -45,7 +45,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const version = _package.default.version.split(".").reduce((v, x) => v * 1e5 + +x, 0);
 
-const versionKey = "@babel/plugin-class-features/version";
+const versionKey = "@gerhobbelt/babel-plugin-class-features/version";
 
 function createClassFeaturePlugin({
   name,
@@ -116,7 +116,7 @@ function createClassFeaturePlugin({
         let ref;
 
         if (path.isClassExpression() || !path.node.id) {
-          (0, _helperFunctionName().default)(path);
+          (0, _babelHelperFunctionName().default)(path);
           ref = path.scope.generateUidIdentifier("class");
         } else {
           ref = path.node.id;
@@ -169,7 +169,7 @@ function createClassFeaturePlugin({
 
         if (decl.isClassDeclaration() && (0, _decorators.hasDecorators)(decl.node)) {
           if (decl.node.id) {
-            (0, _helperSplitExportDeclaration().default)(path);
+            (0, _babelHelperSplitExportDeclaration().default)(path);
           } else {
             decl.node.type = "ClassExpression";
           }

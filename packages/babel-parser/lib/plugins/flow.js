@@ -2098,18 +2098,30 @@ var _default = superClass => class extends superClass {
     super.readToken_mult_modulo(code);
   }
 
+  parseTopLevel(file, program) {
+    const fileNode = super.parseTopLevel(file, program);
+
+    if (this.state.hasFlowComment) {
+      this.unexpected(null, "Unterminated flow-comment");
+    }
+
+    return fileNode;
+  }
+
   skipBlockComment() {
     if (this.hasPlugin("flow") && this.hasPlugin("flowComments") && this.skipFlowComment()) {
+      if (this.state.hasFlowComment) {
+        this.unexpected(null, "Cannot have a flow comment inside another flow comment");
+      }
+
       this.hasFlowCommentCompletion();
       this.state.pos += this.skipFlowComment();
       this.state.hasFlowComment = true;
       return;
     }
 
-    let end;
-
     if (this.hasPlugin("flow") && this.state.hasFlowComment) {
-      end = this.input.indexOf("*-/", this.state.pos += 2);
+      const end = this.input.indexOf("*-/", this.state.pos += 2);
       if (end === -1) this.raise(this.state.pos - 2, "Unterminated comment");
       this.state.pos = end + 3;
       return;
@@ -2119,19 +2131,28 @@ var _default = superClass => class extends superClass {
   }
 
   skipFlowComment() {
-    const ch2 = this.input.charCodeAt(this.state.pos + 2);
-    const ch3 = this.input.charCodeAt(this.state.pos + 3);
+    const {
+      pos
+    } = this.state;
+    let shiftToFirstNonWhiteSpace = 2;
 
-    if (ch2 === 58 && ch3 === 58) {
-      return 4;
+    while ([32, 9].includes(this.input.charCodeAt(pos + shiftToFirstNonWhiteSpace))) {
+      shiftToFirstNonWhiteSpace++;
     }
 
-    if (this.input.slice(this.state.pos + 2, 14) === "flow-include") {
-      return 14;
+    const ch2 = this.input.charCodeAt(shiftToFirstNonWhiteSpace + pos);
+    const ch3 = this.input.charCodeAt(shiftToFirstNonWhiteSpace + pos + 1);
+
+    if (ch2 === 58 && ch3 === 58) {
+      return shiftToFirstNonWhiteSpace + 2;
+    }
+
+    if (this.input.slice(shiftToFirstNonWhiteSpace + pos, shiftToFirstNonWhiteSpace + pos + 12) === "flow-include") {
+      return shiftToFirstNonWhiteSpace + 12;
     }
 
     if (ch2 === 58 && ch3 !== 58) {
-      return 2;
+      return shiftToFirstNonWhiteSpace;
     }
 
     return false;

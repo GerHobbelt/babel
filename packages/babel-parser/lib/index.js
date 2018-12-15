@@ -2984,18 +2984,30 @@ var flow = (function (superClass) {
       _superClass.prototype.readToken_mult_modulo.call(this, code);
     };
 
+    _proto.parseTopLevel = function parseTopLevel(file, program) {
+      var fileNode = _superClass.prototype.parseTopLevel.call(this, file, program);
+
+      if (this.state.hasFlowComment) {
+        this.unexpected(null, "Unterminated flow-comment");
+      }
+
+      return fileNode;
+    };
+
     _proto.skipBlockComment = function skipBlockComment() {
       if (this.hasPlugin("flow") && this.hasPlugin("flowComments") && this.skipFlowComment()) {
+        if (this.state.hasFlowComment) {
+          this.unexpected(null, "Cannot have a flow comment inside another flow comment");
+        }
+
         this.hasFlowCommentCompletion();
         this.state.pos += this.skipFlowComment();
         this.state.hasFlowComment = true;
         return;
       }
 
-      var end;
-
       if (this.hasPlugin("flow") && this.state.hasFlowComment) {
-        end = this.input.indexOf("*-/", this.state.pos += 2);
+        var end = this.input.indexOf("*-/", this.state.pos += 2);
         if (end === -1) this.raise(this.state.pos - 2, "Unterminated comment");
         this.state.pos = end + 3;
         return;
@@ -3005,19 +3017,26 @@ var flow = (function (superClass) {
     };
 
     _proto.skipFlowComment = function skipFlowComment() {
-      var ch2 = this.input.charCodeAt(this.state.pos + 2);
-      var ch3 = this.input.charCodeAt(this.state.pos + 3);
+      var pos = this.state.pos;
+      var shiftToFirstNonWhiteSpace = 2;
 
-      if (ch2 === 58 && ch3 === 58) {
-        return 4;
+      while ([32, 9].includes(this.input.charCodeAt(pos + shiftToFirstNonWhiteSpace))) {
+        shiftToFirstNonWhiteSpace++;
       }
 
-      if (this.input.slice(this.state.pos + 2, 14) === "flow-include") {
-        return 14;
+      var ch2 = this.input.charCodeAt(shiftToFirstNonWhiteSpace + pos);
+      var ch3 = this.input.charCodeAt(shiftToFirstNonWhiteSpace + pos + 1);
+
+      if (ch2 === 58 && ch3 === 58) {
+        return shiftToFirstNonWhiteSpace + 2;
+      }
+
+      if (this.input.slice(shiftToFirstNonWhiteSpace + pos, shiftToFirstNonWhiteSpace + pos + 12) === "flow-include") {
+        return shiftToFirstNonWhiteSpace + 12;
       }
 
       if (ch2 === 58 && ch3 !== 58) {
-        return 2;
+        return shiftToFirstNonWhiteSpace;
       }
 
       return false;
@@ -6570,7 +6589,6 @@ var ExpressionParser = function (_LValParser) {
               throw this.raise(node.start, "Topic reference was used in a lexical context without topic binding");
             }
           }
-          throw this.unexpected();
         }
 
       default:

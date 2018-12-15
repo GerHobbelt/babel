@@ -1,12 +1,14 @@
 var _Object$assign = require("../core-js/object/assign");
 
-var _typeof = require("../helpers/typeof");
-
 var _Symbol$toStringTag = require("../core-js/symbol/to-string-tag");
 
 var _Object$defineProperty = require("../core-js/object/define-property");
 
+var _typeof = require("../helpers/typeof");
+
 var toArray = require("./toArray");
+
+var toPropertyKey = require("./toPropertyKey");
 
 function _decorate(decorators, factory, superClass) {
   var r = factory(function initialize(O) {
@@ -21,6 +23,7 @@ function _decorate(decorators, factory, superClass) {
 }
 
 function _createElementDescriptor(def) {
+  var key = toPropertyKey(def.key);
   var descriptor;
 
   if (def.kind === "method") {
@@ -30,6 +33,10 @@ function _createElementDescriptor(def) {
       configurable: true,
       enumerable: false
     };
+    Object.defineProperty(def.value, "name", {
+      value: _typeof(key) === "symbol" ? "" : key,
+      configurable: true
+    });
   } else if (def.kind === "get") {
     descriptor = {
       get: def.value,
@@ -46,13 +53,13 @@ function _createElementDescriptor(def) {
     descriptor = {
       configurable: true,
       writable: true,
-      enumerable: false
+      enumerable: true
     };
   }
 
   var element = {
     kind: def.kind === "field" ? "field" : "method",
-    key: def.key,
+    key: key,
     placement: def.static ? "static" : def.kind === "field" ? "own" : "prototype",
     descriptor: descriptor
   };
@@ -307,8 +314,7 @@ function _toElementDescriptor(elementObject) {
     throw new TypeError('An element descriptor\'s .kind property must be either "method" or' + ' "field", but a decorator created an element descriptor with' + ' .kind "' + kind + '"');
   }
 
-  var key = elementObject.key;
-  if (typeof key !== "string" && _typeof(key) !== "symbol") key = String(key);
+  var key = toPropertyKey(elementObject.key);
   var placement = String(elementObject.placement);
 
   if (placement !== "static" && placement !== "prototype" && placement !== "own") {

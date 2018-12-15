@@ -229,6 +229,9 @@ class Scope {
     this.labels = new Map();
   }
 
+  static globals = Object.keys(_globals().default.builtin);
+  static contextVariables = ["arguments", "undefined", "Infinity", "NaN"];
+
   get parent() {
     const parent = this.path.findParent(p => p.isScope());
     return parent && parent.scope;
@@ -900,5 +903,3 @@ class Scope {
 }
 
 exports.default = Scope;
-Scope.globals = Object.keys(_globals().default.builtin);
-Scope.contextVariables = ["arguments", "undefined", "Infinity", "NaN"];

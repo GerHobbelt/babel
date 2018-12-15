@@ -85,11 +85,17 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
         const elements = node.elements;
         if (!hasSpread(elements)) return;
         const nodes = build(elements, scope);
-        const first = nodes.shift();
+        let first = nodes[0];
 
-        if (nodes.length === 0 && first !== elements[0].argument) {
+        if (nodes.length === 1 && first !== elements[0].argument) {
           path.replaceWith(first);
           return;
+        }
+
+        if (!_babelCore().types.isArrayExpression(first)) {
+          first = _babelCore().types.arrayExpression([]);
+        } else {
+          nodes.shift();
         }
 
         path.replaceWith(_babelCore().types.callExpression(_babelCore().types.memberExpression(first, _babelCore().types.identifier("concat")), nodes));

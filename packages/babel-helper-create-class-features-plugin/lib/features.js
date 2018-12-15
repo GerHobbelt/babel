@@ -16,8 +16,8 @@ const FEATURES = Object.freeze({
   decorators: 1 << 3
 });
 exports.FEATURES = FEATURES;
-const featuresKey = "@babel/plugin-class-features/featuresKey";
-const looseKey = "@babel/plugin-class-features/looseKey";
+const featuresKey = "@gerhobbelt/babel-plugin-class-features/featuresKey";
+const looseKey = "@gerhobbelt/babel-plugin-class-features/looseKey";
 
 function enableFeature(file, feature, loose) {
   if (!hasFeature(file, feature)) {
@@ -51,16 +51,16 @@ function verifyUsedFeatures(path, file) {
     }
 
     if (path.node.static) {
-      throw path.buildCodeFrameError("@babel/plugin-class-features doesn't support class static private methods yet.");
+      throw path.buildCodeFrameError("@gerhobbelt/babel-plugin-class-features doesn't support class static private methods yet.");
     }
 
     if (path.node.kind !== "method") {
-      throw path.buildCodeFrameError("@babel/plugin-class-features doesn't support class private accessors yet.");
+      throw path.buildCodeFrameError("@gerhobbelt/babel-plugin-class-features doesn't support class private accessors yet.");
     }
   }
 
   if (hasFeature(file, FEATURES.privateMethods) && hasFeature(file, FEATURES.fields) && isLoose(file, FEATURES.privateMethods) !== isLoose(file, FEATURES.fields)) {
-    throw path.buildCodeFrameError("'loose' mode configuration must be the same for both @babel/plugin-proposal-class-properties " + "and @babel/plugin-proposal-private-methods");
+    throw path.buildCodeFrameError("'loose' mode configuration must be the same for both @gerhobbelt/babel-plugin-proposal-class-properties " + "and @gerhobbelt/babel-plugin-proposal-private-methods");
   }
 
   if (path.isProperty()) {

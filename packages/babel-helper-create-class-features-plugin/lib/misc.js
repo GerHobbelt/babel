@@ -6,27 +6,27 @@ Object.defineProperty(exports, "__esModule", {
 exports.injectInitialization = injectInitialization;
 exports.extractComputedKeys = extractComputedKeys;
 
-function _core() {
-  const data = require("@babel/core");
+function _babelCore() {
+  const data = require("@gerhobbelt/babel-core");
 
-  _core = function () {
+  _babelCore = function () {
     return data;
   };
 
   return data;
 }
 
-function _helperReplaceSupers() {
-  const data = require("@babel/helper-replace-supers");
+function _babelHelperReplaceSupers() {
+  const data = require("@gerhobbelt/babel-helper-replace-supers");
 
-  _helperReplaceSupers = function () {
+  _babelHelperReplaceSupers = function () {
     return data;
   };
 
   return data;
 }
 
-const findBareSupers = _core().traverse.visitors.merge([{
+const findBareSupers = _babelCore().traverse.visitors.merge([{
   Super(path) {
     const {
       node,
@@ -40,7 +40,7 @@ const findBareSupers = _core().traverse.visitors.merge([{
     }
   }
 
-}, _helperReplaceSupers().environmentVisitor]);
+}, _babelHelperReplaceSupers().environmentVisitor]);
 
 const referenceVisitor = {
   "TSTypeAnnotation|TypeAnnotation"(path) {
@@ -56,30 +56,30 @@ const referenceVisitor = {
 
 };
 
-const classFieldDefinitionEvaluationTDZVisitor = _core().traverse.visitors.merge([{
+const classFieldDefinitionEvaluationTDZVisitor = _babelCore().traverse.visitors.merge([{
   ReferencedIdentifier(path) {
     if (this.classBinding && this.classBinding === path.scope.getBinding(path.node.name)) {
       const classNameTDZError = this.file.addHelper("classNameTDZError");
 
-      const throwNode = _core().types.callExpression(classNameTDZError, [_core().types.stringLiteral(path.node.name)]);
+      const throwNode = _babelCore().types.callExpression(classNameTDZError, [_babelCore().types.stringLiteral(path.node.name)]);
 
-      path.replaceWith(_core().types.sequenceExpression([throwNode, path.node]));
+      path.replaceWith(_babelCore().types.sequenceExpression([throwNode, path.node]));
       path.skip();
     }
   }
 
-}, _helperReplaceSupers().environmentVisitor]);
+}, _babelHelperReplaceSupers().environmentVisitor]);
 
 function injectInitialization(path, constructor, nodes, renamer) {
   if (!nodes.length) return;
   const isDerived = !!path.node.superClass;
 
   if (!constructor) {
-    const newConstructor = _core().types.classMethod("constructor", _core().types.identifier("constructor"), [], _core().types.blockStatement([]));
+    const newConstructor = _babelCore().types.classMethod("constructor", _babelCore().types.identifier("constructor"), [], _babelCore().types.blockStatement([]));
 
     if (isDerived) {
-      newConstructor.params = [_core().types.restElement(_core().types.identifier("args"))];
-      newConstructor.body.body.push(_core().template.statement.ast`super(...args)`);
+      newConstructor.params = [_babelCore().types.restElement(_babelCore().types.identifier("args"))];
+      newConstructor.body.body.push(_babelCore().template.statement.ast`super(...args)`);
     }
 
     [constructor] = path.get("body").unshiftContainer("body", newConstructor);
@@ -115,8 +115,8 @@ function extractComputedKeys(ref, path, computedPaths, file) {
 
     if (!computedPath.get("key").isConstantExpression()) {
       const ident = path.scope.generateUidIdentifierBasedOnNode(computedNode.key);
-      declarations.push(_core().types.variableDeclaration("var", [_core().types.variableDeclarator(ident, computedNode.key)]));
-      computedNode.key = _core().types.cloneNode(ident);
+      declarations.push(_babelCore().types.variableDeclaration("var", [_babelCore().types.variableDeclarator(ident, computedNode.key)]));
+      computedNode.key = _babelCore().types.cloneNode(ident);
     }
   }
 
