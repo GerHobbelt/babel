@@ -1,5 +1,5 @@
-import nameFunction from "@babel/helper-function-name";
-import splitExportDeclaration from "@babel/helper-split-export-declaration";
+import nameFunction from "@gerhobbelt/babel-helper-function-name";
+import splitExportDeclaration from "@gerhobbelt/babel-helper-split-export-declaration";
 import {
   buildPrivateNamesNodes,
   buildPrivateNamesMap,
@@ -28,7 +28,7 @@ export { FEATURES };
 //       package, but it breaks if we relese x.y.z where x, y or z are
 //       greater than 99_999.
 const version = pkg.version.split(".").reduce((v, x) => v * 1e5 + +x, 0);
-const versionKey = "@babel/plugin-class-features/version";
+const versionKey = "@gerhobbelt/babel-plugin-class-features/version";
 
 export function createClassFeaturePlugin({
   name,

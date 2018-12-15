@@ -10,18 +10,18 @@ export const FEATURES = Object.freeze({
 // We can't use a symbol because this needs to always be the same, even if
 // this package isn't deduped by npm. e.g.
 //  - node_modules/
-//    - @babel/plugin-class-features
-//    - @babel/plugin-proposal-decorators
+//    - @gerhobbelt/babel-plugin-class-features
+//    - @gerhobbelt/babel-plugin-proposal-decorators
 //      - node_modules
 //        - @babel-plugin-class-features
-const featuresKey = "@babel/plugin-class-features/featuresKey";
-const looseKey = "@babel/plugin-class-features/looseKey";
+const featuresKey = "@gerhobbelt/babel-plugin-class-features/featuresKey";
+const looseKey = "@gerhobbelt/babel-plugin-class-features/looseKey";
 
 export function enableFeature(file, feature, loose) {
   // We can't blindly enable the feature because, if it was already set,
   // "loose" can't be changed, so that
-  //   @babel/plugin-class-properties { loose: true }
-  //   @babel/plugin-class-properties { loose: false }
+  //   @gerhobbelt/babel-plugin-class-properties { loose: true }
+  //   @gerhobbelt/babel-plugin-class-properties { loose: false }
   // is transformed in loose mode.
   // We only enabled the feature if it was previously disabled.
   if (!hasFeature(file, feature)) {
@@ -61,13 +61,13 @@ export function verifyUsedFeatures(path, file) {
 
     if (path.node.static) {
       throw path.buildCodeFrameError(
-        "@babel/plugin-class-features doesn't support class static private methods yet.",
+        "@gerhobbelt/babel-plugin-class-features doesn't support class static private methods yet.",
       );
     }
 
     if (path.node.kind !== "method") {
       throw path.buildCodeFrameError(
-        "@babel/plugin-class-features doesn't support class private accessors yet.",
+        "@gerhobbelt/babel-plugin-class-features doesn't support class private accessors yet.",
       );
     }
   }
@@ -78,8 +78,8 @@ export function verifyUsedFeatures(path, file) {
     isLoose(file, FEATURES.privateMethods) !== isLoose(file, FEATURES.fields)
   ) {
     throw path.buildCodeFrameError(
-      "'loose' mode configuration must be the same for both @babel/plugin-proposal-class-properties " +
-        "and @babel/plugin-proposal-private-methods",
+      "'loose' mode configuration must be the same for both @gerhobbelt/babel-plugin-proposal-class-properties " +
+        "and @gerhobbelt/babel-plugin-proposal-private-methods",
     );
   }
 
