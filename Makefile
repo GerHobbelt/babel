@@ -7,7 +7,12 @@ export FORCE_COLOR = true
 
 SOURCES = packages codemods
 
-.PHONY: build build-dist build-no-bundle dev watch lint fix clean test-clean test-only test test-ci publish bootstrap update-npm-packages update-version
+.PHONY: build build-dist build-no-bundle dev watch lint fix clean test-clean test-only test test-ci publish bootstrap update-npm-packages update-version \
+	build-standalone build-preset-env-standalone prepublish-build-standalone prepublish-build-preset-env-standalone \
+	flow fix-json test-ci-coverage bootstrap-flow test-flow test-flow-ci test-flow-update-whitelist \
+	bootstrap-test262 test-test262 test-test262-ci test-test262-update-whitelist \
+	clone-license prepublish-build prepublish clean-lib superclean clean-all
+
 
 dev:
 	BABEL_ENV=development make build-no-bundle build-dist fix test
@@ -30,6 +35,12 @@ build-standalone:
 
 build-preset-env-standalone:
 	./node_modules/.bin/gulp build-babel-preset-env-standalone
+
+prepublish-build-standalone:
+	BABEL_ENV=production IS_PUBLISH=true ./node_modules/.bin/gulp build-babel-standalone
+
+prepublish-build-preset-env-standalone:
+	BABEL_ENV=production IS_PUBLISH=true ./node_modules/.bin/gulp build-babel-preset-env-standalone
 
 build-dist: build
 	cd packages/babel-polyfill; \
@@ -120,7 +131,7 @@ prepublish-build:
 	rm -rf packages/babel-runtime/helpers
 	rm -rf packages/babel-runtime-corejs2/helpers
 	rm -rf packages/babel-runtime-corejs2/core-js
-	BABEL_ENV=production IS_PUBLISH=true make build-no-bundle build-dist
+	BABEL_ENV=production make build-no-bundle build-dist
 	make clone-license
 
 prepublish:
