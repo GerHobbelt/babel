@@ -72,15 +72,14 @@ function makeCachedFunction(callCache, handler) {
 }
 
 class CacheConfigurator {
-  _active = true;
-  _never = false;
-  _forever = false;
-  _invalidate = false;
-  _configured = false;
-  _pairs = [];
-
   constructor(data) {
     this._data = data;
+    this._active = true;
+    this._never = false;
+    this._forever = false;
+    this._invalidate = false;
+    this._configured = false;
+    this._pairs = [];
   }
 
   simple() {

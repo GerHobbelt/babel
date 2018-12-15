@@ -94,6 +94,16 @@ export const isPluginRequired = (
   return isRequiredForEnvironments.length > 0;
 };
 
+const getBuiltInTargets = targets => {
+  const builtInTargets = {
+    ...targets,
+  };
+  if (builtInTargets.uglify != null) {
+    delete builtInTargets.uglify;
+  }
+  return builtInTargets;
+};
+
 export const transformIncludesAndExcludes = (opts: Array<string>): Object => {
   return opts.reduce(
     (result, opt) => {
@@ -204,14 +214,17 @@ export default declare((api, opts) => {
   );
 
   let polyfills;
+  let polyfillTargets;
 
   if (useBuiltIns) {
+    polyfillTargets = getBuiltInTargets(targets);
+
     polyfills = filterItems(
       shippedProposals ? builtInsList : builtInsListWithoutProposals,
       include.builtIns,
       exclude.builtIns,
-      targets,
-      getPlatformSpecificDefaultFor(targets),
+      polyfillTargets,
+      getPlatformSpecificDefaultFor(polyfillTargets),
     );
   }
 
@@ -268,7 +281,7 @@ Using polyfills with \`${useBuiltIns}\` option:`,
       regenerator,
       onDebug: (polyfills, context) => {
         polyfills.forEach(polyfill =>
-          logPlugin(polyfill, targets, builtInsList, context),
+          logPlugin(polyfill, polyfillTargets, builtInsList, context),
         );
       },
     };

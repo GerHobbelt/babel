@@ -6,14 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 class PluginPass {
-  _map = new Map();
-
   constructor(file, key, options) {
     this.key = key;
     this.file = file;
     this.opts = options || {};
     this.cwd = file.opts.cwd;
     this.filename = file.opts.filename;
+    this._map = new Map();
   }
 
   set(key, val) {

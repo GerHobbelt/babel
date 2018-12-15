@@ -29,9 +29,8 @@ class TraversalContext {
     this.scope = scope;
     this.state = state;
     this.opts = opts;
+    this.queue = null;
   }
-
-  queue = null;
 
   shouldVisit(node) {
     const opts = this.opts;

@@ -82,21 +82,6 @@ const errorVisitor = {
 };
 
 class File {
-  _map = new Map();
-  declarations = {};
-  path = null;
-  ast = {};
-  metadata = {};
-  code = "";
-  inputMap = null;
-  hub = {
-    file: this,
-    getCode: () => this.code,
-    getScope: () => this.scope,
-    addHelper: this.addHelper.bind(this),
-    buildError: this.buildCodeFrameError.bind(this)
-  };
-
   constructor(options, {
     code,
     ast,
@@ -106,6 +91,19 @@ class File {
     this.code = code;
     this.ast = ast;
     this.inputMap = inputMap;
+    this._map = new Map();
+    this.declarations = {};
+    this.path = null;
+    this.metadata = {};
+    this.code = "";
+    this.inputMap = null;
+    this.hub = {
+      file: this,
+      getCode: () => this.code,
+      getScope: () => this.scope,
+      addHelper: this.addHelper.bind(this),
+      buildError: this.buildCodeFrameError.bind(this)
+    };
     this.path = _babelTraverse().NodePath.get({
       hub: this.hub,
       parentPath: null,

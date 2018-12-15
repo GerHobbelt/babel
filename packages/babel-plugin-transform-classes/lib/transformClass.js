@@ -67,82 +67,6 @@ function buildConstructor(classRef, constructorBody, node) {
   return func;
 }
 
-function findNearestBlock(p) {
-  let last = p;
-  return p.find(p => {
-    if (p.isBlockParent() || p.isSequenceExpression()) {
-      if (last && p.isMethod({
-        key: last.node
-      })) {
-        return false;
-      }
-
-      return true;
-    }
-
-    last = p;
-  });
-}
-
-const checkSuperCalleeVisitor = _babelCore().traverse.visitors.merge([_babelHelperReplaceSupers().environmentVisitor, {
-  Super(path, state) {
-    const {
-      node,
-      parentPath
-    } = path;
-
-    if (parentPath.isCallExpression({
-      callee: node
-    }) && !isInConditional(parentPath, state.root)) {
-      state.assert = true;
-      state.path = path;
-      path.stop();
-    }
-  }
-
-}]);
-
-function findPrevSiblingSuper(p) {
-  let ret;
-  return p.getAllPrevSiblings().some(p => {
-    const state = {
-      path: null,
-      root: p
-    };
-    return p.traverse(checkSuperCalleeVisitor, state), ret = state.path;
-  }) && ret;
-}
-
-function isInConditional(p, ref) {
-  do {
-    if (p.isConditional() || p.isLogicalExpression() || p.isSwitchStatement()) {
-      return true;
-    } else if (p === ref) return false;
-  } while (p = p.parentPath);
-
-  return false;
-}
-
-function findUp(p, fn) {
-  do {
-    if (!p || p.isClassBody()) return false;else if (fn(p)) return p;
-  } while (p = p.parentPath);
-
-  return false;
-}
-
-const isThisAsserted = p => findUp(p, p => !!p.getData("_assertThisInitialized"));
-
-const findUpwardsSuper = p => {
-  let ret;
-  return findUp(p, p => !!(ret = findPrevSiblingSuper(p.getStatementParent()))), ret;
-};
-
-const setThisAssert = p => {
-  const b = findNearestBlock(p);
-  b && b.setData("_assertThisInitialized", 1);
-};
-
 const verifyConstructorVisitor = _babelCore().traverse.visitors.merge([_babelHelperReplaceSupers().environmentVisitor, {
   Super(path, state) {
     if (state.isDerived) return;
@@ -159,17 +83,21 @@ const verifyConstructorVisitor = _babelCore().traverse.visitors.merge([_babelHel
   },
 
   ThisExpression(path, state) {
+    if (!state.isDerived) return;
     const {
-      isDerived,
-      superThises,
-      ctorThises
-    } = state;
-    ctorThises.push(path);
+      node,
+      parentPath
+    } = path;
 
-    if (isDerived) {
-      superThises.push(path);
+    if (parentPath.isMemberExpression({
+      object: node
+    })) {
+      return;
     }
 
+    const assertion = _babelCore().types.callExpression(state.file.addHelper("assertThisInitialized"), [node]);
+
+    path.replaceWith(assertion);
     path.skip();
   }
 
@@ -197,8 +125,7 @@ function transformClass(path, file, builtinClasses, isLoose) {
     instancePropRefs: {},
     staticPropBody: [],
     body: [],
-    bareSupers: [],
-    ctorThises: [],
+    bareSupers: new Set(),
     superThises: [],
     pushedConstructor: false,
     pushedInherits: false,
@@ -213,6 +140,13 @@ function transformClass(path, file, builtinClasses, isLoose) {
   const setState = newState => {
     Object.assign(classState, newState);
   };
+
+  const findThisesVisitor = _babelCore().traverse.visitors.merge([_babelHelperReplaceSupers().environmentVisitor, {
+    ThisExpression(path) {
+      classState.superThises.push(path);
+    }
+
+  }]);
 
   function pushToMap(node, enumerable, kind = "value", scope) {
     let mutatorMap;
@@ -303,6 +237,14 @@ function transformClass(path, file, builtinClasses, isLoose) {
 
       if (_babelCore().types.isClassMethod(node)) {
         const isConstructor = node.kind === "constructor";
+
+        if (isConstructor) {
+          path.traverse(verifyConstructorVisitor, {
+            isDerived: classState.isDerived,
+            file: classState.file
+          });
+        }
+
         const replaceSupers = new (_babelHelperReplaceSupers().default)({
           methodPath: path,
           objectRef: classState.classRef,
@@ -311,33 +253,33 @@ function transformClass(path, file, builtinClasses, isLoose) {
           file: classState.file
         });
         replaceSupers.replace();
+        const state = {
+          returns: [],
+          bareSupers: new Set()
+        };
+        path.traverse(_babelCore().traverse.visitors.merge([_babelHelperReplaceSupers().environmentVisitor, {
+          ReturnStatement(path, state) {
+            if (!path.getFunctionParent().isArrowFunctionExpression()) {
+              state.returns.push(path);
+            }
+          },
+
+          Super(path, state) {
+            const {
+              node,
+              parentPath
+            } = path;
+
+            if (parentPath.isCallExpression({
+              callee: node
+            })) {
+              state.bareSupers.add(parentPath);
+            }
+          }
+
+        }]), state);
 
         if (isConstructor) {
-          const state = {
-            returns: [],
-            bareSupers: []
-          };
-          path.traverse(_babelCore().traverse.visitors.merge([_babelHelperReplaceSupers().environmentVisitor, {
-            ReturnStatement(path, state) {
-              if (!path.getFunctionParent().isArrowFunctionExpression()) {
-                state.returns.push(path);
-              }
-            },
-
-            Super(path, state) {
-              const {
-                node,
-                parentPath
-              } = path;
-
-              if (parentPath.isCallExpression({
-                callee: node
-              })) {
-                state.bareSupers.push(parentPath);
-              }
-            }
-
-          }]), state);
           pushConstructor(state, node, path);
         } else {
           pushMethod(node, path);
@@ -430,78 +372,21 @@ function transformClass(path, file, builtinClasses, isLoose) {
   }
 
   function verifyConstructor() {
-    const {
-      userConstructorPath: path,
-      isDerived,
-      file,
-      bareSupers,
-      ctorThises
-    } = classState;
-    if (!path) return;
+    if (!classState.isDerived) return;
+    const path = classState.userConstructorPath;
     const body = path.get("body");
-    path.traverse(verifyConstructorVisitor, classState);
+    path.traverse(findThisesVisitor);
+    let guaranteedSuperBeforeFinish = !!classState.bareSupers.size;
 
-    const thisRef = () => {
-      let ref;
+    let thisRef = function () {
+      const ref = path.scope.generateDeclaredUidIdentifier("this");
 
-      if (ref = thisRef.ref) {
-        return _babelCore().types.cloneNode(ref);
-      }
+      thisRef = () => _babelCore().types.cloneNode(ref);
 
-      if (isDerived || ctorThises.length > 1) {
-        ref = path.scope.generateUidIdentifier("this");
-        path.scope.push({
-          id: ref,
-          init: thisRef.thisAlias = !isDerived ? _babelCore().types.thisExpression() : null
-        });
-      } else {
-        ref = _babelCore().types.thisExpression();
-      }
-
-      return thisRef.ref = ref;
+      return ref;
     };
 
-    for (const path of ctorThises) {
-      const {
-        node
-      } = path;
-      if (node === thisRef.thisAlias) continue;
-
-      if (isDerived && !isThisAsserted(path)) {
-        const superPath = findUpwardsSuper(path);
-
-        if (superPath) {
-          setThisAssert(superPath);
-        } else {
-          const block = findNearestBlock(path);
-          const stateLine = path.find(p => p.parentPath === block);
-
-          if (findPrevSiblingSuper(stateLine)) {
-            setThisAssert(path);
-
-            if (block.isSequenceExpression() && !isInConditional(block, body)) {
-              setThisAssert(body);
-            }
-          } else {
-            const assertion = _babelCore().types.callExpression(file.addHelper("assertThisInitialized"), [thisRef()]);
-
-            if (!isInConditional(path, stateLine)) {
-              setThisAssert(path);
-            }
-
-            path.replaceWith(assertion);
-            continue;
-          }
-        }
-      }
-
-      path.replaceWith(thisRef());
-    }
-
-    if (!isDerived) return;
-    let guaranteedSuperBeforeFinish = !!bareSupers.length;
-
-    for (const bareSuper of bareSupers) {
+    for (const bareSuper of classState.bareSupers) {
       wrapSuperCall(bareSuper, classState.superName, thisRef, body);
 
       if (guaranteedSuperBeforeFinish) {
@@ -518,17 +403,32 @@ function transformClass(path, file, builtinClasses, isLoose) {
       }
     }
 
+    for (const thisPath of classState.superThises) {
+      const {
+        node,
+        parentPath
+      } = thisPath;
+
+      if (parentPath.isMemberExpression({
+        object: node
+      })) {
+        thisPath.replaceWith(thisRef());
+        continue;
+      }
+
+      thisPath.replaceWith(_babelCore().types.callExpression(classState.file.addHelper("assertThisInitialized"), [thisRef()]));
+    }
+
     let wrapReturn;
 
     if (classState.isLoose) {
       wrapReturn = returnArg => {
-        const thisExpr = isThisAsserted(body) ? thisRef() : _babelCore().types.callExpression(file.addHelper("assertThisInitialized"), [thisRef()]);
+        const thisExpr = _babelCore().types.callExpression(classState.file.addHelper("assertThisInitialized"), [thisRef()]);
+
         return returnArg ? _babelCore().types.logicalExpression("||", returnArg, thisExpr) : thisExpr;
       };
     } else {
-      wrapReturn = returnArg => {
-        return isThisAsserted(body) ? returnArg ? _babelCore().types.logicalExpression("||", returnArg, thisRef()) : thisRef() : _babelCore().types.callExpression(file.addHelper("possibleConstructorReturn"), [thisRef()].concat(returnArg || []));
-      };
+      wrapReturn = returnArg => _babelCore().types.callExpression(classState.file.addHelper("possibleConstructorReturn"), [thisRef()].concat(returnArg || []));
     }
 
     const bodyPaths = body.get("body");

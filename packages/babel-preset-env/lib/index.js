@@ -96,6 +96,16 @@ const isPluginRequired = (supportedEnvironments, plugin) => {
 
 exports.isPluginRequired = isPluginRequired;
 
+const getBuiltInTargets = targets => {
+  const builtInTargets = Object.assign({}, targets);
+
+  if (builtInTargets.uglify != null) {
+    delete builtInTargets.uglify;
+  }
+
+  return builtInTargets;
+};
+
 const transformIncludesAndExcludes = opts => {
   return opts.reduce((result, opt) => {
     const target = opt.match(/^(es\d+|web)\./) ? "builtIns" : "plugins";
@@ -179,9 +189,11 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, opts) => {
     loose
   }));
   let polyfills;
+  let polyfillTargets;
 
   if (useBuiltIns) {
-    polyfills = filterItems(shippedProposals ? _builtIns.default : builtInsListWithoutProposals, include.builtIns, exclude.builtIns, targets, (0, _defaults.getPlatformSpecificDefaultFor)(targets));
+    polyfillTargets = getBuiltInTargets(targets);
+    polyfills = filterItems(shippedProposals ? _builtIns.default : builtInsListWithoutProposals, include.builtIns, exclude.builtIns, polyfillTargets, (0, _defaults.getPlatformSpecificDefaultFor)(polyfillTargets));
   }
 
   const plugins = [];
@@ -224,7 +236,7 @@ Using polyfills with \`${useBuiltIns}\` option:`);
       polyfills,
       regenerator,
       onDebug: (polyfills, context) => {
-        polyfills.forEach(polyfill => (0, _debug.logPlugin)(polyfill, targets, _builtIns.default, context));
+        polyfills.forEach(polyfill => (0, _debug.logPlugin)(polyfill, polyfillTargets, _builtIns.default, context));
       }
     };
     plugins.push([useBuiltIns === "usage" ? _useBuiltInsPlugin.default : _useBuiltInsEntryPlugin.default, pluginOptions]);

@@ -30,15 +30,14 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class ImportBuilder {
-  _statements = [];
-  _resultName = null;
-  _scope = null;
-  _hub = null;
-
   constructor(importedSource, scope, hub) {
     this._scope = scope;
     this._hub = hub;
     this._importedSource = importedSource;
+    this._statements = [];
+    this._resultName = null;
+    this._scope = null;
+    this._hub = null;
   }
 
   done() {
