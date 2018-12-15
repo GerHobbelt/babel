@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helpers",
-  "version": "7.2.1-26",
+  "version": "7.2.1-27",
   "description": "Collection of helper functions used by Babel transforms.",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
   "homepage": "https://babeljs.io/",
@@ -11,11 +11,11 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helpers",
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-template": "7.2.1-26",
-    "@gerhobbelt/babel-traverse": "7.2.1-26",
-    "@gerhobbelt/babel-types": "7.2.1-26"
+    "@gerhobbelt/babel-template": "7.2.1-27",
+    "@gerhobbelt/babel-traverse": "7.2.1-27",
+    "@gerhobbelt/babel-types": "7.2.1-27"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-26"
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-27"
   }
 }

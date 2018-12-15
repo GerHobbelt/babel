@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-unicode-regex",
-  "version": "7.2.1-26",
+  "version": "7.2.1-27",
   "description": "Compile ES2015 Unicode regex to ES5",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-unicode-regex",
   "license": "MIT",
@@ -12,15 +12,15 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-26",
-    "@gerhobbelt/babel-helper-regex": "7.2.1-26",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.2.1-27",
+    "@gerhobbelt/babel-helper-regex": "7.2.1-27",
     "regexpu-core": "^4.4.0"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.1-26"
+    "@gerhobbelt/babel-core": "~7.2.1-27"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.2.1-26",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-26"
+    "@gerhobbelt/babel-core": "7.2.1-27",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.1-27"
   }
 }

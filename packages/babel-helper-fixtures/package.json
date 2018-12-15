@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-fixtures",
-  "version": "7.2.1-26",
+  "version": "7.2.1-27",
   "description": "Helper function to support fixtures",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
   "license": "MIT",

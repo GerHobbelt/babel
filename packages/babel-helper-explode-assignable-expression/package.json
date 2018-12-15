@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-explode-assignable-expression",
-  "version": "7.2.1-26",
+  "version": "7.2.1-27",
   "description": "Helper function to explode an assignable expression",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-explode-assignable-expression",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-traverse": "7.2.1-26",
-    "@gerhobbelt/babel-types": "7.2.1-26"
+    "@gerhobbelt/babel-traverse": "7.2.1-27",
+    "@gerhobbelt/babel-types": "7.2.1-27"
   }
 }
