@@ -35,7 +35,8 @@ module.exports = {
             origin &&
             origin.kind === "import" &&
             origin.name === "declare" &&
-            origin.source === "@babel/helper-plugin-utils"
+            (origin.source === "@babel/helper-plugin-utils" ||
+              origin.source === "@gerhobbelt/babel-helper-plugin-utils")
           ) {
             plugin = plugin.arguments[0];
           }
