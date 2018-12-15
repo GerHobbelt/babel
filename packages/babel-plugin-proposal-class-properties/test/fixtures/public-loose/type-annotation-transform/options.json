@@ -1,11 +1,8 @@
 {
-  "presets": [
-    "env",
-    "flow"
-  ],
+  "presets": ["env", "flow"],
   "plugins": [
     "external-helpers",
-    ["proposal-class-properties", {"loose": true}],
+    ["proposal-class-properties", { "loose": true }],
     "transform-classes"
   ]
 }

@@ -1,12 +1,13 @@
 {
-  "plugins": [
-    ["proposal-decorators", { "legacy": true }]
-  ],
+  "plugins": [["proposal-decorators", { "legacy": true }]],
   "presets": [
-    ["env", {
-      "targets": {
-        "node": 8
+    [
+      "env",
+      {
+        "targets": {
+          "node": 8
+        }
       }
-    }]
+    ]
   ]
 }

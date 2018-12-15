@@ -1,8 +1,5 @@
 {
-  "presets": [
-    "env",
-    "flow"
-  ],
+  "presets": ["env", "flow"],
   "plugins": [
     "external-helpers",
     "proposal-class-properties",
