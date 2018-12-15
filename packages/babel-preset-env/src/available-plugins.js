@@ -1,6 +1,5 @@
 export default {
   "syntax-async-generators": require("@gerhobbelt/babel-plugin-syntax-async-generators"),
-  "syntax-class-properties": require("@gerhobbelt/babel-plugin-syntax-class-properties"),
   "syntax-object-rest-spread": require("@gerhobbelt/babel-plugin-syntax-object-rest-spread"),
   "syntax-optional-catch-binding": require("@gerhobbelt/babel-plugin-syntax-optional-catch-binding"),
   "transform-async-to-generator": require("@gerhobbelt/babel-plugin-transform-async-to-generator"),

@@ -28,7 +28,6 @@ export default declare((api, options) => {
     strictMode,
     noInterop,
     lazy = false,
-    throwOnUninitializedRead = false,
     // Defaulting to 'true' for now. May change before 7.x major.
     allowCommonJSExports = true,
   } = options;
@@ -155,7 +154,6 @@ export default declare((api, options) => {
               allowTopLevelThis,
               noInterop,
               lazy,
-              throwOnUninitializedRead,
               esNamespaceOnly:
                 typeof state.filename === "string" &&
                 /\.mjs$/.test(state.filename)

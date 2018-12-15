@@ -944,17 +944,6 @@ export default class Scope {
     return this.parent && this.parent.hasBinding(name, noGlobals);
   }
 
-  updateOwnBinding(id: t.Identifier, kind: string, path: NodePath) {
-    if (!kind) throw new ReferenceError("no `kind`");
-
-    const binding = this.getOwnBinding(id.name);
-    if (!binding) throw new ReferenceError(`Unknown binding: ${id.name}`);
-
-    binding.identifier = id;
-    binding.kind = kind;
-    binding.path = path;
-  }
-
   /**
    * Move a binding of `name` to another `scope`.
    */
