@@ -36,8 +36,6 @@ class ImportBuilder {
     this._importedSource = importedSource;
     this._statements = [];
     this._resultName = null;
-    this._scope = null;
-    this._hub = null;
   }
 
   done() {
