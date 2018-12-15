@@ -7,6 +7,7 @@
     "fix": "make fix",
     "lint": "make lint",
     "test": "make test",
+    "build-data": "make build-data",
     "pub": "make publish",
     "bump": "make update-version"
   },
@@ -187,7 +188,7 @@
     "chalk": "2.4.1",
     "charcodes": "0.1.1",
     "commander": "2.19.0",
-    "compat-table": "kangax/compat-table#7655c84581184806d4f94ef97fbaac7abd5852d8",
+    "compat-table": "kangax/compat-table#d7058cebbf31085fe464688f7012934a0b6cfaa9",
     "convert-source-map": "1.6.0",
     "core-js": "2.6.0",
     "debug": "4.1.0",

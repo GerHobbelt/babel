@@ -11,7 +11,7 @@ SOURCES = packages codemods
 	build-standalone build-preset-env-standalone prepublish-build-standalone prepublish-build-preset-env-standalone \
 	flow fix-json test-ci-coverage bootstrap-flow test-flow test-flow-ci test-flow-update-whitelist \
 	bootstrap-test262 test-test262 test-test262-ci test-test262-update-whitelist \
-	clone-license prepublish-build prepublish clean-lib superclean clean-all
+	clone-license prepublish-build prepublish clean-lib superclean clean-all build-data
 
 
 dev:
@@ -160,6 +160,10 @@ update-npm-packages:
 
 update-version:
 	node scripts/generators/package-version.js
+
+build-data:
+	node packages/babel-preset-env/scripts/build-data.js
+	node packages/babel-preset-env/scripts/build-modules-support.js
 
 clean-lib:
 	$(foreach source, $(SOURCES), \
