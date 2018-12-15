@@ -21,30 +21,39 @@ const errorVisitor = {
 };
 
 export default class File {
-  _map: Map<any, any> = new Map();
+  _map: Map<any, any>;
   opts: Object;
-  declarations: Object = {};
-  path: NodePath = null;
-  ast: Object = {};
+  declarations: Object;
+  path: NodePath;
+  ast: Object;
   scope: Scope;
-  metadata: {} = {};
-  code: string = "";
-  inputMap: Object | null = null;
+  metadata: {};
+  code: string;
+  inputMap: Object | null;
 
-  hub: HubInterface = {
-    // keep it for the usage in babel-core, ex: path.hub.file.opts.filename
-    file: this,
-    getCode: () => this.code,
-    getScope: () => this.scope,
-    addHelper: this.addHelper.bind(this),
-    buildError: this.buildCodeFrameError.bind(this),
-  };
+  hub: HubInterface;
 
   constructor(options: {}, { code, ast, inputMap }: NormalizedFile) {
     this.opts = options;
     this.code = code;
     this.ast = ast;
     this.inputMap = inputMap;
+
+    this._map = new Map();
+    this.declarations = {};
+    this.path = null;
+    this.metadata = {};
+    this.code = "";
+    this.inputMap = null;
+
+    this.hub = {
+      // keep it for the usage in babel-core, ex: path.hub.file.opts.filename
+      file: this,
+      getCode: () => this.code,
+      getScope: () => this.scope,
+      addHelper: this.addHelper.bind(this),
+      buildError: this.buildCodeFrameError.bind(this),
+    };
 
     this.path = NodePath.get({
       hub: this.hub,

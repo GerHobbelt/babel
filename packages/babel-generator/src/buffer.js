@@ -13,24 +13,32 @@ const SPACES_RE = /^[ \t]+$/;
 export default class Buffer {
   constructor(map: ?SourceMap) {
     this._map = map;
+
+    this._buf = [];
+    this._last = "";
+    this._queue = [];
+
+    this._position = {
+      line: 1,
+      column: 0,
+    };
+    this._sourcePosition = {
+      identifierName: null,
+      line: null,
+      column: null,
+      filename: null,
+    };
+    this._disallowedPop = null;
   }
 
-  _map: SourceMap = null;
-  _buf: Array = [];
-  _last: string = "";
-  _queue: Array = [];
+  _map: SourceMap;
+  _buf: Array;
+  _last: string;
+  _queue: Array;
 
-  _position: Object = {
-    line: 1,
-    column: 0,
-  };
-  _sourcePosition: Object = {
-    identifierName: null,
-    line: null,
-    column: null,
-    filename: null,
-  };
-  _disallowedPop: Object | null = null;
+  _position: Object;
+  _sourcePosition: Object;
+  _disallowedPop: Object | null;
 
   /**
    * Get the final string output from the buffer, along with the sourcemap if one exists.

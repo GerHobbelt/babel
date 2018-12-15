@@ -103,19 +103,28 @@ function makeCachedFunction<
 }
 
 class CacheConfigurator<SideChannel = void> {
-  _active: boolean = true;
-  _never: boolean = false;
-  _forever: boolean = false;
-  _invalidate: boolean = false;
+  _active: boolean;
+  _never: boolean;
+  _forever: boolean;
+  _invalidate: boolean;
 
-  _configured: boolean = false;
+  _configured: boolean;
 
-  _pairs: Array<[mixed, (SideChannel) => mixed]> = [];
+  _pairs: Array<[mixed, (SideChannel) => mixed]>;
 
   _data: SideChannel;
 
   constructor(data: SideChannel) {
     this._data = data;
+
+    this._active = true;
+    this._never = false;
+    this._forever = false;
+    this._invalidate = false;
+
+    this._configured = false;
+
+    this._pairs = [];
   }
 
   simple() {

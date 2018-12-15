@@ -8,7 +8,12 @@ module.exports = function(api) {
   const envOpts = {
     loose: true,
     modules: false,
+    debug: true,
     exclude: ["transform-typeof-symbol"],
+    targets: {
+      node: "4",
+      browsers: "> 5%",
+    },
   };
 
   let convertESM = true;
@@ -28,20 +33,10 @@ module.exports = function(api) {
       break;
     case "production":
       // Config during builds before publish.
-      envOpts.targets = {
-        node: "6.9",
-      };
       break;
     case "development":
-      envOpts.debug = true;
-      envOpts.targets = {
-        node: "current",
-      };
       break;
     case "test":
-      envOpts.targets = {
-        node: "current",
-      };
       break;
   }
 

@@ -180,13 +180,13 @@ export default class Scope {
    * Globals.
    */
 
-  static globals = Object.keys(globals.builtin);
+  static globals;
 
   /**
    * Variables available in current context.
    */
 
-  static contextVariables = ["arguments", "undefined", "Infinity", "NaN"];
+  static contextVariables;
 
   get parent() {
     const parent = this.path.findParent(p => p.isScope());
@@ -988,3 +988,7 @@ export default class Scope {
     } while ((scope = scope.parent));
   }
 }
+
+Scope.globals = Object.keys(globals.builtin);
+
+Scope.contextVariables = ["arguments", "undefined", "Infinity", "NaN"];

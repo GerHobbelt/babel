@@ -113,14 +113,7 @@ export default class ImportInjector {
   /**
    * The default options to use with this instance when imports are added.
    */
-  _defaultOpts: ImportOptions = {
-    importedSource: null,
-    importedType: "commonjs",
-    importedInterop: "babel",
-    importingInterop: "babel",
-    ensureLiveReference: false,
-    ensureNoContext: false,
-  };
+  _defaultOpts: ImportOptions;
 
   constructor(path, importedSource, opts) {
     const programPath = path.find(p => p.isProgram());
@@ -129,6 +122,14 @@ export default class ImportInjector {
     this._programScope = programPath.scope;
     this._hub = programPath.hub;
 
+    this._defaultOpts = {
+      importedSource: null,
+      importedType: "commonjs",
+      importedInterop: "babel",
+      importingInterop: "babel",
+      ensureLiveReference: false,
+      ensureNoContext: false,
+    };
     this._defaultOpts = this._applyDefaults(importedSource, opts, true);
   }
 

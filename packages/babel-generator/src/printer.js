@@ -32,22 +32,35 @@ export default class Printer {
   constructor(format, map) {
     this.format = format || {};
     this._buf = new Buffer(map);
+
+    this.inForStatementInitCounter = 0;
+
+    this._printStack = [];
+    this._indent = 0;
+    this._insideAux = false;
+    this._printedCommentStarts = {};
+    this._parenPushNewlineState = null;
+    this._noLineTerminator = false;
+    this._printAuxAfterOnNextUserNode = false;
+    this._printedComments = new WeakSet();
+    this._endsWithInteger = false;
+    this._endsWithWord = false;
   }
 
   format: Format;
-  inForStatementInitCounter: number = 0;
+  inForStatementInitCounter: number;
 
   _buf: Buffer;
-  _printStack: Array<Node> = [];
-  _indent: number = 0;
-  _insideAux: boolean = false;
-  _printedCommentStarts: Object = {};
-  _parenPushNewlineState: ?Object = null;
-  _noLineTerminator: boolean = false;
-  _printAuxAfterOnNextUserNode: boolean = false;
-  _printedComments: WeakSet = new WeakSet();
-  _endsWithInteger = false;
-  _endsWithWord = false;
+  _printStack: Array<Node>;
+  _indent: number;
+  _insideAux: boolean;
+  _printedCommentStarts: Object;
+  _parenPushNewlineState: ?Object;
+  _noLineTerminator: boolean;
+  _printAuxAfterOnNextUserNode: boolean;
+  _printedComments: WeakSet;
+  _endsWithInteger: boolean;
+  _endsWithWord: boolean;
 
   generate(ast) {
     this.print(ast);

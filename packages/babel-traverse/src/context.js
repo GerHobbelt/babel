@@ -9,13 +9,15 @@ export default class TraversalContext {
     this.scope = scope;
     this.state = state;
     this.opts = opts;
+
+    this.queue = null;
   }
 
   parentPath: NodePath;
   scope;
   state;
   opts;
-  queue: ?Array<NodePath> = null;
+  queue: ?Array<NodePath>;
 
   /**
    * This method does a simple check to determine whether or not we really need to attempt

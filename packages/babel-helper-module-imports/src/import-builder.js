@@ -6,16 +6,16 @@ import * as t from "@gerhobbelt/babel-types";
  * output a new require/import statement list.
  */
 export default class ImportBuilder {
-  _statements = [];
-  _resultName = null;
-
-  _scope = null;
-  _hub = null;
-
   constructor(importedSource, scope, hub) {
     this._scope = scope;
     this._hub = hub;
     this._importedSource = importedSource;
+
+    this._statements = [];
+    this._resultName = null;
+
+    this._scope = null;
+    this._hub = null;
   }
 
   done() {

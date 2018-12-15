@@ -3,7 +3,7 @@
 import type File from "./file/file";
 
 export default class PluginPass {
-  _map: Map<mixed, mixed> = new Map();
+  _map: Map<mixed, mixed>;
   key: ?string;
   file: File;
   opts: Object;
@@ -21,6 +21,8 @@ export default class PluginPass {
     this.opts = options || {};
     this.cwd = file.opts.cwd;
     this.filename = file.opts.filename;
+
+    this._map = new Map();
   }
 
   set(key: mixed, val: mixed) {
