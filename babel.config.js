@@ -11,8 +11,12 @@ module.exports = function(api) {
     debug: true,
     exclude: ["transform-typeof-symbol"],
     targets: {
-      node: "4",
-      browsers: "> 5%",
+      node: "current",
+
+      // node: "6.9",
+
+      // node: "4",
+      // browsers: "> 5%",
     },
   };
 

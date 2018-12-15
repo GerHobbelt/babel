@@ -13,9 +13,6 @@ export default class ImportBuilder {
 
     this._statements = [];
     this._resultName = null;
-
-    this._scope = null;
-    this._hub = null;
   }
 
   done() {
