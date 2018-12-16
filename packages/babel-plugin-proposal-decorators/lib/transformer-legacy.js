@@ -149,8 +149,6 @@ var _default = {
 
     if (replacement) {
       path.replaceWith(replacement);
-      const decl = path.get("declarations.0");
-      path.scope.updateOwnBinding(decl.node.id, path.node.kind, decl);
     }
   },
 

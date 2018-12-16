@@ -58,7 +58,6 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
     strictMode,
     noInterop,
     lazy = false,
-    throwOnUninitializedRead = false,
     allowCommonJSExports = true
   } = options;
 
@@ -161,7 +160,6 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, options) => {
             allowTopLevelThis,
             noInterop,
             lazy,
-            throwOnUninitializedRead,
             esNamespaceOnly: typeof state.filename === "string" && /\.mjs$/.test(state.filename) ? mjsStrictNamespace : strictNamespace
           });
 

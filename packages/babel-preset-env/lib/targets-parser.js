@@ -95,20 +95,6 @@ const mergeBrowsers = (fromQuery, fromTarget) => {
   }, fromQuery);
 };
 
-const injectCurrentNodeVersion = browser => {
-  return browser.replace(/(current node)|(node current)/, `node ${(0, _utils.roundToMinor)(process.versions.node)}`);
-};
-
-const normalizeBrowsers = browsers => {
-  if (!browsers) return browsers;
-
-  if (typeof browsers === "string") {
-    return injectCurrentNodeVersion(browsers);
-  }
-
-  return browsers.map(injectCurrentNodeVersion);
-};
-
 const getLowestVersions = browsers => {
   return browsers.reduce((all, browser) => {
     const [browserName, browserVersion] = browser.split(" ");
@@ -189,16 +175,14 @@ const getTargets = (targets = {}, options = {}) => {
     targets.browsers = Object.keys(supportsESModules).map(browser => `${browser} ${supportsESModules[browser]}`).join(", ");
   }
 
-  let browsersquery = validateBrowsers(targets.browsers);
-  browsersquery = normalizeBrowsers(targets.browsers);
+  const browsersquery = validateBrowsers(targets.browsers);
   const shouldParseBrowsers = !!targets.browsers;
   const shouldSearchForConfig = !options.ignoreBrowserslistConfig && !Object.keys(targets).length;
 
   if (shouldParseBrowsers || shouldSearchForConfig) {
     _browserslist().default.defaults = (0, _normalizeOptions.objectToBrowserslist)(targets);
     const browsers = (0, _browserslist().default)(browsersquery, {
-      path: options.configPath,
-      ignoreUnknownVersions: true
+      path: options.configPath
     });
     const queryBrowsers = getLowestVersions(browsers);
     targets = mergeBrowsers(queryBrowsers, targets);

@@ -858,15 +858,6 @@ class Scope {
     return this.parent && this.parent.hasBinding(name, noGlobals);
   }
 
-  updateOwnBinding(id, kind, path) {
-    if (!kind) throw new ReferenceError("no `kind`");
-    const binding = this.getOwnBinding(id.name);
-    if (!binding) throw new ReferenceError(`Unknown binding: ${id.name}`);
-    binding.identifier = id;
-    binding.kind = kind;
-    binding.path = path;
-  }
-
   moveBindingTo(name, scope) {
     const info = this.getBinding(name);
 

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isRequire = exports.createImport = exports.getModulePath = exports.isPolyfillSource = exports.filterStageFromList = exports.getLowestUnreleased = exports.isUnreleasedVersion = exports.prettifyTargets = exports.prettifyVersion = exports.findSuggestion = exports.getValues = exports.roundToMinor = exports.semverify = void 0;
+exports.isRequire = exports.createImport = exports.getModulePath = exports.isPolyfillSource = exports.filterStageFromList = exports.getLowestUnreleased = exports.isUnreleasedVersion = exports.prettifyTargets = exports.prettifyVersion = exports.findSuggestion = exports.getValues = exports.semverify = void 0;
 
 function _assert() {
   const data = _interopRequireDefault(require("assert"));
@@ -69,12 +69,6 @@ const semverify = version => {
 };
 
 exports.semverify = semverify;
-
-const roundToMinor = version => {
-  return `${_semver().default.major(version)}.${_semver().default.minor(version)}.0`;
-};
-
-exports.roundToMinor = roundToMinor;
 
 const getValues = object => Object.keys(object).map(key => object[key]);
 

@@ -227,9 +227,9 @@ function transformClass(path, file, builtinClasses, isLoose) {
     for (const path of classBodyPaths) {
       const node = path.node;
 
-      if (path.isClassProperty()) {
-        throw path.buildCodeFrameError("Missing class properties transform.");
-      }
+      // if (path.isClassProperty()) {
+      //   throw path.buildCodeFrameError("Missing class properties transform.");
+      // }
 
       if (node.decorators) {
         throw path.buildCodeFrameError("Method has decorators, put the decorator plugin before the classes one.");

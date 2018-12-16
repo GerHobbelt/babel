@@ -94,7 +94,6 @@ function rewriteModuleStatementsAndPrepareHeader(path, {
   loose,
   noInterop,
   lazy,
-  throwOnUninitializedRead,
   esNamespaceOnly
 }) {
   (0, _assert().default)((0, _babelHelperModuleImports().isModule)(path), "Cannot process module statements in a script");
@@ -135,7 +134,7 @@ function rewriteModuleStatementsAndPrepareHeader(path, {
     headers.push(nameList.statement);
   }
 
-  headers.push(...buildExportInitializationStatements(path, meta, loose, throwOnUninitializedRead));
+  headers.push(...buildExportInitializationStatements(path, meta, loose));
   return {
     meta,
     headers
@@ -304,7 +303,7 @@ function buildExportNameListDeclaration(programPath, metadata) {
   };
 }
 
-function buildExportInitializationStatements(programPath, metadata, loose = false, throwOnUninitializedRead = false) {
+function buildExportInitializationStatements(programPath, metadata, loose = false) {
   const initStatements = [];
   const exportNames = [];
 
@@ -326,51 +325,10 @@ function buildExportInitializationStatements(programPath, metadata, loose = fals
     }
   }
 
-  if (throwOnUninitializedRead) {
-    const setterParam = programPath.scope.generateUidIdentifier("v");
-
-    for (const exportName of exportNames) {
-      initStatements.push(...buildThrowInitStatements(metadata, exportName, setterParam, programPath.scope));
-    }
-  } else {
-    initStatements.push(...(0, _chunk().default)(exportNames, 100).map(members => {
-      return buildInitStatement(metadata, members, programPath.scope.buildUndefinedNode());
-    }));
-  }
-
+  initStatements.push(...(0, _chunk().default)(exportNames, 100).map(members => {
+    return buildInitStatement(metadata, members, programPath.scope.buildUndefinedNode());
+  }));
   return initStatements;
-}
-
-function buildThrowInitStatements(metadata, exportName, setterParam, scope) {
-  const storage = scope.generateUidIdentifier(exportName + "_storage");
-  const set = scope.generateUidIdentifier(exportName + "_set");
-  return _babelTemplate().default.statements`
-    var STORAGE, SET = false;
-    Object.defineProperty(EXPORTS, NAME, {
-      get: function(){
-        if (SET === false) {
-          throw new Error(GET_ERROR);
-        }
-        return STORAGE;
-      },
-      set: function(SETTER_PARAM){
-        if (SET) {
-          throw new Error(SET_ERROR);
-        }
-        SET = true;
-        STORAGE = SETTER_PARAM;
-      },
-      enumerable: true,
-    });
-  `({
-    STORAGE: storage,
-    SET: set,
-    SETTER_PARAM: setterParam,
-    EXPORTS: metadata.exportName,
-    NAME: t().stringLiteral(exportName),
-    GET_ERROR: t().stringLiteral(`Cannot access uninitialized export ${exportName}`),
-    SET_ERROR: t().stringLiteral(`Cannot reassign exported value ${exportName}`)
-  });
 }
 
 function buildInitStatement(metadata, exportNames, initExpr) {

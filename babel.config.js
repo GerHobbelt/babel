@@ -14,6 +14,7 @@ module.exports = function(api) {
       // node: "current",
 
       // node: "6.9",
+      // node: "8.11",
 
       node: "4",
       // browsers: "> 5%",
