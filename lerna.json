@@ -1,6 +1,5 @@
 {
-  "lerna": "2.11.0",
-  "version": "7.2.2-27",
+  "version": "7.2.4-27",
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.2.2-27"
   },
@@ -21,17 +20,17 @@
     "publish": {
       "ignoreChanges": [
         "*.md",
-        "*.json",
         "*.txt",
         "test/**",
         "codemods/**",
-        "package.json"
+        "# We ignore every JSON file, except for built-in-modules, built-ins and plugins defined in babel-preset-env/data.",
+        "@(!(built-in-modules|built-ins|plugins)).json"
       ]
     }
   },
   "packages": [
-    "packages/*",
-    "codemods/*"
+    "codemods/*",
+    "packages/*"
   ],
   "npmClient": "npm",
   "npmClientArgs": [

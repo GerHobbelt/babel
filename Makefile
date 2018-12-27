@@ -142,7 +142,7 @@ prepublish:
 publish: prepublish
 	# --only-explicit-updates
     #
-	#./node_modules/.bin/lerna publish --force-publish="@babel/runtime,@babel/runtime-corejs2" --dangerously-only-publish-explicit-updates-this-is-a-custom-flag-for-babel-and-you-should-not-be-using-it-just-deal-with-more-packages-being-published-it-is-not-a-big-deal
+	#./node_modules/.bin/lerna publish --force-publish="@babel/runtime,@babel/runtime-corejs2,@babel/standalone,@babel/preset-env-standalone" --require-scripts
 	#
 	#./node_modules/.bin/lerna publish --exact --skip-temp-tag --skip-npm --skip-git --repo-version 7.0.0-49.7
 	#make clean
