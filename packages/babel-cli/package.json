@@ -19,6 +19,7 @@
     "compiler"
   ],
   "dependencies": {
+    "@gerhobbelt/debug": "3.1.1-1",
     "commander": "^2.19.0",
     "convert-source-map": "^1.6.0",
     "fs-readdir-recursive": "^1.1.0",
