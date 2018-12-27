@@ -172,7 +172,7 @@
     "@gerhobbelt/babel-template": "7.2.1-26",
     "@gerhobbelt/babel-traverse": "7.2.1-26",
     "@gerhobbelt/babel-types": "7.2.1-26",
-    "@gerhobbelt/debug": "3.1.1-1",
+    "@gerhobbelt/debug": "4.1.1-4",
     "@gerhobbelt/gulp-babel": "8.0.0-4",
     "@gerhobbelt/json5": "2.0.1-37",
     "@gerhobbelt/rollup-plugin-babel": "4.0.3-4",
