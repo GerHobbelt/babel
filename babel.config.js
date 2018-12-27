@@ -8,7 +8,7 @@ module.exports = function(api) {
   const envOpts = {
     loose: true,
     modules: false,
-    debug: true,
+    //debug: true,
     exclude: ["transform-typeof-symbol"],
     targets: {
       node: "current",
