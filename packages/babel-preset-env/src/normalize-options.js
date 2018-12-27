@@ -203,6 +203,11 @@ export default function normalizeOptions(opts: Options) {
       opts.forceAllTransforms,
       false,
     ),
+    forwardEnv: validateBoolOption(
+      TopLevelOptions.forwardEnv,
+      opts.forwardEnv,
+      false,
+    ),
     ignoreBrowserslistConfig: validateIgnoreBrowserslistConfig(
       opts.ignoreBrowserslistConfig,
     ),

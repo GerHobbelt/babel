@@ -167,6 +167,7 @@ export default declare((api, opts) => {
     debug,
     exclude: optionsExclude,
     forceAllTransforms,
+    forwardEnv,
     ignoreBrowserslistConfig,
     include: optionsInclude,
     loose,
@@ -198,6 +199,7 @@ export default declare((api, opts) => {
   const targets = getTargets(optionsTargets, {
     ignoreBrowserslistConfig,
     configPath,
+    env: forwardEnv ? api.env() : undefined,
   });
   const include = transformIncludesAndExcludes(optionsInclude);
   const exclude = transformIncludesAndExcludes(optionsExclude);
