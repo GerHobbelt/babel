@@ -79,7 +79,7 @@ const expandIncludesAndExcludes = (plugins = [], type) => {
 
 const validBrowserslistTargets = [...Object.keys(_browserslist().default.data), ...Object.keys(_browserslist().default.aliases)];
 
-const normalizePluginName = plugin => plugin.replace(/^babel-plugin-/, "");
+const normalizePluginName = plugin => plugin.replace(/^(@babel\/|babel-)(plugin-)?/, "");
 
 exports.normalizePluginName = normalizePluginName;
 
@@ -167,6 +167,7 @@ function normalizeOptions(opts) {
     include,
     exclude,
     forceAllTransforms: validateBoolOption(_options.TopLevelOptions.forceAllTransforms, opts.forceAllTransforms, false),
+    forwardEnv: validateBoolOption(_options.TopLevelOptions.forwardEnv, opts.forwardEnv, false),
     ignoreBrowserslistConfig: validateIgnoreBrowserslistConfig(opts.ignoreBrowserslistConfig),
     loose: validateBoolOption(_options.TopLevelOptions.loose, opts.loose, false),
     modules: validateModulesOption(opts.modules),

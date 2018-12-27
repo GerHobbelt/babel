@@ -9,6 +9,7 @@ const TopLevelOptions = {
   debug: "debug",
   exclude: "exclude",
   forceAllTransforms: "forceAllTransforms",
+  forwardEnv: "forwardEnv",
   ignoreBrowserslistConfig: "ignoreBrowserslistConfig",
   include: "include",
   loose: "loose",

@@ -157,6 +157,7 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, opts) => {
     debug,
     exclude: optionsExclude,
     forceAllTransforms,
+    forwardEnv,
     ignoreBrowserslistConfig,
     include: optionsInclude,
     loose,
@@ -180,7 +181,8 @@ var _default = (0, _babelHelperPluginUtils().declare)((api, opts) => {
 
   const targets = (0, _targetsParser.default)(optionsTargets, {
     ignoreBrowserslistConfig,
-    configPath
+    configPath,
+    env: forwardEnv ? api.env() : undefined
   });
   const include = transformIncludesAndExcludes(optionsInclude);
   const exclude = transformIncludesAndExcludes(optionsExclude);

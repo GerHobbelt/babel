@@ -107,7 +107,9 @@ const types = {
     startsExpr
   }),
   at: new TokenType("@"),
-  hash: new TokenType("#"),
+  hash: new TokenType("#", {
+    startsExpr
+  }),
   interpreterDirective: new TokenType("#!..."),
   eq: new TokenType("=", {
     beforeExpr,
@@ -1797,6 +1799,10 @@ var flow = (superClass => class extends superClass {
       default:
         if (this.state.type.keyword === "typeof") {
           return this.flowParseTypeofType();
+        } else if (this.state.type.keyword) {
+          const label = this.state.type.label;
+          this.next();
+          return super.createIdentifier(node, label);
         }
 
     }
@@ -8611,6 +8617,9 @@ function keywordTypeFromName(value) {
 
     case "boolean":
       return "TSBooleanKeyword";
+
+    case "bigint":
+      return "TSBigIntKeyword";
 
     case "never":
       return "TSNeverKeyword";

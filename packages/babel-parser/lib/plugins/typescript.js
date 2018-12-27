@@ -39,6 +39,9 @@ function keywordTypeFromName(value) {
     case "boolean":
       return "TSBooleanKeyword";
 
+    case "bigint":
+      return "TSBigIntKeyword";
+
     case "never":
       return "TSNeverKeyword";
 

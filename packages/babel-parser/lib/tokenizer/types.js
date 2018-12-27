@@ -112,7 +112,9 @@ const types = {
     startsExpr
   }),
   at: new TokenType("@"),
-  hash: new TokenType("#"),
+  hash: new TokenType("#", {
+    startsExpr
+  }),
   interpreterDirective: new TokenType("#!..."),
   eq: new TokenType("=", {
     beforeExpr,

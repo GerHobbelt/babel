@@ -1494,6 +1494,52 @@ export type JSX = JSXAttribute | JSXClosingElement | JSXElement | JSXEmptyExpres
 export type Private = ClassPrivateProperty | ClassPrivateMethod | PrivateName;
 export type TSTypeElement = TSCallSignatureDeclaration | TSConstructSignatureDeclaration | TSPropertySignature | TSMethodSignature | TSIndexSignature;
 export type TSType = TSAnyKeyword | TSUnknownKeyword | TSNumberKeyword | TSObjectKeyword | TSBooleanKeyword | TSStringKeyword | TSSymbolKeyword | TSVoidKeyword | TSUndefinedKeyword | TSNullKeyword | TSNeverKeyword | TSThisType | TSFunctionType | TSConstructorType | TSTypeReference | TSTypePredicate | TSTypeQuery | TSTypeLiteral | TSArrayType | TSTupleType | TSOptionalType | TSRestType | TSUnionType | TSIntersectionType | TSConditionalType | TSInferType | TSParenthesizedType | TSTypeOperator | TSIndexedAccessType | TSMappedType | TSLiteralType | TSExpressionWithTypeArguments;
+
+export interface Aliases {
+  Expression: Expression;
+  Binary: Binary;
+  Scopable: Scopable;
+  BlockParent: BlockParent;
+  Block: Block;
+  Statement: Statement;
+  Terminatorless: Terminatorless;
+  CompletionStatement: CompletionStatement;
+  Conditional: Conditional;
+  Loop: Loop;
+  While: While;
+  ExpressionWrapper: ExpressionWrapper;
+  For: For;
+  ForXStatement: ForXStatement;
+  Function: Function;
+  FunctionParent: FunctionParent;
+  Pureish: Pureish;
+  Declaration: Declaration;
+  PatternLike: PatternLike;
+  LVal: LVal;
+  TSEntityName: TSEntityName;
+  Literal: Literal;
+  Immutable: Immutable;
+  UserWhitespacable: UserWhitespacable;
+  Method: Method;
+  ObjectMember: ObjectMember;
+  Property: Property;
+  UnaryLike: UnaryLike;
+  Pattern: Pattern;
+  Class: Class;
+  ModuleDeclaration: ModuleDeclaration;
+  ExportDeclaration: ExportDeclaration;
+  ModuleSpecifier: ModuleSpecifier;
+  Flow: Flow;
+  FlowType: FlowType;
+  FlowBaseAnnotation: FlowBaseAnnotation;
+  FlowDeclaration: FlowDeclaration;
+  FlowPredicate: FlowPredicate;
+  JSX: JSX;
+  Private: Private;
+  TSTypeElement: TSTypeElement;
+  TSType: TSType;
+}
+
 export function arrayExpression(elements?: Array<null | Expression | SpreadElement>): ArrayExpression;
 export function assignmentExpression(operator: string, left: LVal, right: Expression): AssignmentExpression;
 export function binaryExpression(operator: "+" | "-" | "/" | "%" | "*" | "**" | "&" | "|" | ">>" | ">>>" | "<<" | "^" | "==" | "===" | "!=" | "!==" | "in" | "instanceof" | ">" | "<" | ">=" | "<=", left: Expression, right: Expression): BinaryExpression;

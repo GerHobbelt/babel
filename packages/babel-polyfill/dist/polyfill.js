@@ -771,7 +771,7 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
 };
 
 },{"14":14,"39":39,"41":41,"44":44,"45":45,"50":50,"56":56,"61":61,"69":69,"92":92,"93":93,"99":99}],29:[function(_dereq_,module,exports){
-var core = module.exports = { version: '2.6.0' };
+var core = module.exports = { version: '2.6.1' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 },{}],30:[function(_dereq_,module,exports){
@@ -5135,7 +5135,7 @@ var SUPPORTS_Y = !!(function () { try { return new RegExp('x', 'y'); } catch (e)
 
 // @@split logic
 _dereq_(42)('split', 2, function (defined, SPLIT, $split, maybeCallNative) {
-  var internalSplit = $split;
+  var internalSplit;
   if (
     'abbc'[$SPLIT](/(b)*/)[1] == 'c' ||
     'test'[$SPLIT](/(?:)/, -1)[LENGTH] != 4 ||
@@ -5181,6 +5181,8 @@ _dereq_(42)('split', 2, function (defined, SPLIT, $split, maybeCallNative) {
     internalSplit = function (separator, limit) {
       return separator === undefined && limit === 0 ? [] : $split.call(this, separator, limit);
     };
+  } else {
+    internalSplit = $split;
   }
 
   return [
