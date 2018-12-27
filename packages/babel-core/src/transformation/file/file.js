@@ -43,8 +43,6 @@ export default class File {
     this.declarations = {};
     this.path = null;
     this.metadata = {};
-    this.code = "";
-    this.inputMap = null;
 
     this.hub = {
       // keep it for the usage in babel-core, ex: path.hub.file.opts.filename
