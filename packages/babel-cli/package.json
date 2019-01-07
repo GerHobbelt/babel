@@ -19,6 +19,7 @@
     "compiler"
   ],
   "dependencies": {
+    "@gerhobbelt/babel-core": "7.2.2-27",
     "@gerhobbelt/debug": "4.1.1-4",
     "commander": "^2.19.0",
     "convert-source-map": "^1.6.0",
@@ -33,10 +34,8 @@
     "chokidar": "^2.0.4"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.2.2-27"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.2.2-27",
     "@gerhobbelt/babel-helper-fixtures": "7.2.2-27",
     "unify-paths": "^1.0.1"
   },
