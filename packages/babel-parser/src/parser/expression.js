@@ -126,12 +126,18 @@ export default class ExpressionParser extends LValParser {
   ): N.Expression {
     const startPos = this.state.start;
     const startLoc = this.state.startLoc;
-    if (this.match(tt._yield) && this.state.inGenerator) {
-      let left = this.parseYield();
-      if (afterLeftParse) {
-        left = afterLeftParse.call(this, left, startPos, startLoc);
+    if (this.isContextual("yield")) {
+      if (this.state.inGenerator) {
+        let left = this.parseYield(noIn);
+        if (afterLeftParse) {
+          left = afterLeftParse.call(this, left, startPos, startLoc);
+        }
+        return left;
+      } else {
+        // The tokenizer will assume an expression is allowed after
+        // `yield`, but this isn't that kind of yield
+        this.state.exprAllowed = false;
       }
-      return left;
     }
 
     const oldCommaAfterSpreadAt = this.state.commaAfterSpreadAt;
@@ -145,7 +151,7 @@ export default class ExpressionParser extends LValParser {
       failOnShorthandAssign = true;
     }
 
-    if (this.match(tt.parenL) || this.match(tt.name) || this.match(tt._yield)) {
+    if (this.match(tt.parenL) || this.match(tt.name)) {
       this.state.potentialArrowAt = this.state.start;
     }
 
@@ -412,7 +418,13 @@ export default class ExpressionParser extends LValParser {
   // Parse unary operators, both prefix and postfix.
 
   parseMaybeUnary(refShorthandDefaultPos: ?Pos): N.Expression {
-    if (this.state.type.prefix) {
+    if (
+      this.isContextual("await") &&
+      (this.state.inAsync ||
+        (!this.state.inFunction && this.options.allowAwaitOutsideFunction))
+    ) {
+      return this.parseAwait();
+    } else if (this.state.type.prefix) {
       const node = this.startNode();
       const update = this.match(tt.incDec);
       node.operator = this.state.value;
@@ -841,29 +853,12 @@ export default class ExpressionParser extends LValParser {
         this.next();
         return this.finishNode(node, "ThisExpression");
 
-      case tt._yield:
-        if (this.state.inGenerator) this.unexpected();
-
       case tt.name: {
         node = this.startNode();
-        const allowAwait =
-          this.state.value === "await" &&
-          (this.state.inAsync ||
-            (!this.state.inFunction && this.options.allowAwaitOutsideFunction));
-
         const containsEsc = this.state.containsEsc;
-        const allowYield = this.shouldAllowYieldIdentifier();
-        const id = this.parseIdentifier(allowAwait || allowYield);
+        const id = this.parseIdentifier();
 
-        if (id.name === "await") {
-          if (
-            this.state.inAsync ||
-            this.inModule ||
-            (!this.state.inFunction && this.options.allowAwaitOutsideFunction)
-          ) {
-            return this.parseAwait(node);
-          }
-        } else if (
+        if (
           !containsEsc &&
           id.name === "async" &&
           this.match(tt._function) &&
@@ -1835,17 +1830,14 @@ export default class ExpressionParser extends LValParser {
     if (isExpression) {
       node.body = this.parseMaybeAssign();
     } else {
-      // Start a new scope with regard to labels and the `inGenerator`
+      // Start a new scope with regard to labels
       // flag (restore them to their old value afterwards).
-      const oldInGen = this.state.inGenerator;
       const oldInFunc = this.state.inFunction;
       const oldLabels = this.state.labels;
-      this.state.inGenerator = node.generator;
       this.state.inFunction = true;
       this.state.labels = [];
       node.body = this.parseBlock(true);
       this.state.inFunction = oldInFunc;
-      this.state.inGenerator = oldInGen;
       this.state.labels = oldLabels;
     }
 
@@ -1959,15 +1951,6 @@ export default class ExpressionParser extends LValParser {
   }
 
   parseIdentifierName(pos: number, liberal?: boolean): string {
-    if (!liberal) {
-      this.checkReservedWord(
-        this.state.value,
-        this.state.start,
-        !!this.state.type.keyword,
-        false,
-      );
-    }
-
     let name: string;
 
     if (this.match(tt.name)) {
@@ -1992,11 +1975,17 @@ export default class ExpressionParser extends LValParser {
       throw this.unexpected();
     }
 
-    if (!liberal && name === "await" && this.state.inAsync) {
-      this.raise(pos, "invalid use of await inside of an async function");
+    if (!liberal) {
+      this.checkReservedWord(
+        name,
+        this.state.start,
+        !!this.state.type.keyword,
+        false,
+      );
     }
 
     this.next();
+
     return name;
   }
 
@@ -2006,18 +1995,17 @@ export default class ExpressionParser extends LValParser {
     checkKeywords: boolean,
     isBinding: boolean,
   ): void {
-    if (
-      this.state.strict &&
-      (isStrictReservedWord(word) ||
-        (isBinding && isStrictBindReservedWord(word)))
-    ) {
-      this.raise(startLoc, word + " is a reserved word in strict mode");
-    }
-
     if (this.state.inGenerator && word === "yield") {
       this.raise(
         startLoc,
-        "yield is a reserved word inside generator functions",
+        "Can not use 'yield' as identifier inside a generator",
+      );
+    }
+
+    if (this.state.inAsync && word === "await") {
+      this.raise(
+        startLoc,
+        "Can not use 'await' as identifier inside an async function",
       );
     }
 
@@ -2029,20 +2017,40 @@ export default class ExpressionParser extends LValParser {
     }
 
     if (this.isReservedWord(word) || (checkKeywords && isKeyword(word))) {
+      if (!this.state.inAsync && word === "await") {
+        this.raise(
+          startLoc,
+          "Can not use keyword 'await' outside an async function",
+        );
+      }
       this.raise(startLoc, word + " is a reserved word");
+    }
+
+    if (
+      this.state.strict &&
+      (isStrictReservedWord(word) ||
+        (isBinding && isStrictBindReservedWord(word)))
+    ) {
+      this.raise(startLoc, word + " is a reserved word in strict mode");
     }
   }
 
   // Parses await expression inside async function.
 
-  parseAwait(node: N.AwaitExpression): N.AwaitExpression {
-    // istanbul ignore next: this condition is checked at the call site so won't be hit here
+  parseAwait(): N.AwaitExpression {
+    const node = this.startNode();
+
     if (
-      !this.state.inAsync &&
-      (this.state.inFunction || !this.options.allowAwaitOutsideFunction)
+      this.state.maybeInArrowParameters &&
+      // We only set yieldOrAwaitInPossibleArrowParameters if we haven't already
+      // found a possible invalid AwaitExpression.
+      !this.state.yieldOrAwaitInPossibleArrowParameters
     ) {
-      this.unexpected();
+      this.state.yieldOrAwaitInPossibleArrowParameters = node;
     }
+
+    this.next();
+
     if (this.state.inParameters) {
       this.raise(
         node.start,
@@ -2055,14 +2063,6 @@ export default class ExpressionParser extends LValParser {
         "await* has been removed from the async functions proposal. Use Promise.all() instead.",
       );
     }
-    if (
-      this.state.maybeInArrowParameters &&
-      // We only set yieldOrAwaitInPossibleArrowParameters if we haven't already
-      // found a possible invalid AwaitExpression.
-      !this.state.yieldOrAwaitInPossibleArrowParameters
-    ) {
-      this.state.yieldOrAwaitInPossibleArrowParameters = node;
-    }
 
     node.argument = this.parseMaybeUnary();
     return this.finishNode(node, "AwaitExpression");
@@ -2070,7 +2070,7 @@ export default class ExpressionParser extends LValParser {
 
   // Parses yield expression inside generator.
 
-  parseYield(): N.YieldExpression {
+  parseYield(noIn?: ?boolean): N.YieldExpression {
     const node = this.startNode();
 
     if (this.state.inParameters) {
@@ -2095,7 +2095,7 @@ export default class ExpressionParser extends LValParser {
       node.argument = null;
     } else {
       node.delegate = this.eat(tt.star);
-      node.argument = this.parseMaybeAssign();
+      node.argument = this.parseMaybeAssign(noIn);
     }
     return this.finishNode(node, "YieldExpression");
   }

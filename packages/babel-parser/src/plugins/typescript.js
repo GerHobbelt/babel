@@ -1191,8 +1191,15 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       if (this.isLineTerminator()) {
         return;
       }
+      let starttype = this.state.type;
+      let kind;
 
-      switch (this.state.type) {
+      if (this.isContextual("let")) {
+        starttype = tt._var;
+        kind = "let";
+      }
+
+      switch (starttype) {
         case tt._function:
           this.next();
           return this.parseFunction(nany, /* isStatement */ true);
@@ -1211,8 +1218,8 @@ export default (superClass: Class<Parser>): Class<Parser> =>
           }
         // falls through
         case tt._var:
-        case tt._let:
-          return this.parseVarStatement(nany, this.state.type);
+          kind = kind || this.state.value;
+          return this.parseVarStatement(nany, kind);
         case tt.name: {
           const value = this.state.value;
           if (value === "global") {
@@ -1616,16 +1623,14 @@ export default (superClass: Class<Parser>): Class<Parser> =>
     */
     checkDuplicateExports() {}
 
-    parseImport(
-      node: N.Node,
-    ): N.ImportDeclaration | N.TsImportEqualsDeclaration {
+    parseImport(node: N.Node): N.AnyImport {
       if (this.match(tt.name) && this.lookahead().type === tt.eq) {
         return this.tsParseImportEqualsDeclaration(node);
       }
       return super.parseImport(node);
     }
 
-    parseExport(node: N.Node): N.Node {
+    parseExport(node: N.Node): N.AnyExport {
       if (this.match(tt._import)) {
         // `export import A = B;`
         this.expect(tt._import);
@@ -1849,10 +1854,15 @@ export default (superClass: Class<Parser>): Class<Parser> =>
     }
 
     parseExportDeclaration(node: N.ExportNamedDeclaration): ?N.Declaration {
+      // Store original location/position
+      const startPos = this.state.start;
+      const startLoc = this.state.startLoc;
+
       // "export declare" is equivalent to just "export".
       const isDeclare = this.eatContextual("declare");
 
       let declaration: ?N.Declaration;
+
       if (this.match(tt.name)) {
         declaration = this.tsTryParseExportDeclaration();
       }
@@ -1861,6 +1871,9 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       }
 
       if (declaration && isDeclare) {
+        // Reset location to include `declare` in range
+        this.resetStartLocation(declaration, startPos, startLoc);
+
         declaration.declare = true;
       }
 
@@ -1944,8 +1957,11 @@ export default (superClass: Class<Parser>): Class<Parser> =>
     }
 
     // `let x: number;`
-    parseVarHead(decl: N.VariableDeclarator): void {
-      super.parseVarHead(decl);
+    parseVarId(
+      decl: N.VariableDeclarator,
+      kind: "var" | "let" | "const",
+    ): void {
+      super.parseVarId(decl, kind);
       if (decl.id.type === "Identifier" && this.eat(tt.bang)) {
         decl.definite = true;
       }
