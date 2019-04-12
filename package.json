@@ -178,7 +178,7 @@
     "@gerhobbelt/rollup-plugin-babel": "4.0.3-4",
     "babel-check-duplicated-nodes": "1.0.0",
     "babel-core": "~7.0.0-0",
-    "babel-eslint": "10.0.1",
+    "babel-eslint": "^11.0.0-beta.0",
     "babel-jest": "24.7.1",
     "babel-loader": "8.0.5",
     "babel-plugin-transform-charcodes": "0.2.0",
@@ -307,7 +307,9 @@
       "_browser\\.js"
     ],
     "testEnvironment": "node",
-    "setupTestFrameworkScriptFile": "<rootDir>/test/testSetupFile.js",
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/testSetupFile.js"
+    ],
     "transformIgnorePatterns": [
       "/node_modules/",
       "<rootDir>/packages/babel-standalone/babel(\\.min)?\\.js",
@@ -331,5 +333,6 @@
       "^@babel/([a-zA-Z0-9_-]+)$": "<rootDir>/packages/babel-$1/",
       "^@gerhobbelt/babel-([a-zA-Z0-9_-]+)$": "<rootDir>/packages/babel-$1/"
     }
-  }
+  },
+  "dependencies": {}
 }
