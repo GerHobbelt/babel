@@ -21,6 +21,7 @@ export default {
   "transform-modules-commonjs": require("@gerhobbelt/babel-plugin-transform-modules-commonjs"),
   "transform-modules-systemjs": require("@gerhobbelt/babel-plugin-transform-modules-systemjs"),
   "transform-modules-umd": require("@gerhobbelt/babel-plugin-transform-modules-umd"),
+  "transform-named-capturing-groups-regex": require("@gerhobbelt/babel-plugin-transform-named-capturing-groups-regex"),
   "transform-object-super": require("@gerhobbelt/babel-plugin-transform-object-super"),
   "transform-parameters": require("@gerhobbelt/babel-plugin-transform-parameters"),
   "transform-shorthand-properties": require("@gerhobbelt/babel-plugin-transform-shorthand-properties"),
