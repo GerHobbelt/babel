@@ -95,8 +95,6 @@ class File {
     this.declarations = {};
     this.path = null;
     this.metadata = {};
-    this.code = "";
-    this.inputMap = null;
     this.hub = {
       file: this,
       getCode: () => this.code,
