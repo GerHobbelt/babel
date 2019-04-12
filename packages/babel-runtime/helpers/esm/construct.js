@@ -7,11 +7,6 @@ function isNativeReflectConstruct() {
 
   try {
     Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
-
-    if (typeof Map === "function") {
-      Map.prototype.get.call(Reflect.construct(Map, [], function () {}));
-    }
-
     return true;
   } catch (e) {
     return false;

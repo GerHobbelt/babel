@@ -1,5 +1,3 @@
-var _Map = require("../core-js/map");
-
 var _Reflect$construct = require("../core-js/reflect/construct");
 
 var setPrototypeOf = require("./setPrototypeOf");
@@ -11,11 +9,6 @@ function isNativeReflectConstruct() {
 
   try {
     Date.prototype.toString.call(_Reflect$construct(Date, [], function () {}));
-
-    if (typeof _Map === "function") {
-      _Map.prototype.get.call(_Reflect$construct(_Map, [], function () {}));
-    }
-
     return true;
   } catch (e) {
     return false;
