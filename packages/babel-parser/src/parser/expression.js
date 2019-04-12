@@ -130,6 +130,9 @@ export default class ExpressionParser extends LValParser {
       return left;
     }
 
+    const oldCommaAfterSpreadAt = this.state.commaAfterSpreadAt;
+    this.state.commaAfterSpreadAt = -1;
+
     let failOnShorthandAssign;
     if (refShorthandDefaultPos) {
       failOnShorthandAssign = false;
@@ -169,20 +172,25 @@ export default class ExpressionParser extends LValParser {
 
       this.checkLVal(left, undefined, undefined, "assignment expression");
 
-      if (left.extra && left.extra.parenthesized) {
-        let errorMsg;
-        if (left.type === "ObjectPattern") {
-          errorMsg = "`({a}) = 0` use `({a} = 0)`";
-        } else if (left.type === "ArrayPattern") {
-          errorMsg = "`([a]) = 0` use `([a] = 0)`";
-        }
-        if (errorMsg) {
-          this.raise(
-            left.start,
-            `You're trying to assign to a parenthesized expression, eg. instead of ${errorMsg}`,
-          );
-        }
+      let patternErrorMsg;
+      let elementName;
+      if (left.type === "ObjectPattern") {
+        patternErrorMsg = "`({a}) = 0` use `({a} = 0)`";
+        elementName = "property";
+      } else if (left.type === "ArrayPattern") {
+        patternErrorMsg = "`([a]) = 0` use `([a] = 0)`";
+        elementName = "element";
       }
+
+      if (patternErrorMsg && left.extra && left.extra.parenthesized) {
+        this.raise(
+          left.start,
+          `You're trying to assign to a parenthesized expression, eg. instead of ${patternErrorMsg}`,
+        );
+      }
+
+      if (elementName) this.checkCommaAfterRestFromSpread(elementName);
+      this.state.commaAfterSpreadAt = oldCommaAfterSpreadAt;
 
       this.next();
       node.right = this.parseMaybeAssign(noIn);
@@ -190,6 +198,8 @@ export default class ExpressionParser extends LValParser {
     } else if (failOnShorthandAssign && refShorthandDefaultPos.start) {
       this.unexpected(refShorthandDefaultPos.start);
     }
+
+    this.state.commaAfterSpreadAt = oldCommaAfterSpreadAt;
 
     return left;
   }
@@ -580,15 +590,13 @@ export default class ExpressionParser extends LValParser {
       let node = this.startNodeAt(startPos, startLoc);
       node.callee = base;
 
-      // TODO: Clean up/merge this into `this.state` or a class like acorn's
-      // `DestructuringErrors` alongside refShorthandDefaultPos and
-      // refNeedsArrowPos.
-      const refTrailingCommaPos: Pos = { start: -1 };
+      const oldCommaAfterSpreadAt = this.state.commaAfterSpreadAt;
+      this.state.commaAfterSpreadAt = -1;
 
       node.arguments = this.parseCallExpressionArguments(
         tt.parenR,
         possibleAsync,
-        refTrailingCommaPos,
+        base.type === "Import",
       );
       if (!state.optionalChainMember) {
         this.finishCallExpression(node);
@@ -599,12 +607,7 @@ export default class ExpressionParser extends LValParser {
       if (possibleAsync && this.shouldParseAsyncArrow()) {
         state.stop = true;
 
-        if (refTrailingCommaPos.start > -1) {
-          this.raise(
-            refTrailingCommaPos.start,
-            "A trailing comma is not permitted after the rest element",
-          );
-        }
+        this.checkCommaAfterRestFromSpread("parameter");
 
         node = this.parseAsyncArrowFromCallExpression(
           this.startNodeAt(startPos, startLoc),
@@ -621,6 +624,7 @@ export default class ExpressionParser extends LValParser {
       }
 
       this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
+      this.state.commaAfterSpreadAt = oldCommaAfterSpreadAt;
 
       return node;
     } else if (this.match(tt.backQuote)) {
@@ -700,7 +704,7 @@ export default class ExpressionParser extends LValParser {
   parseCallExpressionArguments(
     close: TokenType,
     possibleAsyncArrow: boolean,
-    refTrailingCommaPos?: Pos,
+    dynamicImport?: boolean,
   ): $ReadOnlyArray<?N.Expression> {
     const elts = [];
     let innerParenStart;
@@ -711,7 +715,15 @@ export default class ExpressionParser extends LValParser {
         first = false;
       } else {
         this.expect(tt.comma);
-        if (this.eat(close)) break;
+        if (this.eat(close)) {
+          if (dynamicImport) {
+            this.raise(
+              this.state.lastTokStart,
+              "Trailing comma is disallowed inside import(...) arguments",
+            );
+          }
+          break;
+        }
       }
 
       // we need to make sure that if this is an async arrow functions,
@@ -725,7 +737,6 @@ export default class ExpressionParser extends LValParser {
           false,
           possibleAsyncArrow ? { start: 0 } : undefined,
           possibleAsyncArrow ? { start: 0 } : undefined,
-          possibleAsyncArrow ? refTrailingCommaPos : undefined,
         ),
       );
     }
@@ -1192,14 +1203,7 @@ export default class ExpressionParser extends LValParser {
           ),
         );
 
-        if (this.match(tt.comma)) {
-          const nextTokenType = this.lookahead().type;
-          const errorMessage =
-            nextTokenType === tt.parenR
-              ? "A trailing comma is not permitted after the rest element"
-              : "Rest parameter must be last formal parameter";
-          this.raise(this.state.start, errorMessage);
-        }
+        this.checkCommaAfterRest(tt.parenR, "parameter");
 
         break;
       } else {
@@ -1312,7 +1316,10 @@ export default class ExpressionParser extends LValParser {
     }
 
     node.callee = this.parseNoCallExpr();
-    if (
+
+    if (node.callee.type === "Import") {
+      this.raise(node.callee.start, "Cannot use new with import(...)");
+    } else if (
       node.callee.type === "OptionalMemberExpression" ||
       node.callee.type === "OptionalCallExpression"
     ) {
@@ -1320,13 +1327,13 @@ export default class ExpressionParser extends LValParser {
         this.state.lastTokEnd,
         "constructors in/after an Optional Chain are not allowed",
       );
-    }
-    if (this.eat(tt.questionDot)) {
+    } else if (this.eat(tt.questionDot)) {
       this.raise(
         this.state.start,
         "constructors in/after an Optional Chain are not allowed",
       );
     }
+
     this.parseNewArguments(node);
     return this.finishNode(node, "NewExpression");
   }
@@ -1398,8 +1405,6 @@ export default class ExpressionParser extends LValParser {
     node.properties = [];
     this.next();
 
-    let firstRestLocation = null;
-
     while (!this.eat(tt.braceR)) {
       if (first) {
         first = false;
@@ -1435,34 +1440,14 @@ export default class ExpressionParser extends LValParser {
 
       if (this.match(tt.ellipsis)) {
         prop = this.parseSpread(isPattern ? { start: 0 } : undefined);
-        if (isPattern) {
-          this.toAssignable(prop, true, "object pattern");
-        }
         node.properties.push(prop);
         if (isPattern) {
-          const position = this.state.start;
-          if (firstRestLocation !== null) {
-            this.unexpected(
-              firstRestLocation,
-              "Cannot have multiple rest elements when destructuring",
-            );
-          } else if (this.eat(tt.braceR)) {
-            break;
-          } else if (
-            this.match(tt.comma) &&
-            this.lookahead().type === tt.braceR
-          ) {
-            this.unexpected(
-              position,
-              "A trailing comma is not permitted after the rest element",
-            );
-          } else {
-            firstRestLocation = position;
-            continue;
-          }
-        } else {
-          continue;
+          this.toAssignable(prop, true, "object pattern");
+          this.checkCommaAfterRest(tt.braceR, "property");
+          this.expect(tt.braceR);
+          break;
         }
+        continue;
       }
 
       prop.method = false;
@@ -1517,13 +1502,6 @@ export default class ExpressionParser extends LValParser {
       }
 
       node.properties.push(prop);
-    }
-
-    if (firstRestLocation !== null) {
-      this.unexpected(
-        firstRestLocation,
-        "The rest element has to be the last element when destructuring",
-      );
     }
 
     if (decorators.length) {
@@ -1930,7 +1908,6 @@ export default class ExpressionParser extends LValParser {
     allowEmpty: ?boolean,
     refShorthandDefaultPos: ?Pos,
     refNeedsArrowPos: ?Pos,
-    refTrailingCommaPos?: Pos,
   ): ?N.Expression {
     let elt;
     if (allowEmpty && this.match(tt.comma)) {
@@ -1943,10 +1920,6 @@ export default class ExpressionParser extends LValParser {
         spreadNodeStartPos,
         spreadNodeStartLoc,
       );
-
-      if (refTrailingCommaPos && this.match(tt.comma)) {
-        refTrailingCommaPos.start = this.state.start;
-      }
     } else {
       elt = this.parseMaybeAssign(
         false,

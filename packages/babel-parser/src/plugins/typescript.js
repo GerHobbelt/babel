@@ -221,6 +221,28 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       return result;
     }
 
+    tsParseImportType(): N.TsImportType {
+      const node: N.TsImportType = this.startNode();
+      this.expect(tt._import);
+      this.expect(tt.parenL);
+      if (!this.match(tt.string)) {
+        throw this.unexpected(
+          null,
+          "Argument in a type import must be a string literal",
+        );
+      }
+      node.argument = this.parseLiteral(this.state.value, "StringLiteral");
+      this.expect(tt.parenR);
+
+      if (this.eat(tt.dot)) {
+        node.qualifier = this.tsParseEntityName(/* allowReservedWords */ true);
+      }
+      if (this.isRelational("<")) {
+        node.typeParameters = this.tsParseTypeArguments();
+      }
+      return this.finishNode(node, "TSImportType");
+    }
+
     tsParseEntityName(allowReservedWords: boolean): N.TsEntityName {
       let entity: N.TsEntityName = this.parseIdentifier();
       while (this.eat(tt.dot)) {
@@ -258,7 +280,11 @@ export default (superClass: Class<Parser>): Class<Parser> =>
     tsParseTypeQuery(): N.TsTypeQuery {
       const node: N.TsTypeQuery = this.startNode();
       this.expect(tt._typeof);
-      node.exprName = this.tsParseEntityName(/* allowReservedWords */ true);
+      if (this.match(tt._import)) {
+        node.exprName = this.tsParseImportType();
+      } else {
+        node.exprName = this.tsParseEntityName(/* allowReservedWords */ true);
+      }
       return this.finishNode(node, "TSTypeQuery");
     }
 
@@ -521,17 +547,10 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       //   No mandatory elements may follow optional elements
       //   If there's a rest element, it must be at the end of the tuple
       let seenOptionalElement = false;
-      node.elementTypes.forEach((elementNode, i) => {
-        if (elementNode.type === "TSRestType") {
-          if (i !== node.elementTypes.length - 1) {
-            this.raise(
-              elementNode.start,
-              "A rest element must be last in a tuple type.",
-            );
-          }
-        } else if (elementNode.type === "TSOptionalType") {
+      node.elementTypes.forEach(elementNode => {
+        if (elementNode.type === "TSOptionalType") {
           seenOptionalElement = true;
-        } else if (seenOptionalElement) {
+        } else if (seenOptionalElement && elementNode.type !== "TSRestType") {
           this.raise(
             elementNode.start,
             "A required element cannot follow an optional element.",
@@ -548,6 +567,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
         const restNode: N.TsRestType = this.startNode();
         this.next(); // skips ellipsis
         restNode.typeAnnotation = this.tsParseType();
+        this.checkCommaAfterRest(tt.bracketR, "type");
         return this.finishNode(restNode, "TSRestType");
       }
 
@@ -646,6 +666,8 @@ export default (superClass: Class<Parser>): Class<Parser> =>
         }
         case tt._typeof:
           return this.tsParseTypeQuery();
+        case tt._import:
+          return this.tsParseImportType();
         case tt.braceL:
           return this.tsLookAhead(this.tsIsStartOfMappedType.bind(this))
             ? this.tsParseMappedType()
@@ -897,6 +919,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
 
     tsParseTypeAssertion(): N.TsTypeAssertion {
       const node: N.TsTypeAssertion = this.startNode();
+      this.next(); // <
       // Not actually necessary to set state.inType because we never reach here if JSX plugin is enabled,
       // but need `tsInType` to satisfy the assertion in `tsParseType`.
       node.typeAnnotation = this.tsInType(() => this.tsParseType());
@@ -905,11 +928,21 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       return this.finishNode(node, "TSTypeAssertion");
     }
 
-    tsParseHeritageClause(): $ReadOnlyArray<N.TsExpressionWithTypeArguments> {
-      return this.tsParseDelimitedList(
+    tsParseHeritageClause(
+      descriptor: string,
+    ): $ReadOnlyArray<N.TsExpressionWithTypeArguments> {
+      const originalStart = this.state.start;
+
+      const delimitedList = this.tsParseDelimitedList(
         "HeritageClauseElement",
         this.tsParseExpressionWithTypeArguments.bind(this),
       );
+
+      if (!delimitedList.length) {
+        this.raise(originalStart, `'${descriptor}' list cannot be empty.`);
+      }
+
+      return delimitedList;
     }
 
     tsParseExpressionWithTypeArguments(): N.TsExpressionWithTypeArguments {
@@ -930,7 +963,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       node.id = this.parseIdentifier();
       node.typeParameters = this.tsTryParseTypeParameters();
       if (this.eat(tt._extends)) {
-        node.extends = this.tsParseHeritageClause();
+        node.extends = this.tsParseHeritageClause("extends");
       }
       const body: N.TSInterfaceBody = this.startNode();
       body.body = this.tsInType(this.tsParseObjectTypeMembers.bind(this));
@@ -1365,6 +1398,10 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       allowModifiers: ?boolean,
       decorators: N.Decorator[],
     ): N.Pattern | N.TSParameterProperty {
+      // Store original location/position to include modifiers in range
+      const startPos = this.state.start;
+      const startLoc = this.state.startLoc;
+
       let accessibility: ?N.Accessibility;
       let readonly = false;
       if (allowModifiers) {
@@ -1376,7 +1413,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
       this.parseAssignableListItemTypes(left);
       const elt = this.parseMaybeDefault(left.start, left.loc.start, left);
       if (accessibility || readonly) {
-        const pp: N.TSParameterProperty = this.startNodeAtNode(elt);
+        const pp: N.TSParameterProperty = this.startNodeAt(startPos, startLoc);
         if (decorators.length) {
           pp.decorators = decorators;
         }
@@ -1390,12 +1427,13 @@ export default (superClass: Class<Parser>): Class<Parser> =>
         }
         pp.parameter = elt;
         return this.finishNode(pp, "TSParameterProperty");
-      } else {
-        if (decorators.length) {
-          left.decorators = decorators;
-        }
-        return elt;
       }
+
+      if (decorators.length) {
+        left.decorators = decorators;
+      }
+
+      return elt;
     }
 
     parseFunctionBodyAndFinish(
@@ -1874,7 +1912,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
         node.superTypeParameters = this.tsParseTypeArguments();
       }
       if (this.eatContextual("implements")) {
-        node.implements = this.tsParseHeritageClause();
+        node.implements = this.tsParseHeritageClause("implements");
       }
     }
 
@@ -1986,10 +2024,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
 
       // Correct TypeScript code should have at least 1 type parameter, but don't crash on bad code.
       if (typeParameters && typeParameters.params.length !== 0) {
-        this.resetStartLocationFromNode(
-          arrowExpression,
-          typeParameters.params[0],
-        );
+        this.resetStartLocationFromNode(arrowExpression, typeParameters);
       }
       arrowExpression.typeParameters = typeParameters;
       return arrowExpression;
@@ -1997,7 +2032,7 @@ export default (superClass: Class<Parser>): Class<Parser> =>
 
     // Handle type assertions
     parseMaybeUnary(refShorthandDefaultPos?: ?Pos): N.Expression {
-      if (!this.hasPlugin("jsx") && this.eatRelational("<")) {
+      if (!this.hasPlugin("jsx") && this.isRelational("<")) {
         return this.tsParseTypeAssertion();
       } else {
         return super.parseMaybeUnary(refShorthandDefaultPos);

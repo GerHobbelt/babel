@@ -14,6 +14,7 @@
   <a href="https://codecov.io/github/babel/babel"><img alt="Coverage Status" src="https://img.shields.io/codecov/c/github/babel/babel/master.svg?maxAge=43200"></a>
   <a href="https://slack.babeljs.io/"><img alt="Slack Status" src="https://slack.babeljs.io/badge.svg"></a>
   <a href="https://www.npmjs.com/package/babel-core"><img alt="npm Downloads" src="https://img.shields.io/npm/dm/babel-core.svg?maxAge=43200"></a>
+  <a href="https://twitter.com/intent/follow?screen_name=babeljs"><img alt="Follow on Twitter" src="https://img.shields.io/twitter/follow/babeljs.svg?style=social&label=Follow"></a>
 </p>
 
 <h2 align="center">Supporting Babel</h2>
@@ -55,7 +56,8 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 
 ## Bronze
 
-<a href="https://webflow.com/" target="_blank"><img src="https://opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F4a5024b0-8cf2-11e7-b1a2-b30b1de1463c.png&height=64"></a>
+<a href="https://webflow.com" target="_blank"><img src="https://opencollective.com/proxy/images/?src=https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F4a5024b0-8cf2-11e7-b1a2-b30b1de1463c.png&height=64"></a>
+<a href="https://issuehunt.io" target="_blank"><img src="https://lh4.googleusercontent.com/vnUKfy2TFE6d88pEPG42DxZje8wXUxsVUalqaFuB3wqExlxg1gYsTAqY2DUhU_ZDLxCMvtsrs2t3XktYeP8=w2154-h1956-rw" height="64"></a>
 
 ## Intro
 
