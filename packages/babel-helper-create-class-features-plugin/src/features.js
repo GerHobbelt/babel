@@ -72,12 +72,6 @@ export function verifyUsedFeatures(path, file) {
         "@gerhobbelt/babel-plugin-class-features doesn't support class static private methods yet.",
       );
     }
-
-    if (path.node.kind !== "method") {
-      throw path.buildCodeFrameError(
-        "@gerhobbelt/babel-plugin-class-features doesn't support class private accessors yet.",
-      );
-    }
   }
 
   if (

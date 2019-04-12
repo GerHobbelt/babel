@@ -389,16 +389,20 @@ helpers.objectSpread = helper("7.0.0-beta.0")`
 
   export default function _objectSpread(target) {
     for (var i = 1; i < arguments.length; i++) {
-      var source = (arguments[i] != null) ? arguments[i] : {};
-      var ownKeys = Object.keys(source);
-      if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-        }));
+      if (i % 2) {
+        var source = (arguments[i] != null) ? arguments[i] : {};
+        var ownKeys = Object.keys(source);
+        if (typeof Object.getOwnPropertySymbols === 'function') {
+          ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
+            return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+          }));
+        }
+        ownKeys.forEach(function(key) {
+          defineProperty(target, key, source[key]);
+        });
+      } else {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(arguments[i]));
       }
-      ownKeys.forEach(function(key) {
-        defineProperty(target, key, source[key]);
-      });
     }
     return target;
   }
@@ -1048,7 +1052,11 @@ helpers.classPrivateFieldGet = helper("7.0.0-beta.0")`
     if (!privateMap.has(receiver)) {
       throw new TypeError("attempted to get private field on non-instance");
     }
-    return privateMap.get(receiver).value;
+    var descriptor = privateMap.get(receiver);
+    if (descriptor.get) {
+      return descriptor.get.call(receiver);
+    }
+    return descriptor.value;
   }
 `;
 
@@ -1058,13 +1066,19 @@ helpers.classPrivateFieldSet = helper("7.0.0-beta.0")`
       throw new TypeError("attempted to set private field on non-instance");
     }
     var descriptor = privateMap.get(receiver);
-    if (!descriptor.writable) {
-      // This should only throw in strict mode, but class bodies are
-      // always strict and private fields can only be used inside
-      // class bodies.
-      throw new TypeError("attempted to set read only private field");
+    if (descriptor.set) {
+      descriptor.set.call(receiver, value);
+    } else {
+      if (!descriptor.writable) {
+        // This should only throw in strict mode, but class bodies are
+        // always strict and private fields can only be used inside
+        // class bodies.
+        throw new TypeError("attempted to set read only private field");
+      }
+
+      descriptor.value = value;
     }
-    descriptor.value = value;
+
     return value;
   }
 `;

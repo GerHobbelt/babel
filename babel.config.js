@@ -5,13 +5,16 @@ module.exports = function(api) {
 
   const includeCoverage = process.env.BABEL_COVERAGE === "true";
 
+  const nodeVersion = "6.9";
+
   const envOpts = {
     loose: true,
     modules: false,
     //debug: true,
     exclude: ["transform-typeof-symbol"],
     targets: {
-      node: "current",
+      // node: "current",
+      node: nodeVersion,
 
       // node: "6.9",
       // node: "8.11",
