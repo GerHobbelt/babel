@@ -16,6 +16,6 @@
     "@gerhobbelt/babel-helper-split-export-declaration": "7.3.2-30",
     "@gerhobbelt/babel-template": "7.3.2-30",
     "@gerhobbelt/babel-types": "7.3.2-30",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.11"
   }
 }

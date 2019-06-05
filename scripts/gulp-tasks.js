@@ -17,9 +17,9 @@ const chalk = require("chalk");
 const through = require("through2");
 const fancyLog = require("fancy-log");
 const rename = require("gulp-rename");
-const RootMostResolvePlugin = require("webpack-dependency-suite")
-  .RootMostResolvePlugin;
 const webpack = require("webpack");
+const { RootMostResolvePlugin } = require("webpack-dependency-suite");
+const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 const webpackStream = require("webpack-stream");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const TerserJsPlugin = require("terser-webpack-plugin");
@@ -182,6 +182,11 @@ function webpackBuild(opts) {
     // Instead let the minimizer(s) handle this...
     mode: "production",
     plugins: [
+      new DuplicatePackageCheckerPlugin({
+        exclude(instance) {
+          return instance.name === "semver";
+        },
+      }),
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(buildMode),
         "process.env.BABEL_ENV": process.env.BABEL_ENV
@@ -220,8 +225,11 @@ function webpackBuild(opts) {
   return webpackStream(config, webpack);
   // To write JSON for debugging:
   /*return webpackStream(config, webpack, (err, stats) => {
-    require('fancy-log')(stats.toString({colors: true}));
-    require('fs').writeFileSync('webpack-debug.json', JSON.stringify(stats.toJson()));
+    require("fancy-log")(stats.toString({ colors: true }));
+    require("fs").writeFileSync(
+      "webpack-debug.json",
+      JSON.stringify(stats.toJson())
+    );
   });*/
 }
 

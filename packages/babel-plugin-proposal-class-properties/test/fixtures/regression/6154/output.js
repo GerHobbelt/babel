@@ -43,8 +43,8 @@ var Test = function Test() {
 
       _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Other)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-      _defineProperty(_this, "a", function () {
-        return _get(_getPrototypeOf(Other.prototype), "test", _this);
+      _defineProperty(_assertThisInitialized(_this), "a", function () {
+        return _get(_getPrototypeOf(Other.prototype), "test", _assertThisInitialized(_this));
       });
 
       return _this;

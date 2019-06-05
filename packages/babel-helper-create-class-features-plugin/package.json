@@ -18,7 +18,8 @@
     "@gerhobbelt/babel-helper-member-expression-to-functions": "7.3.2-30",
     "@gerhobbelt/babel-helper-optimise-call-expression": "7.3.2-30",
     "@gerhobbelt/babel-helper-plugin-utils": "7.3.2-30",
-    "@gerhobbelt/babel-helper-replace-supers": "7.3.2-30"
+    "@gerhobbelt/babel-helper-replace-supers": "7.3.2-30",
+    "@gerhobbelt/babel-helper-split-export-declaration": "^7.0.0"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.3.1-29"
