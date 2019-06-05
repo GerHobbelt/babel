@@ -122,7 +122,9 @@ module.exports = function(api) {
           /[\\/]node_modules[\\/](?:@gerhobbelt\/babel-runtime|@babel\/runtime|babel-runtime|core-js)[\\/]/,
         ],
         plugins: [
-          includeRuntime ? "@gerhobbelt/babel-plugin-transform-runtime" : null,
+          includeRuntime
+            ? ["@gerhobbelt/babel-plugin-transform-runtime", { version: "7.3.4" }]
+            : null,
         ].filter(Boolean),
       },
     ].filter(Boolean),
