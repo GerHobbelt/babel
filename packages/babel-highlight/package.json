@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-highlight",
-  "version": "7.3.2-30",
+  "version": "7.3.3-30",
   "description": "Syntax highlight JavaScript strings for output in terminals.",
   "author": "suchipi <me@suchipi.com>",
   "homepage": "https://babeljs.io/",

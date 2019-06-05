@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-external-helpers",
-  "version": "7.3.2-30",
+  "version": "7.3.3-30",
   "description": "This plugin contains helper functions that’ll be placed at the top of the generated code",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-external-helpers",
   "license": "MIT",
@@ -12,13 +12,13 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.3.2-30"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.3.3-30"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.3.1-29"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.3.2-30",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.3.2-30"
+    "@gerhobbelt/babel-core": "7.3.3-30",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.3.3-30"
   }
 }
