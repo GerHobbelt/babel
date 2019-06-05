@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-proposal-optional-chaining",
-  "version": "7.3.3-30",
+  "version": "7.3.4-30",
   "description": "Transform optional chaining operators into a series of nil checks",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-proposal-optional-chaining",
   "license": "MIT",
@@ -12,15 +12,15 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.3.3-30",
-    "@gerhobbelt/babel-plugin-syntax-optional-chaining": "7.3.3-30"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.3.4-30",
+    "@gerhobbelt/babel-plugin-syntax-optional-chaining": "7.3.4-30"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.3.1-29"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.3.3-30",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.3.3-30",
-    "@gerhobbelt/babel-plugin-transform-block-scoping": "7.3.3-30"
+    "@gerhobbelt/babel-core": "7.3.4-30",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.3.4-30",
+    "@gerhobbelt/babel-plugin-transform-block-scoping": "7.3.4-30"
   }
 }
