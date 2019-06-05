@@ -1817,7 +1817,9 @@ export default class StatementParser extends ExpressionParser {
   }
 
   checkDeclaration(node: N.Pattern | N.ObjectProperty): void {
-    if (node.type === "ObjectPattern") {
+    if (node.type === "Identifier") {
+      this.checkDuplicateExports(node, node.name);
+    } else if (node.type === "ObjectPattern") {
       for (const prop of node.properties) {
         this.checkDeclaration(prop);
       }
@@ -1831,8 +1833,8 @@ export default class StatementParser extends ExpressionParser {
       this.checkDeclaration(node.value);
     } else if (node.type === "RestElement") {
       this.checkDeclaration(node.argument);
-    } else if (node.type === "Identifier") {
-      this.checkDuplicateExports(node, node.name);
+    } else if (node.type === "AssignmentPattern") {
+      this.checkDeclaration(node.left);
     }
   }
 
