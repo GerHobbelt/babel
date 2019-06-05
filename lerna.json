@@ -1,5 +1,5 @@
 {
-  "version": "7.3.2",
+  "version": "7.3.2-30",
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.3.1-29"
   },
