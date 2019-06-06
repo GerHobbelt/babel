@@ -1,10 +1,7 @@
-import syntaxDynamicImport from "@gerhobbelt/babel-plugin-syntax-dynamic-import";
-import syntaxImportMeta from "@gerhobbelt/babel-plugin-syntax-import-meta";
-import transformClassProperties from "@gerhobbelt/babel-plugin-proposal-class-properties";
-import transformJsonStrings from "@gerhobbelt/babel-plugin-proposal-json-strings";
-import transformPrivateMethods from "@gerhobbelt/babel-plugin-proposal-private-methods";
+// @flow
+import * as babelPlugins from "./generated/plugins";
 
-export default (_, opts) => {
+export default (_: any, opts: Object) => {
   let loose = false;
 
   if (opts !== undefined) {
@@ -13,11 +10,11 @@ export default (_, opts) => {
 
   return {
     plugins: [
-      syntaxDynamicImport,
-      syntaxImportMeta,
-      [transformClassProperties, { loose }],
-      transformJsonStrings,
-      [transformPrivateMethods, { loose }],
+      babelPlugins.syntaxDynamicImport,
+      babelPlugins.syntaxImportMeta,
+      [babelPlugins.proposalClassProperties, { loose }],
+      babelPlugins.proposalJsonStrings,
+      [babelPlugins.proposalPrivateMethods, { loose }],
     ],
   };
 };

@@ -19,6 +19,7 @@ export type Options = {
   strictMode: ?boolean,
   ranges: boolean,
   tokens: boolean,
+  createParenthesizedExpressions: boolean,
   jisonVariables: boolean,
 };
 
@@ -56,6 +57,9 @@ export const defaultOptions: Options = {
   ranges: false,
   // Adds all parsed tokens to a `tokens` property on the `File` node
   tokens: false,
+  // Whether to create ParenthesizedExpression AST nodes (if false
+  // the parser sets extra.parenthesized on the expression nodes instead).
+  createParenthesizedExpressions: false,
   // Recognize JISON action block variables, e.g. `#1` or `@id`
   jisonVariables: false,
 };

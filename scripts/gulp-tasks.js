@@ -20,6 +20,7 @@ const rename = require("gulp-rename");
 const webpack = require("webpack");
 const { RootMostResolvePlugin } = require("webpack-dependency-suite");
 const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
+const WarningsToErrorsPlugin = require("warnings-to-errors-webpack-plugin");
 const webpackStream = require("webpack-stream");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const TerserJsPlugin = require("terser-webpack-plugin");
@@ -182,6 +183,7 @@ function webpackBuild(opts) {
     // Instead let the minimizer(s) handle this...
     mode: "production",
     plugins: [
+      new WarningsToErrorsPlugin(),
       new DuplicatePackageCheckerPlugin({
         exclude(instance) {
           return instance.name === "semver";

@@ -93,6 +93,14 @@ export default class LValParser extends NodeUtils {
           }
           break;
 
+        case "ParenthesizedExpression":
+          node.expression = this.toAssignable(
+            node.expression,
+            isBinding,
+            contextDescription,
+          );
+          break;
+
         case "MemberExpression":
           if (!isBinding) break;
 
@@ -122,7 +130,7 @@ export default class LValParser extends NodeUtils {
 
       this.raise(prop.key.start, error);
     } else if (prop.type === "SpreadElement" && !isLast) {
-      this.raiseRestNotLast(prop.start, "property");
+      this.raiseRestNotLast(prop.start);
     } else {
       this.toAssignable(prop, isBinding, "object destructuring pattern");
     }
@@ -160,7 +168,7 @@ export default class LValParser extends NodeUtils {
       if (elt) {
         this.toAssignable(elt, isBinding, contextDescription);
         if (elt.type === "RestElement") {
-          this.raiseRestNotLast(elt.start, "element");
+          this.raiseRestNotLast(elt.start);
         }
       }
     }
@@ -213,7 +221,7 @@ export default class LValParser extends NodeUtils {
     return this.finishNode(node, "SpreadElement");
   }
 
-  parseRest(): RestElement {
+  parseRestBinding(): RestElement {
     const node = this.startNode();
     this.next();
     node.argument = this.parseBindingAtom();
@@ -260,13 +268,8 @@ export default class LValParser extends NodeUtils {
       } else if (this.eat(close)) {
         break;
       } else if (this.match(tt.ellipsis)) {
-        elts.push(this.parseAssignableListItemTypes(this.parseRest()));
-        this.checkCommaAfterRest(
-          close,
-          this.scope.inFunction && this.state.inParameters
-            ? "parameter"
-            : "element",
-        );
+        elts.push(this.parseAssignableListItemTypes(this.parseRestBinding()));
+        this.checkCommaAfterRest();
         this.expect(close);
         break;
       } else {
@@ -418,6 +421,15 @@ export default class LValParser extends NodeUtils {
         );
         break;
 
+      case "ParenthesizedExpression":
+        this.checkLVal(
+          expr.expression,
+          bindingType,
+          checkClashes,
+          "parenthesized expression",
+        );
+        break;
+
       default: {
         const message =
           (bindingType === BIND_NONE
@@ -441,27 +453,19 @@ export default class LValParser extends NodeUtils {
     }
   }
 
-  checkCommaAfterRest(close: TokenType, kind: string): void {
+  checkCommaAfterRest(): void {
     if (this.match(tt.comma)) {
-      if (this.lookahead().type === close) {
-        this.raiseCommaAfterRest(this.state.start, kind);
-      } else {
-        this.raiseRestNotLast(this.state.start, kind);
-      }
+      this.raiseRestNotLast(this.state.start);
     }
   }
 
-  checkCommaAfterRestFromSpread(kind: string): void {
+  checkCommaAfterRestFromSpread(): void {
     if (this.state.commaAfterSpreadAt > -1) {
-      this.raiseCommaAfterRest(this.state.commaAfterSpreadAt, kind);
+      this.raiseRestNotLast(this.state.commaAfterSpreadAt);
     }
   }
 
-  raiseCommaAfterRest(pos: number, kind: string) {
-    this.raise(pos, `A trailing comma is not permitted after the rest ${kind}`);
-  }
-
-  raiseRestNotLast(pos: number, kind: string) {
-    this.raise(pos, `The rest ${kind} must be the last ${kind}`);
+  raiseRestNotLast(pos: number) {
+    this.raise(pos, `Rest element must be last element`);
   }
 }
