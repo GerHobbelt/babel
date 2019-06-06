@@ -29,8 +29,8 @@
   },
   "devDependencies": {
     "@gerhobbelt/babel-helper-fixtures": "7.3.4-30",
-    "charcodes": "0.1.0",
-    "unicode-11.0.0": "^0.7.8"
+    "charcodes": "0.2.0",
+    "unicode-11.0.0": "0.7.8"
   },
   "bin": {
     "parser": "./bin/babel-parser.js"

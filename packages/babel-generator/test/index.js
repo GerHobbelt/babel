@@ -520,7 +520,7 @@ suites.forEach(function(testSuite) {
             const actualAst = parse(actualCode, {
               filename: actual.loc,
               plugins: task.options.plugins || [],
-              strictMode: false,
+              strictMode: task.options.strictMode === false ? false : true,
               sourceType: "module",
               sourceMaps: !!task.sourceMap,
             });
