@@ -19,9 +19,15 @@
     "@gerhobbelt/babel-types": "7.2.2-27",
     "debug": "^4.1.0",
     "globals": "^11.1.0",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "@gerhobbelt/babel-helper-plugin-test-runner": "7.2.2-27"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
