@@ -167,6 +167,10 @@ update-npm-packages:
 update-version:
 	node scripts/generators/package-version.js
 
+# fix all references for @babel/... to be @gerhobbelt/babel-..., where applicable
+fix-scope-dep:
+	node scripts/generators/fix-scoped-npm-package-deps.js
+
 build-data:
 	node packages/babel-preset-env/scripts/build-data.js
 	node packages/babel-preset-env/scripts/build-modules-support.js
