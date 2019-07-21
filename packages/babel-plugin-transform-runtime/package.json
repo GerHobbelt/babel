@@ -24,6 +24,8 @@
     "@gerhobbelt/babel-core": "7.3.4-30",
     "@gerhobbelt/babel-helper-plugin-test-runner": "7.3.4-30",
     "@gerhobbelt/babel-helpers": "7.3.4-30",
+    "@babel/plugin-transform-member-expression-literals": "7.2.0",
+    "@babel/plugin-transform-property-literals": "7.2.0",
     "@gerhobbelt/babel-plugin-transform-runtime": "7.3.4-30",
     "@gerhobbelt/babel-preset-env": "7.3.4-30",
     "@gerhobbelt/babel-runtime": "7.3.4-30",

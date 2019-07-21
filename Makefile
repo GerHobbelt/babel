@@ -137,11 +137,12 @@ prepublish-build:
 	make clone-license
 
 prepublish:
-	#git pull --rebase
+	make bootstrap-only
 	make prepublish-build
 	make test
 
 new-version:
+	#git pull --rebase
 	./node_modules/.bin/lerna version --force-publish="@babel/runtime,@babel/runtime-corejs2,@babel/standalone,@babel/preset-env-standalone"
 
 # NOTE: Run make new-version first
@@ -154,11 +155,13 @@ publish: prepublish
 	#make clean
 	bash scripts/publish-all-packages.sh
 
-bootstrap: #clean-all
+bootstrap-only: #clean-all
 	##./node_modules/.bin/yarn --ignore-engines
 	-rm -f package-lock.json
 	npm i
 	./node_modules/.bin/lerna bootstrap -- --ignore-engines
+
+bootstrap: bootstrap-only
 	make build-dist
 
 update-npm-packages:

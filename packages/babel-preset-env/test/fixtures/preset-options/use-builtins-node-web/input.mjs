@@ -1,1 +1,0 @@
-import "@gerhobbelt/babel-polyfill";
