@@ -6,7 +6,7 @@
  */
 
 const { join } = require("path");
-const { readdirSync, readFileSync, writeFileSync } = require("fs");
+const { readdirSync, readFileSync, writeFileSync, existsSync } = require("fs");
 
 const cwd = process.cwd();
 
@@ -22,14 +22,21 @@ console.log("Updating version of all babel packages to", babelVersion);
 // pick up the peerDependencies clause from lerna.json for packages/babel-core:
 const babelPeerDependencyClause = (() => {
   const packageJson = require(join(cwd, "lerna.json"));
-  return packageJson.peerDependencies["@gerhobbelt/babel-core"];
+  return packageJson.peerDependencies ? packageJson.peerDependencies["@gerhobbelt/babel-core"] : null;
 })();
-console.log(
-  "Updating all peerDependencies of all babel packages to the expression:",
-  babelPeerDependencyClause
-);
+if (babelPeerDependencyClause) {
+  console.log(
+    "Updating all peerDependencies of all babel packages to the expression:",
+    babelPeerDependencyClause
+  );
+}
 
 function patchPackageJson(filePath, settings = {}) {
+  if (!existsSync(filePath)) {
+    console.error("FAIL: file does not exist:", filePath);
+    return;
+  }
+  
   const packageJson = readFileSync(filePath, "utf8");
 
   // apply patches:
@@ -59,6 +66,7 @@ function patchPackageJson(filePath, settings = {}) {
 
   // peerDependencies patches:
   if (
+    babelPeerDependencyClause &&
     data.peerDependencies &&
     data.peerDependencies["@gerhobbelt/babel-core"]
   ) {
