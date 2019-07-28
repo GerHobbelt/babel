@@ -161,6 +161,12 @@ bootstrap: bootstrap-only
 	cd packages/babel-plugin-transform-runtime; \
 	node scripts/build-dist.js
 
+update-npm-packages:
+	bash scripts/update-all-npm-package-dependencies.sh
+
+update-version:
+	node scripts/generators/package-version.js
+
 # fix all references for @babel/... to be @gerhobbelt/babel-..., where applicable
 fix-scope-dep:
 	node scripts/generators/fix-scoped-npm-package-deps.js
