@@ -1,6 +1,8 @@
 .npmrc
 
 .DS_Store
+/node_modules_backup
+node_modules
 /node_modules
 /.github/actions/*/node_modules
 /packages/*/node_modules
@@ -9,13 +11,13 @@
 !/packages/babel-plugin-transform-object-assign/LICENSE
 *.log
 *.cache
-/build
+# /build
 /.eslintcache
 /browser.js
 /browser-polyfill.js
 /runtime.js
 coverage
-dist
+# dist
 /.package.json
 package-lock.json
 !/.github/actions/*/package-lock.json
@@ -60,3 +62,5 @@ packages/babel-preset-env-standalone/babel-preset-env.min.js
 /packages/babel-parser/build
 .idea/
 /.changelog
+/tmp/
+/desktop.ini
