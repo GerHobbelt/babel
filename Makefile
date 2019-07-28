@@ -155,6 +155,11 @@ fix-scope-dep:
 	node scripts/generators/fix-scoped-npm-package-deps.js
 
 
+# fix all references for @babel/... to be @gerhobbelt/babel-..., where applicable
+fix-scope-dep:
+	node scripts/generators/fix-scoped-npm-package-deps.js
+
+
 clean-lib:
 	$(foreach source, $(SOURCES), \
 		$(call clean-source-lib, $(source)))
