@@ -1,7 +1,7 @@
 {
-  "version": "7.5.0-30",
+  "version": "7.5.5-30",
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.5.0-30"
+    "@gerhobbelt/babel-core": "~7.5.5-30"
   },
   "changelog": {
     "repo": "babel/babel",
