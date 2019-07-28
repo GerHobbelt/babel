@@ -129,7 +129,7 @@ module.exports = function(api) {
         ],
         plugins: [
           includeRuntime
-            ? ["@babel/transform-runtime", { version: "7.4.4" }]
+            ? ["@babel/plugin-transform-runtime", { version: "7.5.0" }]
             : null,
         ].filter(Boolean),
       },

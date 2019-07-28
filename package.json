@@ -9,7 +9,8 @@
     "test": "make test",
     "build-data": "make build-data",
     "pub": "make publish",
-    "bump": "make update-version"
+    "bump": "make update-version",
+    "patch": "make fix-scope-dep update-version"
   },
   "devDependencies": {
     "@babel/cli": "7.4.4",
