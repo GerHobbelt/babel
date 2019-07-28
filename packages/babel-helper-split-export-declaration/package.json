@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-split-export-declaration",
-  "version": "7.3.4-30",
+  "version": "7.5.0-30",
   "description": "",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-split-export-declaration",
   "license": "MIT",
@@ -9,6 +9,6 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-types": "7.3.4-30"
+    "@gerhobbelt/babel-types": "7.5.0-30"
   }
 }

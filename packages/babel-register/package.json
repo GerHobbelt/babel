@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-register",
-  "version": "7.3.4-30",
+  "version": "7.5.0-30",
   "description": "babel require hook",
   "license": "MIT",
   "publishConfig": {
@@ -21,10 +21,10 @@
     "source-map-support": "^0.5.9"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.3.1-29"
+    "@gerhobbelt/babel-core": "~7.5.0-30"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.3.4-30",
+    "@gerhobbelt/babel-core": "7.5.0-30",
     "default-require-extensions": "^2.0.0"
   }
 }
