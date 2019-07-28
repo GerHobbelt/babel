@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-named-capturing-groups-regex",
-  "version": "7.5.5",
+  "version": "7.5.5-30",
   "description": "Compile regular expressions using named groups to ES5.",
   "homepage": "https://babeljs.io/",
   "license": "MIT",
@@ -17,10 +17,10 @@
     "regexp-tree": "^0.1.6"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "7.5.5"
+    "@gerhobbelt/babel-core": "~7.5.5-30"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.5.5",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.5.5"
+    "@gerhobbelt/babel-core": "7.5.5-30",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.5.5-30"
   }
 }

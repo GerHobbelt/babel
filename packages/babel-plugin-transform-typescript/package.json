@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-typescript",
-  "version": "7.5.5",
+  "version": "7.5.5-30",
   "description": "Transform TypeScript into ES.next",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-typescript",
   "license": "MIT",
@@ -13,15 +13,15 @@
     "typescript"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-create-class-features-plugin": "7.5.5",
-    "@gerhobbelt/babel-helper-plugin-utils": "7.5.5",
-    "@gerhobbelt/babel-plugin-syntax-typescript": "7.5.5"
+    "@gerhobbelt/babel-helper-create-class-features-plugin": "7.5.5-30",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.5.5-30",
+    "@gerhobbelt/babel-plugin-syntax-typescript": "7.5.5-30"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "7.5.5"
+    "@gerhobbelt/babel-core": "~7.5.5-30"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.5.5",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.5.5"
+    "@gerhobbelt/babel-core": "7.5.5-30",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.5.5-30"
   }
 }

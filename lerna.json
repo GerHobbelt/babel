@@ -1,5 +1,8 @@
 {
-  "version": "7.5.5",
+  "version": "7.5.5-30",
+  "peerDependencies": {
+    "@gerhobbelt/babel-core": "~7.5.5-30"
+  },
   "changelog": {
     "repo": "babel/babel",
     "cacheDir": ".changelog",
