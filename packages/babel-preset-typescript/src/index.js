@@ -1,5 +1,5 @@
-import { declare } from "@babel/helper-plugin-utils";
-import transformTypeScript from "@babel/plugin-transform-typescript";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import transformTypeScript from "@gerhobbelt/babel-plugin-transform-typescript";
 
 export default declare(
   (api, { jsxPragma, allExtensions = false, isTSX = false }) => {

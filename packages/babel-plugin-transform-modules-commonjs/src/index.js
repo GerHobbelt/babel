@@ -1,4 +1,4 @@
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 import {
   isModule,
   rewriteModuleStatementsAndPrepareHeader,
@@ -6,9 +6,9 @@ import {
   buildNamespaceInitStatements,
   ensureStatementsHoisted,
   wrapInterop,
-} from "@babel/helper-module-transforms";
-import simplifyAccess from "@babel/helper-simple-access";
-import { template, types as t } from "@babel/core";
+} from "@gerhobbelt/babel-helper-module-transforms";
+import simplifyAccess from "@gerhobbelt/babel-helper-simple-access";
+import { template, types as t } from "@gerhobbelt/babel-core";
 
 import { createDynamicImportTransform } from "babel-plugin-dynamic-import-node/utils";
 
@@ -123,12 +123,12 @@ export default declare((api, options) => {
     name: "transform-modules-commonjs",
 
     pre() {
-      this.file.set("@babel/plugin-transform-modules-*", "commonjs");
+      this.file.set("@gerhobbelt/babel-plugin-transform-modules-*", "commonjs");
     },
 
     visitor: {
       CallExpression(path) {
-        if (!this.file.has("@babel/plugin-proposal-dynamic-import")) return;
+        if (!this.file.has("@gerhobbelt/babel-plugin-proposal-dynamic-import")) return;
         if (!path.get("callee").isImport()) return;
 
         let { scope } = path;

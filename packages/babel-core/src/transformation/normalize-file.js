@@ -3,11 +3,11 @@
 import path from "path";
 import buildDebug from "debug";
 import cloneDeep from "lodash/cloneDeep";
-import * as t from "@babel/types";
+import * as t from "@gerhobbelt/babel-types";
 import type { PluginPasses } from "../config";
 import convertSourceMap, { typeof Converter } from "convert-source-map";
-import { parse } from "@babel/parser";
-import { codeFrameColumns } from "@babel/code-frame";
+import { parse } from "@gerhobbelt/babel-parser";
+import { codeFrameColumns } from "@gerhobbelt/babel-code-frame";
 import File from "./file/file";
 import generateMissingPluginMessage from "./util/missing-plugin-helper";
 
@@ -117,7 +117,7 @@ function parser(
           `You appear to be using an async codegen plugin, ` +
             `which your current version of Babel does not support. ` +
             `If you're using a published plugin, you may need to upgrade ` +
-            `your @babel/core version.`,
+            `your @gerhobbelt/babel-core version.`,
         );
       }
       return results[0];

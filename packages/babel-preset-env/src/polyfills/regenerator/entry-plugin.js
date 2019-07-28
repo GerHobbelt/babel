@@ -1,7 +1,7 @@
 // @flow
 
 import { getImportSource, getRequireSource } from "../../utils";
-import type { NodePath } from "@babel/traverse";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
 
 function isRegeneratorSource(source) {
   return source === "regenerator-runtime/runtime";

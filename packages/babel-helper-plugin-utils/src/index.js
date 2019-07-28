@@ -67,15 +67,15 @@ function throwVersionError(range, version) {
   if (version.slice(0, 2) === "7.") {
     err = new Error(
       `Requires Babel "^7.0.0-beta.41", but was loaded with "${version}". ` +
-        `You'll need to update your @babel/core version.`,
+        `You'll need to update your @gerhobbelt/babel-core version.`,
     );
   } else {
     err = new Error(
       `Requires Babel "${range}", but was loaded with "${version}". ` +
-        `If you are sure you have a compatible version of @babel/core, ` +
+        `If you are sure you have a compatible version of @gerhobbelt/babel-core, ` +
         `it is likely that something in your build process is loading the ` +
         `wrong version. Inspect the stack trace of this error to look for ` +
-        `the first entry that doesn't mention "@babel/core" or "babel-core" ` +
+        `the first entry that doesn't mention "@gerhobbelt/babel-core" or "babel-core" ` +
         `to see what is calling Babel.`,
     );
   }

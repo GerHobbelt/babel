@@ -25,7 +25,7 @@ import {
 import { logUsagePolyfills } from "../../debug";
 
 import type { InternalPluginOptions } from "../../types";
-import type { NodePath } from "@babel/traverse";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
 
 const NO_DIRECT_POLYFILL_IMPORT = `
   When setting \`useBuiltIns: 'usage'\`, polyfills are automatically imported when needed.

@@ -4,9 +4,9 @@ import * as virtualTypes from "./lib/virtual-types";
 import buildDebug from "debug";
 import traverse from "../index";
 import Scope from "../scope";
-import * as t from "@babel/types";
+import * as t from "@gerhobbelt/babel-types";
 import { path as pathCache } from "../cache";
-import generator from "@babel/generator";
+import generator from "@gerhobbelt/babel-generator";
 
 // NodePath is split across many files.
 import * as NodePath_ancestry from "./ancestry";

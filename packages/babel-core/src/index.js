@@ -9,11 +9,11 @@ export { resolvePlugin, resolvePreset } from "./config/files";
 export { version } from "../package.json";
 export { getEnv } from "./config/helpers/environment";
 
-export * as types from "@babel/types";
-export { tokTypes } from "@babel/parser";
+export * as types from "@gerhobbelt/babel-types";
+export { tokTypes } from "@gerhobbelt/babel-parser";
 
-export { default as traverse } from "@babel/traverse";
-export { default as template } from "@babel/template";
+export { default as traverse } from "@gerhobbelt/babel-traverse";
+export { default as template } from "@gerhobbelt/babel-template";
 
 export { createConfigItem } from "./config/item";
 
@@ -33,8 +33,8 @@ export {
 export { parse, parseSync, parseAsync } from "./parse";
 
 /**
- * Recommended set of compilable extensions. Not used in @babel/core directly, but meant as
- * as an easy source for tooling making use of @babel/core.
+ * Recommended set of compilable extensions. Not used in @gerhobbelt/babel-core directly, but meant as
+ * as an easy source for tooling making use of @gerhobbelt/babel-core.
  */
 export const DEFAULT_EXTENSIONS = Object.freeze([
   ".js",

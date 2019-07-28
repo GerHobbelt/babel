@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 import path from "path";
-import { types as t } from "@babel/core";
+import { types as t } from "@gerhobbelt/babel-core";
 
 export default declare(api => {
   api.assertVersion(7);

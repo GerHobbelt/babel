@@ -15,17 +15,17 @@ If you want the same configuration as before:
 {
   "plugins": [
     // Stage 2
-    ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    "@babel/plugin-proposal-function-sent",
-    "@babel/plugin-proposal-export-namespace-from",
-    "@babel/plugin-proposal-numeric-separator",
-    "@babel/plugin-proposal-throw-expressions",
+    ["@gerhobbelt/babel-plugin-proposal-decorators", { "legacy": true }],
+    "@gerhobbelt/babel-plugin-proposal-function-sent",
+    "@gerhobbelt/babel-plugin-proposal-export-namespace-from",
+    "@gerhobbelt/babel-plugin-proposal-numeric-separator",
+    "@gerhobbelt/babel-plugin-proposal-throw-expressions",
 
     // Stage 3
-    "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-syntax-import-meta",
-    ["@babel/plugin-proposal-class-properties", { "loose": false }],
-    "@babel/plugin-proposal-json-strings"
+    "@gerhobbelt/babel-plugin-syntax-dynamic-import",
+    "@gerhobbelt/babel-plugin-syntax-import-meta",
+    ["@gerhobbelt/babel-plugin-proposal-class-properties", { "loose": false }],
+    "@gerhobbelt/babel-plugin-proposal-json-strings"
   ]
 }
 
@@ -36,9 +36,9 @@ whichever plugins and presets you're looking to use.
 module.exports = function() {
   return {
     plugins: [
-      require("@babel/plugin-syntax-dynamic-import"),
-      [require("@babel/plugin-proposal-decorators"), { "legacy": true }],
-      [require("@babel/plugin-proposal-class-properties"), { "loose": false }],
+      require("@gerhobbelt/babel-plugin-syntax-dynamic-import"),
+      [require("@gerhobbelt/babel-plugin-proposal-decorators"), { "legacy": true }],
+      [require("@gerhobbelt/babel-plugin-proposal-class-properties"), { "loose": false }],
     ],
     presets: [
       // ...

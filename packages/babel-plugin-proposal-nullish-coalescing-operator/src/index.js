@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxNullishCoalescingOperator from "@babel/plugin-syntax-nullish-coalescing-operator";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxNullishCoalescingOperator from "@gerhobbelt/babel-plugin-syntax-nullish-coalescing-operator";
+import { types as t } from "@gerhobbelt/babel-core";
 
 export default declare((api, { loose = false }) => {
   api.assertVersion(7);

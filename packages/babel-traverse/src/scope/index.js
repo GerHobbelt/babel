@@ -6,7 +6,7 @@ import traverse from "../index";
 import defaults from "lodash/defaults";
 import Binding from "./binding";
 import globals from "globals";
-import * as t from "@babel/types";
+import * as t from "@gerhobbelt/babel-types";
 import { scope as scopeCache } from "../cache";
 
 // Recursively gathers the identifying names of a node.
@@ -493,7 +493,7 @@ export default class Scope {
     if (this.hasBinding("undefined")) {
       return t.unaryExpression("void", t.numericLiteral(0), true);
     } else {
-      // eslint-disable-next-line @babel/development/no-undefined-identifier
+      // eslint-disable-next-line @gerhobbelt/babel-development/no-undefined-identifier
       return t.identifier("undefined");
     }
   }

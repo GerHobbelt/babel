@@ -1,9 +1,9 @@
-import { template, traverse, types as t } from "@babel/core";
+import { template, traverse, types as t } from "@gerhobbelt/babel-core";
 import ReplaceSupers, {
   environmentVisitor,
-} from "@babel/helper-replace-supers";
-import memberExpressionToFunctions from "@babel/helper-member-expression-to-functions";
-import optimiseCall from "@babel/helper-optimise-call-expression";
+} from "@gerhobbelt/babel-helper-replace-supers";
+import memberExpressionToFunctions from "@gerhobbelt/babel-helper-member-expression-to-functions";
+import optimiseCall from "@gerhobbelt/babel-helper-optimise-call-expression";
 
 export function buildPrivateNamesMap(props) {
   const privateNamesMap = new Map();

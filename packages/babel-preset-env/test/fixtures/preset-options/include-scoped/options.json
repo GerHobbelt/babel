@@ -6,7 +6,7 @@
         "targets": {
           "chrome": 61
         },
-        "include": ["@babel/plugin-transform-classes"],
+        "include": ["@gerhobbelt/babel-plugin-transform-classes"],
         "modules": false
       }
     ]

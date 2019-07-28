@@ -1,5 +1,5 @@
-import { declare } from "@babel/helper-plugin-utils";
-import type NodePath from "@babel/traverse";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import type NodePath from "@gerhobbelt/babel-traverse";
 
 export default declare((api, options) => {
   api.assertVersion(7);

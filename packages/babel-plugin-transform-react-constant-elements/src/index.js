@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
-import { types as t } from "@babel/core";
-import annotateAsPure from "@babel/helper-annotate-as-pure";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import { types as t } from "@gerhobbelt/babel-core";
+import annotateAsPure from "@gerhobbelt/babel-helper-annotate-as-pure";
 
 export default declare((api, options) => {
   api.assertVersion(7);

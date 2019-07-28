@@ -15,14 +15,14 @@ describe("normalize-options", () => {
         include: [
           "babel-plugin-transform-spread",
           "transform-classes",
-          "@babel/plugin-transform-unicode-regex",
-          "@babel/transform-block-scoping",
+          "@gerhobbelt/babel-plugin-transform-unicode-regex",
+          "@gerhobbelt/babel-transform-block-scoping",
         ],
         exclude: [
           "babel-plugin-transform-for-of",
           "transform-parameters",
-          "@babel/plugin-transform-regenerator",
-          "@babel/transform-new-target",
+          "@gerhobbelt/babel-plugin-transform-regenerator",
+          "@gerhobbelt/babel-transform-new-target",
         ],
       });
       expect(normalized.include).toEqual([
@@ -47,15 +47,15 @@ describe("normalize-options", () => {
     test.each`
       include                               | exclude
       ${["babel-plugin-transform-spread"]}  | ${["transform-spread"]}
-      ${["@babel/plugin-transform-spread"]} | ${["transform-spread"]}
+      ${["@gerhobbelt/babel-plugin-transform-spread"]} | ${["transform-spread"]}
       ${["transform-spread"]}               | ${["babel-plugin-transform-spread"]}
-      ${["transform-spread"]}               | ${["@babel/plugin-transform-spread"]}
-      ${["babel-plugin-transform-spread"]}  | ${["@babel/plugin-transform-spread"]}
-      ${["@babel/plugin-transform-spread"]} | ${["babel-plugin-transform-spread"]}
-      ${["@babel/plugin-transform-spread"]} | ${["@babel/transform-spread"]}
-      ${["@babel/transform-spread"]}        | ${["@babel/plugin-transform-spread"]}
-      ${["babel-plugin-transform-spread"]}  | ${["@babel/transform-spread"]}
-      ${["@babel/transform-spread"]}        | ${["babel-plugin-transform-spread"]}
+      ${["transform-spread"]}               | ${["@gerhobbelt/babel-plugin-transform-spread"]}
+      ${["babel-plugin-transform-spread"]}  | ${["@gerhobbelt/babel-plugin-transform-spread"]}
+      ${["@gerhobbelt/babel-plugin-transform-spread"]} | ${["babel-plugin-transform-spread"]}
+      ${["@gerhobbelt/babel-plugin-transform-spread"]} | ${["@gerhobbelt/babel-transform-spread"]}
+      ${["@gerhobbelt/babel-transform-spread"]}        | ${["@gerhobbelt/babel-plugin-transform-spread"]}
+      ${["babel-plugin-transform-spread"]}  | ${["@gerhobbelt/babel-transform-spread"]}
+      ${["@gerhobbelt/babel-transform-spread"]}        | ${["babel-plugin-transform-spread"]}
     `(
       "should throw if with includes $include and excludes $exclude",
       ({ include, exclude }) => {

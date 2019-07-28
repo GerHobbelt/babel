@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxExportNamespaceFrom from "@babel/plugin-syntax-export-namespace-from";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxExportNamespaceFrom from "@gerhobbelt/babel-plugin-syntax-export-namespace-from";
+import { types as t } from "@gerhobbelt/babel-core";
 
 export default declare(api => {
   api.assertVersion(7);

@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxLogicalAssignmentOperators from "@babel/plugin-syntax-logical-assignment-operators";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxLogicalAssignmentOperators from "@gerhobbelt/babel-plugin-syntax-logical-assignment-operators";
+import { types as t } from "@gerhobbelt/babel-core";
 
 export default declare(api => {
   api.assertVersion(7);

@@ -18,7 +18,7 @@ import removeRegeneratorEntryPlugin from "./polyfills/regenerator/entry-plugin";
 import getTargets from "./targets-parser";
 import availablePlugins from "./available-plugins";
 import { filterStageFromList, prettifyTargets } from "./utils";
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 
 export { isPluginRequired } from "./filter-items";
 
@@ -98,7 +98,7 @@ export default declare((api, opts) => {
   if (optionsTargets && optionsTargets.esmodules && optionsTargets.browsers) {
     console.log("");
     console.log(
-      "@babel/preset-env: esmodules and browsers targets have been specified together.",
+      "@gerhobbelt/babel-preset-env: esmodules and browsers targets have been specified together.",
     );
     console.log(
       `\`browsers\` target, \`${optionsTargets.browsers}\` will be ignored.`,
@@ -169,7 +169,7 @@ export default declare((api, opts) => {
   );
 
   if (debug) {
-    console.log("@babel/preset-env: `DEBUG` option");
+    console.log("@gerhobbelt/babel-preset-env: `DEBUG` option");
     console.log("\nUsing targets:");
     console.log(JSON.stringify(prettifyTargets(targets), null, 2));
     console.log(`\nUsing modules transform: ${modules.toString()}`);

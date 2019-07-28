@@ -1,5 +1,5 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxJsonStrings from "@babel/plugin-syntax-json-strings";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxJsonStrings from "@gerhobbelt/babel-plugin-syntax-json-strings";
 
 export default declare(api => {
   api.assertVersion(7);
