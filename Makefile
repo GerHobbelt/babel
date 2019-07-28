@@ -135,6 +135,11 @@ bootstrap: clean-all
 	cd packages/babel-plugin-transform-runtime; \
 	node scripts/build-dist.js
 
+# fix all references for @babel/... to be @gerhobbelt/babel-..., where applicable
+fix-scope-dep:
+	node scripts/generators/fix-scoped-npm-package-deps.js
+
+
 clean-lib:
 	$(foreach source, $(SOURCES), \
 		$(call clean-source-lib, $(source)))
