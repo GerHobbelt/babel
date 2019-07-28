@@ -77,6 +77,10 @@ export default class State {
     maxTopicIndex: null,
   };
 
+  // For the F# plugin
+  soloAwait: boolean = false;
+  inFSharpPipelineDirectBody: boolean = false;
+
   // Check whether we are in a (nested) class or not.
   classLevel: number = 0;
 
@@ -170,7 +174,7 @@ export default class State {
       // $FlowIgnore
       let val = this[key];
 
-      if ((!skipArrays || key === "context") && Array.isArray(val)) {
+      if (!skipArrays && Array.isArray(val)) {
         val = val.slice();
       }
 

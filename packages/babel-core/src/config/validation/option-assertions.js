@@ -231,7 +231,7 @@ function assertIgnoreItem(loc: GeneralPath, value: mixed): IgnoreItem {
     throw new Error(
       `${msg(
         loc,
-      )} must be an array of string/Funtion/RegExp values, or undefined`,
+      )} must be an array of string/Function/RegExp values, or undefined`,
     );
   }
   return value;
@@ -337,7 +337,7 @@ function assertPluginItem(loc: GeneralPath, value: mixed): PluginItem {
       if (
         opts !== undefined &&
         opts !== false &&
-        (typeof opts !== "object" || Array.isArray(opts))
+        (typeof opts !== "object" || Array.isArray(opts) || opts === null)
       ) {
         throw new Error(
           `${msg(access(loc, 1))} must be an object, false, or undefined`,

@@ -89,7 +89,7 @@ const assertTest = function(stdout, stderr, opts, cwd) {
   }
 
   if (opts.outFiles) {
-    const actualFiles = readDir(path.join(tmpLoc), fileFilter);
+    const actualFiles = readDir(tmpLoc, fileFilter);
 
     Object.keys(actualFiles).forEach(function(filename) {
       if (
@@ -183,12 +183,12 @@ const buildTest = function(binName, testName, opts) {
 };
 
 fs.readdirSync(fixtureLoc).forEach(function(binName) {
-  if (binName[0] === ".") return;
+  if (binName.startsWith(".")) return;
 
   const suiteLoc = path.join(fixtureLoc, binName);
   describe("bin/" + binName, function() {
     fs.readdirSync(suiteLoc).forEach(function(testName) {
-      if (testName[0] === ".") return;
+      if (testName.startsWith(".")) return;
 
       const testLoc = path.join(suiteLoc, testName);
 

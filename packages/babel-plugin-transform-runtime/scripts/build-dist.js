@@ -9,8 +9,6 @@ const t = require("@gerhobbelt/babel-types");
 const slash = require("slash");
 
 const transformRuntime = require("../");
-const transformMemberExpressionLiterals = require("@babel/plugin-transform-member-expression-literals");
-const transformPropertyLiterals = require("@babel/plugin-transform-property-literals");
 
 const corejs2Definitions = require("../lib/runtime-corejs2-definitions").default();
 const corejs3Definitions = require("../lib/runtime-corejs3-definitions").default();
@@ -157,8 +155,6 @@ function buildHelper(
     presets: [[require("@gerhobbelt/babel-preset-env"), { modules: false }]],
     plugins: [
       [transformRuntime, { corejs, useESModules: esm }],
-      [transformMemberExpressionLiterals],
-      [transformPropertyLiterals],
       buildRuntimeRewritePlugin(
         runtimeName,
         slash(path.relative(path.dirname(helperFilename), pkgDirname)),

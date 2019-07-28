@@ -15,6 +15,7 @@ export type Options = {
   allowReturnOutsideFunction: boolean,
   allowImportExportEverywhere: boolean,
   allowSuperOutsideMethod: boolean,
+  allowUndeclaredExports: boolean,
   plugins: PluginList,
   strictMode: ?boolean,
   ranges: boolean,
@@ -42,6 +43,8 @@ export const defaultOptions: Options = {
   allowImportExportEverywhere: false,
   // TODO
   allowSuperOutsideMethod: false,
+  // When enabled, export statements can reference undeclared variables.
+  allowUndeclaredExports: false,
   // An array of plugins to enable
   plugins: [],
   // TODO

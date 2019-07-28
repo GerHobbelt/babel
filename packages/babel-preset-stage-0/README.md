@@ -32,7 +32,7 @@ If you want the same configuration as before:
     // Stage 3
     "@gerhobbelt/babel-plugin-syntax-dynamic-import",
     "@gerhobbelt/babel-plugin-syntax-import-meta",
-    ["@gerhobbelt/babel-plugin-proposal-class-properties", { "loose": false }],
+    ["@gerhobbelt/babel-plugin-proposal-class-properties", { "loose": true }],
     "@gerhobbelt/babel-plugin-proposal-json-strings"
   ]
 }
@@ -48,7 +48,7 @@ module.exports = function() {
     plugins: [
       require("@gerhobbelt/babel-plugin-syntax-dynamic-import"),
       [require("@gerhobbelt/babel-plugin-proposal-decorators"), { "legacy": true }],
-      [require("@gerhobbelt/babel-plugin-proposal-class-properties"), { "loose": false }],
+      [require("@gerhobbelt/babel-plugin-proposal-class-properties"), { "loose": true }],
     ],
     presets: [
       // ...
@@ -56,3 +56,10 @@ module.exports = function() {
   };
 };
 ```
+
+**NOTE: Compatibility between `@babel/plugin-proposal-class-properties` and `@babel/plugin-proposal-decorators`**
+If you are including your plugins manually and using `@babel/plugin-proposal-class-properties`, make sure that `@babel/plugin-proposal-decorators` comes before `@babel/plugin-proposal-class-properties`.
+
+When using the `legacy: true` option of `@babel/plugin-proposal-decorators`, `@babel/plugin-proposal-class-properties` must be used in `loose: true` mode.
+
+If you are not using `@babel/plugin-proposal-decorators`, `loose` mode is not needed.

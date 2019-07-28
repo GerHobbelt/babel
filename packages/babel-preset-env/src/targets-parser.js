@@ -44,13 +44,16 @@ const validateTargetNames = (targets: Targets): void => {
 
 const browserNameMap = {
   and_chr: "chrome",
+  and_ff: "firefox",
   android: "android",
   chrome: "chrome",
   edge: "edge",
   firefox: "firefox",
   ie: "ie",
+  ie_mob: "ie",
   ios_saf: "ios",
   node: "node",
+  op_mob: "opera",
   opera: "opera",
   safari: "safari",
   samsung: "samsung",
@@ -65,6 +68,7 @@ const validateBrowsers = browsers => {
     typeof browsers === "undefined" || isBrowsersQueryValid(browsers),
     `Invalid Option: '${browsers}' is not a valid browserslist query`,
   );
+
   return browsers;
 };
 
@@ -191,16 +195,28 @@ const getTargets = (targets: Object = {}, options: Object = {}): Targets => {
 
   // Parse browsers target via browserslist
   const browsersquery = validateBrowsers(targets.browsers);
+
+  const hasTargets = Object.keys(targets).length > 0;
   const shouldParseBrowsers = !!targets.browsers;
   const shouldSearchForConfig =
-    !options.ignoreBrowserslistConfig && !Object.keys(targets).length;
+    !options.ignoreBrowserslistConfig && !hasTargets;
 
   if (shouldParseBrowsers || shouldSearchForConfig) {
-    browserslist.defaults = objectToBrowserslist(targets);
+    // If no targets are passed, we need to overwrite browserslist's defaults
+    // so that we enable all transforms (acting like the now deprecated
+    // preset-latest).
+    //
+    // Note, if browserslist resolves the config (ex. package.json), then usage
+    // of `defaults` in queries will be different since we don't want to break
+    // the behavior of "no targets is the same as preset-latest".
+    if (!hasTargets) {
+      browserslist.defaults = objectToBrowserslist(targets);
+    }
 
     const browsers = browserslist(browsersquery, {
       path: options.configPath,
       env: options.env,
+      mobileToDesktop: true,
     });
 
     const queryBrowsers = getLowestVersions(browsers);

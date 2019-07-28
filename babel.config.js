@@ -7,7 +7,7 @@ module.exports = function(api) {
 
   const nodeVersion = "6.9";
 
-  const envOpts = {
+  const envOptsNoTargets = {
     loose: true,
     modules: false,
     //debug: true,
@@ -23,6 +23,7 @@ module.exports = function(api) {
       // browsers: "> 5%",
     },
   };
+  const envOpts = Object.assign({}, envOptsNoTargets);
 
   let convertESM = true;
   let ignoreLib = true;
@@ -104,6 +105,11 @@ module.exports = function(api) {
         ].filter(Boolean),
       },
       {
+        test: "./packages/babel-polyfill",
+        presets: [["@babel/env", envOptsNoTargets]],
+        plugins: [["@babel/transform-modules-commonjs", { lazy: false }]],
+      },
+      {
         // The vast majority of our src files are modules, but we use
         // unambiguous to keep things simple until we get around to renaming
         // the modules to be more easily distinguished from CommonJS
@@ -123,7 +129,7 @@ module.exports = function(api) {
         ],
         plugins: [
           includeRuntime
-            ? ["@gerhobbelt/babel-plugin-transform-runtime", { version: "7.3.4" }]
+            ? ["@babel/transform-runtime", { version: "7.4.4" }]
             : null,
         ].filter(Boolean),
       },

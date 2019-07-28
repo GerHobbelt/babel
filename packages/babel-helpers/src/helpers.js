@@ -26,13 +26,14 @@ helpers.typeof = helper("7.0.0-beta.0")`
   }
 `;
 
+// "for" is a reserved keyword in ES3 so escaping it here for backward compatibility
 helpers.jsx = helper("7.0.0-beta.0")`
   var REACT_ELEMENT_TYPE;
 
   export default function _createRawReactElement(type, props, key, children) {
     if (!REACT_ELEMENT_TYPE) {
       REACT_ELEMENT_TYPE = (
-        typeof Symbol === "function" && Symbol.for && Symbol.for("react.element")
+        typeof Symbol === "function" && Symbol["for"] && Symbol["for"]("react.element")
       ) || 0xeac7;
     }
 
@@ -80,7 +81,7 @@ helpers.jsx = helper("7.0.0-beta.0")`
 helpers.asyncIterator = helper("7.0.0-beta.0")`
   export default function _asyncIterator(iterable) {
     var method
-    if (typeof Symbol === "function") {
+    if (typeof Symbol !== "undefined") {
       if (Symbol.asyncIterator) {
         method = iterable[Symbol.asyncIterator]
         if (method != null) return method.call(iterable);
@@ -384,6 +385,7 @@ helpers.extends = helper("7.0.0-beta.0")`
   }
 `;
 
+// This old helper can be removed in babel v8
 helpers.objectSpread = helper("7.0.0-beta.0")`
   import defineProperty from "defineProperty";
 
@@ -399,6 +401,30 @@ helpers.objectSpread = helper("7.0.0-beta.0")`
       ownKeys.forEach(function(key) {
         defineProperty(target, key, source[key]);
       });
+    }
+    return target;
+  }
+`;
+
+helpers.objectSpread2 = helper("7.0.0-beta.0")`
+  import defineProperty from "defineProperty";
+
+  export default function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      if (i % 2) {
+        var source = (arguments[i] != null) ? arguments[i] : {};
+        var ownKeys = Object.keys(source);
+        if (typeof Object.getOwnPropertySymbols === 'function') {
+          ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
+            return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+          }));
+        }
+        ownKeys.forEach(function(key) {
+          defineProperty(target, key, source[key]);
+        });
+      } else {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(arguments[i]));
+      }
     }
     return target;
   }
@@ -1045,10 +1071,10 @@ helpers.classPrivateFieldLooseBase = helper("7.0.0-beta.0")`
 
 helpers.classPrivateFieldGet = helper("7.0.0-beta.0")`
   export default function _classPrivateFieldGet(receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
+    var descriptor = privateMap.get(receiver);
+    if (!descriptor) {
       throw new TypeError("attempted to get private field on non-instance");
     }
-    var descriptor = privateMap.get(receiver);
     if (descriptor.get) {
       return descriptor.get.call(receiver);
     }
@@ -1058,10 +1084,10 @@ helpers.classPrivateFieldGet = helper("7.0.0-beta.0")`
 
 helpers.classPrivateFieldSet = helper("7.0.0-beta.0")`
   export default function _classPrivateFieldSet(receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
+    var descriptor = privateMap.get(receiver);
+    if (!descriptor) {
       throw new TypeError("attempted to set private field on non-instance");
     }
-    var descriptor = privateMap.get(receiver);
     if (descriptor.set) {
       descriptor.set.call(receiver, value);
     } else {
@@ -1870,7 +1896,7 @@ helpers.wrapRegExp = helper("7.2.6")`
       // but in that case Babel doesn't add the wrapper anyway.
 
       var g = _groups.get(re);
-      return Object.keys(groups).reduce(function(groups, name) {
+      return Object.keys(g).reduce(function(groups, name) {
         groups[name] = result[g[name]];
         return groups;
       }, Object.create(null));

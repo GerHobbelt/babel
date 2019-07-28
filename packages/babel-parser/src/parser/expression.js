@@ -331,8 +331,11 @@ export default class ExpressionParser extends LValParser {
     const prec = this.state.type.binop;
     if (prec != null && (!noIn || !this.match(tt._in))) {
       if (prec > minPrec) {
-        const node = this.startNodeAt(leftStartPos, leftStartLoc);
         const operator = this.state.value;
+        if (operator === "|>" && this.state.inFSharpPipelineDirectBody) {
+          return left;
+        }
+        const node = this.startNodeAt(leftStartPos, leftStartLoc);
         node.left = left;
         node.operator = operator;
         if (
@@ -406,18 +409,23 @@ export default class ExpressionParser extends LValParser {
     prec: number,
     noIn: ?boolean,
   ): N.Expression {
+    const startPos = this.state.start;
+    const startLoc = this.state.startLoc;
     switch (op) {
       case tt.pipeline:
-        if (this.getPluginOption("pipelineOperator", "proposal") === "smart") {
-          const startPos = this.state.start;
-          const startLoc = this.state.startLoc;
-          return this.withTopicPermittingContext(() => {
-            return this.parseSmartPipelineBody(
-              this.parseExprOpBaseRightExpr(op, prec, noIn),
-              startPos,
-              startLoc,
-            );
-          });
+        switch (this.getPluginOption("pipelineOperator", "proposal")) {
+          case "smart":
+            return this.withTopicPermittingContext(() => {
+              return this.parseSmartPipelineBody(
+                this.parseExprOpBaseRightExpr(op, prec, noIn),
+                startPos,
+                startLoc,
+              );
+            });
+          case "fsharp":
+            return this.withSoloAwaitPermittingContext(() => {
+              return this.parseFSharpPipelineBody(prec, noIn);
+            });
         }
       // falls through
 
@@ -766,6 +774,8 @@ export default class ExpressionParser extends LValParser {
     const elts = [];
     let innerParenStart;
     let first = true;
+    const oldInFSharpPipelineDirectBody = this.state.inFSharpPipelineDirectBody;
+    this.state.inFSharpPipelineDirectBody = false;
 
     while (!this.eat(close)) {
       if (first) {
@@ -803,6 +813,8 @@ export default class ExpressionParser extends LValParser {
     if (possibleAsyncArrow && innerParenStart && this.shouldParseAsyncArrow()) {
       this.unexpected();
     }
+
+    this.state.inFSharpPipelineDirectBody = oldInFSharpPipelineDirectBody;
 
     return elts;
   }
@@ -875,19 +887,19 @@ export default class ExpressionParser extends LValParser {
         return this.finishNode(node, "Super");
 
       case tt._import:
-        if (this.lookahead().type === tt.dot) {
-          return this.parseImportMetaProperty();
-        }
-
-        this.expectPlugin("dynamicImport");
-
         node = this.startNode();
         this.next();
+
+        if (this.match(tt.dot)) {
+          return this.parseImportMetaProperty(node);
+        }
+
+        this.expectPlugin("dynamicImport", node.start);
+
         if (!this.match(tt.parenL)) {
           this.unexpected(null, tt.parenL);
         }
         return this.finishNode(node, "Import");
-
       case tt._this:
         node = this.startNode();
         this.next();
@@ -969,7 +981,10 @@ export default class ExpressionParser extends LValParser {
       case tt.parenL:
         return this.parseParenAndDistinguishExpression(canBeArrow);
 
-      case tt.bracketL:
+      case tt.bracketL: {
+        const oldInFSharpPipelineDirectBody = this.state
+          .inFSharpPipelineDirectBody;
+        this.state.inFSharpPipelineDirectBody = false;
         node = this.startNode();
         this.next();
         node.elements = this.parseExprList(
@@ -985,11 +1000,17 @@ export default class ExpressionParser extends LValParser {
           // expression by calling toReferencedListDeep.
           this.toReferencedList(node.elements);
         }
+        this.state.inFSharpPipelineDirectBody = oldInFSharpPipelineDirectBody;
         return this.finishNode(node, "ArrayExpression");
-
-      case tt.braceL:
-        return this.parseObj(false, refShorthandDefaultPos);
-
+      }
+      case tt.braceL: {
+        const oldInFSharpPipelineDirectBody = this.state
+          .inFSharpPipelineDirectBody;
+        this.state.inFSharpPipelineDirectBody = false;
+        const ret = this.parseObj(false, refShorthandDefaultPos);
+        this.state.inFSharpPipelineDirectBody = oldInFSharpPipelineDirectBody;
+        return ret;
+      }
       case tt._function:
         return this.parseFunctionExpression();
 
@@ -1125,20 +1146,17 @@ export default class ExpressionParser extends LValParser {
     return this.finishNode(node, "MetaProperty");
   }
 
-  parseImportMetaProperty(): N.MetaProperty {
-    const node = this.startNode();
-    const id = this.parseIdentifier(true);
+  parseImportMetaProperty(node: N.MetaProperty): N.MetaProperty {
+    const id = this.createIdentifier(this.startNodeAtNode(node), "import");
     this.expect(tt.dot);
 
-    if (id.name === "import") {
-      if (this.isContextual("meta")) {
-        this.expectPlugin("importMeta");
-      } else if (!this.hasPlugin("importMeta")) {
-        this.raise(
-          id.start,
-          `Dynamic imports require a parameter: import('a.js')`,
-        );
-      }
+    if (this.isContextual("meta")) {
+      this.expectPlugin("importMeta");
+    } else if (!this.hasPlugin("importMeta")) {
+      this.raise(
+        id.start,
+        `Dynamic imports require a parameter: import('a.js')`,
+      );
     }
 
     if (!this.inModule) {
@@ -1180,9 +1198,11 @@ export default class ExpressionParser extends LValParser {
     const oldMaybeInArrowParameters = this.state.maybeInArrowParameters;
     const oldYieldPos = this.state.yieldPos;
     const oldAwaitPos = this.state.awaitPos;
+    const oldInFSharpPipelineDirectBody = this.state.inFSharpPipelineDirectBody;
     this.state.maybeInArrowParameters = true;
     this.state.yieldPos = 0;
     this.state.awaitPos = 0;
+    this.state.inFSharpPipelineDirectBody = false;
 
     const innerStartPos = this.state.start;
     const innerStartLoc = this.state.startLoc;
@@ -1236,6 +1256,7 @@ export default class ExpressionParser extends LValParser {
     this.expect(tt.parenR);
 
     this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
+    this.state.inFSharpPipelineDirectBody = oldInFSharpPipelineDirectBody;
 
     let arrowNode = this.startNodeAt(startPos, startLoc);
     if (
@@ -1767,6 +1788,7 @@ export default class ExpressionParser extends LValParser {
     this.parseFunctionParams((node: any), allowModifiers);
     this.checkYieldAwaitInDefaultParams();
     this.parseFunctionBodyAndFinish(node, type, true);
+    this.scope.exit();
 
     this.state.yieldPos = oldYieldPos;
     this.state.awaitPos = oldAwaitPos;
@@ -1795,6 +1817,7 @@ export default class ExpressionParser extends LValParser {
     if (params) this.setArrowFunctionParameters(node, params);
     this.parseFunctionBody(node, true);
 
+    this.scope.exit();
     this.state.maybeInArrowParameters = oldMaybeInArrowParameters;
     this.state.yieldPos = oldYieldPos;
     this.state.awaitPos = oldAwaitPos;
@@ -1890,7 +1913,6 @@ export default class ExpressionParser extends LValParser {
       node.body = this.parseBlock(true, false);
       this.state.labels = oldLabels;
     }
-    this.scope.exit();
 
     this.state.inParameters = oldInParameters;
     // Ensure the function name isn't a forbidden identifier in strict mode, e.g. 'eval'
@@ -2116,7 +2138,9 @@ export default class ExpressionParser extends LValParser {
       );
     }
 
-    node.argument = this.parseMaybeUnary();
+    if (!this.state.soloAwait) {
+      node.argument = this.parseMaybeUnary();
+    }
     return this.finishNode(node, "AwaitExpression");
   }
 
@@ -2306,6 +2330,17 @@ export default class ExpressionParser extends LValParser {
     }
   }
 
+  withSoloAwaitPermittingContext<T>(callback: () => T): T {
+    const outerContextSoloAwaitState = this.state.soloAwait;
+    this.state.soloAwait = true;
+
+    try {
+      return callback();
+    } finally {
+      this.state.soloAwait = outerContextSoloAwaitState;
+    }
+  }
+
   // Register the use of a primary topic reference (`#`) within the current
   // topic context.
   registerTopicReference(): void {
@@ -2321,5 +2356,26 @@ export default class ExpressionParser extends LValParser {
       this.state.topicContext.maxTopicIndex != null &&
       this.state.topicContext.maxTopicIndex >= 0
     );
+  }
+
+  parseFSharpPipelineBody(prec: number, noIn: ?boolean): N.Expression {
+    const startPos = this.state.start;
+    const startLoc = this.state.startLoc;
+
+    this.state.potentialArrowAt = this.state.start;
+    const oldInFSharpPipelineDirectBody = this.state.inFSharpPipelineDirectBody;
+    this.state.inFSharpPipelineDirectBody = true;
+
+    const ret = this.parseExprOp(
+      this.parseMaybeUnary(),
+      startPos,
+      startLoc,
+      prec,
+      noIn,
+    );
+
+    this.state.inFSharpPipelineDirectBody = oldInFSharpPipelineDirectBody;
+
+    return ret;
   }
 }
