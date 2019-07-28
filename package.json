@@ -85,11 +85,6 @@
       "eslint --format=codeframe"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "jest": {
     "collectCoverageFrom": [
       "packages/*/src/**/*.mjs",
