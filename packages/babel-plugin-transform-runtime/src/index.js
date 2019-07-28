@@ -132,7 +132,7 @@ export default declare((api, options, dirname) => {
     } else {
       throw new Error(
         "The 'useBuiltIns' option has been removed. Use the 'corejs'" +
-          "option to polyfill with `core-js` via @babel/runtime.",
+          "option to polyfill with `core-js` via @gerhobbelt/babel-runtime.",
       );
     }
   }
@@ -146,7 +146,7 @@ export default declare((api, options, dirname) => {
     } else {
       throw new Error(
         "The 'polyfill' option has been removed. Use the 'corejs'" +
-          "option to polyfill with `core-js` via @babel/runtime.",
+          "option to polyfill with `core-js` via @gerhobbelt/babel-runtime.",
       );
     }
   }
@@ -168,7 +168,7 @@ export default declare((api, options, dirname) => {
   const injectCoreJS = corejsVersion !== false;
 
   const moduleName = injectCoreJS3
-    ? "@babel/runtime-corejs3"
+    ? "@gerhobbelt/babel-runtime-corejs3"
     : injectCoreJS2
     ? "@gerhobbelt/babel-runtime-corejs2"
     : "@gerhobbelt/babel-runtime";

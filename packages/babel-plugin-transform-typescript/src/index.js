@@ -1,7 +1,7 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxTypeScript from "@babel/plugin-syntax-typescript";
-import { types as t, template } from "@babel/core";
-import { injectInitialization } from "@babel/helper-create-class-features-plugin";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxTypeScript from "@gerhobbelt/babel-plugin-syntax-typescript";
+import { types as t, template } from "@gerhobbelt/babel-core";
+import { injectInitialization } from "@gerhobbelt/babel-helper-create-class-features-plugin";
 
 import transpileEnum from "./enum";
 import transpileNamespace from "./namespace";
@@ -273,7 +273,7 @@ export default declare(
 
         TSImportEqualsDeclaration(path) {
           throw path.buildCodeFrameError(
-            "`import =` is not supported by @babel/plugin-transform-typescript\n" +
+            "`import =` is not supported by @gerhobbelt/babel-plugin-transform-typescript\n" +
               "Please consider using " +
               "`import <moduleName> from '<moduleName>';` alongside " +
               "Typescript's --allowSyntheticDefaultImports option.",
@@ -282,7 +282,7 @@ export default declare(
 
         TSExportAssignment(path) {
           throw path.buildCodeFrameError(
-            "`export =` is not supported by @babel/plugin-transform-typescript\n" +
+            "`export =` is not supported by @gerhobbelt/babel-plugin-transform-typescript\n" +
               "Please consider using `export <value>;`.",
           );
         },

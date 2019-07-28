@@ -1,4 +1,4 @@
-// Type definitions for @babel/parser
+// Type definitions for @gerhobbelt/babel-parser
 // Project: https://github.com/babel/babel/tree/master/packages/babel-parser
 // Definitions by: Troy Gerwien <https://github.com/yortus>
 //                 Marvin Hagemeister <https://github.com/marvinhagemeister>
@@ -39,7 +39,7 @@ export interface ParserOptions {
     /**
      * Indicate the mode the code should be parsed in.
      * Can be one of "script", "module", or "unambiguous". Defaults to "script".
-     * "unambiguous" will make @babel/parser attempt to guess, based on the presence
+     * "unambiguous" will make @gerhobbelt/babel-parser attempt to guess, based on the presence
      * of ES6 import or export statements.
      * Files with ES6 imports and exports are considered "module" and are otherwise "script".
      */

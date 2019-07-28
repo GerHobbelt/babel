@@ -174,7 +174,7 @@ const pluginNameMap = {
     },
   },
 
-  // TODO: This plugins are now supported by default by @babel/parser: they can
+  // TODO: This plugins are now supported by default by @gerhobbelt/babel-parser: they can
   // be removed from this list. Although removing them isn't a breaking change,
   // it's better to keep a nice error message for users using older versions of
   // the parser. They can be removed in Babel 8.

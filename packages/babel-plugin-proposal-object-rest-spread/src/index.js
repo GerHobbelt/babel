@@ -3,7 +3,7 @@ import syntaxObjectRestSpread from "@gerhobbelt/babel-plugin-syntax-object-rest-
 import { types as t } from "@gerhobbelt/babel-core";
 
 // TODO: Remove in Babel 8
-// @babel/types <=7.3.3 counts FOO as referenced in var { x: FOO }.
+// @gerhobbelt/babel-types <=7.3.3 counts FOO as referenced in var { x: FOO }.
 // We need to detect this bug to know if "unused" means 0 or 1 references.
 const ZERO_REFS = (() => {
   const node = t.identifier("a");

@@ -2,11 +2,11 @@ import path from "path";
 import fs from "fs";
 import os from "os";
 import { sync as mkdirpSync } from "mkdirp";
-import * as babel from "@babel/core";
+import * as babel from "@gerhobbelt/babel-core";
 import findCacheDir from "find-cache-dir";
 
 const DEFAULT_CACHE_DIR =
-  findCacheDir({ name: "@babel/register" }) || os.homedir() || os.tmpdir();
+  findCacheDir({ name: "@gerhobbelt/babel-register" }) || os.homedir() || os.tmpdir();
 const DEFAULT_FILENAME = path.join(
   DEFAULT_CACHE_DIR,
   `.babel.${babel.version}.${babel.getEnv()}.json`,

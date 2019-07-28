@@ -13,9 +13,9 @@ const transformRuntime = require("../");
 const corejs2Definitions = require("../lib/runtime-corejs2-definitions").default();
 const corejs3Definitions = require("../lib/runtime-corejs3-definitions").default();
 
-writeHelpers("@babel/runtime");
-writeHelpers("@babel/runtime-corejs2", { corejs: 2 });
-writeHelpers("@babel/runtime-corejs3", {
+writeHelpers("@gerhobbelt/babel-runtime");
+writeHelpers("@gerhobbelt/babel-runtime-corejs2", { corejs: 2 });
+writeHelpers("@gerhobbelt/babel-runtime-corejs3", {
   corejs: { version: 3, proposals: true },
 });
 
@@ -27,7 +27,7 @@ writeCoreJS({
     "is-iterable",
     "get-iterator",
     // This was previously in definitions, but was removed to work around
-    // zloirock/core-js#262. We need to keep it in @babel/runtime-corejs2 to
+    // zloirock/core-js#262. We need to keep it in @gerhobbelt/babel-runtime-corejs2 to
     // avoid a breaking change there.
     "symbol/async-iterator",
   ],
@@ -55,7 +55,7 @@ function writeCoreJS({
   paths,
   corejsRoot,
 }) {
-  const pkgDirname = getRuntimeRoot(`@babel/runtime-corejs${corejs}`);
+  const pkgDirname = getRuntimeRoot(`@gerhobbelt/babel-runtime-corejs${corejs}`);
 
   Object.keys(BuiltIns).forEach(name => {
     const { stable, path } = BuiltIns[name];

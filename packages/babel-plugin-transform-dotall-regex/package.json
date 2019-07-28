@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-dotall-regex",
-  "version": "7.5.0-30",
+  "version": "7.5.5-30",
   "description": "Compile regular expressions using the `s` (`dotAll`) flag to ES5.",
   "homepage": "https://babeljs.io/",
   "license": "MIT",
@@ -21,15 +21,15 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-dotall-regex",
   "bugs": "https://github.com/babel/babel/issues",
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.5.0-30",
-    "@gerhobbelt/babel-helper-regex": "7.5.0-30",
+    "@gerhobbelt/babel-helper-plugin-utils": "7.5.5-30",
+    "@gerhobbelt/babel-helper-regex": "7.5.5-30",
     "regexpu-core": "^4.5.4"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.5.0-30"
+    "@gerhobbelt/babel-core": "~7.5.5-30"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.5.0-30",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.5.0-30"
+    "@gerhobbelt/babel-core": "7.5.5-30",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.5.5-30"
   }
 }

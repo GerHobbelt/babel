@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-syntax-partial-application",
-  "version": "7.5.0-30",
+  "version": "7.5.5-30",
   "description": "Allow parsing of partial application syntax",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-partial-application",
   "license": "MIT",
@@ -12,12 +12,12 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.5.0-30"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.5.5-30"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.5.0-30"
+    "@gerhobbelt/babel-core": "~7.5.5-30"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.5.0-30"
+    "@gerhobbelt/babel-core": "7.5.5-30"
   }
 }

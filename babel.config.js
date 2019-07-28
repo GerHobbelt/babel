@@ -106,8 +106,8 @@ module.exports = function(api) {
       },
       {
         test: "./packages/babel-polyfill",
-        presets: [["@babel/env", envOptsNoTargets]],
-        plugins: [["@babel/transform-modules-commonjs", { lazy: false }]],
+        presets: [["@gerhobbelt/babel-preset-env", envOptsNoTargets]],
+        plugins: [["@gerhobbelt/babel-plugin-transform-modules-commonjs", { lazy: false }]],
       },
       {
         // The vast majority of our src files are modules, but we use
@@ -129,7 +129,7 @@ module.exports = function(api) {
         ],
         plugins: [
           includeRuntime
-            ? ["@babel/plugin-transform-runtime", { version: "7.5.0" }]
+            ? ["@gerhobbelt/babel-plugin-transform-runtime", { version: "7.5.5-30" }]
             : null,
         ].filter(Boolean),
       },

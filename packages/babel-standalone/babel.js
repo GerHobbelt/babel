@@ -38432,7 +38432,7 @@
               if (!deprecationWarningShown) {
                 deprecationWarningShown = true;
                 const message =
-                  "Passing lineNumber and colNumber is deprecated to @babel/code-frame. Please use `codeFrameColumns`.";
+                  "Passing lineNumber and colNumber is deprecated to @gerhobbelt/babel-code-frame. Please use `codeFrameColumns`.";
 
                 if (process.emitWarning) {
                   process.emitWarning(message, "DeprecationWarning");
@@ -109262,7 +109262,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             .split(".")
             .reduce((v, x) => v * 1e5 + +x, 0);
 
-          const versionKey = "@babel/plugin-class-features/version";
+          const versionKey = "@gerhobbelt/babel-plugin-class-features/version";
 
           function createClassFeaturePlugin({
             name,
@@ -110306,7 +110306,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                 ) {
                   const placeholderName = placeholder.name;
                   throw new Error(`Error: No substitution given for "${placeholderName}". If this is not meant to be a
-            placeholder you may want to consider passing one of the following options to @babel/template:
+            placeholder you may want to consider passing one of the following options to @gerhobbelt/babel-template:
             - { placeholderPattern: false, placeholderWhitelist: new Set(['${placeholderName}'])}
             - { placeholderPattern: /^${placeholderName}$/ }`);
                 }
@@ -110329,7 +110329,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                     (replacements && replacements[placeholder.name]) || null
                   );
                 } catch (e) {
-                  e.message = `@babel/template placeholder "${
+                  e.message = `@gerhobbelt/babel-template placeholder "${
                     placeholder.name
                   }": ${e.message}`;
                   throw e;
@@ -110582,7 +110582,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
               if (key === "helpersNamespace") {
                 throw new Error(
                   "Babel 7.0.0-beta.56 has dropped support for the 'helpersNamespace' utility." +
-                    "If you are using @babel/plugin-external-helpers you will need to use a newer " +
+                    "If you are using @gerhobbelt/babel-plugin-external-helpers you will need to use a newer " +
                     "version than the one you currently have installed. " +
                     "If you have your own implementation, you'll want to explore using 'helperGenerator' " +
                     "alongside 'file.availableHelper()'."
@@ -110640,7 +110640,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
               throw new Error(
                 "This API has been removed. If you're looking for this " +
                   "functionality in Babel 7, you should import the " +
-                  "'@babel/helper-module-imports' module and use the functions exposed " +
+                  "'@gerhobbelt/babel-helper-module-imports' module and use the functions exposed " +
                   " from that module, such as 'addNamed' or 'addDefault'."
               );
             }
@@ -116565,7 +116565,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                 ) {
                   const placeholderName = placeholder.name;
                   throw new Error(`Error: No substitution given for "${placeholderName}". If this is not meant to be a
-            placeholder you may want to consider passing one of the following options to @babel/template:
+            placeholder you may want to consider passing one of the following options to @gerhobbelt/babel-template:
             - { placeholderPattern: false, placeholderWhitelist: new Set(['${placeholderName}'])}
             - { placeholderPattern: /^${placeholderName}$/ }`);
                 }
@@ -116588,7 +116588,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                     (replacements && replacements[placeholder.name]) || null
                   );
                 } catch (e) {
-                  e.message = `@babel/template placeholder "${
+                  e.message = `@gerhobbelt/babel-template placeholder "${
                     placeholder.name
                   }": ${e.message}`;
                   throw e;
@@ -118313,7 +118313,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                       `You appear to be using an plugin with an async .pre, ` +
                         `which your current version of Babel does not support.` +
                         `If you're using a published plugin, you may need to upgrade ` +
-                        `your @babel/core version.`
+                        `your @gerhobbelt/babel-core version.`
                     );
                   }
                 }
@@ -118338,7 +118338,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                       `You appear to be using an plugin with an async .post, ` +
                         `which your current version of Babel does not support.` +
                         `If you're using a published plugin, you may need to upgrade ` +
-                        `your @babel/core version.`
+                        `your @gerhobbelt/babel-core version.`
                     );
                   }
                 }
@@ -118664,7 +118664,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                     `You appear to be using an async codegen plugin, ` +
                       `which your current version of Babel does not support. ` +
                       `If you're using a published plugin, you may need to upgrade ` +
-                      `your @babel/core version.`
+                      `your @gerhobbelt/babel-core version.`
                   );
                 }
 
@@ -122222,8 +122222,8 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             } catch (err) {
               if (err.code === "BABEL_HELPER_UNKNOWN") {
                 err.message +=
-                  "\n  '@babel/plugin-transform-decorators' in non-legacy mode" +
-                  " requires '@babel/core' version ^7.0.2 and you appear to be using" +
+                  "\n  '@gerhobbelt/babel-plugin-transform-decorators' in non-legacy mode" +
+                  " requires '@gerhobbelt/babel-core' version ^7.0.2 and you appear to be using" +
                   " an older version.";
               }
 
@@ -122435,8 +122435,8 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             } catch (err) {
               if (err.code === "BABEL_HELPER_UNKNOWN") {
                 err.message +=
-                  "\n  '@babel/plugin-transform-decorators' in non-legacy mode" +
-                  " requires '@babel/core' version ^7.0.2 and you appear to be using" +
+                  "\n  '@gerhobbelt/babel-plugin-transform-decorators' in non-legacy mode" +
+                  " requires '@gerhobbelt/babel-core' version ^7.0.2 and you appear to be using" +
                   " an older version.";
               }
 
@@ -148065,7 +148065,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
   import toArray from "toArray";
   import toPropertyKey from "toPropertyKey";
 
-  // These comments are stripped by @babel/template
+  // These comments are stripped by @gerhobbelt/babel-template
   /*::
   type PropertyDescriptor =
     | {
@@ -157482,7 +157482,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
 
           function makeStatementFormatter(fn) {
             return {
-              code: str => `/* @babel/template */;\n${str}`,
+              code: str => `/* @gerhobbelt/babel-template */;\n${str}`,
               validate: () => {},
               unwrap: ast => {
                 return fn(ast.program.body.slice(1));
@@ -198507,7 +198507,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                   `You appear to be using a plugin with an async traversal visitor, ` +
                     `which your current version of Babel does not support.` +
                     `If you're using a published plugin, you may need to upgrade ` +
-                    `your @babel/core version.`
+                    `your @gerhobbelt/babel-core version.`
                 );
               }
 
@@ -201148,7 +201148,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
   import toArray from "toArray";
   import toPropertyKey from "toPropertyKey";
 
-  // These comments are stripped by @babel/template
+  // These comments are stripped by @gerhobbelt/babel-template
   /*::
   type PropertyDescriptor =
     | {
@@ -215617,7 +215617,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                   `You appear to be using a plugin with an async traversal visitor, ` +
                     `which your current version of Babel does not support.` +
                     `If you're using a published plugin, you may need to upgrade ` +
-                    `your @babel/core version.`
+                    `your @gerhobbelt/babel-core version.`
                 );
               }
 
@@ -217452,7 +217452,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
 
           function makeStatementFormatter(fn) {
             return {
-              code: str => `/* @babel/template */;\n${str}`,
+              code: str => `/* @gerhobbelt/babel-template */;\n${str}`,
               validate: () => {},
               unwrap: ast => {
                 return fn(ast.program.body.slice(1));
@@ -217785,16 +217785,16 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
         /* 894 */
         function(module) {
           module.exports = {
-            _from: "@babel/core@7.2.2",
-            _id: "@babel/core@7.2.2",
+            _from: "@gerhobbelt/babel-core@7.2.2",
+            _id: "@gerhobbelt/babel-core@7.2.2",
             _inBundle: false,
             _integrity:
               "sha512-59vB0RWt09cAct5EIe58+NzGP4TFSD3Bz//2/ELy3ZeTeKF6VTD1AXlH8BGGbCX0PuobZBsIzO7IAI9PH67eKw==",
-            _location: "/@babel/core",
+            _location: "/@gerhobbelt/babel-core",
             _phantomChildren: {
-              "@babel/code-frame": "7.0.0",
-              "@babel/helper-function-name": "7.1.0",
-              "@babel/helper-split-export-declaration": "7.0.0",
+              "@gerhobbelt/babel-code-frame": "7.0.0",
+              "@gerhobbelt/babel-helper-function-name": "7.1.0",
+              "@gerhobbelt/babel-helper-split-export-declaration": "7.0.0",
               debug: "4.1.1",
               esutils: "2.0.2",
               globals: "11.9.0",
@@ -217806,8 +217806,8 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             _requested: {
               type: "version",
               registry: true,
-              raw: "@babel/core@7.2.2",
-              name: "@babel/core",
+              raw: "@gerhobbelt/babel-core@7.2.2",
+              name: "@gerhobbelt/babel-core",
               escapedName: "@babel%2fcore",
               scope: "@babel",
               rawSpec: "7.2.2",
@@ -217816,9 +217816,9 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             },
             _requiredBy: ["#DEV:/"],
             _resolved:
-              "https://registry.npmjs.org/@babel/core/-/core-7.2.2.tgz",
+              "https://registry.npmjs.org/@gerhobbelt/babel-core/-/core-7.2.2.tgz",
             _shasum: "07adba6dde27bb5ad8d8672f15fde3e08184a687",
-            _spec: "@babel/core@7.2.2",
+            _spec: "@gerhobbelt/babel-core@7.2.2",
             _where: "K:\\lib\\js\\babel",
             author: { name: "Sebastian McKenzie", email: "sebmck@gmail.com" },
             browser: {
@@ -217828,13 +217828,13 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             },
             bundleDependencies: false,
             dependencies: {
-              "@babel/code-frame": "^7.0.0",
-              "@babel/generator": "^7.2.2",
-              "@babel/helpers": "^7.2.0",
-              "@babel/parser": "^7.2.2",
-              "@babel/template": "^7.2.2",
-              "@babel/traverse": "^7.2.2",
-              "@babel/types": "^7.2.2",
+              "@gerhobbelt/babel-code-frame": "^7.0.0",
+              "@gerhobbelt/babel-generator": "^7.2.2",
+              "@gerhobbelt/babel-helpers": "^7.2.0",
+              "@gerhobbelt/babel-parser": "^7.2.2",
+              "@gerhobbelt/babel-template": "^7.2.2",
+              "@gerhobbelt/babel-traverse": "^7.2.2",
+              "@gerhobbelt/babel-types": "^7.2.2",
               "convert-source-map": "^1.1.0",
               debug: "^4.1.0",
               json5: "^2.1.0",
@@ -217846,8 +217846,8 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             deprecated: false,
             description: "Babel compiler core.",
             devDependencies: {
-              "@babel/helper-transform-fixture-test-runner": "^7.0.0",
-              "@babel/register": "^7.0.0",
+              "@gerhobbelt/babel-helper-transform-fixture-test-runner": "^7.0.0",
+              "@gerhobbelt/babel-register": "^7.0.0",
             },
             engines: { node: ">=6.9.0" },
             homepage: "https://babeljs.io/",
@@ -217868,7 +217868,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             ],
             license: "MIT",
             main: "lib/index.js",
-            name: "@babel/core",
+            name: "@gerhobbelt/babel-core",
             publishConfig: { access: "public" },
             repository: {
               type: "git",
@@ -218109,7 +218109,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                   `You appear to be using an async plugin, ` +
                     `which your current version of Babel does not support.` +
                     `If you're using a published plugin, ` +
-                    `you may need to upgrade your @babel/core version.`
+                    `you may need to upgrade your @gerhobbelt/babel-core version.`
                 );
               }
 
@@ -218525,10 +218525,10 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
               `Requires Babel "${range}", but was loaded with "${
                 _.version
               }". ` +
-                `If you are sure you have a compatible version of @babel/core, ` +
+                `If you are sure you have a compatible version of @gerhobbelt/babel-core, ` +
                 `it is likely that something in your build process is loading the ` +
                 `wrong version. Inspect the stack trace of this error to look for ` +
-                `the first entry that doesn't mention "@babel/core" or "babel-core" ` +
+                `the first entry that doesn't mention "@gerhobbelt/babel-core" or "babel-core" ` +
                 `to see what is calling Babel.`
             );
 
@@ -218743,203 +218743,203 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
           const pluginNameMap = {
             classProperties: {
               syntax: {
-                name: "@babel/plugin-syntax-class-properties",
+                name: "@gerhobbelt/babel-plugin-syntax-class-properties",
                 url: "https://git.io/vb4yQ",
               },
               transform: {
-                name: "@babel/plugin-proposal-class-properties",
+                name: "@gerhobbelt/babel-plugin-proposal-class-properties",
                 url: "https://git.io/vb4SL",
               },
             },
             decorators: {
               syntax: {
-                name: "@babel/plugin-syntax-decorators",
+                name: "@gerhobbelt/babel-plugin-syntax-decorators",
                 url: "https://git.io/vb4y9",
               },
               transform: {
-                name: "@babel/plugin-proposal-decorators",
+                name: "@gerhobbelt/babel-plugin-proposal-decorators",
                 url: "https://git.io/vb4ST",
               },
             },
             doExpressions: {
               syntax: {
-                name: "@babel/plugin-syntax-do-expressions",
+                name: "@gerhobbelt/babel-plugin-syntax-do-expressions",
                 url: "https://git.io/vb4yh",
               },
               transform: {
-                name: "@babel/plugin-proposal-do-expressions",
+                name: "@gerhobbelt/babel-plugin-proposal-do-expressions",
                 url: "https://git.io/vb4S3",
               },
             },
             dynamicImport: {
               syntax: {
-                name: "@babel/plugin-syntax-dynamic-import",
+                name: "@gerhobbelt/babel-plugin-syntax-dynamic-import",
                 url: "https://git.io/vb4Sv",
               },
             },
             exportDefaultFrom: {
               syntax: {
-                name: "@babel/plugin-syntax-export-default-from",
+                name: "@gerhobbelt/babel-plugin-syntax-export-default-from",
                 url: "https://git.io/vb4SO",
               },
               transform: {
-                name: "@babel/plugin-proposal-export-default-from",
+                name: "@gerhobbelt/babel-plugin-proposal-export-default-from",
                 url: "https://git.io/vb4yH",
               },
             },
             exportNamespaceFrom: {
               syntax: {
-                name: "@babel/plugin-syntax-export-namespace-from",
+                name: "@gerhobbelt/babel-plugin-syntax-export-namespace-from",
                 url: "https://git.io/vb4Sf",
               },
               transform: {
-                name: "@babel/plugin-proposal-export-namespace-from",
+                name: "@gerhobbelt/babel-plugin-proposal-export-namespace-from",
                 url: "https://git.io/vb4SG",
               },
             },
             flow: {
               syntax: {
-                name: "@babel/plugin-syntax-flow",
+                name: "@gerhobbelt/babel-plugin-syntax-flow",
                 url: "https://git.io/vb4yb",
               },
               transform: {
-                name: "@babel/plugin-transform-flow-strip-types",
+                name: "@gerhobbelt/babel-plugin-transform-flow-strip-types",
                 url: "https://git.io/vb49g",
               },
             },
             functionBind: {
               syntax: {
-                name: "@babel/plugin-syntax-function-bind",
+                name: "@gerhobbelt/babel-plugin-syntax-function-bind",
                 url: "https://git.io/vb4y7",
               },
               transform: {
-                name: "@babel/plugin-proposal-function-bind",
+                name: "@gerhobbelt/babel-plugin-proposal-function-bind",
                 url: "https://git.io/vb4St",
               },
             },
             functionSent: {
               syntax: {
-                name: "@babel/plugin-syntax-function-sent",
+                name: "@gerhobbelt/babel-plugin-syntax-function-sent",
                 url: "https://git.io/vb4yN",
               },
               transform: {
-                name: "@babel/plugin-proposal-function-sent",
+                name: "@gerhobbelt/babel-plugin-proposal-function-sent",
                 url: "https://git.io/vb4SZ",
               },
             },
             importMeta: {
               syntax: {
-                name: "@babel/plugin-syntax-import-meta",
+                name: "@gerhobbelt/babel-plugin-syntax-import-meta",
                 url: "https://git.io/vbKK6",
               },
             },
             jsx: {
               syntax: {
-                name: "@babel/plugin-syntax-jsx",
+                name: "@gerhobbelt/babel-plugin-syntax-jsx",
                 url: "https://git.io/vb4yA",
               },
               transform: {
-                name: "@babel/plugin-transform-react-jsx",
+                name: "@gerhobbelt/babel-plugin-transform-react-jsx",
                 url: "https://git.io/vb4yd",
               },
             },
             logicalAssignment: {
               syntax: {
-                name: "@babel/plugin-syntax-logical-assignment-operators",
+                name: "@gerhobbelt/babel-plugin-syntax-logical-assignment-operators",
                 url: "https://git.io/vAlBp",
               },
               transform: {
-                name: "@babel/plugin-proposal-logical-assignment-operators",
+                name: "@gerhobbelt/babel-plugin-proposal-logical-assignment-operators",
                 url: "https://git.io/vAlRe",
               },
             },
             nullishCoalescingOperator: {
               syntax: {
-                name: "@babel/plugin-syntax-nullish-coalescing-operator",
+                name: "@gerhobbelt/babel-plugin-syntax-nullish-coalescing-operator",
                 url: "https://git.io/vb4yx",
               },
               transform: {
-                name: "@babel/plugin-proposal-nullish-coalescing-operator",
+                name: "@gerhobbelt/babel-plugin-proposal-nullish-coalescing-operator",
                 url: "https://git.io/vb4Se",
               },
             },
             numericSeparator: {
               syntax: {
-                name: "@babel/plugin-syntax-numeric-separator",
+                name: "@gerhobbelt/babel-plugin-syntax-numeric-separator",
                 url: "https://git.io/vb4Sq",
               },
               transform: {
-                name: "@babel/plugin-proposal-numeric-separator",
+                name: "@gerhobbelt/babel-plugin-proposal-numeric-separator",
                 url: "https://git.io/vb4yS",
               },
             },
             optionalChaining: {
               syntax: {
-                name: "@babel/plugin-syntax-optional-chaining",
+                name: "@gerhobbelt/babel-plugin-syntax-optional-chaining",
                 url: "https://git.io/vb4Sc",
               },
               transform: {
-                name: "@babel/plugin-proposal-optional-chaining",
+                name: "@gerhobbelt/babel-plugin-proposal-optional-chaining",
                 url: "https://git.io/vb4Sk",
               },
             },
             pipelineOperator: {
               syntax: {
-                name: "@babel/plugin-syntax-pipeline-operator",
+                name: "@gerhobbelt/babel-plugin-syntax-pipeline-operator",
                 url: "https://git.io/vb4yj",
               },
               transform: {
-                name: "@babel/plugin-proposal-pipeline-operator",
+                name: "@gerhobbelt/babel-plugin-proposal-pipeline-operator",
                 url: "https://git.io/vb4SU",
               },
             },
             throwExpressions: {
               syntax: {
-                name: "@babel/plugin-syntax-throw-expressions",
+                name: "@gerhobbelt/babel-plugin-syntax-throw-expressions",
                 url: "https://git.io/vb4SJ",
               },
               transform: {
-                name: "@babel/plugin-proposal-throw-expressions",
+                name: "@gerhobbelt/babel-plugin-proposal-throw-expressions",
                 url: "https://git.io/vb4yF",
               },
             },
             typescript: {
               syntax: {
-                name: "@babel/plugin-syntax-typescript",
+                name: "@gerhobbelt/babel-plugin-syntax-typescript",
                 url: "https://git.io/vb4SC",
               },
               transform: {
-                name: "@babel/plugin-transform-typescript",
+                name: "@gerhobbelt/babel-plugin-transform-typescript",
                 url: "https://git.io/vb4Sm",
               },
             },
             asyncGenerators: {
               syntax: {
-                name: "@babel/plugin-syntax-async-generators",
+                name: "@gerhobbelt/babel-plugin-syntax-async-generators",
                 url: "https://git.io/vb4SY",
               },
               transform: {
-                name: "@babel/plugin-proposal-async-generator-functions",
+                name: "@gerhobbelt/babel-plugin-proposal-async-generator-functions",
                 url: "https://git.io/vb4yp",
               },
             },
             objectRestSpread: {
               syntax: {
-                name: "@babel/plugin-syntax-object-rest-spread",
+                name: "@gerhobbelt/babel-plugin-syntax-object-rest-spread",
                 url: "https://git.io/vb4y5",
               },
               transform: {
-                name: "@babel/plugin-proposal-object-rest-spread",
+                name: "@gerhobbelt/babel-plugin-proposal-object-rest-spread",
                 url: "https://git.io/vb4Ss",
               },
             },
             optionalCatchBinding: {
               syntax: {
-                name: "@babel/plugin-syntax-optional-catch-binding",
+                name: "@gerhobbelt/babel-plugin-syntax-optional-catch-binding",
                 url: "https://git.io/vb4Sn",
               },
               transform: {
-                name: "@babel/plugin-proposal-optional-catch-binding",
+                name: "@gerhobbelt/babel-plugin-proposal-optional-catch-binding",
                 url: "https://git.io/vb4SI",
               },
             },
@@ -219055,7 +219055,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                   `You appear to be using an async parser plugin, ` +
                     `which your current version of Babel does not support. ` +
                     `If you're using a published plugin, ` +
-                    `you may need to upgrade your @babel/core version.`
+                    `you may need to upgrade your @gerhobbelt/babel-core version.`
                 );
               }
             } else {
@@ -253190,7 +253190,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                   `You appear to be using a plugin with an async traversal visitor, ` +
                     `which your current version of Babel does not support.` +
                     `If you're using a published plugin, you may need to upgrade ` +
-                    `your @babel/core version.`
+                    `your @gerhobbelt/babel-core version.`
                 );
               }
 
@@ -254961,8 +254961,8 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             decorators: 1 << 3,
           });
           exports.FEATURES = FEATURES;
-          const featuresKey = "@babel/plugin-class-features/featuresKey";
-          const looseKey = "@babel/plugin-class-features/looseKey";
+          const featuresKey = "@gerhobbelt/babel-plugin-class-features/featuresKey";
+          const looseKey = "@gerhobbelt/babel-plugin-class-features/looseKey";
 
           function enableFeature(file, feature, loose) {
             if (!hasFeature(file, feature)) {
@@ -255003,13 +255003,13 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
 
               if (path.node.static) {
                 throw path.buildCodeFrameError(
-                  "@babel/plugin-class-features doesn't support class static private methods yet."
+                  "@gerhobbelt/babel-plugin-class-features doesn't support class static private methods yet."
                 );
               }
 
               if (path.node.kind !== "method") {
                 throw path.buildCodeFrameError(
-                  "@babel/plugin-class-features doesn't support class private accessors yet."
+                  "@gerhobbelt/babel-plugin-class-features doesn't support class private accessors yet."
                 );
               }
             }
@@ -255021,8 +255021,8 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                 isLoose(file, FEATURES.fields)
             ) {
               throw path.buildCodeFrameError(
-                "'loose' mode configuration must be the same for both @babel/plugin-proposal-class-properties " +
-                  "and @babel/plugin-proposal-private-methods"
+                "'loose' mode configuration must be the same for both @gerhobbelt/babel-plugin-proposal-class-properties " +
+                  "and @gerhobbelt/babel-plugin-proposal-private-methods"
               );
             }
 
@@ -255490,15 +255490,15 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             if (version.slice(0, 2) === "7.") {
               err = new Error(
                 `Requires Babel "^7.0.0-beta.41", but was loaded with "${version}". ` +
-                  `You'll need to update your @babel/core version.`
+                  `You'll need to update your @gerhobbelt/babel-core version.`
               );
             } else {
               err = new Error(
                 `Requires Babel "${range}", but was loaded with "${version}". ` +
-                  `If you are sure you have a compatible version of @babel/core, ` +
+                  `If you are sure you have a compatible version of @gerhobbelt/babel-core, ` +
                   `it is likely that something in your build process is loading the ` +
                   `wrong version. Inspect the stack trace of this error to look for ` +
-                  `the first entry that doesn't mention "@babel/core" or "babel-core" ` +
+                  `the first entry that doesn't mention "@gerhobbelt/babel-core" or "babel-core" ` +
                   `to see what is calling Babel.`
               );
             }
@@ -255571,7 +255571,7 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             .split(".")
             .reduce((v, x) => v * 1e5 + +x, 0);
 
-          const versionKey = "@babel/plugin-class-features/version";
+          const versionKey = "@gerhobbelt/babel-plugin-class-features/version";
 
           function createClassFeaturePlugin({
             name,
@@ -256493,8 +256493,8 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
             decorators: 1 << 3,
           });
           exports.FEATURES = FEATURES;
-          const featuresKey = "@babel/plugin-class-features/featuresKey";
-          const looseKey = "@babel/plugin-class-features/looseKey";
+          const featuresKey = "@gerhobbelt/babel-plugin-class-features/featuresKey";
+          const looseKey = "@gerhobbelt/babel-plugin-class-features/looseKey";
 
           function enableFeature(file, feature, loose) {
             if (!hasFeature(file, feature)) {
@@ -256535,13 +256535,13 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
 
               if (path.node.static) {
                 throw path.buildCodeFrameError(
-                  "@babel/plugin-class-features doesn't support class static private methods yet."
+                  "@gerhobbelt/babel-plugin-class-features doesn't support class static private methods yet."
                 );
               }
 
               if (path.node.kind !== "method") {
                 throw path.buildCodeFrameError(
-                  "@babel/plugin-class-features doesn't support class private accessors yet."
+                  "@gerhobbelt/babel-plugin-class-features doesn't support class private accessors yet."
                 );
               }
             }
@@ -256553,8 +256553,8 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
                 isLoose(file, FEATURES.fields)
             ) {
               throw path.buildCodeFrameError(
-                "'loose' mode configuration must be the same for both @babel/plugin-proposal-class-properties " +
-                  "and @babel/plugin-proposal-private-methods"
+                "'loose' mode configuration must be the same for both @gerhobbelt/babel-plugin-proposal-class-properties " +
+                  "and @gerhobbelt/babel-plugin-proposal-private-methods"
               );
             }
 
@@ -256568,53 +256568,53 @@ You can turn on the 'throwIfNamespace' flag to bypass this warning.`);
         /* 1045 */
         function(module) {
           module.exports = {
-            _from: "@babel/helper-create-class-features-plugin@^7.2.3",
-            _id: "@babel/helper-create-class-features-plugin@7.2.3",
+            _from: "@gerhobbelt/babel-helper-create-class-features-plugin@^7.2.3",
+            _id: "@gerhobbelt/babel-helper-create-class-features-plugin@7.2.3",
             _inBundle: false,
             _integrity:
               "sha512-xO/3Gn+2C7/eOUeb0VRnSP1+yvWHNxlpAot1eMhtoKDCN7POsyQP5excuT5UsV5daHxMWBeIIOeI5cmB8vMRgQ==",
-            _location: "/@babel/helper-create-class-features-plugin",
+            _location: "/@gerhobbelt/babel-helper-create-class-features-plugin",
             _phantomChildren: {},
             _requested: {
               type: "range",
               registry: true,
-              raw: "@babel/helper-create-class-features-plugin@^7.2.3",
-              name: "@babel/helper-create-class-features-plugin",
+              raw: "@gerhobbelt/babel-helper-create-class-features-plugin@^7.2.3",
+              name: "@gerhobbelt/babel-helper-create-class-features-plugin",
               escapedName: "@babel%2fhelper-create-class-features-plugin",
               scope: "@babel",
               rawSpec: "^7.2.3",
               saveSpec: null,
               fetchSpec: "^7.2.3",
             },
-            _requiredBy: ["/@babel/plugin-proposal-class-properties"],
+            _requiredBy: ["/@gerhobbelt/babel-plugin-proposal-class-properties"],
             _resolved:
-              "https://registry.npmjs.org/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.2.3.tgz",
+              "https://registry.npmjs.org/@gerhobbelt/babel-helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.2.3.tgz",
             _shasum: "f6e719abb90cb7f4a69591e35fd5eb89047c4a7c",
-            _spec: "@babel/helper-create-class-features-plugin@^7.2.3",
+            _spec: "@gerhobbelt/babel-helper-create-class-features-plugin@^7.2.3",
             _where:
               "K:\\lib\\js\\babel\\node_modules\\@babel\\plugin-proposal-class-properties",
             author: { name: "The Babel Team", url: "https://babeljs.io/team" },
             bundleDependencies: false,
             dependencies: {
-              "@babel/helper-function-name": "^7.1.0",
-              "@babel/helper-member-expression-to-functions": "^7.0.0",
-              "@babel/helper-optimise-call-expression": "^7.0.0",
-              "@babel/helper-plugin-utils": "^7.0.0",
-              "@babel/helper-replace-supers": "^7.2.3",
+              "@gerhobbelt/babel-helper-function-name": "^7.1.0",
+              "@gerhobbelt/babel-helper-member-expression-to-functions": "^7.0.0",
+              "@gerhobbelt/babel-helper-optimise-call-expression": "^7.0.0",
+              "@gerhobbelt/babel-helper-plugin-utils": "^7.0.0",
+              "@gerhobbelt/babel-helper-replace-supers": "^7.2.3",
             },
             deprecated: false,
             description:
               "Compile class public and private fields, private methods and decorators to ES6",
             devDependencies: {
-              "@babel/core": "^7.2.2",
-              "@babel/helper-plugin-test-runner": "^7.0.0",
+              "@gerhobbelt/babel-core": "^7.2.2",
+              "@gerhobbelt/babel-helper-plugin-test-runner": "^7.0.0",
             },
             gitHead: "d35f2ad92b322c3bb9c6792e2683807afae0b105",
             keywords: ["babel", "babel-plugin"],
             license: "MIT",
             main: "lib/index.js",
-            name: "@babel/helper-create-class-features-plugin",
-            peerDependencies: { "@babel/core": "^7.0.0" },
+            name: "@gerhobbelt/babel-helper-create-class-features-plugin",
+            peerDependencies: { "@gerhobbelt/babel-core": "^7.0.0" },
             publishConfig: { access: "public" },
             repository: {
               type: "git",

@@ -1039,7 +1039,7 @@ helpers.decorate = helper("7.1.5")`
   import toArray from "toArray";
   import toPropertyKey from "toPropertyKey";
 
-  // These comments are stripped by @babel/template
+  // These comments are stripped by @gerhobbelt/babel-template
   /*::
   type PropertyDescriptor =
     | {

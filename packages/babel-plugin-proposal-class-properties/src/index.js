@@ -1,4 +1,4 @@
-/* eslint-disable @babel/development/plugin-name */
+/* eslint-disable @gerhobbelt/babel-development/plugin-name */
 
 import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 import {

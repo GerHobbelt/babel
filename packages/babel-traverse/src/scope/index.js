@@ -493,7 +493,7 @@ export default class Scope {
     if (this.hasBinding("undefined")) {
       return t.unaryExpression("void", t.numericLiteral(0), true);
     } else {
-      // eslint-disable-next-line @babel/development/no-undefined-identifier
+      // eslint-disable-next-line @gerhobbelt/babel-development/no-undefined-identifier
       return t.identifier("undefined");
     }
   }

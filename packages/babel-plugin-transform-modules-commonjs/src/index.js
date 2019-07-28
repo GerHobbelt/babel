@@ -123,12 +123,12 @@ export default declare((api, options) => {
     name: "transform-modules-commonjs",
 
     pre() {
-      this.file.set("@babel/plugin-transform-modules-*", "commonjs");
+      this.file.set("@gerhobbelt/babel-plugin-transform-modules-*", "commonjs");
     },
 
     visitor: {
       CallExpression(path) {
-        if (!this.file.has("@babel/plugin-proposal-dynamic-import")) return;
+        if (!this.file.has("@gerhobbelt/babel-plugin-proposal-dynamic-import")) return;
         if (!path.get("callee").isImport()) return;
 
         let { scope } = path;

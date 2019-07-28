@@ -1,7 +1,7 @@
 // @flow
 
-import * as t from "@babel/types";
-import type { NodePath } from "@babel/traverse";
+import * as t from "@gerhobbelt/babel-types";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
 import assert from "assert";
 import semver from "semver";
 import levenshtein from "js-levenshtein";

@@ -44,11 +44,11 @@ export function verifyUsedFeatures(path, file) {
       throw path.buildCodeFrameError(
         "Decorators are not enabled." +
           "\nIf you are using " +
-          '["@babel/plugin-proposal-decorators", { "legacy": true }], ' +
-          'make sure it comes *before* "@babel/plugin-proposal-class-properties" ' +
+          '["@gerhobbelt/babel-plugin-proposal-decorators", { "legacy": true }], ' +
+          'make sure it comes *before* "@gerhobbelt/babel-plugin-proposal-class-properties" ' +
           "and enable loose mode, like so:\n" +
-          '\t["@babel/plugin-proposal-decorators", { "legacy": true }]\n' +
-          '\t["@babel/plugin-proposal-class-properties", { "loose": true }]',
+          '\t["@gerhobbelt/babel-plugin-proposal-decorators", { "legacy": true }]\n' +
+          '\t["@gerhobbelt/babel-plugin-proposal-class-properties", { "loose": true }]',
       );
     }
 

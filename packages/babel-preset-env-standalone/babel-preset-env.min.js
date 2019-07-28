@@ -72500,7 +72500,7 @@ Using polyfills with \`${useBuiltIns}\` option:`);
   import toArray from "toArray";
   import toPropertyKey from "toPropertyKey";
 
-  // These comments are stripped by @babel/template
+  // These comments are stripped by @gerhobbelt/babel-template
   /*::
   type PropertyDescriptor =
     | {

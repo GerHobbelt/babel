@@ -1,4 +1,4 @@
-# @babel/runtime-corejs3
+# @gerhobbelt/babel-runtime-corejs3
 
 > babel's modular runtime helpers with core-js@3 polyfilling
 
@@ -7,11 +7,11 @@
 Using npm:
 
 ```sh
-npm install --save-dev @babel/runtime-corejs3
+npm install --save-dev @gerhobbelt/babel-runtime-corejs3
 ```
 
 or using yarn:
 
 ```sh
-yarn add @babel/runtime-corejs3 --dev
+yarn add @gerhobbelt/babel-runtime-corejs3 --dev
 ```
