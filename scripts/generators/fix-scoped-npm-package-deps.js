@@ -23,12 +23,15 @@ function patchFile(filePath, settings = {}) {
     
     updatedSrc = updatedSrc
     // inside a string or text:
-    .replace(/@babel\/([a-z0-9_-]+)(.*)$/gim, (m, m1, m2) => {
+    .replace(/^(.*?)@babel\/([a-z0-9_-]+)(.*)$/gim, (m, m1, m2, m3) => {
       if (m.includes("@babel/es2015 -> @gerhobbelt/babel-preset-es2015")) {
         return m;
       }
+      if (m.includes('source === "@gerhobbelt/babel-polyfill" || source === "@babel/polyfill"')) {
+        return m;
+      }
       pc++;
-      return `@gerhobbelt/babel-${m1}${m2}`;
+      return `${m1}@gerhobbelt/babel-${m2}${m3}`;
     })
     // inside a regex:
     .replace(/^(.*?)@babel\\\/([a-z0-9_-]+)(.*)$/gim, (m, m1, m2, m3) => {
