@@ -1031,7 +1031,7 @@ helpers.classStaticPrivateFieldSpecSet = helper("7.0.1")`
 helpers.decorate = helper("7.0.1")`
   import toArray from "toArray";
 
-  // These comments are stripped by @babel/template
+  // These comments are stripped by @gerhobbelt/babel-template
   /*::
   type PropertyDescriptor =
     | {

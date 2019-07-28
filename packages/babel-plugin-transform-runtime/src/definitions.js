@@ -33,7 +33,7 @@ function hasMinVersion(minVersion, runtimeVersion) {
 
 export default runtimeVersion => {
   // Conditionally include 'Math' because it was not included in the 7.0.0
-  // release of '@babel/runtime'. See issue https://github.com/babel/babel/pull/8616.
+  // release of '@gerhobbelt/babel-runtime'. See issue https://github.com/babel/babel/pull/8616.
   const includeMathModule = hasMinVersion("7.0.1", runtimeVersion);
 
   return {

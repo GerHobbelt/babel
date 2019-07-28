@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 function _core() {
-  const data = require("@babel/core");
+  const data = require("@gerhobbelt/babel-core");
 
   _core = function () {
     return data;
@@ -16,7 +16,7 @@ function _core() {
 }
 
 function _helperSplitExportDeclaration() {
-  const data = _interopRequireDefault(require("@babel/helper-split-export-declaration"));
+  const data = _interopRequireDefault(require("@gerhobbelt/babel-helper-split-export-declaration"));
 
   _helperSplitExportDeclaration = function () {
     return data;
@@ -26,7 +26,7 @@ function _helperSplitExportDeclaration() {
 }
 
 function _helperReplaceSupers() {
-  const data = _interopRequireDefault(require("@babel/helper-replace-supers"));
+  const data = _interopRequireDefault(require("@gerhobbelt/babel-helper-replace-supers"));
 
   _helperReplaceSupers = function () {
     return data;
@@ -204,7 +204,7 @@ function addDecorateHelper(file) {
     return file.addHelper("decorate");
   } catch (err) {
     if (err.code === "BABEL_HELPER_UNKNOWN") {
-      err.message += "\n  '@babel/plugin-transform-decorators' in non-legacy mode" + " requires '@babel/core' version ^7.0.1 and you appear to be using" + " an older version.";
+      err.message += "\n  '@gerhobbelt/babel-plugin-transform-decorators' in non-legacy mode" + " requires '@gerhobbelt/babel-core' version ^7.0.1 and you appear to be using" + " an older version.";
     }
 
     throw err;
