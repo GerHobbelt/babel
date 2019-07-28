@@ -1,5 +1,6 @@
 .DS_Store
 /node_modules_backup
+node_modules
 /node_modules
 /packages/*/node_modules
 *.log
@@ -25,3 +26,4 @@ coverage
 .idea/
 /.changelog
 /tmp/
+/desktop.ini
