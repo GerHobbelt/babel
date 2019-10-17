@@ -12,6 +12,22 @@ export default declare((api, options) => {
     inherits: syntaxOptionalChaining,
 
     visitor: {
+      Program(path, state) {
+        if (
+          state.filename?.includes(
+            "packages/babel-plugin-proposal-optional-chaining/src/index.js",
+          )
+        ) {
+          path.pushContainer(
+            "body",
+            t.throwStatement(
+              t.newExpression(t.identifier("Error"), [
+                t.stringLiteral("I am a bug!"),
+              ]),
+            ),
+          );
+        }
+      },
       "OptionalCallExpression|OptionalMemberExpression"(path) {
         const { parentPath, scope } = path;
         const optionals = [];
