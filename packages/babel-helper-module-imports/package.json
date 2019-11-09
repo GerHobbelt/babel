@@ -1,6 +1,6 @@
 {
   "name": "@babel/helper-module-imports",
-  "version": "7.0.0",
+  "version": "7.6.5",
   "description": "Babel helper functions for inserting module loads",
   "author": "Logan Smyth <loganfsmyth@gmail.com>",
   "homepage": "https://babeljs.io/",
@@ -14,6 +14,6 @@
     "@babel/types": "^7.6.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0"
+    "@babel/core": "^7.6.5"
   }
 }

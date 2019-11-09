@@ -1,6 +1,6 @@
 {
   "name": "@babel/helper-member-expression-to-functions",
-  "version": "7.5.5",
+  "version": "7.6.5",
   "description": "Helper function to replace certain member expressions with function calls",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-member-expression-to-functions",
   "license": "MIT",
