@@ -47,6 +47,12 @@ function patchFile(filePath, settings = {}) {
       'gerhobbelt/babel-env', 'gerhobbelt/babel-preset-env',
       'gerhobbelt/babel-transform', 'gerhobbelt/babel-plugin-transform',
     ];
+    for (let i = 0, len = patchList.length; i < len; i += 2)
+    {
+      let s = patchList[i];
+      let r = patchList[i + 1];
+      updatedSrc = updatedSrc.replace(s, r);
+    }
 
     if (pc === patched) {
       break;
