@@ -16,13 +16,13 @@ describe("normalize-options", () => {
           "babel-plugin-transform-spread",
           "transform-classes",
           "@gerhobbelt/babel-plugin-transform-unicode-regex",
-          "@gerhobbelt/babel-transform-block-scoping",
+          "@gerhobbelt/babel-plugin-transform-block-scoping",
         ],
         exclude: [
           "babel-plugin-transform-for-of",
           "transform-parameters",
           "@gerhobbelt/babel-plugin-transform-regenerator",
-          "@gerhobbelt/babel-transform-new-target",
+          "@gerhobbelt/babel-plugin-transform-new-target",
         ],
       });
       expect(normalized.include).toEqual([

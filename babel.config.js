@@ -78,12 +78,7 @@ module.exports = function(api) {
       ],
 
       // Explicitly use the lazy version of CommonJS modules.
-      convertESM
-        ? [
-            "@gerhobbelt/babel-plugin-transform-modules-commonjs",
-            { lazy: true },
-          ]
-        : null,
+      convertESM ? ["@gerhobbelt/babel-plugin-transform-modules-commonjs", { lazy: true }] : null,
     ].filter(Boolean),
     overrides: [
       {
@@ -99,9 +94,7 @@ module.exports = function(api) {
           // Override the root options to disable lazy imports for babel-register
           // because otherwise the require hook will try to lazy-import things
           // leading to dependency cycles.
-          convertESM
-            ? "@gerhobbelt/babel-plugin-transform-modules-commonjs"
-            : null,
+          convertESM ? "@gerhobbelt/babel-plugin-transform-modules-commonjs" : null,
         ].filter(Boolean),
       },
       {
@@ -129,7 +122,7 @@ module.exports = function(api) {
         ],
         plugins: [
           includeRuntime
-            ? ["@gerhobbelt/babel-plugin-transform-runtime", { version: "7.5.5-30" }]
+            ? ["@gerhobbelt/babel-plugin-transform-runtime", { version: "7.6.0-31" }]
             : null,
         ].filter(Boolean),
       },

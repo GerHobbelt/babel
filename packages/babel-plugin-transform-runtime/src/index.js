@@ -168,7 +168,7 @@ export default declare((api, options, dirname) => {
 
   if (has(options, "moduleName")) {
     throw new Error(
-      "The 'moduleName' option has been removed. @gerhobbelt/babel-transform-runtime " +
+      "The 'moduleName' option has been removed. @gerhobbelt/babel-plugin-transform-runtime " +
         "no longer supports arbitrary runtimes. If you were using this to " +
         "set an absolute path for Babel's standard runtimes, please use the " +
         "'absoluteRuntime' option.",

@@ -12,15 +12,14 @@ console.log("Patching all files to reference @gerhobbelt/babel-* instead of @bab
 
 function patchFile(filePath, settings = {}) {
   const src = readFileSync(filePath, "utf8");
-  let patched = 0;
 
   // apply patches:
   let updatedSrc = src;
 
+  // helper variable to cope with multiple @babel/... replacements in a single source line
+  let oldSrc = updatedSrc;
+
   for (;;) {
-    // helper variable to cope with multiple @babel/... replacements in a single source line
-    let pc = patched;
-    
     updatedSrc = updatedSrc
     // inside a string or text:
     .replace(/^(.*?)@babel\/([a-z0-9_-]+)(.*)$/gim, (m, m1, m2, m3) => {
@@ -30,7 +29,6 @@ function patchFile(filePath, settings = {}) {
       if (m.includes('source === "@gerhobbelt/babel-polyfill" || source === "@babel/polyfill"')) {
         return m;
       }
-      pc++;
       return `${m1}@gerhobbelt/babel-${m2}${m3}`;
     })
     // inside a regex:
@@ -38,14 +36,14 @@ function patchFile(filePath, settings = {}) {
       if (m.includes("@gerhobbelt\\/babel-runtime|@babel\\/runtime|babel-runtime")) {
         return m;
       }
-      pc++;
       return `${m1}@gerhobbelt\\/babel-${m2}${m3}`;
     });
 
     // post-processing fixups:
     let patchList = [
-      'gerhobbelt/babel-env', 'gerhobbelt/babel-preset-env',
-      'gerhobbelt/babel-transform', 'gerhobbelt/babel-plugin-transform',
+      /gerhobbelt\/babel-env/g, 'gerhobbelt/babel-preset-env',
+      /gerhobbelt\/babel-transform/g, 'gerhobbelt/babel-plugin-transform',
+      /gerhobbelt\/babel-proposal/g, 'gerhobbelt/babel-plugin-proposal',
     ];
     for (let i = 0, len = patchList.length; i < len; i += 2)
     {
@@ -54,14 +52,14 @@ function patchFile(filePath, settings = {}) {
       updatedSrc = updatedSrc.replace(s, r);
     }
 
-    if (pc === patched) {
+    if (updatedSrc === oldSrc) {
       break;
     }
-    patched = pc;
+    oldSrc = updatedSrc;
   }
 
   // write
-  if (patched > 0) {
+  if (updatedSrc !== src) {
     writeFileSync(filePath, updatedSrc);
 
     console.log("+PATCHED OK", filePath);
