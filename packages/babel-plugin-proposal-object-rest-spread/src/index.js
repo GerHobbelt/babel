@@ -452,7 +452,18 @@ export default declare((api, opts) => {
         if (loose) {
           helper = getExtendsHelper(file);
         } else {
-          helper = file.addHelper("objectSpread2");
+          try {
+            helper = file.addHelper("objectSpread2");
+          } catch {
+            // TODO: This is needed to workaround https://github.com/babel/babel/issues/10187
+            // and https://github.com/babel/babel/issues/10179 for older @gerhobbelt/babel-core versions
+            // where #10187 isn't fixed.
+            this.file.declarations["objectSpread2"] = null;
+
+            // objectSpread2 has been introduced in v7.5.0
+            // We have to maintain backward compatibility.
+            helper = file.addHelper("objectSpread");
+          }
         }
 
         path.replaceWith(t.callExpression(helper, args));

@@ -28,6 +28,7 @@
     "node": ">=6.0.0"
   },
   "devDependencies": {
+    "@gerhobbelt/babel-code-frame": "7.5.5-30",
     "@gerhobbelt/babel-helper-fixtures": "7.5.5-30",
     "charcodes": "0.2.0",
     "unicode-12.0.0": "0.7.9"

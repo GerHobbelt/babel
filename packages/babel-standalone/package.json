@@ -85,6 +85,7 @@
     "@gerhobbelt/babel-plugin-transform-react-jsx-self": "7.5.5-30",
     "@gerhobbelt/babel-plugin-transform-react-jsx-source": "7.5.5-30",
     "@gerhobbelt/babel-plugin-transform-regenerator": "7.5.5-30",
+    "@gerhobbelt/babel-plugin-transform-reserved-words": "7.5.5-30",
     "@gerhobbelt/babel-plugin-transform-runtime": "7.5.5-30",
     "@gerhobbelt/babel-plugin-transform-shorthand-properties": "7.5.5-30",
     "@gerhobbelt/babel-plugin-transform-spread": "7.5.5-30",

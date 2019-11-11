@@ -11,6 +11,6 @@
   "dependencies": {
     "@gerhobbelt/babel-helper-function-name": "7.5.5-30",
     "@gerhobbelt/babel-types": "7.5.5-30",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.13"
   }
 }

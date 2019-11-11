@@ -22,7 +22,7 @@
     "@gerhobbelt/babel-polyfill": "7.5.5-30",
     "@gerhobbelt/babel-register": "7.5.5-30",
     "commander": "^2.8.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "v8flags": "^3.1.1"
   },
   "peerDependencies": {

@@ -10,7 +10,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@gerhobbelt/babel-helper-plugin-utils": "7.5.5-30",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.13"
   },
   "keywords": [
     "babel-plugin"

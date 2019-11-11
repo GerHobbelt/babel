@@ -27,6 +27,7 @@ function patchFile(filePath, settings = {}) {
       if (m.includes("@babel/es2015 -> @gerhobbelt/babel-preset-es2015")) {
         return m;
       }
+      // babel-preset-env/src/utils.js:
       if (m.includes('source === "@gerhobbelt/babel-polyfill" || source === "@babel/polyfill"')) {
         return m;
       }

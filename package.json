@@ -1,5 +1,5 @@
 {
-  "name": "babel-core",
+  "name": "babel",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -230,10 +230,10 @@
     "js-levenshtein": "1.1.6",
     "js-tokens": "4.0.0",
     "jsesc": "2.5.2",
-    "lerna": "3.14.1",
+    "lerna": "^3.14.2",
     "lerna-changelog": "0.8.2",
     "lint-staged": "8.1.7",
-    "lodash": "4.17.11",
+    "lodash": "^4.17.13",
     "make-dir": "3.0.0",
     "merge-stream": "2.0.0",
     "mkdirp": "0.5.1",
@@ -272,7 +272,7 @@
     "webpack-stream": "5.2.1"
   },
   "resolutions": {
-    "@lerna/**/@lerna/collect-updates": "https://github.com/nicolo-ribaudo/lerna.git#babel-collect-updates"
+    "@lerna/**/@lerna/collect-updates": "https://github.com/babel/lerna.git#babel-collect-updates"
   },
   "engines": {
     "node": ">= 6.9.0",

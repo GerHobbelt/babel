@@ -19,7 +19,7 @@
     "@gerhobbelt/babel-types": "7.5.5-30",
     "@gerhobbelt/debug": "4.1.1-4",
     "globals": "^11.1.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.13"
   },
   "devDependencies": {
     "@gerhobbelt/babel-helper-plugin-test-runner": "7.5.5-30"

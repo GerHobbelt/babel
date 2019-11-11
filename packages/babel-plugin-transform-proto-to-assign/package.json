@@ -12,7 +12,8 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.5.5-30"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.5.5-30",
+    "lodash": "^4.17.13"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.5.5-30"

@@ -18,6 +18,36 @@ See [Babylon's CHANGELOG](packages/babylon/CHANGELOG.md) for the Babylon pre-7.0
 <!-- DO NOT CHANGE THESE COMMENTS - See .github/actions/trigger-github-release/update-changelog.js -->
 <!-- insert-new-changelog-here -->
 
+## v7.5.4 (2019-07-09)
+
+#### :bug: Bug Fix
+* `babel-helpers`, `babel-plugin-proposal-object-rest-spread`, `babel-preset-env`
+  * [#10188](https://github.com/babel/babel/pull/10188) Fix _objectSpread2 for real ([@nicolo-ribaudo](https://github.com/nicolo-ribaudo))
+
+## v7.5.3 (2019-07-09)
+
+#### :bug: Bug Fix
+* `babel-helpers`, `babel-plugin-proposal-object-rest-spread`, `babel-preset-env`
+  * [#10180](https://github.com/babel/babel/pull/10180) [_objectSpread2] Do not use hoisted var from prev iteration ([@nicolo-ribaudo](https://github.com/nicolo-ribaudo))
+
+## v7.5.2 (2019-07-08)
+
+#### :bug: Bug Fix
+* `babel-plugin-transform-typescript`
+  * [#10174](https://github.com/babel/babel/pull/10174) Do not trust Scope when removing TypeScript types ([@nicolo-ribaudo](https://github.com/nicolo-ribaudo))
+* `babel-helpers`, `babel-plugin-proposal-object-rest-spread`, `babel-preset-env`
+  * [#10171](https://github.com/babel/babel/pull/10171) Don't rely on getOwnPropertyDescriptors in objectSpread2 ([@nicolo-ribaudo](https://github.com/nicolo-ribaudo))
+* `babel-plugin-proposal-export-default-from`, `babel-plugin-proposal-export-namespace-from`
+  * [#10172](https://github.com/babel/babel/pull/10172) fix: register injected importDeclaration ([@JLHwung](https://github.com/JLHwung))
+
+## v7.5.1 (2019-07-06)
+
+#### :bug: Bug Fix
+* `babel-helpers`, `babel-plugin-proposal-object-rest-spread`
+  * [#10170](https://github.com/babel/babel/pull/10170) Fix objectSpread2 backward compatibility ([@nicolo-ribaudo](https://github.com/nicolo-ribaudo))
+* `babel-plugin-transform-typescript`
+  * [#10167](https://github.com/babel/babel/pull/10167) Retain typescript export-from-source ([@Wolvereness](https://github.com/Wolvereness))
+
 ## v7.5.0 (2019-07-04)
 
 #### :eyeglasses: Spec Compliance

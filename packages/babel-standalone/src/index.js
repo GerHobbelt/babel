@@ -14,16 +14,16 @@ import {
   transformFromAst as babelTransformFromAst,
   transform as babelTransform,
   buildExternalHelpers as babelBuildExternalHelpers,
-} from "gerhobbelt/babel-core";
+} from "@gerhobbelt/babel-core";
 import { all } from "./generated/plugins";
 import preset2015 from "./preset-es2015";
 import presetStage0 from "./preset-stage-0";
 import presetStage1 from "./preset-stage-1";
 import presetStage2 from "./preset-stage-2";
 import presetStage3 from "./preset-stage-3";
-import presetReact from "gerhobbelt/babel-preset-react";
-import presetFlow from "gerhobbelt/babel-preset-flow";
-import presetTypescript from "gerhobbelt/babel-preset-typescript";
+import presetReact from "@gerhobbelt/babel-preset-react";
+import presetFlow from "@gerhobbelt/babel-preset-flow";
+import presetTypescript from "@gerhobbelt/babel-preset-typescript";
 
 import { runScripts } from "./transformScriptTags";
 

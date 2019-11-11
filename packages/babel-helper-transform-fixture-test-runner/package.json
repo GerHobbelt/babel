@@ -18,7 +18,7 @@
     "babel-check-duplicated-nodes": "^1.0.0",
     "jest": "^23.6.0",
     "jest-diff": "^23.6.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "resolve": "^1.8.1",
     "source-map": "0.6.1",
     "unify-paths": "1.0.1"
