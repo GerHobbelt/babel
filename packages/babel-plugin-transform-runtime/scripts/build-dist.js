@@ -6,7 +6,7 @@ const helpers = require("@gerhobbelt/babel-helpers");
 const babel = require("@gerhobbelt/babel-core");
 const template = require("@gerhobbelt/babel-template");
 const t = require("@gerhobbelt/babel-types");
-const slash = require("slash");
+const unify = require("unify-paths");
 
 const transformRuntime = require("../");
 
@@ -157,7 +157,7 @@ function buildHelper(
       [transformRuntime, { corejs, useESModules: esm }],
       buildRuntimeRewritePlugin(
         runtimeName,
-        slash(path.relative(path.dirname(helperFilename), pkgDirname)),
+        unify(path.relative(path.dirname(helperFilename), pkgDirname)),
         helperName
       ),
     ],

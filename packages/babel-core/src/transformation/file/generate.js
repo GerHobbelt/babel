@@ -1,7 +1,7 @@
 // @flow
 
 import type { PluginPasses } from "../../config";
-import convertSourceMap, { type SourceMap } from "convert-source-map";
+import convertSourceMap, { typeof SourceMap } from "convert-source-map";
 import generate from "@gerhobbelt/babel-generator";
 
 import type File from "./file";

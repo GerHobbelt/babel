@@ -128,16 +128,17 @@ defineType("TSIndexSignature", {
 
 const tsKeywordTypes = [
   "TSAnyKeyword",
-  "TSUnknownKeyword",
+  "TSBooleanKeyword",
+  "TSBigIntKeyword",
+  "TSNeverKeyword",
+  "TSNullKeyword",
   "TSNumberKeyword",
   "TSObjectKeyword",
-  "TSBooleanKeyword",
   "TSStringKeyword",
   "TSSymbolKeyword",
-  "TSVoidKeyword",
   "TSUndefinedKeyword",
-  "TSNullKeyword",
-  "TSNeverKeyword",
+  "TSUnknownKeyword",
+  "TSVoidKeyword",
 ];
 
 for (const type of tsKeywordTypes) {
@@ -494,6 +495,7 @@ defineType("TSTypeParameterDeclaration", {
 });
 
 defineType("TSTypeParameter", {
+  builder: ["constraint", "default", "name"],
   visitor: ["constraint", "default"],
   fields: {
     name: {

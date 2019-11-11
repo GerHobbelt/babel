@@ -284,11 +284,6 @@
       "eslint --format=codeframe"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit-orig": "lint-staged"
-    }
-  },
   "jest": {
     "collectCoverageFrom": [
       "packages/*/src/**/*.mjs",
@@ -336,6 +331,5 @@
       "^@babel/([a-zA-Z0-9_-]+)$": "<rootDir>/packages/babel-$1/",
       "^@gerhobbelt/babel-([a-zA-Z0-9_-]+)$": "<rootDir>/packages/babel-$1/"
     }
-  },
-  "dependencies": {}
+  }
 }

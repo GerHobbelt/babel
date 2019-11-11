@@ -1,53 +1,76 @@
 workflow "Release" {
   on = "push"
-  resolves = [
-    "Trigger GitHub release",
-    # GitHub actions are too slow for this, it takes more than 15 mins.
-    # Publishing to npm from GH actions is a cool idea, but it's a lot faster to
-    # publish locally.
-    # "Publish to npm",
-   ]
+  resolves = ["Trigger GitHub release"]
+}
+
+action "Is version tag" {
+  uses = "actions/bin/filter@0dbb077f64d0ec1068a644d25c71b1db66148a24"
+  args = "tag v*"
+}
+
+action "Is tag from master" {
+  uses = "babel/actions/commit-matches-branch@master"
+  needs = [
+    "Is version tag",
+  ]
+  args = "master"
 }
 
 action "Trigger GitHub release" {
-  uses = "./.github/actions/trigger-github-release/"
+  uses = "babel/actions/trigger-github-release@master"
   secrets = ["GITHUB_TOKEN"]
   env = {
     COMMIT_AUTHOR_NAME = "Babel Bot"
     COMMIT_AUTHOR_EMAIL = "babel-bot@users.noreply.github.com"
   }
-  needs = ["Create release tag"]
-}
-
-action "Publish to npm" {
-  uses = "docker://node:10"
-  secrets = ["NPM_TOKEN"]
-  runs = "make"
-  args = "publish-ci"
-  env = {
-    CI = "true"
-  }
-  needs = ["Create release tag"]
-}
-
-# When GitHub Actions will support the "release" event for public
-# repositories, we won't need this checks anymore.
-action "Create release tag" {
-  uses = "./.github/actions/create-release-tag"
   needs = [
-    "Is version commit",
-    "On master branch",
+    "Is version tag",
+    "Is tag from master",
   ]
 }
 
-action "Is version commit" {
-  uses = "./.github/actions/filter-commit-message"
-  # This regex is run using "grep -P".
-  # The (-\\S+) part is for 7.0.0-beta.1 releases.
-  args = "^v(\\d+\\.){2}\\d+(-\\S+)?$"
+workflow "Welcome" {
+  resolves = [
+    "Create Welcome Comment"
+  ]
+  on = "issues"
 }
 
-action "On master branch" {
+action "Is action 'opened'" {
   uses = "actions/bin/filter@master"
-  args = "branch master"
+  args = "action opened"
+}
+
+action "Create Welcome Comment" {
+  uses = "babel/actions/create-welcome-comment@master"
+  secrets = ["GITHUB_TOKEN", "BOT_TOKEN"]
+  needs = ["Is action 'opened'"]
+}
+
+workflow "Needs Info" {
+  resolves = [
+    "Create Needs Info Comment"
+  ]
+  on = "issues"
+}
+
+action "Is action 'labeled'" {
+  uses = "actions/bin/filter@master"
+  args = "action labeled"
+}
+
+action "Has label 'Needs Info'" {
+  uses = "actions/bin/filter@master"
+  needs = [
+    "Is action 'labeled'"
+  ]
+  args = "label 'Needs Info'"
+}
+
+action "Create Needs Info Comment" {
+  uses = "babel/actions/create-needs-info-comment@master"
+  needs = [
+    "Has label 'Needs Info'",
+  ]
+  secrets = ["BOT_TOKEN", "GITHUB_TOKEN"]
 }

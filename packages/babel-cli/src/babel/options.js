@@ -1,3 +1,5 @@
+// @flow
+
 import fs from "fs";
 
 import commander from "commander";
@@ -152,7 +154,12 @@ commander.option(
 commander.version(pkg.version + " (@gerhobbelt/babel-core " + version + ")");
 commander.usage("[options] <files ...>");
 
-export default function parseArgv(args: Array<string>) {
+export type CmdOptions = {
+  babelOptions: Object,
+  cliOptions: Object,
+};
+
+export default function parseArgv(args: Array<string>): CmdOptions {
   //
   commander.parse(args);
 

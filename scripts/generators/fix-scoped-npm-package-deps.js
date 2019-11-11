@@ -27,7 +27,6 @@ function patchFile(filePath, settings = {}) {
       if (m.includes("@babel/es2015 -> @gerhobbelt/babel-preset-es2015")) {
         return m;
       }
-      // babel-preset-env/src/utils.js:
       if (m.includes('source === "@gerhobbelt/babel-polyfill" || source === "@babel/polyfill"')) {
         return m;
       }
@@ -42,6 +41,12 @@ function patchFile(filePath, settings = {}) {
       pc++;
       return `${m1}@gerhobbelt\\/babel-${m2}${m3}`;
     });
+
+    // post-processing fixups:
+    let patchList = [
+      'gerhobbelt/babel-env', 'gerhobbelt/babel-preset-env',
+      'gerhobbelt/babel-transform', 'gerhobbelt/babel-plugin-transform',
+    ];
 
     if (pc === patched) {
       break;

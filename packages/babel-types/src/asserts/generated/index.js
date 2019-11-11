@@ -8,9 +8,8 @@ import is from "../../validators/is";
 function assert(type: string, node: Object, opts?: Object): void {
   if (!is(type, node, opts)) {
     throw new Error(
-      `Expected type "${type}" with option ${JSON.stringify(
-        opts,
-      )}, but instead got "${node.type}".`,
+      `Expected type "${type}" with option ${JSON.stringify((opts: any))}, ` +
+        `but instead got "${node.type}".`,
     );
   }
 }
@@ -663,6 +662,12 @@ export function assertNoop(node: Object, opts?: Object = {}): void {
 export function assertPlaceholder(node: Object, opts?: Object = {}): void {
   assert("Placeholder", node, opts);
 }
+export function assertV8IntrinsicIdentifier(
+  node: Object,
+  opts?: Object = {},
+): void {
+  assert("V8IntrinsicIdentifier", node, opts);
+}
 export function assertArgumentPlaceholder(
   node: Object,
   opts?: Object = {},
@@ -795,8 +800,17 @@ export function assertTSIndexSignature(node: Object, opts?: Object = {}): void {
 export function assertTSAnyKeyword(node: Object, opts?: Object = {}): void {
   assert("TSAnyKeyword", node, opts);
 }
-export function assertTSUnknownKeyword(node: Object, opts?: Object = {}): void {
-  assert("TSUnknownKeyword", node, opts);
+export function assertTSBooleanKeyword(node: Object, opts?: Object = {}): void {
+  assert("TSBooleanKeyword", node, opts);
+}
+export function assertTSBigIntKeyword(node: Object, opts?: Object = {}): void {
+  assert("TSBigIntKeyword", node, opts);
+}
+export function assertTSNeverKeyword(node: Object, opts?: Object = {}): void {
+  assert("TSNeverKeyword", node, opts);
+}
+export function assertTSNullKeyword(node: Object, opts?: Object = {}): void {
+  assert("TSNullKeyword", node, opts);
 }
 export function assertTSNumberKeyword(node: Object, opts?: Object = {}): void {
   assert("TSNumberKeyword", node, opts);
@@ -804,17 +818,11 @@ export function assertTSNumberKeyword(node: Object, opts?: Object = {}): void {
 export function assertTSObjectKeyword(node: Object, opts?: Object = {}): void {
   assert("TSObjectKeyword", node, opts);
 }
-export function assertTSBooleanKeyword(node: Object, opts?: Object = {}): void {
-  assert("TSBooleanKeyword", node, opts);
-}
 export function assertTSStringKeyword(node: Object, opts?: Object = {}): void {
   assert("TSStringKeyword", node, opts);
 }
 export function assertTSSymbolKeyword(node: Object, opts?: Object = {}): void {
   assert("TSSymbolKeyword", node, opts);
-}
-export function assertTSVoidKeyword(node: Object, opts?: Object = {}): void {
-  assert("TSVoidKeyword", node, opts);
 }
 export function assertTSUndefinedKeyword(
   node: Object,
@@ -822,11 +830,11 @@ export function assertTSUndefinedKeyword(
 ): void {
   assert("TSUndefinedKeyword", node, opts);
 }
-export function assertTSNullKeyword(node: Object, opts?: Object = {}): void {
-  assert("TSNullKeyword", node, opts);
+export function assertTSUnknownKeyword(node: Object, opts?: Object = {}): void {
+  assert("TSUnknownKeyword", node, opts);
 }
-export function assertTSNeverKeyword(node: Object, opts?: Object = {}): void {
-  assert("TSNeverKeyword", node, opts);
+export function assertTSVoidKeyword(node: Object, opts?: Object = {}): void {
+  assert("TSVoidKeyword", node, opts);
 }
 export function assertTSThisType(node: Object, opts?: Object = {}): void {
   assert("TSThisType", node, opts);

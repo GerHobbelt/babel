@@ -131,36 +131,17 @@ function wrapPackagesArray(type, names, optionsDir) {
 }
 
 function run(task) {
-  const actual = task.actual;
-  const expected = task.expect;
-  const exec = task.exec;
-  const opts = task.options;
-  const optionsDir = task.optionsDir;
-
-  // <CWD>
-  const cwdPathPrefix = path.resolve(__dirname, "../../../");
-
-  // this function is duplicated in packages\babel-generator\test\index.js
-  function filterExceptionStackTrace(inp) {
-    const s =
-      typeof inp === "object"
-        ? inp instanceof Error
-          ? JSON.stringify(
-              {
-                message: inp.message,
-                stack: inp.stack,
-              },
-              null,
-              2,
-            )
-          : JSON.stringify(inp, null, 2)
-        : "" + inp;
-    return unify(s, {
-      hasExplicitEscapes: true,
-      reducePaths: ["fake", "babel"],
-      cwdPathPrefix: cwdPathPrefix,
-    });
-  }
+  const {
+    actual,
+    expect: expected,
+    exec,
+    options: opts,
+    optionsDir,
+    validateLogs,
+    ignoreOutput,
+    stdout,
+    stderr,
+  } = task;
 
   function getOpts(self) {
     const newOpts = merge(
@@ -216,52 +197,66 @@ function run(task) {
     }
   }
 
-  let actualCode = actual.code;
-  const expectCode = expected.code;
-  if (!execCode || actualCode) {
-    result = babel.transform(actualCode, getOpts(actual));
-    const expectedCode = filterExceptionStackTrace(result.code);
+  const inputCode = actual.code;
+  const expectedCode = expected.code;
+  if (!execCode || inputCode) {
+    const actualLogs = { stdout: "", stderr: "" };
+    let restoreSpies = null;
+    if (validateLogs) {
+      const spy1 = jest.spyOn(console, "log").mockImplementation(msg => {
+        actualLogs.stdout += `${msg}\n`;
+      });
+      const spy2 = jest.spyOn(console, "warn").mockImplementation(msg => {
+        actualLogs.stderr += `${msg}\n`;
+      });
+      restoreSpies = () => {
+        spy1.mockRestore();
+        spy2.mockRestore();
+      };
+    }
+
+    result = babel.transform(inputCode, getOpts(actual));
+
+    if (restoreSpies) restoreSpies();
+
+    const outputCode = normalizeOutput(result.code);
 
     checkDuplicatedNodes(babel, result.ast);
-    if (
-      !expected.code &&
-      expectedCode &&
-      !opts.throws &&
-      fs.statSync(path.dirname(expected.loc)).isDirectory() &&
-      !process.env.CI
-    ) {
-      const expectedFile = expected.loc.replace(
-        /\.m?js$/,
-        result.sourceType === "module" ? ".mjs" : ".js",
-      );
-
-      console.log(`New test file created: ${expectedFile}`);
-      fs.writeFileSync(expectedFile, `${expectedCode}\n`);
-
-      if (expected.loc !== expectedFile) {
-        try {
-          fs.unlinkSync(expected.loc);
-        } catch (e) {}
-      }
-    } else {
-      actualCode = filterExceptionStackTrace(expectedCode.trim());
-      try {
-        expect(actualCode).toEqualFile({
-          filename: expected.loc,
-          code: filterExceptionStackTrace(expectCode),
-        });
-      } catch (e) {
-        if (!process.env.OVERWRITE) throw e;
-
-        console.log(`Updated test file: ${expected.loc}`);
-        fs.writeFileSync(expected.loc, `${expectedCode}\n`);
-      }
-
-      if (actualCode) {
-        expect(expected.loc).toMatch(
-          result.sourceType === "module" ? /\.mjs$/ : /\.js$/,
+    if (!ignoreOutput) {
+      if (
+        !expected.code &&
+        outputCode &&
+        !opts.throws &&
+        fs.statSync(path.dirname(expected.loc)).isDirectory() &&
+        !process.env.CI
+      ) {
+        const expectedFile = expected.loc.replace(
+          /\.m?js$/,
+          result.sourceType === "module" ? ".mjs" : ".js",
         );
+
+        console.log(`New test file created: ${expectedFile}`);
+        fs.writeFileSync(expectedFile, `${outputCode}\n`);
+
+        if (expected.loc !== expectedFile) {
+          try {
+            fs.unlinkSync(expected.loc);
+          } catch (e) {}
+        }
+      } else {
+        validateFile(outputCode, expected.loc, expectedCode);
+
+        if (inputCode) {
+          expect(expected.loc).toMatch(
+            result.sourceType === "module" ? /\.mjs$/ : /\.js$/,
+          );
+        }
       }
+    }
+
+    if (validateLogs) {
+      validateFile(actualLogs.stdout, stdout.loc, stdout.code);
+      validateFile(actualLogs.stderr, stderr.loc, stderr.code);
     }
   }
 
@@ -283,6 +278,52 @@ function run(task) {
   if (execCode && resultExec) {
     return resultExec;
   }
+}
+
+function validateFile(actualCode, expectedLoc, expectedCode) {
+  actualCode = normalizeOutput(actualCode);
+  expectedCode = normalizeOutput(expectedCode);
+  
+  try {
+    expect(actualCode).toEqualFile({
+      filename: expectedLoc,
+      code: expectedCode,
+    });
+  } catch (e) {
+    if (!process.env.OVERWRITE) throw e;
+
+    console.log(`Updated test file: ${expectedLoc}`);
+    fs.writeFileSync(expectedLoc, `${actualCode}\n`);
+  }
+}
+
+function normalizeOutput(code) {
+  return filterExceptionStackTrace(code).trim();
+}
+
+// <CWD>
+const cwdPathPrefix = path.resolve(__dirname, "../../../");
+
+// this function is duplicated in packages\babel-generator\test\index.js
+function filterExceptionStackTrace(inp) {
+  const s =
+    typeof inp === "object"
+      ? inp instanceof Error
+        ? JSON.stringify(
+            {
+              message: inp.message,
+              stack: inp.stack,
+            },
+            null,
+            2,
+          )
+        : JSON.stringify(inp, null, 2)
+      : "" + inp;
+  return unify(s, {
+    hasExplicitEscapes: true,
+    reducePaths: ["fake", "babel"],
+    cwdPathPrefix: cwdPathPrefix,
+  });
 }
 
 const toEqualFile = () => ({

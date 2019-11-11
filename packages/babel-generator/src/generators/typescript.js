@@ -67,12 +67,14 @@ export function TSQualifiedName(node) {
 
 export function TSCallSignatureDeclaration(node) {
   this.tsPrintSignatureDeclarationBase(node);
+  this.token(";");
 }
 
 export function TSConstructSignatureDeclaration(node) {
   this.word("new");
   this.space();
   this.tsPrintSignatureDeclarationBase(node);
+  this.token(";");
 }
 
 export function TSPropertySignature(node) {
@@ -126,6 +128,9 @@ export function TSIndexSignature(node) {
 
 export function TSAnyKeyword() {
   this.word("any");
+}
+export function TSBigIntKeyword() {
+  this.word("bigint");
 }
 export function TSUnknownKeyword() {
   this.word("unknown");

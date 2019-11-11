@@ -14,13 +14,14 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-named-capturing-groups-regex",
   "bugs": "https://github.com/babel/babel/issues",
   "dependencies": {
-    "regexp-tree": "^0.1.0"
+    "regexp-tree": "^0.1.13"
   },
   "peerDependencies": {
     "@gerhobbelt/babel-core": "~7.5.5-30"
   },
   "devDependencies": {
     "@gerhobbelt/babel-core": "7.5.5-30",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.5.5-30"
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.5.5-30",
+    "core-js-pure": "^3.0.0"
   }
 }
