@@ -10,7 +10,7 @@ const writeFile = require("../../../scripts/utils/writeFileAndMkDir");
 
 const baseDir = path.join(__dirname, "../src");
 
-console.log("Generating @babel/types dynamic functions");
+console.log("Generating @gerhobbelt/babel-types dynamic functions");
 
 const buildersFile = path.join(baseDir, "builders/generated/index.js");
 writeFile(buildersFile, format(generateBuilders(), buildersFile));

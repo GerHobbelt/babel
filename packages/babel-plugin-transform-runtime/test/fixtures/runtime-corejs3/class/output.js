@@ -1,4 +1,4 @@
-var _classCallCheck = require("@babel/runtime-corejs3/helpers/classCallCheck");
+var _classCallCheck = require("@gerhobbelt/babel-runtime-corejs3/helpers/classCallCheck");
 
 let Foo = function Foo() {
   "use strict";

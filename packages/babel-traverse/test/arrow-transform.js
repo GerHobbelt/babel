@@ -1,7 +1,7 @@
 import { NodePath } from "../lib";
-import { parse } from "@babel/parser";
-import generate from "@babel/generator";
-import * as t from "@babel/types";
+import { parse } from "@gerhobbelt/babel-parser";
+import generate from "@gerhobbelt/babel-generator";
+import * as t from "@gerhobbelt/babel-types";
 
 function assertConversion(
   input,

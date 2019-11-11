@@ -1,5 +1,5 @@
 const readdir = require("fs-readdir-recursive");
-const helper = require("@babel/helper-fixtures");
+const helper = require("@gerhobbelt/babel-helper-fixtures");
 const rimraf = require("rimraf");
 const outputFileSync = require("output-file-sync");
 const child = require("child_process");

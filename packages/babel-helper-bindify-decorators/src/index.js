@@ -1,5 +1,5 @@
-import type { NodePath } from "@babel/traverse";
-import * as t from "@babel/types";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
+import * as t from "@gerhobbelt/babel-types";
 
 export default function bindifyDecorators(
   decorators: Array<NodePath>,

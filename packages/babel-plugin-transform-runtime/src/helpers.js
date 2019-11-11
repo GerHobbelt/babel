@@ -1,5 +1,5 @@
 import semver from "semver";
-import { types as t } from "@babel/core";
+import { types as t } from "@gerhobbelt/babel-core";
 
 export function hasMinVersion(minVersion, runtimeVersion) {
   // If the range is unavailable, we're running the script during Babel's

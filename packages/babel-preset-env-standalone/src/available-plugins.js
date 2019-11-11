@@ -1,10 +1,10 @@
-import { availablePlugins, registerPlugin } from "@babel/standalone";
+import { availablePlugins, registerPlugin } from "@gerhobbelt/babel-standalone";
 
 const notIncludedPlugins = {
-  "transform-named-capturing-groups-regex": require("@babel/plugin-transform-named-capturing-groups-regex"),
-  "transform-new-target": require("@babel/plugin-transform-new-target"),
-  "proposal-json-strings": require("@babel/plugin-proposal-json-strings"),
-  "proposal-dynamic-import": require("@babel/plugin-proposal-dynamic-import"),
+  "transform-named-capturing-groups-regex": require("@gerhobbelt/babel-plugin-transform-named-capturing-groups-regex"),
+  "transform-new-target": require("@gerhobbelt/babel-plugin-transform-new-target"),
+  "proposal-json-strings": require("@gerhobbelt/babel-plugin-proposal-json-strings"),
+  "proposal-dynamic-import": require("@gerhobbelt/babel-plugin-proposal-dynamic-import"),
 };
 
 Object.keys(notIncludedPlugins).forEach(pluginName => {

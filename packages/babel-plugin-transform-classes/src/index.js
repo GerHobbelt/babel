@@ -1,10 +1,10 @@
 // @flow
-import { declare } from "@babel/helper-plugin-utils";
-import annotateAsPure from "@babel/helper-annotate-as-pure";
-import nameFunction from "@babel/helper-function-name";
-import splitExportDeclaration from "@babel/helper-split-export-declaration";
-import { types as t } from "@babel/core";
-import type { NodePath } from "@babel/traverse";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import annotateAsPure from "@gerhobbelt/babel-helper-annotate-as-pure";
+import nameFunction from "@gerhobbelt/babel-helper-function-name";
+import splitExportDeclaration from "@gerhobbelt/babel-helper-split-export-declaration";
+import { types as t } from "@gerhobbelt/babel-core";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
 import globals from "globals";
 import transformClass from "./transformClass";
 

@@ -1,4 +1,4 @@
-import { types as t } from "@babel/core";
+import { types as t } from "@gerhobbelt/babel-core";
 
 // tries to optimize sequence expressions in the format
 //   (a = b, ((c) => d + e)(a))

@@ -1,5 +1,5 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxPipelineOperator from "@babel/plugin-syntax-pipeline-operator";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxPipelineOperator from "@gerhobbelt/babel-plugin-syntax-pipeline-operator";
 import minimalVisitor from "./minimalVisitor";
 import smartVisitor from "./smartVisitor";
 import fsharpVisitor from "./fsharpVisitor";

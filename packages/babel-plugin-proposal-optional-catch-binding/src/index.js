@@ -1,5 +1,5 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxOptionalCatchBinding from "@babel/plugin-syntax-optional-catch-binding";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxOptionalCatchBinding from "@gerhobbelt/babel-plugin-syntax-optional-catch-binding";
 
 export default declare(api => {
   api.assertVersion(7);

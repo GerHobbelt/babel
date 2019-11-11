@@ -1,6 +1,6 @@
 import annotateAsPure from "../";
 
-describe("@babel/helper-annotate-as-pure", () => {
+describe("@gerhobbelt/babel-helper-annotate-as-pure", () => {
   it("will add leading comment", () => {
     const node = {};
     annotateAsPure(node);

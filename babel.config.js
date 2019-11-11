@@ -65,28 +65,28 @@ module.exports = function(api) {
       "packages/babel-standalone/babel.js",
       "packages/babel-preset-env-standalone/babel-preset-env.js",
     ].filter(Boolean),
-    presets: [["@babel/env", envOpts]],
+    presets: [["@gerhobbelt/babel-preset-env", envOpts]],
     plugins: [
-      // TODO: Use @babel/preset-flow when
+      // TODO: Use @gerhobbelt/babel-preset-flow when
       // https://github.com/babel/babel/issues/7233 is fixed
-      "@babel/plugin-transform-flow-strip-types",
-      ["@babel/proposal-class-properties", { loose: true }],
-      "@babel/proposal-export-namespace-from",
-      "@babel/proposal-numeric-separator",
+      "@gerhobbelt/babel-plugin-transform-flow-strip-types",
+      ["@gerhobbelt/babel-plugin-proposal-class-properties", { loose: true }],
+      "@gerhobbelt/babel-plugin-proposal-export-namespace-from",
+      "@gerhobbelt/babel-plugin-proposal-numeric-separator",
       [
-        "@babel/proposal-object-rest-spread",
+        "@gerhobbelt/babel-plugin-proposal-object-rest-spread",
         { useBuiltIns: true, loose: true },
       ],
 
       // Explicitly use the lazy version of CommonJS modules.
-      convertESM ? ["@babel/transform-modules-commonjs", { lazy: true }] : null,
+      convertESM ? ["@gerhobbelt/babel-plugin-transform-modules-commonjs", { lazy: true }] : null,
     ].filter(Boolean),
     overrides: [
       {
         test: "packages/babel-parser",
         plugins: [
           "babel-plugin-transform-charcodes",
-          ["@babel/transform-for-of", { assumeArray: true }],
+          ["@gerhobbelt/babel-plugin-transform-for-of", { assumeArray: true }],
         ],
       },
       {
@@ -95,13 +95,13 @@ module.exports = function(api) {
           // Override the root options to disable lazy imports for babel-register
           // because otherwise the require hook will try to lazy-import things
           // leading to dependency cycles.
-          convertESM ? "@babel/transform-modules-commonjs" : null,
+          convertESM ? "@gerhobbelt/babel-plugin-transform-modules-commonjs" : null,
         ].filter(Boolean),
       },
       {
         test: "./packages/babel-polyfill",
-        presets: [["@babel/env", envOptsNoTargets]],
-        plugins: [["@babel/transform-modules-commonjs", { lazy: false }]],
+        presets: [["@gerhobbelt/babel-preset-env", envOptsNoTargets]],
+        plugins: [["@gerhobbelt/babel-plugin-transform-modules-commonjs", { lazy: false }]],
       },
       {
         // The vast majority of our src files are modules, but we use
@@ -119,11 +119,11 @@ module.exports = function(api) {
         // The runtime transform shouldn't process its own runtime or core-js.
         exclude: [
           "packages/babel-runtime",
-          /[\\/]node_modules[\\/](?:@babel\/runtime|babel-runtime|core-js)[\\/]/,
+          /[\\/]node_modules[\\/](?:@gerhobbelt\/babel-runtime|babel-runtime|core-js)[\\/]/,
         ],
         plugins: [
           includeRuntime
-            ? ["@babel/transform-runtime", { version: "7.4.4" }]
+            ? ["@gerhobbelt/babel-plugin-transform-runtime", { version: "7.4.4" }]
             : null,
         ].filter(Boolean),
       },

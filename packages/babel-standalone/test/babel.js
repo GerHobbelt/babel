@@ -1,6 +1,6 @@
-// Basic smoke tests for @babel/standalone
+// Basic smoke tests for @gerhobbelt/babel-standalone
 (process.env.TEST_TYPE === "cov" ? describe.skip : describe)(
-  "@babel/standalone",
+  "@gerhobbelt/babel-standalone",
   () => {
     const Babel = require("../babel");
 

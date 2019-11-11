@@ -1,11 +1,11 @@
 // @flow
 
-import * as t from "@babel/types";
-import type { NodePath } from "@babel/traverse";
+import * as t from "@gerhobbelt/babel-types";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
 import invariant from "invariant";
 import semver from "semver";
 import levenshtein from "js-levenshtein";
-import { addSideEffect } from "@babel/helper-module-imports";
+import { addSideEffect } from "@gerhobbelt/babel-helper-module-imports";
 import unreleasedLabels from "../data/unreleased-labels";
 import { semverMin } from "./targets-parser";
 import type { Targets } from "./types";
@@ -148,7 +148,7 @@ export function getRequireSource({ node }: NodePath) {
 }
 
 export function isPolyfillSource(source: ?string): boolean {
-  return source === "@babel/polyfill" || source === "core-js";
+  return source === "@gerhobbelt/babel-polyfill" || source === "core-js";
 }
 
 const modulePathMap = {
