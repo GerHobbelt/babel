@@ -1,6 +1,6 @@
 // @flow
 
-import type { Options as ParserOpts } from "@babel/parser/src/options";
+import type { Options as ParserOpts } from "@gerhobbelt/babel-parser/src/options";
 
 export type { ParserOpts };
 

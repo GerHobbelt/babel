@@ -1,7 +1,7 @@
 // @flow
 
 import readdirRecursive from "fs-readdir-recursive";
-import * as babel from "@babel/core";
+import * as babel from "@gerhobbelt/babel-core";
 import includes from "lodash/includes";
 import path from "path";
 import fs from "fs";
@@ -55,7 +55,7 @@ export function addSourceMappingUrl(code: string, loc: string): string {
 }
 
 const CALLER = {
-  name: "@babel/cli",
+  name: "@gerhobbelt/babel-cli",
 };
 
 export function transform(

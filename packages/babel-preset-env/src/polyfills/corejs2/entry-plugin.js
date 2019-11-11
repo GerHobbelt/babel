@@ -12,7 +12,7 @@ import {
 import { logEntryPolyfills } from "../../debug";
 
 import type { InternalPluginOptions } from "../../types";
-import type { NodePath } from "@babel/traverse";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
 
 export default function(
   _: any,
@@ -72,7 +72,7 @@ export default function(
     post() {
       if (debug) {
         logEntryPolyfills(
-          "@babel/polyfill",
+          "@gerhobbelt/babel-polyfill",
           this.importPolyfillIncluded,
           polyfills,
           this.file.opts.filename,

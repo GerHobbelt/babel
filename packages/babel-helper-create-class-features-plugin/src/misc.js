@@ -1,5 +1,5 @@
-import { template, traverse, types as t } from "@babel/core";
-import { environmentVisitor } from "@babel/helper-replace-supers";
+import { template, traverse, types as t } from "@gerhobbelt/babel-core";
+import { environmentVisitor } from "@gerhobbelt/babel-helper-replace-supers";
 
 const findBareSupers = traverse.visitors.merge([
   {

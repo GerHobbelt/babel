@@ -1,4 +1,4 @@
-import { types as t } from "@babel/core";
+import { types as t } from "@gerhobbelt/babel-core";
 import buildOptimizedSequenceExpression from "./buildOptimizedSequenceExpression";
 
 const fsharpVisitor = {

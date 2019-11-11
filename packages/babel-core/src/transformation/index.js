@@ -1,5 +1,5 @@
 // @flow
-import traverse from "@babel/traverse";
+import traverse from "@gerhobbelt/babel-traverse";
 import typeof { SourceMap } from "convert-source-map";
 
 import type { ResolvedConfig, PluginPasses } from "../config";
@@ -113,7 +113,7 @@ function transformFile(file: File, pluginPasses: PluginPasses): void {
             `You appear to be using an plugin with an async .pre, ` +
               `which your current version of Babel does not support. ` +
               `If you're using a published plugin, you may need to upgrade ` +
-              `your @babel/core version.`,
+              `your @gerhobbelt/babel-core version.`,
           );
         }
       }
@@ -137,7 +137,7 @@ function transformFile(file: File, pluginPasses: PluginPasses): void {
             `You appear to be using an plugin with an async .post, ` +
               `which your current version of Babel does not support. ` +
               `If you're using a published plugin, you may need to upgrade ` +
-              `your @babel/core version.`,
+              `your @gerhobbelt/babel-core version.`,
           );
         }
       }

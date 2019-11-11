@@ -189,7 +189,7 @@ prepublish:
 
 new-version:
 	git pull --rebase
-	yarn lerna version --force-publish="@babel/runtime,@babel/runtime-corejs2,@babel/runtime-corejs3,@babel/standalone,@babel/preset-env-standalone"
+	yarn lerna version --force-publish="@gerhobbelt/babel-runtime,@gerhobbelt/babel-runtime-corejs2,@gerhobbelt/babel-runtime-corejs3,@gerhobbelt/babel-standalone,@gerhobbelt/babel-preset-env-standalone"
 
 # NOTE: Run make new-version first
 publish: prepublish

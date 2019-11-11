@@ -1,4 +1,4 @@
-import _regeneratorRuntime from "@babel/runtime/regenerator";
+import _regeneratorRuntime from "@gerhobbelt/babel-runtime/regenerator";
 
 var _marked =
 /*#__PURE__*/

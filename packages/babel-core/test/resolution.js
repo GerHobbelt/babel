@@ -80,7 +80,7 @@ describe("addon resolution", function() {
     babel.transform("", {
       filename: "filename.js",
       babelrc: false,
-      presets: ["@babel/foo"],
+      presets: ["@gerhobbelt/babel-foo"],
     });
   });
 
@@ -90,7 +90,7 @@ describe("addon resolution", function() {
     babel.transform("", {
       filename: "filename.js",
       babelrc: false,
-      plugins: ["@babel/foo"],
+      plugins: ["@gerhobbelt/babel-foo"],
     });
   });
 
@@ -100,7 +100,7 @@ describe("addon resolution", function() {
     babel.transform("", {
       filename: "filename.js",
       babelrc: false,
-      presets: ["@babel/preset-foo"],
+      presets: ["@gerhobbelt/babel-preset-foo"],
     });
   });
 
@@ -110,7 +110,7 @@ describe("addon resolution", function() {
     babel.transform("", {
       filename: "filename.js",
       babelrc: false,
-      plugins: ["@babel/plugin-foo"],
+      plugins: ["@gerhobbelt/babel-plugin-foo"],
     });
   });
 
@@ -320,7 +320,7 @@ describe("addon resolution", function() {
     babel.transform("", {
       filename: "filename.js",
       babelrc: false,
-      presets: ["@babel/mod/preset"],
+      presets: ["@gerhobbelt/babel-mod/preset"],
     });
   });
 
@@ -330,7 +330,7 @@ describe("addon resolution", function() {
     babel.transform("", {
       filename: "filename.js",
       babelrc: false,
-      plugins: ["@babel/mod/plugin"],
+      plugins: ["@gerhobbelt/babel-mod/plugin"],
     });
   });
 
@@ -372,7 +372,7 @@ describe("addon resolution", function() {
         presets: ["foo"],
       });
     }).toThrow(
-      /Cannot find module 'babel-preset-foo'.*\n- Did you mean "@babel\/foo"\?/,
+      /Cannot find module 'babel-preset-foo'.*\n- Did you mean "@gerhobbelt\/babel-foo"\?/,
     );
   });
 
@@ -386,7 +386,7 @@ describe("addon resolution", function() {
         plugins: ["foo"],
       });
     }).toThrow(
-      /Cannot find module 'babel-plugin-foo'.*\n- Did you mean "@babel\/foo"\?/,
+      /Cannot find module 'babel-plugin-foo'.*\n- Did you mean "@gerhobbelt\/babel-foo"\?/,
     );
   });
 

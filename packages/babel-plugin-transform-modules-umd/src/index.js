@@ -1,4 +1,4 @@
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 import { basename, extname } from "path";
 import {
   isModule,
@@ -8,8 +8,8 @@ import {
   buildNamespaceInitStatements,
   ensureStatementsHoisted,
   wrapInterop,
-} from "@babel/helper-module-transforms";
-import { types as t, template } from "@babel/core";
+} from "@gerhobbelt/babel-helper-module-transforms";
+import { types as t, template } from "@gerhobbelt/babel-core";
 
 const buildPrerequisiteAssignment = template(`
   GLOBAL_REFERENCE = GLOBAL_REFERENCE || {}

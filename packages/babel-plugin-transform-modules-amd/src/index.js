@@ -1,4 +1,4 @@
-import { declare } from "@babel/helper-plugin-utils";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
 import {
   isModule,
   rewriteModuleStatementsAndPrepareHeader,
@@ -7,8 +7,8 @@ import {
   buildNamespaceInitStatements,
   ensureStatementsHoisted,
   wrapInterop,
-} from "@babel/helper-module-transforms";
-import { template, types as t } from "@babel/core";
+} from "@gerhobbelt/babel-helper-module-transforms";
+import { template, types as t } from "@gerhobbelt/babel-core";
 import { getImportSource } from "babel-plugin-dynamic-import-node/utils";
 
 const buildWrapper = template(`
@@ -42,12 +42,12 @@ export default declare((api, options) => {
     name: "transform-modules-amd",
 
     pre() {
-      this.file.set("@babel/plugin-transform-modules-*", "amd");
+      this.file.set("@gerhobbelt/babel-plugin-transform-modules-*", "amd");
     },
 
     visitor: {
       CallExpression(path, state) {
-        if (!this.file.has("@babel/plugin-proposal-dynamic-import")) return;
+        if (!this.file.has("@gerhobbelt/babel-plugin-proposal-dynamic-import")) return;
         if (!path.get("callee").isImport()) return;
 
         let { requireId, resolveId, rejectId } = state;

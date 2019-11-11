@@ -1,9 +1,9 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxObjectRestSpread from "@babel/plugin-syntax-object-rest-spread";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxObjectRestSpread from "@gerhobbelt/babel-plugin-syntax-object-rest-spread";
+import { types as t } from "@gerhobbelt/babel-core";
 
 // TODO: Remove in Babel 8
-// @babel/types <=7.3.3 counts FOO as referenced in var { x: FOO }.
+// @gerhobbelt/babel-types <=7.3.3 counts FOO as referenced in var { x: FOO }.
 // We need to detect this bug to know if "unused" means 0 or 1 references.
 const ZERO_REFS = (() => {
   const node = t.identifier("a");
@@ -498,7 +498,7 @@ export default declare((api, opts) => {
             helper = file.addHelper("objectSpread2");
           } catch {
             // TODO: This is needed to workaround https://github.com/babel/babel/issues/10187
-            // and https://github.com/babel/babel/issues/10179 for older @babel/core versions
+            // and https://github.com/babel/babel/issues/10179 for older @gerhobbelt/babel-core versions
             // where #10187 isn't fixed.
             this.file.declarations["objectSpread2"] = null;
 

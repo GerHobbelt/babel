@@ -1,8 +1,8 @@
-import type { NodePath } from "@babel/traverse";
-import traverse from "@babel/traverse";
-import memberExpressionToFunctions from "@babel/helper-member-expression-to-functions";
-import optimiseCall from "@babel/helper-optimise-call-expression";
-import * as t from "@babel/types";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
+import traverse from "@gerhobbelt/babel-traverse";
+import memberExpressionToFunctions from "@gerhobbelt/babel-helper-member-expression-to-functions";
+import optimiseCall from "@gerhobbelt/babel-helper-optimise-call-expression";
+import * as t from "@gerhobbelt/babel-types";
 
 /**
  * Creates an expression which result is the proto of objectRef.

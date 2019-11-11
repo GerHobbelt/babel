@@ -71,7 +71,7 @@ function standardizeName(type: "plugin" | "preset", name: string) {
         isPreset ? BABEL_PRESET_PREFIX_RE : BABEL_PLUGIN_PREFIX_RE,
         `babel-${type}-`,
       )
-      // @babel/es2015 -> @babel/preset-es2015
+      // @gerhobbelt/babel-es2015 -> @gerhobbelt/babel-preset-es2015
       .replace(
         isPreset ? BABEL_PRESET_ORG_RE : BABEL_PLUGIN_ORG_RE,
         `$1${type}-`,

@@ -1,5 +1,5 @@
 // This file is executed by lerna before publishing,
-// @babel/preset-env-standalone so that it has the
+// @gerhobbelt/babel-preset-env-standalone so that it has the
 // new version and not the old one.
 
 require("child_process").execSync(

@@ -1,5 +1,5 @@
-import { declare } from "@babel/helper-plugin-utils";
-import transformFlowStripTypes from "@babel/plugin-transform-flow-strip-types";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import transformFlowStripTypes from "@gerhobbelt/babel-plugin-transform-flow-strip-types";
 
 export default declare((api, { all }) => {
   api.assertVersion(7);

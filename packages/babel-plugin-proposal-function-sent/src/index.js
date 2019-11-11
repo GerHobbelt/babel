@@ -1,7 +1,7 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxFunctionSent from "@babel/plugin-syntax-function-sent";
-import wrapFunction from "@babel/helper-wrap-function";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxFunctionSent from "@gerhobbelt/babel-plugin-syntax-function-sent";
+import wrapFunction from "@gerhobbelt/babel-helper-wrap-function";
+import { types as t } from "@gerhobbelt/babel-core";
 
 export default declare(api => {
   api.assertVersion(7);

@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
-import hoistVariables from "@babel/helper-hoist-variables";
-import { template, types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import hoistVariables from "@gerhobbelt/babel-helper-hoist-variables";
+import { template, types as t } from "@gerhobbelt/babel-core";
 import { getImportSource } from "babel-plugin-dynamic-import-node/utils";
 
 const buildTemplate = template(`
@@ -24,7 +24,7 @@ const buildExportAll = template(`
 
 const MISSING_PLUGIN_WARNING = `\
 WARNING: Dynamic import() transformation must be enabled using the
-         @babel/plugin-proposal-dynamic-import plugin. Babel 8 will
+         @gerhobbelt/babel-plugin-proposal-dynamic-import plugin. Babel 8 will
          no longer transform import() without using that plugin.
 `;
 
@@ -174,13 +174,13 @@ export default declare((api, options) => {
     name: "transform-modules-systemjs",
 
     pre() {
-      this.file.set("@babel/plugin-transform-modules-*", "systemjs");
+      this.file.set("@gerhobbelt/babel-plugin-transform-modules-*", "systemjs");
     },
 
     visitor: {
       CallExpression(path, state) {
         if (t.isImport(path.node.callee)) {
-          if (!this.file.has("@babel/plugin-proposal-dynamic-import")) {
+          if (!this.file.has("@gerhobbelt/babel-plugin-proposal-dynamic-import")) {
             console.warn(MISSING_PLUGIN_WARNING);
           }
 

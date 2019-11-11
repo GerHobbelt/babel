@@ -184,7 +184,7 @@ lines.push(
   `export function toExpression(node: ExpressionStatement | Expression | Class | Function): Expression`,
   `export function toIdentifier(name: { toString(): string } | null | undefined): string`,
   `export function toKeyAlias(node: Method | Property, key?: Node): string`,
-  // NOTE: this actually uses Scope from @babel/traverse, but we can't add a dependency on its types,
+  // NOTE: this actually uses Scope from @gerhobbelt/babel-traverse, but we can't add a dependency on its types,
   // as they live in @types. Declare the structural subset that is required.
   // eslint-disable-next-line max-len
   `export function toSequenceExpression(nodes: ReadonlyArray<Node>, scope: { push(value: { id: LVal; kind: 'var'; init?: Expression}): void; buildUndefinedNode(): Node }): SequenceExpression | undefined`,

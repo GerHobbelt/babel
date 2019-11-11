@@ -1,5 +1,8 @@
 {
-  "version": "7.6.3",
+  "version": "7.6.0-31",
+  "peerDependencies": {
+    "@gerhobbelt/babel-core": "~7.6.0-31"
+  },
   "changelog": {
     "repo": "babel/babel",
     "cacheDir": ".changelog",
@@ -30,8 +33,7 @@
     "codemods/*",
     "packages/*"
   ],
-  "npmClient": "yarn",
+  "npmClient": "npm",
   "npmClientArgs": [
-    "--no-lockfile"
   ]
 }

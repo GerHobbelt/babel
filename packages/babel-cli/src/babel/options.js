@@ -3,7 +3,7 @@
 import fs from "fs";
 
 import commander from "commander";
-import { version } from "@babel/core";
+import { version } from "@gerhobbelt/babel-core";
 import uniq from "lodash/uniq";
 import glob from "glob";
 
@@ -109,7 +109,7 @@ commander.option(
   "specify a custom name for module ids",
 );
 
-// "babel" command specific arguments that are not passed to @babel/core.
+// "babel" command specific arguments that are not passed to @gerhobbelt/babel-core.
 commander.option(
   "-x, --extensions [extensions]",
   "List of extensions to compile when a directory has been input [.es6,.js,.es,.jsx,.mjs]",
@@ -150,7 +150,7 @@ commander.option(
   "Delete the out directory before compilation",
 );
 
-commander.version(pkg.version + " (@babel/core " + version + ")");
+commander.version(pkg.version + " (@gerhobbelt/babel-core " + version + ")");
 commander.usage("[options] <files ...>");
 
 export type CmdOptions = {
@@ -250,16 +250,16 @@ export default function parseArgv(args: Array<string>): CmdOptions | null {
     moduleId: opts.moduleId,
 
     // Commander will default the "--no-" arguments to true, but we want to
-    // leave them undefined so that @babel/core can handle the
+    // leave them undefined so that @gerhobbelt/babel-core can handle the
     // default-assignment logic on its own.
     babelrc: opts.babelrc === true ? undefined : opts.babelrc,
     highlightCode: opts.highlightCode === true ? undefined : opts.highlightCode,
     comments: opts.comments === true ? undefined : opts.comments,
   };
 
-  // If the @babel/cli version is newer than the @babel/core version, and we have added
-  // new options for @babel/core, we'll potentially get option validation errors from
-  // @babel/core. To avoid that, we delete undefined options, so @babel/core will only
+  // If the @gerhobbelt/babel-cli version is newer than the @gerhobbelt/babel-core version, and we have added
+  // new options for @gerhobbelt/babel-core, we'll potentially get option validation errors from
+  // @gerhobbelt/babel-core. To avoid that, we delete undefined options, so @gerhobbelt/babel-core will only
   // give the error if users actually pass an unsupported CLI option.
   for (const key of Object.keys(babelOptions)) {
     if (babelOptions[key] === undefined) {

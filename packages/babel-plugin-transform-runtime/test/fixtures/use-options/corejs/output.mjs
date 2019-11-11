@@ -1,7 +1,7 @@
-import _classCallCheck from "@babel/runtime-corejs2/helpers/classCallCheck";
-import _possibleConstructorReturn from "@babel/runtime-corejs2/helpers/possibleConstructorReturn";
-import _getPrototypeOf from "@babel/runtime-corejs2/helpers/getPrototypeOf";
-import _inherits from "@babel/runtime-corejs2/helpers/inherits";
+import _classCallCheck from "@gerhobbelt/babel-runtime-corejs2/helpers/classCallCheck";
+import _possibleConstructorReturn from "@gerhobbelt/babel-runtime-corejs2/helpers/possibleConstructorReturn";
+import _getPrototypeOf from "@gerhobbelt/babel-runtime-corejs2/helpers/getPrototypeOf";
+import _inherits from "@gerhobbelt/babel-runtime-corejs2/helpers/inherits";
 
 let Foo =
 /*#__PURE__*/

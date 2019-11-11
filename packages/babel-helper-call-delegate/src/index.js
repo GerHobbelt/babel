@@ -1,6 +1,6 @@
-import hoistVariables from "@babel/helper-hoist-variables";
-import type { NodePath } from "@babel/traverse";
-import * as t from "@babel/types";
+import hoistVariables from "@gerhobbelt/babel-helper-hoist-variables";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
+import * as t from "@gerhobbelt/babel-types";
 
 const visitor = {
   enter(path, state) {
