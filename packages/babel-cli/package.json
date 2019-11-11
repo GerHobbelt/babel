@@ -33,8 +33,7 @@
   "optionalDependencies": {
     "chokidar": "^2.1.8"
   },
-  "peerDependencies": {
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@gerhobbelt/babel-helper-fixtures": "7.5.5-30",
     "unify-paths": "^1.0.1"
