@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-helper-get-function-arity",
-  "version": "7.5.5-30",
+  "version": "7.6.0-31",
   "description": "Helper function to get function arity",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-helper-get-function-arity",
   "license": "MIT",
@@ -9,6 +9,6 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@gerhobbelt/babel-types": "7.5.5-30"
+    "@gerhobbelt/babel-types": "7.6.0-31"
   }
 }

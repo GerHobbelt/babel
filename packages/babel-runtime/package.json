@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-runtime",
-  "version": "7.5.5-30",
+  "version": "7.6.0-31",
   "description": "babel selfContained runtime",
   "license": "MIT",
   "publishConfig": {
@@ -9,14 +9,14 @@
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-runtime",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
   "dependencies": {
-    "core-js": "^2.6.0",
-    "regenerator-runtime": "^0.13.1"
+    "core-js": "^3.4.0",
+    "regenerator-runtime": "^0.13.3"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.5.5-30",
-    "@gerhobbelt/babel-helpers": "7.5.5-30",
-    "@gerhobbelt/babel-plugin-transform-runtime": "7.5.5-30",
-    "@gerhobbelt/babel-preset-env": "7.5.5-30",
-    "@gerhobbelt/babel-types": "7.5.5-30"
+    "@gerhobbelt/babel-core": "7.6.0-31",
+    "@gerhobbelt/babel-helpers": "7.6.0-31",
+    "@gerhobbelt/babel-plugin-transform-runtime": "7.6.0-31",
+    "@gerhobbelt/babel-preset-env": "7.6.0-31",
+    "@gerhobbelt/babel-types": "7.6.0-31"
   }
 }

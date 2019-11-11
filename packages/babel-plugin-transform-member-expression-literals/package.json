@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-plugin-transform-member-expression-literals",
-  "version": "7.5.5-30",
+  "version": "7.6.0-31",
   "description": "Ensure that reserved words are quoted in property accesses",
   "repository": "https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-member-expression-literals",
   "license": "MIT",
@@ -12,13 +12,13 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@gerhobbelt/babel-helper-plugin-utils": "7.5.5-30"
+    "@gerhobbelt/babel-helper-plugin-utils": "7.6.0-31"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.5.5-30"
+    "@gerhobbelt/babel-core": "~7.6.0-31"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.5.5-30",
-    "@gerhobbelt/babel-helper-plugin-test-runner": "7.5.5-30"
+    "@gerhobbelt/babel-core": "7.6.0-31",
+    "@gerhobbelt/babel-helper-plugin-test-runner": "7.6.0-31"
   }
 }

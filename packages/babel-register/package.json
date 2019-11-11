@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/babel-register",
-  "version": "7.5.5-30",
+  "version": "7.6.0-31",
   "description": "babel require hook",
   "license": "MIT",
   "publishConfig": {
@@ -13,17 +13,17 @@
     "./lib/node.js": "./lib/browser.js"
   },
   "dependencies": {
-    "find-cache-dir": "^2.0.0",
-    "lodash": "^4.17.13",
+    "find-cache-dir": "^3.1.0",
+    "lodash": "^4.17.15",
     "mkdirp": "^0.5.1",
-    "pirates": "^4.0.0",
-    "source-map-support": "^0.5.9"
+    "pirates": "^4.0.1",
+    "source-map-support": "^0.5.16"
   },
   "peerDependencies": {
-    "@gerhobbelt/babel-core": "~7.5.5-30"
+    "@gerhobbelt/babel-core": "~7.6.0-31"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-core": "7.5.5-30",
-    "default-require-extensions": "^2.0.0"
+    "@gerhobbelt/babel-core": "7.6.0-31",
+    "default-require-extensions": "^3.0.0"
   }
 }
