@@ -1,4 +1,4 @@
-# @babel/preset-stage-0
+# @gerhobbelt/babel-preset-stage-0
 
 As of v7.0.0-beta.55, we've removed Babel's Stage presets. Please consider reading our [blog post](https://babeljs.io/blog/2018/07/27/removing-babels-stage-presets) on this decision for more details. TL;DR is that it's more beneficial in the long run to explicitly add which proposals to use.
 
@@ -12,28 +12,28 @@ If you want the same configuration as before:
 {
   "plugins": [
     // Stage 0
-    "@babel/plugin-proposal-function-bind",
+    "@gerhobbelt/babel-plugin-proposal-function-bind",
 
     // Stage 1
-    "@babel/plugin-proposal-export-default-from",
-    "@babel/plugin-proposal-logical-assignment-operators",
-    ["@babel/plugin-proposal-optional-chaining", { "loose": false }],
-    ["@babel/plugin-proposal-pipeline-operator", { "proposal": "minimal" }],
-    ["@babel/plugin-proposal-nullish-coalescing-operator", { "loose": false }],
-    "@babel/plugin-proposal-do-expressions",
+    "@gerhobbelt/babel-plugin-proposal-export-default-from",
+    "@gerhobbelt/babel-plugin-proposal-logical-assignment-operators",
+    ["@gerhobbelt/babel-plugin-proposal-optional-chaining", { "loose": false }],
+    ["@gerhobbelt/babel-plugin-proposal-pipeline-operator", { "proposal": "minimal" }],
+    ["@gerhobbelt/babel-plugin-proposal-nullish-coalescing-operator", { "loose": false }],
+    "@gerhobbelt/babel-plugin-proposal-do-expressions",
 
     // Stage 2
-    ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    "@babel/plugin-proposal-function-sent",
-    "@babel/plugin-proposal-export-namespace-from",
-    "@babel/plugin-proposal-numeric-separator",
-    "@babel/plugin-proposal-throw-expressions",
+    ["@gerhobbelt/babel-plugin-proposal-decorators", { "legacy": true }],
+    "@gerhobbelt/babel-plugin-proposal-function-sent",
+    "@gerhobbelt/babel-plugin-proposal-export-namespace-from",
+    "@gerhobbelt/babel-plugin-proposal-numeric-separator",
+    "@gerhobbelt/babel-plugin-proposal-throw-expressions",
 
     // Stage 3
-    "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-syntax-import-meta",
-    ["@babel/plugin-proposal-class-properties", { "loose": true }],
-    "@babel/plugin-proposal-json-strings"
+    "@gerhobbelt/babel-plugin-syntax-dynamic-import",
+    "@gerhobbelt/babel-plugin-syntax-import-meta",
+    ["@gerhobbelt/babel-plugin-proposal-class-properties", { "loose": true }],
+    "@gerhobbelt/babel-plugin-proposal-json-strings"
   ]
 }
 ```
@@ -46,9 +46,9 @@ whichever plugins and presets you're looking to use.
 module.exports = function() {
   return {
     plugins: [
-      require("@babel/plugin-syntax-dynamic-import"),
-      [require("@babel/plugin-proposal-decorators"), { "legacy": true }],
-      [require("@babel/plugin-proposal-class-properties"), { "loose": true }],
+      require("@gerhobbelt/babel-plugin-syntax-dynamic-import"),
+      [require("@gerhobbelt/babel-plugin-proposal-decorators"), { "legacy": true }],
+      [require("@gerhobbelt/babel-plugin-proposal-class-properties"), { "loose": true }],
     ],
     presets: [
       // ...
@@ -57,9 +57,9 @@ module.exports = function() {
 };
 ```
 
-**NOTE: Compatibility between `@babel/plugin-proposal-class-properties` and `@babel/plugin-proposal-decorators`**
-If you are including your plugins manually and using `@babel/plugin-proposal-class-properties`, make sure that `@babel/plugin-proposal-decorators` comes before `@babel/plugin-proposal-class-properties`.
+**NOTE: Compatibility between `@gerhobbelt/babel-plugin-proposal-class-properties` and `@gerhobbelt/babel-plugin-proposal-decorators`**
+If you are including your plugins manually and using `@gerhobbelt/babel-plugin-proposal-class-properties`, make sure that `@gerhobbelt/babel-plugin-proposal-decorators` comes before `@gerhobbelt/babel-plugin-proposal-class-properties`.
 
-When using the `legacy: true` option of `@babel/plugin-proposal-decorators`, `@babel/plugin-proposal-class-properties` must be used in `loose: true` mode.
+When using the `legacy: true` option of `@gerhobbelt/babel-plugin-proposal-decorators`, `@gerhobbelt/babel-plugin-proposal-class-properties` must be used in `loose: true` mode.
 
-If you are not using `@babel/plugin-proposal-decorators`, `loose` mode is not needed.
+If you are not using `@gerhobbelt/babel-plugin-proposal-decorators`, `loose` mode is not needed.

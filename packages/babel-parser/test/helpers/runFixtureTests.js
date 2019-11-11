@@ -1,5 +1,5 @@
-import { multiple as getFixtures } from "@babel/helper-fixtures";
-import { codeFrameColumns } from "@babel/code-frame";
+import { multiple as getFixtures } from "@gerhobbelt/babel-helper-fixtures";
+import { codeFrameColumns } from "@gerhobbelt/babel-code-frame";
 import fs from "fs";
 import path from "path";
 

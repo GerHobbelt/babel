@@ -1,6 +1,6 @@
 import { basename, extname } from "path";
 
-import splitExportDeclaration from "@babel/helper-split-export-declaration";
+import splitExportDeclaration from "@gerhobbelt/babel-helper-split-export-declaration";
 
 export type ModuleMetadata = {
   exportName: string,

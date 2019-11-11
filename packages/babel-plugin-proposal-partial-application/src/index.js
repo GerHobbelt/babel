@@ -1,6 +1,6 @@
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxPartialApplication from "@babel/plugin-syntax-partial-application";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxPartialApplication from "@gerhobbelt/babel-plugin-syntax-partial-application";
+import { types as t } from "@gerhobbelt/babel-core";
 
 export default declare(api => {
   api.assertVersion(7);

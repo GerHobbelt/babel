@@ -1,6 +1,6 @@
 import traverse, { NodePath } from "../lib";
-import { parse } from "@babel/parser";
-import * as t from "@babel/types";
+import { parse } from "@gerhobbelt/babel-parser";
+import * as t from "@gerhobbelt/babel-types";
 
 function getPath(code, options) {
   const ast =

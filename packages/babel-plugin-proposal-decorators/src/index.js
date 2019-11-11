@@ -1,11 +1,11 @@
-/* eslint-disable @babel/development/plugin-name */
+/* eslint-disable @gerhobbelt/babel-development/plugin-name */
 
-import { declare } from "@babel/helper-plugin-utils";
-import syntaxDecorators from "@babel/plugin-syntax-decorators";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import syntaxDecorators from "@gerhobbelt/babel-plugin-syntax-decorators";
 import {
   createClassFeaturePlugin,
   FEATURES,
-} from "@babel/helper-create-class-features-plugin";
+} from "@gerhobbelt/babel-helper-create-class-features-plugin";
 import legacyVisitor from "./transformer-legacy";
 
 export default declare((api, options) => {

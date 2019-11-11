@@ -1,6 +1,6 @@
-import { types as t, template } from "@babel/core";
-import ReplaceSupers from "@babel/helper-replace-supers";
-import nameFunction from "@babel/helper-function-name";
+import { types as t, template } from "@gerhobbelt/babel-core";
+import ReplaceSupers from "@gerhobbelt/babel-helper-replace-supers";
+import nameFunction from "@gerhobbelt/babel-helper-function-name";
 
 export function hasOwnDecorators(node) {
   return !!(node.decorators && node.decorators.length);
@@ -102,8 +102,8 @@ function addDecorateHelper(file) {
   } catch (err) {
     if (err.code === "BABEL_HELPER_UNKNOWN") {
       err.message +=
-        "\n  '@babel/plugin-transform-decorators' in non-legacy mode" +
-        " requires '@babel/core' version ^7.0.2 and you appear to be using" +
+        "\n  '@gerhobbelt/babel-plugin-transform-decorators' in non-legacy mode" +
+        " requires '@gerhobbelt/babel-core' version ^7.0.2 and you appear to be using" +
         " an older version.";
     }
     throw err;

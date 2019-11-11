@@ -1,12 +1,12 @@
 "use strict";
 
-var _Object$keys = require("@babel/runtime-corejs3/core-js-stable/object/keys");
+var _Object$keys = require("@gerhobbelt/babel-runtime-corejs3/core-js-stable/object/keys");
 
-var _forEachInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/for-each");
+var _forEachInstanceProperty = require("@gerhobbelt/babel-runtime-corejs3/core-js-stable/instance/for-each");
 
 var _context;
 
-var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
+var _interopRequireDefault = require("@gerhobbelt/babel-runtime-corejs3/helpers/interopRequireDefault");
 
 exports.__esModule = true;
 var _exportNames = {

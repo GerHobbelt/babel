@@ -1,4 +1,4 @@
-import { template } from "@babel/core";
+import { template } from "@gerhobbelt/babel-core";
 
 export default function transpileNamespace(path, t, allowNamespaces) {
   if (path.node.declare || path.node.id.type === "StringLiteral") {

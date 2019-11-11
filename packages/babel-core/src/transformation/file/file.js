@@ -1,10 +1,10 @@
 // @flow
 
-import * as helpers from "@babel/helpers";
-import { NodePath, Scope, type HubInterface } from "@babel/traverse";
-import { codeFrameColumns } from "@babel/code-frame";
-import traverse from "@babel/traverse";
-import * as t from "@babel/types";
+import * as helpers from "@gerhobbelt/babel-helpers";
+import { NodePath, Scope, type HubInterface } from "@gerhobbelt/babel-traverse";
+import { codeFrameColumns } from "@gerhobbelt/babel-code-frame";
+import traverse from "@gerhobbelt/babel-traverse";
+import * as t from "@gerhobbelt/babel-types";
 import semver from "semver";
 
 import type { NormalizedFile } from "../normalize-file";
@@ -76,7 +76,7 @@ export default class File {
     if (key === "helpersNamespace") {
       throw new Error(
         "Babel 7.0.0-beta.56 has dropped support for the 'helpersNamespace' utility." +
-          "If you are using @babel/plugin-external-helpers you will need to use a newer " +
+          "If you are using @gerhobbelt/babel-plugin-external-helpers you will need to use a newer " +
           "version than the one you currently have installed. " +
           "If you have your own implementation, you'll want to explore using 'helperGenerator' " +
           "alongside 'file.availableHelper()'.",
@@ -144,13 +144,13 @@ export default class File {
     throw new Error(
       "This API has been removed. If you're looking for this " +
         "functionality in Babel 7, you should import the " +
-        "'@babel/helper-module-imports' module and use the functions exposed " +
+        "'@gerhobbelt/babel-helper-module-imports' module and use the functions exposed " +
         " from that module, such as 'addNamed' or 'addDefault'.",
     );
   }
 
   /**
-   * Check if a given helper is available in @babel/core's helper list.
+   * Check if a given helper is available in @gerhobbelt/babel-core's helper list.
    *
    * This _also_ allows you to pass a Babel version specifically. If the
    * helper exists, but was not available for the full given range, it will be

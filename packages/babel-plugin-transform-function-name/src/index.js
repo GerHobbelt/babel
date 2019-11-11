@@ -1,5 +1,5 @@
-import { declare } from "@babel/helper-plugin-utils";
-import nameFunction from "@babel/helper-function-name";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import nameFunction from "@gerhobbelt/babel-helper-function-name";
 
 export default declare(api => {
   api.assertVersion(7);

@@ -1,8 +1,8 @@
 import path from "path";
 import resolve from "resolve";
-import { declare } from "@babel/helper-plugin-utils";
-import { addDefault, isModule } from "@babel/helper-module-imports";
-import { types as t } from "@babel/core";
+import { declare } from "@gerhobbelt/babel-helper-plugin-utils";
+import { addDefault, isModule } from "@gerhobbelt/babel-helper-module-imports";
+import { types as t } from "@gerhobbelt/babel-core";
 
 import getCoreJS2Definitions from "./runtime-corejs2-definitions";
 import getCoreJS3Definitions from "./runtime-corejs3-definitions";
@@ -141,13 +141,13 @@ export default declare((api, options, dirname) => {
   if (has(options, "useBuiltIns")) {
     if (options.useBuiltIns) {
       throw new Error(
-        "The 'useBuiltIns' option has been removed. The @babel/runtime " +
+        "The 'useBuiltIns' option has been removed. The @gerhobbelt/babel-runtime " +
           "module now uses builtins by default.",
       );
     } else {
       throw new Error(
         "The 'useBuiltIns' option has been removed. Use the 'corejs'" +
-          "option to polyfill with `core-js` via @babel/runtime.",
+          "option to polyfill with `core-js` via @gerhobbelt/babel-runtime.",
       );
     }
   }
@@ -155,20 +155,20 @@ export default declare((api, options, dirname) => {
   if (has(options, "polyfill")) {
     if (options.polyfill === false) {
       throw new Error(
-        "The 'polyfill' option has been removed. The @babel/runtime " +
+        "The 'polyfill' option has been removed. The @gerhobbelt/babel-runtime " +
           "module now skips polyfilling by default.",
       );
     } else {
       throw new Error(
         "The 'polyfill' option has been removed. Use the 'corejs'" +
-          "option to polyfill with `core-js` via @babel/runtime.",
+          "option to polyfill with `core-js` via @gerhobbelt/babel-runtime.",
       );
     }
   }
 
   if (has(options, "moduleName")) {
     throw new Error(
-      "The 'moduleName' option has been removed. @babel/transform-runtime " +
+      "The 'moduleName' option has been removed. @gerhobbelt/babel-transform-runtime " +
         "no longer supports arbitrary runtimes. If you were using this to " +
         "set an absolute path for Babel's standard runtimes, please use the " +
         "'absoluteRuntime' option.",
@@ -183,10 +183,10 @@ export default declare((api, options, dirname) => {
   const injectCoreJS = corejsVersion !== false;
 
   const moduleName = injectCoreJS3
-    ? "@babel/runtime-corejs3"
+    ? "@gerhobbelt/babel-runtime-corejs3"
     : injectCoreJS2
-    ? "@babel/runtime-corejs2"
-    : "@babel/runtime";
+    ? "@gerhobbelt/babel-runtime-corejs2"
+    : "@gerhobbelt/babel-runtime";
 
   const corejsRoot = injectCoreJS3 && !proposals ? "core-js-stable" : "core-js";
 

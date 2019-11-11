@@ -8,7 +8,7 @@ const writeFile = require("../../../scripts/utils/writeFileAndMkDir");
 
 const outputFile = path.join(__dirname, "../src/generated/plugins.js");
 
-console.log("Generating @babel/standalone files");
+console.log("Generating @gerhobbelt/babel-standalone files");
 
 let imports = "";
 let list = "";
@@ -16,7 +16,7 @@ let allList = "";
 
 for (const plugin of pluginConfig) {
   const camelPlugin = camelCase(plugin);
-  imports += `import ${camelPlugin} from "@babel/plugin-${plugin}";`;
+  imports += `import ${camelPlugin} from "@gerhobbelt/babel-plugin-${plugin}";`;
   list += `${camelPlugin},`;
   allList += `"${plugin}": ${camelPlugin},`;
 }

@@ -1,2 +1,2 @@
-import "@babel/polyfill";
+import "@gerhobbelt/babel-polyfill";
 1 ** 2;

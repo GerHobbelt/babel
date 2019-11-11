@@ -1,8 +1,8 @@
 (process.env.TEST_TYPE === "cov" ? describe.skip : describe)(
   "babel-preset-env-standalone",
   () => {
-    const Babel = require("@babel/standalone/babel");
-    jest.mock("Babel", () => require("@babel/standalone/babel"), {
+    const Babel = require("@gerhobbelt/babel-standalone/babel");
+    jest.mock("Babel", () => require("@gerhobbelt/babel-standalone/babel"), {
       virtual: true,
     });
     require("../babel-preset-env");

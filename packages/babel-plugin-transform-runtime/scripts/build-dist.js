@@ -2,19 +2,19 @@
 
 const path = require("path");
 const outputFile = require("output-file-sync");
-const helpers = require("@babel/helpers");
-const babel = require("@babel/core");
-const template = require("@babel/template");
-const t = require("@babel/types");
+const helpers = require("@gerhobbelt/babel-helpers");
+const babel = require("@gerhobbelt/babel-core");
+const template = require("@gerhobbelt/babel-template");
+const t = require("@gerhobbelt/babel-types");
 
 const transformRuntime = require("../");
 
 const corejs2Definitions = require("../lib/runtime-corejs2-definitions").default();
 const corejs3Definitions = require("../lib/runtime-corejs3-definitions").default();
 
-writeHelpers("@babel/runtime");
-writeHelpers("@babel/runtime-corejs2", { corejs: 2 });
-writeHelpers("@babel/runtime-corejs3", {
+writeHelpers("@gerhobbelt/babel-runtime");
+writeHelpers("@gerhobbelt/babel-runtime-corejs2", { corejs: 2 });
+writeHelpers("@gerhobbelt/babel-runtime-corejs3", {
   corejs: { version: 3, proposals: true },
 });
 
@@ -26,7 +26,7 @@ writeCoreJS({
     "is-iterable",
     "get-iterator",
     // This was previously in definitions, but was removed to work around
-    // zloirock/core-js#262. We need to keep it in @babel/runtime-corejs2 to
+    // zloirock/core-js#262. We need to keep it in @gerhobbelt/babel-runtime-corejs2 to
     // avoid a breaking change there.
     "symbol/async-iterator",
   ],
@@ -54,7 +54,7 @@ function writeCoreJS({
   paths,
   corejsRoot,
 }) {
-  const pkgDirname = getRuntimeRoot(`@babel/runtime-corejs${corejs}`);
+  const pkgDirname = getRuntimeRoot(`@gerhobbelt/babel-runtime-corejs${corejs}`);
 
   Object.keys(BuiltIns).forEach(name => {
     const { stable, path } = BuiltIns[name];
@@ -151,7 +151,7 @@ function buildHelper(
   tree.body.push(...helper.nodes);
 
   return babel.transformFromAst(tree, null, {
-    presets: [[require("@babel/preset-env"), { modules: false }]],
+    presets: [[require("@gerhobbelt/babel-preset-env"), { modules: false }]],
     plugins: [
       [transformRuntime, { corejs, useESModules: esm }],
       buildRuntimeRewritePlugin(
@@ -194,7 +194,7 @@ function buildRuntimeRewritePlugin(runtimeName, relativePath, helperName) {
           return;
         }
 
-        // replace any reference to @babel/runtime and other helpers
+        // replace any reference to @gerhobbelt/babel-runtime and other helpers
         // with a relative path
         adjustImportPath(path.get("arguments")[0].node, relativePath);
       },

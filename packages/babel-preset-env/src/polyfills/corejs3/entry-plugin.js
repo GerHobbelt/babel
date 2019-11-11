@@ -14,10 +14,10 @@ import {
 import { logEntryPolyfills } from "../../debug";
 
 import type { InternalPluginOptions } from "../../types";
-import type { NodePath } from "@babel/traverse";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
 
 function isBabelPolyfillSource(source) {
-  return source === "@babel/polyfill" || source === "babel-polyfill";
+  return source === "@gerhobbelt/babel-polyfill" || source === "babel-polyfill";
 }
 
 function isCoreJSSource(source) {
@@ -31,7 +31,7 @@ function isCoreJSSource(source) {
 }
 
 const BABEL_POLYFILL_DEPRECATION = `
-  \`@babel/polyfill\` is deprecated. Please, use required parts of \`core-js\`
+  \`@gerhobbelt/babel-polyfill\` is deprecated. Please, use required parts of \`core-js\`
   and \`regenerator-runtime/runtime\` separately`;
 
 export default function(

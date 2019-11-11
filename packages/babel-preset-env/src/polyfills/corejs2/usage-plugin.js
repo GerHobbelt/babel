@@ -20,11 +20,11 @@ import {
 import { logUsagePolyfills } from "../../debug";
 
 import type { InternalPluginOptions } from "../../types";
-import type { NodePath } from "@babel/traverse";
+import type { NodePath } from "@gerhobbelt/babel-traverse";
 
 const NO_DIRECT_POLYFILL_IMPORT = `
   When setting \`useBuiltIns: 'usage'\`, polyfills are automatically imported when needed.
-  Please remove the \`import '@babel/polyfill'\` call or use \`useBuiltIns: 'entry'\` instead.`;
+  Please remove the \`import '@gerhobbelt/babel-polyfill'\` call or use \`useBuiltIns: 'entry'\` instead.`;
 
 export default function(
   { types: t }: { types: Object },

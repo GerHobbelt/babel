@@ -2,7 +2,7 @@ import * as babel from "../lib/index";
 import sourceMap from "source-map";
 import path from "path";
 import Plugin from "../lib/config/plugin";
-import generator from "@babel/generator";
+import generator from "@gerhobbelt/babel-generator";
 
 function assertIgnored(result) {
   expect(result).toBeNull();
@@ -763,7 +763,7 @@ describe("api", function() {
             "Support for the experimental syntax 'dynamicImport' isn't currently enabled (1:9)",
           );
           expect(err.message).toMatch(
-            "Add @babel/plugin-syntax-dynamic-import (https://git.io/vb4Sv) to the " +
+            "Add @gerhobbelt/babel-plugin-syntax-dynamic-import (https://git.io/vb4Sv) to the " +
               "'plugins' section of your Babel config to enable parsing.",
           );
           done();
@@ -780,7 +780,7 @@ describe("api", function() {
             "Support for the experimental syntax 'logicalAssignment' isn't currently enabled (1:3):",
           );
           expect(err.message).toMatch(
-            "Add @babel/plugin-proposal-logical-assignment-operators (https://git.io/vAlRe) to the " +
+            "Add @gerhobbelt/babel-plugin-proposal-logical-assignment-operators (https://git.io/vAlRe) to the " +
               "'plugins' section of your Babel config to enable transformation.",
           );
           done();

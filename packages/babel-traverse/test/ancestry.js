@@ -1,5 +1,5 @@
 import traverse from "../lib";
-import { parse } from "@babel/parser";
+import { parse } from "@gerhobbelt/babel-parser";
 
 describe("path/ancestry", function() {
   describe("isAncestor", function() {

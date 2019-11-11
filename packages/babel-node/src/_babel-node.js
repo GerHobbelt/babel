@@ -3,10 +3,10 @@ import Module from "module";
 import { inspect } from "util";
 import path from "path";
 import repl from "repl";
-import * as babel from "@babel/core";
+import * as babel from "@gerhobbelt/babel-core";
 import vm from "vm";
-import "@babel/polyfill";
-import register from "@babel/register";
+import "@gerhobbelt/babel-polyfill";
+import register from "@gerhobbelt/babel-register";
 
 import pkg from "../package.json";
 
@@ -66,7 +66,7 @@ program.parse(process.argv);
 
 const babelOptions = {
   caller: {
-    name: "@babel/node",
+    name: "@gerhobbelt/babel-node",
   },
   extensions: program.extensions,
   ignore: program.ignore,
@@ -78,7 +78,7 @@ const babelOptions = {
   rootMode: program.rootMode,
 
   // Commander will default the "--no-" arguments to true, but we want to
-  // leave them undefined so that @babel/core can handle the
+  // leave them undefined so that @gerhobbelt/babel-core can handle the
   // default-assignment logic on its own.
   babelrc: program.babelrc === true ? undefined : program.babelrc,
 };

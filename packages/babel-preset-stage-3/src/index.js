@@ -14,10 +14,10 @@ If you want the same configuration as before:
 
 {
   "plugins": [
-    "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-syntax-import-meta",
-    ["@babel/plugin-proposal-class-properties", { "loose": false }],
-    "@babel/plugin-proposal-json-strings"
+    "@gerhobbelt/babel-plugin-syntax-dynamic-import",
+    "@gerhobbelt/babel-plugin-syntax-import-meta",
+    ["@gerhobbelt/babel-plugin-proposal-class-properties", { "loose": false }],
+    "@gerhobbelt/babel-plugin-proposal-json-strings"
   ]
 }
 
@@ -29,9 +29,9 @@ whichever plugins and presets you're looking to use.
 module.exports = function() {
   return {
     plugins: [
-      require("@babel/plugin-syntax-dynamic-import"),
-      [require("@babel/plugin-proposal-decorators"), { "legacy": true }],
-      [require("@babel/plugin-proposal-class-properties"), { "loose": false }],
+      require("@gerhobbelt/babel-plugin-syntax-dynamic-import"),
+      [require("@gerhobbelt/babel-plugin-proposal-decorators"), { "legacy": true }],
+      [require("@gerhobbelt/babel-plugin-proposal-class-properties"), { "loose": false }],
     ],
     presets: [
       // ...

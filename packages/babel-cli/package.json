@@ -1,6 +1,6 @@
 {
-  "name": "@babel/cli",
-  "version": "7.6.0",
+  "name": "@gerhobbelt/babel-cli",
+  "version": "7.5.5-30",
   "description": "Babel command line.",
   "author": "Sebastian McKenzie <sebmck@gmail.com>",
   "homepage": "https://babeljs.io/",
@@ -33,11 +33,11 @@
     "chokidar": "^2.1.8"
   },
   "peerDependencies": {
-    "@babel/core": "^7.0.0-0"
+    "@gerhobbelt/babel-core": "~7.5.5-30"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/helper-fixtures": "^7.6.0"
+    "@gerhobbelt/babel-core": "7.5.5-30",
+    "@gerhobbelt/babel-helper-fixtures": "7.5.5-30"
   },
   "bin": {
     "babel": "./bin/babel.js",

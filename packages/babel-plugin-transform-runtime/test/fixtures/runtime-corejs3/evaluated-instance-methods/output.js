@@ -1,6 +1,6 @@
-var _mapInstanceProperty = require("@babel/runtime-corejs3/core-js/instance/map");
+var _mapInstanceProperty = require("@gerhobbelt/babel-runtime-corejs3/core-js/instance/map");
 
-var _filterInstanceProperty = require("@babel/runtime-corejs3/core-js/instance/filter");
+var _filterInstanceProperty = require("@gerhobbelt/babel-runtime-corejs3/core-js/instance/filter");
 
 var _map = "map";
 

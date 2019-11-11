@@ -1,7 +1,7 @@
 // @flow
 
 import commander from "commander";
-import { buildExternalHelpers } from "@babel/core";
+import { buildExternalHelpers } from "@gerhobbelt/babel-core";
 
 function collect(
   value: string | any,
