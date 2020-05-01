@@ -21,6 +21,12 @@
     "lodash": "^4.17.11",
     "resolve": "^1.8.1",
     "source-map": "0.6.1",
-    "unify-paths": "1.0.1"
-  }
+    "unify-paths": "1.0.1",
+    "snyk": "^1.316.1"
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
