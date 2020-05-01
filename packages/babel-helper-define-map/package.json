@@ -11,6 +11,12 @@
   "dependencies": {
     "@gerhobbelt/babel-helper-function-name": "7.2.2-27",
     "@gerhobbelt/babel-types": "7.2.2-27",
-    "lodash": "^4.17.11"
-  }
+    "lodash": "^4.17.11",
+    "snyk": "^1.316.1"
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
