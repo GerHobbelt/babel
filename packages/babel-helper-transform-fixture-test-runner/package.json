@@ -16,7 +16,7 @@
     "@gerhobbelt/babel-helper-fixtures": "7.2.2-27",
     "@gerhobbelt/babel-polyfill": "7.2.2-27",
     "babel-check-duplicated-nodes": "^1.0.0",
-    "jest": "^23.6.0",
+    "jest": "^25.0.0",
     "jest-diff": "^23.6.0",
     "lodash": "^4.17.11",
     "resolve": "^1.8.1",
